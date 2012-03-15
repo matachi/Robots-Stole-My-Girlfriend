@@ -1,4 +1,6 @@
-Group 8 - 2D Action Platforming Game
+Group 8 - Robots Stole My Girlfriend
 
-In the directory code can all code related to the project be found.
-In the directory doc can all documentation related to the project be found (such as RAD).
+Directories
+  documentation - Here can all documentation related to the project be found (such as RAD).
+  project - The folder that you essentially will open in Eclipse. Everything that will be in the runnable game can be found here.
+  resources - Here can images, audio and similar files be found that is being worked on and potentially not in the game yet.
