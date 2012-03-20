@@ -1,6 +1,7 @@
 Group 8 - Robots Stole My Girlfriend
 
 Directories
-  documentation - Here can all documentation related to the project be found (such as RAD).
-  project - The folder that you essentially will open in Eclipse. Everything that will be in the runnable game can be found here.
-  resources - Here can images, audio and similar files be found that is being worked on and potentially not in the game yet.
+  doc - Here can all documentation related to the project be found (such as RAD).
+  lib - Folder for external libraries, such as Slick.
+  res - Here can images, audio and similar files be found.
+  src - Folder for all code.
