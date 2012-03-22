@@ -15,7 +15,7 @@ public class Controller {
 	/**
 	 * The model that is visualized on the screen and should be updated.
 	 */
-	private State state;
+//	private State state;
 
 	/**
 	 *  Necessary to calculate the time between two loops.
@@ -31,7 +31,7 @@ public class Controller {
 	
 	public Controller() {
 		// Let the initial state be level 1
-		state = StateFactory.getState(StateFactory.LEVEL1);
+//		state = StateFactory.getState(StateFactory.LEVEL1);
 		
 		startGameLoop();
 	}
@@ -49,7 +49,7 @@ public class Controller {
 		while (true) {
 			calculateDelta();
 			
-			state.update(delta);
+//			state.update(delta);
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class Controller {
 			
 			calculateAndPrintFPS();
 			
-			state.update(delta);
+//			state.update(delta);
 		}
 	}
 	
