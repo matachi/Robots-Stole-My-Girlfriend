@@ -44,7 +44,10 @@ public abstract class InteractiveObject {
 			return false;
 		}
 		else{
-			return true;
+			return (((this.getX() - obj.getX() < (obj.getWidth()) && (this.getX() > obj.getX()) &&
+					((this.getY() - obj.getY()) < obj.getHeight()) && (this.getY() > obj.getY()) ) ||
+					((obj.getX() - this.getX() < this.getWidth()) && (obj.getX() > this.getX()) &&
+						(obj.getY() - this.getY() < this.getHeight()) && (obj.getY() > this.getY()))));
 		}
 	}	
 	
