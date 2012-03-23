@@ -13,13 +13,13 @@ public class GUI extends BasicGame {
 
 	Image bg = null;
 	Image img = null;
+	
 	int x = 0;
 	int y = 0;
-	
-    public GUI()
-    {
-        super("Test");
-    }
+
+	public GUI() {
+		super("Test");
+	}
 
 	@Override
 	public void init(GameContainer g) throws SlickException {
@@ -47,15 +47,13 @@ public class GUI extends BasicGame {
 		bg.draw(0, 0, 1f);
 		img.draw(x, y);
 	}
- 
-    public static void main(String[] args) 
-			throws SlickException, LWJGLException
-    {
-    	
-         AppGameContainer app = 
-			new AppGameContainer(new GUI());
- 
-         app.setDisplayMode(800, 600, false);
-         app.start();
-    }
+
+	public static void main(String[] args) throws SlickException,
+			LWJGLException {
+
+		AppGameContainer app = new AppGameContainer(new GUI());
+
+		app.setDisplayMode(800, 600, false);
+		app.start();
+	}
 }
