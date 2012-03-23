@@ -18,9 +18,19 @@ public abstract class InteractiveObject {
 		this.x=x;
 		this.y=y;
 	}
+	public InteractiveObject(double x, double y, double width, double height ){
+		this.x=x;
+		this.y=y;
+		this.height=height;
+		this.width=width;
+	}
 	
-	public Vector2d getVelocity(){
+	public Vector2d getVector(){
 		return velocity;
+	}
+	
+	public double getVelocity(){
+		return velocity.getlength();
 	}
 	
 	public double getX(){
@@ -39,6 +49,20 @@ public abstract class InteractiveObject {
 		return width;
 	}
 	
+	public void setX(double x){
+		this.x=x;
+	}
+	
+	public void setY(double y){
+		this.y=y;
+	}
+	
+	
+	/**
+	 * 
+	 * @param obj
+	 * @return true if the two InteractiveObjects have collided, otherwise it returns false
+	 */
 	public boolean hasCollidedWith(InteractiveObject obj){
 		if (obj == null){
 			return false;
@@ -49,6 +73,10 @@ public abstract class InteractiveObject {
 					((obj.getX() - this.getX() < this.getWidth()) && (obj.getX() > this.getX()) &&
 						(obj.getY() - this.getY() < this.getHeight()) && (obj.getY() > this.getY()))));
 		}
-	}	
+	}
+	/**
+	 * class for specifying what happens when this objects collides with another InteractiveObject
+	 */
+	public abstract void collide(InteractiveObject obj);
 	
 }

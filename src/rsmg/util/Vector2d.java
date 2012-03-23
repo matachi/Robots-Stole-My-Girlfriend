@@ -1,5 +1,4 @@
 package rsmg.util;
-
 public class Vector2d {
 	private double x;
 	private double y;
@@ -18,13 +17,23 @@ public class Vector2d {
 		x+=vector.getX();
 		y+=vector.getY();
 	}
-	
+	/**
+	 * 
+	 * @return the horizontal size of the vector
+	 */
 	public double getX(){
 		return x;
 	}
-	
+	/**
+	 * 
+	 * @return the vertical size of the vector
+	 */
 	public double getY(){
 		return y;
+	}
+	
+	public double getlength(){
+		return Math.sqrt(x*x+y*y);
 	}
 	
 }
