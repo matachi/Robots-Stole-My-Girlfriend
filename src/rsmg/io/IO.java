@@ -1,8 +1,8 @@
-package rsgm.io;
+package rsmg.io;
 
 import java.io.File;
 
-import rsgm.model.Tile;
+import rsmg.model.Tile;
 
 /**
  * Load and store data by reading files
@@ -17,7 +17,7 @@ public class IO {
 	 * @return A Tile matrix representing a level
 	 */
 	public Tile[][] getLevel(int iLevel) {
-		File file = new File("src/group8/rsgm/xml/Level" + iLevel + ".xml");
+		File file = new File("src/rsmg/io/Level" + iLevel + ".xml");
 		XmlConverter converter = new XmlConverter();
 		Tile[][] grid = converter.xmlToTiles(file);
 		return grid;

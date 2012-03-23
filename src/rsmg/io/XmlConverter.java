@@ -1,22 +1,17 @@
-package rsgm.io;
+package rsmg.io;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
-
 import java.io.File;
 import org.w3c.dom.*;
-
 //import org.xml.sax.SAXException;
 //import org.xml.sax.SAXParseException;
-
-import org.w3c.dom.Document;
-
-import rsgm.model.AirTile;
-import rsgm.model.EndTile;
-import rsgm.model.GroundTile;
-import rsgm.model.SpawnTile;
-import rsgm.model.Tile;
+//import org.w3c.dom.Document;
+import rsmg.model.AirTile;
+import rsmg.model.EndTile;
+import rsmg.model.GroundTile;
+import rsmg.model.SpawnTile;
+import rsmg.model.Tile;
 
 /**
  * Converts to/from XML to/from Tile[][]
@@ -47,8 +42,8 @@ public class XmlConverter {
 			grid = resetGrid(grid);
 			grid = addGround(grid);
 			grid = addSpawnAndEnd(grid);
-
-			grid = addToGrid(doc, grid, "cliff");
+			
+			grid = addCliff(doc, grid);
 			return grid;
 
 		} catch (Exception e) {
@@ -57,26 +52,31 @@ public class XmlConverter {
 	}
 
 	/**
-	 * TODO
+	 * Adds a space in ground where player can fall down
 	 * 
 	 * @param doc
+	 *            Document to retrieve the Node from
 	 * @param grid
-	 * @param elem
-	 * @return
+	 *            The Tile matrix that are to be modified
+	 * @return Updated Tile matrix
 	 */
-	public Tile[][] addToGrid(Document doc, Tile[][] grid, String elem) {
+	public Tile[][] addCliff(Document doc, Tile[][] grid) {
 
-		NodeList cliffs = doc.getElementsByTagName(elem);
+		NodeList cliffs = doc.getElementsByTagName("cliff");
 		for (int i = 0; i < cliffs.getLength(); i++) {
 
 			Node node = cliffs.item(i);
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				Element e = (Element) node;
 
-				// To specific. TODO!!!
-				int cliffStart = getElemByElem(e, "start");
-				int cliffEnd = getElemByElem(e, "end");
-				grid = addCliff(grid, cliffStart, cliffEnd);
+				int start = getElemByElem(e, "start");
+				int end = getElemByElem(e, "end");
+
+				if (start < end && grid[0].length > end && start > 0) {
+					for (int j = start; j < end; j++) {
+						grid[grid.length - 1][j] = new AirTile();
+					}
+				}
 			}
 		}
 		return grid;
@@ -130,7 +130,7 @@ public class XmlConverter {
 	public Tile[][] resetGrid(Tile[][] grid) {
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
-				grid[i][j] = new AirTile(1);
+				grid[i][j] = new AirTile();
 			}
 		}
 		return grid;
@@ -146,34 +146,21 @@ public class XmlConverter {
 	 */
 	public Tile[][] addGround(Tile[][] grid) {
 		for (int j = 0; j < grid[0].length; j++) {
-			grid[grid.length - 1][j] = new GroundTile(1);
+			grid[grid.length - 1][j] = new GroundTile();
 		}
 		return grid;
 	}
 
 	/**
-	 * Adds a space in ground where player can fall down
+	 * Add SpawnTile and EndTile to the Matrix in each side
 	 * 
 	 * @param grid
-	 *            The Tile matrix that are to be modified
-	 * @param start
-	 *            Where the cliff should start in x
-	 * @param end
-	 *            Where the cliff should end in x
-	 * @return Updated Tile matrix
+	 *            The grid to be get a SpawnTile and EndTile
+	 * @return Updated matrix, Tile[][]
 	 */
-	public Tile[][] addCliff(Tile[][] grid, int start, int end) {
-		if (start < end && grid[0].length > end && start > 0) {
-			for (int i = start; i < end; i++) {
-				grid[grid.length - 1][i] = new AirTile(1);
-			}
-		}
-		return grid;
-	}
-	
-	public Tile[][] addSpawnAndEnd(Tile[][] grid){
-		grid[grid.length - 1][0] = new SpawnTile(1);
-		grid[grid.length - 1][grid[0].length - 1] = new EndTile(1);
+	public Tile[][] addSpawnAndEnd(Tile[][] grid) {
+		grid[grid.length - 2][0] = new SpawnTile();
+		grid[grid.length - 2][grid[0].length - 1] = new EndTile();
 		return grid;
 	}
 }
