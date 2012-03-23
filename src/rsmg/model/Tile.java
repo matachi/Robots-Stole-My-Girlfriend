@@ -1,18 +1,13 @@
-package rsgm.model;
+package rsmg.model;
 
 public abstract class Tile {
 
-	private int size;
+	private int size = Constants.TILESIZE;
 
 	/**
-	 * Constructor of Tile. Sets up the tile size
-	 * 
-	 * @param size
-	 *            The size of the Tile
+	 * Constructor of Tile
 	 */
-	public Tile(int size) {
-		this.size = size;
-	}
+	public Tile() {}
 
 	abstract boolean isSolid();
 

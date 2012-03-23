@@ -1,4 +1,4 @@
-package rsgm.model;
+package rsmg.model;
 
 
 public class Level {

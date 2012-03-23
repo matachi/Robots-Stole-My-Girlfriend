@@ -1,18 +1,13 @@
-package rsgm.model;
-
+package rsmg.model;
 
 public class EndTile extends Tile {
 
 	private boolean solid;
 
 	/**
-	 * Constructor of EndTile. Sets up the size and solid values
-	 * 
-	 * @param size
-	 *            is the size of the EndTile
+	 * Constructor of EndTile. Sets the solid value
 	 */
-	public EndTile(int size) {
-		super(size);
+	public EndTile() {
 		solid = false;
 	}
 

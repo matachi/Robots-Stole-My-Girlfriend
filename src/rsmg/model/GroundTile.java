@@ -1,18 +1,13 @@
-package rsgm.model;
-
+package rsmg.model;
 
 public class GroundTile extends Tile {
 
 	private boolean solid;
 
 	/**
-	 * Constructor of GroundTile. Sets up the size and solid values
-	 * 
-	 * @param size
-	 *            is the size of the GroundTile
+	 * Constructor of GroundTile. Sets the solid value
 	 */
-	public GroundTile(int size) {
-		super(size);
+	public GroundTile() {
 		solid = true;
 	}
 

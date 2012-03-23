@@ -1,18 +1,13 @@
-package rsgm.model;
-
+package rsmg.model;
 
 public class HazardousTile extends Tile {
 
 	private boolean solid;
 
 	/**
-	 * Constructor of HazardousTile. Sets up the size and solid values
-	 * 
-	 * @param size
-	 *            is the size of the HazardousTile
+	 * Constructor of HazardousTile. Sets the solid value
 	 */
-	public HazardousTile(int size) {
-		super(size);
+	public HazardousTile() {
 		solid = true;
 	}
 

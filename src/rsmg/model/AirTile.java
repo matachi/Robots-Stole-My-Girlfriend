@@ -1,18 +1,13 @@
-package rsgm.model;
-
+package rsmg.model;
 
 public class AirTile extends Tile {
 
 	private boolean solid;
 
 	/**
-	 * Constructor of AirTile. Sets up the size and solid values
-	 * 
-	 * @param size
-	 *            is the size of the AirTile
+	 * Constructor of AirTile. Sets the solid value
 	 */
-	public AirTile(int size) {
-		super(size);
+	public AirTile() {
 		solid = false;
 	}
 

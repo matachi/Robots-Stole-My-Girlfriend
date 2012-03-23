@@ -1,6 +1,6 @@
-package rsgm.model;
+package rsmg.model;
 
-import rsgm.io.IO;
+import rsmg.io.IO;
 
 /**
  * Contains information about the Tile[][]

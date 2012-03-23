@@ -1,17 +1,13 @@
-package rsgm.model;
+package rsmg.model;
 
 public class SpawnTile extends Tile {
 
 	private boolean solid;
 
 	/**
-	 * Constructor of SpawnTile. Sets up the size and solid values
-	 * 
-	 * @param size
-	 *            is the size of the SpawnTile
+	 * Constructor of SpawnTile. Sets solid value
 	 */
-	public SpawnTile(int size) {
-		super(size);
+	public SpawnTile() {
 		solid = false;
 	}
 
