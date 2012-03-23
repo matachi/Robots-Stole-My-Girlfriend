@@ -1,4 +1,9 @@
 package rsmg.util;
+/**
+ * Class for representing a two dimensional mathematical vector 
+ * @author Johan Grönvall
+ *
+ */
 public class Vector2d {
 	private double x;
 	private double y;
@@ -17,23 +22,36 @@ public class Vector2d {
 		x+=vector.getX();
 		y+=vector.getY();
 	}
+	
 	/**
-	 * 
 	 * @return the horizontal size of the vector
 	 */
 	public double getX(){
 		return x;
 	}
+	
 	/**
-	 * 
 	 * @return the vertical size of the vector
 	 */
 	public double getY(){
 		return y;
 	}
 	
+	/**
+	 * this method returns the resulting vectors length using Pythagoras theorem 
+	 * @return the length of the resulting vector.
+	 */
 	public double getlength(){
 		return Math.sqrt(x*x+y*y);
+	}
+	
+	/**
+	 * subtracts current vector with the specified vector
+	 * @param vector
+	 */
+	public void subtract(Vector2d vector){
+		x-=vector.getX();
+		y-=vector.getY();
 	}
 	
 }

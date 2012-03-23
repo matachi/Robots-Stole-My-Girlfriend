@@ -3,13 +3,13 @@ import rsmg.util.Vector2d;
 
 /**
  * Class which represents an object that can interact with the main character
- * 	and has the possibility of being moved around  
+ * and has the possibility of being moved around.  
  * @author Johan Grönvall
  *
  */
 public abstract class InteractiveObject {
-	private double x;
-	private double y;
+	protected double x;
+	protected double y;
 	private double height;
 	private double width;
 	private Vector2d velocity;
@@ -31,6 +31,10 @@ public abstract class InteractiveObject {
 	
 	public double getVelocity(){
 		return velocity.getlength();
+	}
+	
+	public void addVector(Vector2d vector){
+		velocity.add(vector);
 	}
 	
 	public double getX(){
@@ -57,6 +61,15 @@ public abstract class InteractiveObject {
 		this.y=y;
 	}
 	
+	/**
+	 * Changes the position of the InteractiveObject based on its current Vector.
+	 * a vector with the strength of 1 is equivalent to a speed of 1pixel/s
+	 * @param delta, time since last update
+	 */
+	public void move(int delta){
+		this.x += this.getVector().getX()*delta;
+		this.y += this.getVector().getY()*delta;
+	}
 	
 	/**
 	 * 
@@ -73,7 +86,7 @@ public abstract class InteractiveObject {
 					((obj.getX() - this.getX() < this.getWidth()) && (obj.getX() > this.getX()) &&
 						(obj.getY() - this.getY() < this.getHeight()) && (obj.getY() > this.getY()))));
 		}
-	}
+	}	
 	/**
 	 * class for specifying what happens when this objects collides with another InteractiveObject
 	 */
