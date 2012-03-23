@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+	<height>5</height>
+	<width>20</width>
+	<cliff>
+		<start>10</start>
+		<end>12</end>
+	</cliff>
+
+	<cliff>
+		<start>15</start>
+		<end>18</end>
+	</cliff>
+	<rock>
+		<shape>flat</shape>
+		<start>2</start>
+		<end>5</end>
+	</rock>
+</level>
