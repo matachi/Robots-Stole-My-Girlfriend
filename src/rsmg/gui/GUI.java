@@ -28,7 +28,7 @@ public class GUI extends BasicGame {
 
 	@Override
 	public void init(GameContainer g) throws SlickException {
-		ch = new Image("res/sprites/charPistolRunningSheet.png", false, Image.FILTER_NEAREST);
+		ch = new Image("res/sprites/level/charPistolRunningSheet.png", false, Image.FILTER_NEAREST);
 		ss = new SpriteSheet(ch.getScaledCopy(2f), 64, 46);
 		a = new Animation(ss, 140);
 		bg = new Image("res/art/conceptLevel.jpg", false, Image.FILTER_NEAREST);
