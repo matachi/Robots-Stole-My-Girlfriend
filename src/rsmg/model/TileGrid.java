@@ -51,11 +51,32 @@ public class TileGrid {
 		return grid[x][y];
 	}
 	
-	public Point getSpawnPoint() throws Exception{
-		for(int i = 0; i < grid.length; i++){
-			for(int j = 0; j < grid[i].length; j++){
-				if (grid[i][j] instanceof SpawnTile){
-					return new Point(i*Constants.TILESIZE, j*Constants.TILESIZE);
+	/**
+	 * Returns the number of tiles horizontally in the tile grid.
+	 * @return Number of tiles horizontally.
+	 */
+	public int getWidth() {
+		return grid.length;
+	}
+	
+	/**
+	 * Returns the number of tiles vertically in the tile grid.
+	 * @return Number of tiles vertically.
+	 */
+	public int getHeight() {
+		return grid[0].length;
+	}
+	
+	/**
+	 * Get the spawn position as a real position in the model.
+	 * @return The position where the spawn position is located.
+	 * @throws Exception If a spawn position can't be found.
+	 */
+	public Point getSpawnPoint() throws Exception {
+		for(int x = 0; x < getWidth(); x++) {
+			for(int y = 0; y < getHeight(); y++) {
+				if (get(x,y) instanceof SpawnTile) {
+					return new Point(x*Constants.TILESIZE, y*Constants.TILESIZE);
 				}
 			}
 		}
@@ -82,11 +103,14 @@ public class TileGrid {
 	 */
 	public boolean intersectsWith(InteractiveObject object) {
 		
+		// Get the object's boundaries in the tile grid.
 		int leftX = getTilePosFromRealPos(object.getX());
 		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
 		int topY = getTilePosFromRealPos(object.getY());
 		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
+		// Walk through all tiles that the object is lying over and check if any
+		// of those are solid.
 		for (int x = leftX; x <= rightX; x++) {
 			for (int y = topY; y <= bottomY; y++) {
 				if (get(x,y).isSolid() == true)
@@ -100,27 +124,11 @@ public class TileGrid {
 	 * Test to display grid in console
 	 */
 	public void showGrid() {
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[0].length; j++) {
-				System.out.print(grid[i][j].isSolid() + " | ");
+		for (int x = 0; x < getWidth(); x++) {
+			for (int y = 0; y < getHeight(); y++) {
+				System.out.print(get(x,y).isSolid() + " | ");
 			}
 			System.out.println("");
 		}
-	}
-	
-	/**
-	 * Returns the number of tiles horizontally in the tile grid.
-	 * @return Number of tiles horizontally.
-	 */
-	public int getWidth() {
-		return grid.length;
-	}
-	
-	/**
-	 * Returns the number of tiles vertically in the tile grid.
-	 * @return Number of tiles vertically.
-	 */
-	public int getHeight() {
-		return grid[0].length;
 	}
 }
