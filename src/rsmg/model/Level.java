@@ -2,6 +2,8 @@ package rsmg.model;
 
 import java.awt.Point;
 
+import rsmg.util.Vector2d;
+
 
 public class Level {
 	
@@ -46,10 +48,53 @@ public class Level {
 		if (isAirbourne(character)){
 			character.applyGravity((int)delta);
 		}
+		applyNormalForce(character);
 	}
+	/**
+	 * 
+	 * @param obj
+	 * @return true if there is no tile underneath specified object
+	 */
 	private boolean isAirbourne(InteractiveObject obj){
-		//TODO algorithm for checking if a tile is underneath an object
-		return true;
+		double y = obj.getY()+obj.getHeight()+1;
+		return !(TileIntersect(obj.getX(), y) || TileIntersect(obj.getX()+obj.getWidth(), y));
+	}
+	/**
+	 * Method representing the normal force
+	 * The method moves an object that inside a tile outside of said tile and slows it down
+	 * TODO might require tweaks
+	 */
+	private void applyNormalForce(InteractiveObject obj){
+		double x = obj.getX()+obj.getWidth();
+		double y = obj.getY()+obj.getHeight();
+		int tileSize = Constants.TILESIZE;
+		Vector2d vector = obj.getVector();
+		
+		if (TileIntersect(x, y)){
+			double newX = tileSize-x%tileSize;
+			double newY = tileSize-y%tileSize;
+			if(vector.getX() < 0){
+				newX*=-1;
+			}
+			if(vector.getY() < 0){
+				newY*=-1;
+			}
+				
+			obj.setX(obj.getX()+newX);
+			obj.setY(obj.getY()+newY);
+		}
+			
+	}
+	/**
+	 * 
+	 * @param obj
+	 * @param tile
+	 * @return true coordinates are inside one of the 
+	 */
+	private boolean TileIntersect(double x, double y){
+		int xTilePos = (int)x/Constants.TILESIZE;
+		int yTilePos = (int)y/Constants.TILESIZE;
+		return tGrid.get(xTilePos, yTilePos).isSolid();
 	}
 
 	/**

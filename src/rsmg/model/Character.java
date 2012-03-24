@@ -32,14 +32,14 @@ public class Character extends InteractiveObject {
 	 * Adds a horizontal vector to the character sending him westwards
 	 */
 	public void moveLeft(){
-		this.getVector().add(new Vector2d(-Constants.CHARACTERSPEED, 0));
+		this.getVector().setX(-Constants.CHARACTERSPEED);
 	}
 	
 	/**
-	 * Adds a horizontal vector to the character sending him westwards
+	 * Adds a horizontal vector to the character sending him eastwards
 	 */
 	public void moveRight(){
-		this.getVector().add(new Vector2d(Constants.CHARACTERSPEED, 0));
+		this.getVector().setX(Constants.CHARACTERSPEED);
 	}
 
 }

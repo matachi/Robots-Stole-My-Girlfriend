@@ -12,7 +12,7 @@ public abstract class InteractiveObject {
 	protected double y;
 	private double height;
 	private double width;
-	private Vector2d velocity;
+	private Vector2d velocity = new Vector2d();
 	
 	public InteractiveObject(double x, double y){
 		this.x=x;

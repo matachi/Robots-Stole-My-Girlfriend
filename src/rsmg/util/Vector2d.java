@@ -12,7 +12,6 @@ public class Vector2d {
 		x = 0;
 		y = 0;
 	}
-	
 	public Vector2d(int x, int y){
 		this.x=x;
 		this.y=y;
@@ -28,6 +27,12 @@ public class Vector2d {
 	 */
 	public double getX(){
 		return x;
+	}
+	public void setX(double x){
+		this.x=x;
+	}
+	public void setY(double y){
+		this.y=y;
 	}
 	
 	/**
