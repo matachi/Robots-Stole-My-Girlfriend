@@ -66,7 +66,7 @@ public abstract class InteractiveObject {
 	 * a vector with the strength of 1 is equivalent to a speed of 1pixel/s
 	 * @param delta, time since last update
 	 */
-	public void move(int delta){
+	public void move(double delta){
 		this.x += this.getVector().getX()*delta;
 		this.y += this.getVector().getY()*delta;
 	}
@@ -76,7 +76,7 @@ public abstract class InteractiveObject {
 	 * @param delta
 	 */
 	public void applyGravity(double delta){
-		addVector(new Vector2d(0, -Constants.GRAVITYSTRENGTH*delta));
+		addVector(new Vector2d(0, Constants.GRAVITYSTRENGTH*delta));
 	}
 	
 	/**

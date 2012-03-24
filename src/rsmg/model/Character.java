@@ -25,7 +25,7 @@ public class Character extends InteractiveObject {
 	 * Adds a vertical vector to the character sending him up in the air
 	 */
 	public void jump(){
-		this.getVector().add(new Vector2d(0, Constants.JUMPSTRENGTH));
+		this.getVector().add(new Vector2d(0, -Constants.JUMPSTRENGTH));
 	}
 	
 	/**

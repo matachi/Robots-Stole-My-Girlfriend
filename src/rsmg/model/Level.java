@@ -45,9 +45,11 @@ public class Level {
 	 * @param delta Time since last update in seconds.
 	 */
 	public void update(double delta){
-		if (isAirbourne(character)){
+		outsideMapCheck();
+		//if (isAirbourne(character)){
 			character.applyGravity(delta);
-		}
+		//}
+		character.move(delta);
 		applyNormalForce(character);
 	}
 	/**
@@ -58,6 +60,14 @@ public class Level {
 	private boolean isAirbourne(InteractiveObject obj){
 		double y = obj.getY()+obj.getHeight()+1;
 		return !(TileIntersect(obj.getX(), y) || TileIntersect(obj.getX()+obj.getWidth(), y));
+	}
+	private void outsideMapCheck(){
+		if (character.getX() < 0){
+			character.setX(0);
+		}
+		if (character.getY() < 0){
+			character.setY(0);
+		}
 	}
 	/**
 	 * Method representing the normal force
