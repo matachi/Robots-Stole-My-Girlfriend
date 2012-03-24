@@ -75,7 +75,7 @@ public abstract class InteractiveObject {
 	 * applies a gravity vector to this InteractiveObject 
 	 * @param delta
 	 */
-	public void applyGravity(int delta){
+	public void applyGravity(double delta){
 		addVector(new Vector2d(0, -Constants.GRAVITYSTRENGTH*delta));
 	}
 	

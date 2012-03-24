@@ -46,7 +46,7 @@ public class Level {
 	 */
 	public void update(double delta){
 		if (isAirbourne(character)){
-			character.applyGravity((int)delta);
+			character.applyGravity(delta);
 		}
 		applyNormalForce(character);
 	}
