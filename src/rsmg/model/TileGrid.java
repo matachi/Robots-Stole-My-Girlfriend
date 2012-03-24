@@ -124,8 +124,8 @@ public class TileGrid {
 	 * Test to display grid in console
 	 */
 	public void showGrid() {
-		for (int x = 0; x < getWidth(); x++) {
-			for (int y = 0; y < getHeight(); y++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				System.out.print(get(x,y).isSolid() + " | ");
 			}
 			System.out.println("");
