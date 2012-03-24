@@ -2,8 +2,6 @@ package rsmg.model;
 
 import java.awt.Point;
 
-import rsmg.util.Vector2d;
-
 
 public class Level {
 	
@@ -42,11 +40,11 @@ public class Level {
 	
 	/**
 	 * method which handles necessary updates to the levels state
-	 * @param delta, time since last update
+	 * @param delta Time since last update in seconds.
 	 */
-	public void update(int delta){
+	public void update(double delta){
 		if (isAirbourne(character)){
-			character.applyGravity(delta);
+			character.applyGravity((int)delta);
 		}
 	}
 	private boolean isAirbourne(InteractiveObject obj){
@@ -77,4 +75,48 @@ public class Level {
 	 * 
 	 * public void setLevelReached(int level) { levelReached = level; }
 	 */
+	
+	/**
+	 * Returns the tile grid.
+	 * @return The tile grid.
+	 */
+	public TileGrid getTileGrid() {
+		return tGrid;
+	}
+	
+	/**
+	 * Returns the character.
+	 * @return The character.
+	 */
+	public Character getCharacter() {
+		return character;
+	}
+	
+	/**
+	 * Move the character to the left.
+	 */
+	public void moveLeft() {
+		character.moveLeft();
+	}
+	
+	/**
+	 * Move the character to the right.
+	 */
+	public void moveRight() {
+		character.moveRight();
+	}
+	
+	/**
+	 * Jump with the character.
+	 */
+	public void jump() {
+		character.jump();
+	}
+	
+	/**
+	 * Attack with the character.
+	 */
+	public void attack() {
+		//character.attack();
+	}
 }

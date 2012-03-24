@@ -94,7 +94,7 @@ public class LevelState extends State {
 	private void drawEnvironment() {
 		for (int y = 0; y < level.getTileGrid().getHeight(); y++) {
 			for (int x = 0; x < level.getTileGrid().getWidth(); x++) {
-				if (level.getTileGrid().getTile(y, x).isSolid())
+				if (level.getTileGrid().get(x, y).isSolid())
 					boxTile.draw(y * 64, x * 64);
 //				else
 //					airTile.draw(y * 64, x * 64);
@@ -106,7 +106,7 @@ public class LevelState extends State {
 	 * Draw the character/protagonist on the screen.
 	 */
 	private void drawCharacter() {
-		character.draw(level.getCharacter().getX(), level.getCharacter().getY());
+		character.draw((float)level.getCharacter().getX(), (float)level.getCharacter().getY());
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class LevelState extends State {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		
-		handleKeyboardEvents(gc.getInput());
+		handleKeyboardEvents(gc.getInput(), sbg);
 		
 		// Update the model and give it the time that has passed since last
 		// update as seconds.
@@ -127,7 +127,7 @@ public class LevelState extends State {
 	 * Handle keyboard events.
 	 * @param input
 	 */
-	public void handleKeyboardEvents(Input input) {
+	public void handleKeyboardEvents(Input input, StateBasedGame sbg) {
 		if (input.isKeyDown(Input.KEY_LEFT))
 			level.moveLeft();
 		else if (input.isKeyDown(Input.KEY_RIGHT))

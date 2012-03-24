@@ -1,7 +1,6 @@
 package rsmg.model;
 
 import java.awt.Point;
-import java.util.MissingResourceException;
 
 import rsmg.io.IO;
 
@@ -74,5 +73,21 @@ public class TileGrid {
 			}
 			System.out.println("");
 		}
+	}
+	
+	/**
+	 * Returns the number of tiles horizontally in the tile grid.
+	 * @return Number of tiles horizontally.
+	 */
+	public int getWidth() {
+		return grid.length;
+	}
+	
+	/**
+	 * Returns the number of tiles vertically in the tile grid.
+	 * @return Number of tiles vertically.
+	 */
+	public int getHeight() {
+		return grid[0].length;
 	}
 }

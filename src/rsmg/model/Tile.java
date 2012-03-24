@@ -9,7 +9,7 @@ public abstract class Tile {
 	 */
 	public Tile() {}
 
-	abstract boolean isSolid();
+	public abstract boolean isSolid();
 
 	/**
 	 * @return the size of the Tile
