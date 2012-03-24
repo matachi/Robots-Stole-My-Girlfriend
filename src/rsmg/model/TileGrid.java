@@ -62,6 +62,39 @@ public class TileGrid {
 		throw new Exception();
 		//TODO change to a specifed exception
 	}
+	
+	/**
+	 * Get tile number from a coordinate in the model.
+	 * For an example, if you give the method the argument 50 and a tile is
+	 * 32 units large, the method will return 1 since the real position is in
+	 * tile number 1.
+	 * @param realPos The position in the game.
+	 * @return The position in the matrix.
+	 */
+	public int getTilePosFromRealPos(double realPos) {
+		return (int)(realPos / Constants.TILESIZE);
+	}
+	
+	/**
+	 * Check if an interactive object intersects with any solid tiles.
+	 * @param object The interactive object.
+	 * @return If the object intersects with any solid tiles.
+	 */
+	public boolean intersectsWith(InteractiveObject object) {
+		
+		int leftX = getTilePosFromRealPos(object.getX());
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
+		int topY = getTilePosFromRealPos(object.getY());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		
+		for (int x = leftX; x <= rightX; x++) {
+			for (int y = topY; y <= bottomY; y++) {
+				if (get(x,y).isSolid() == true)
+					return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Test to display grid in console
