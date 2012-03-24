@@ -12,4 +12,5 @@ public enum Constants{
 	public static final int JUMPSTRENGTH = 10;
 	public static final int CHARACTERSPEED = 5;
 	public static final int TILESIZE = 30;
+	public static final int GRAVITYSTRENGTH = 8;
 }

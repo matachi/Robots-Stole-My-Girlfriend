@@ -72,6 +72,14 @@ public abstract class InteractiveObject {
 	}
 	
 	/**
+	 * applies a gravity vector to this InteractiveObject 
+	 * @param delta
+	 */
+	public void applyGravity(int delta){
+		addVector(new Vector2d(0, -Constants.GRAVITYSTRENGTH*delta));
+	}
+	
+	/**
 	 * 
 	 * @param obj
 	 * @return true if the two InteractiveObjects have collided, otherwise it returns false

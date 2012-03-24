@@ -1,5 +1,8 @@
 package rsmg.model;
 
+import java.awt.Point;
+import java.util.MissingResourceException;
+
 import rsmg.io.IO;
 
 /**
@@ -47,6 +50,18 @@ public class TileGrid {
 	 */
 	public Tile get(int x, int y) {
 		return grid[x][y];
+	}
+	
+	public Point getSpawnPoint() throws Exception{
+		for(int i = 0; i < grid.length; i++){
+			for(int j = 0; j < grid[i].length; j++){
+				if (grid[i][j] instanceof SpawnTile){
+					return new Point(i*Constants.TILESIZE, j*Constants.TILESIZE);
+				}
+			}
+		}
+		throw new Exception();
+		//TODO change to a specifed exception
 	}
 
 	/**

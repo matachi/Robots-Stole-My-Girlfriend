@@ -20,6 +20,7 @@ public class Character extends InteractiveObject {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	/**
 	 * Adds a vertical vector to the character sending him up in the air
 	 */
