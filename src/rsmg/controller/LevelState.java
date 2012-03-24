@@ -106,7 +106,7 @@ public class LevelState extends State {
 	 * Draw the character/protagonist on the screen.
 	 */
 	private void drawCharacter() {
-		character.draw((float)level.getCharacter().getX(), (float)level.getCharacter().getY());
+		character.draw((float)level.getCharacter().getX()*2, (float)level.getCharacter().getY()*2);
 	}
 
 	/**

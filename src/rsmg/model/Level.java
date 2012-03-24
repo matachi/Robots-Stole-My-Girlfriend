@@ -59,7 +59,7 @@ public class Level {
 	 */
 	private boolean isAirbourne(InteractiveObject obj){
 		double y = obj.getY()+obj.getHeight()+1;
-		return !(TileIntersect(obj.getX(), y) || TileIntersect(obj.getX()+obj.getWidth(), y));
+		return !(tileIntersect(obj.getX(), y) || tileIntersect(obj.getX()+obj.getWidth(), y));
 	}
 	private void outsideMapCheck(){
 		if (character.getX() < 0){
@@ -80,18 +80,20 @@ public class Level {
 		int tileSize = Constants.TILESIZE;
 		Vector2d vector = obj.getVector();
 		
-		if (TileIntersect(x, y)){
-			double newX = tileSize-x%tileSize;
-			double newY = tileSize-y%tileSize;
-			if(vector.getX() < 0){
-				newX*=-1;
-			}
-			if(vector.getY() < 0){
-				newY*=-1;
-			}
-				
-			obj.setX(obj.getX()+newX);
-			obj.setY(obj.getY()+newY);
+		if (tGrid.intersectsWith(obj)){
+			System.out.println("Solid!");
+//			double newX = tileSize-(x%tileSize);
+//			double newY = tileSize-(y%tileSize);
+//			
+//			if(vector.getX() < 0){
+//				newX*=-1;
+//			}
+//			if(vector.getY() < 0){
+//				newY*=-1;
+//			}
+//				
+//			obj.setX(obj.getX()+newX);
+//			obj.setY(obj.getY()+newY);
 		}
 			
 	}
@@ -101,9 +103,9 @@ public class Level {
 	 * @param tile
 	 * @return true coordinates are inside one of the 
 	 */
-	private boolean TileIntersect(double x, double y){
-		int xTilePos = (int)x/Constants.TILESIZE;
-		int yTilePos = (int)y/Constants.TILESIZE;
+	private boolean tileIntersect(double x, double y){
+		int xTilePos = (int)(x/Constants.TILESIZE);
+		int yTilePos = (int)(y/Constants.TILESIZE);
 		return tGrid.get(xTilePos, yTilePos).isSolid();
 	}
 
