@@ -8,7 +8,8 @@ import rsmg.util.Vector2d;
  *
  */
 public abstract class InteractiveObject {
-	
+	private double previousY = 0;
+	private double previousX = 0;
 	private double x;
 	private double y;
 	private double height;
@@ -69,6 +70,12 @@ public abstract class InteractiveObject {
 	public void setY(double y) {
 		this.y = y;
 	}
+	public double getPX(){
+		return previousX;
+	}
+	public double getPY(){
+		return previousY;
+	}
 	
 	/**
 	 * Changes the position of the InteractiveObject based on its current Vector.
@@ -76,6 +83,8 @@ public abstract class InteractiveObject {
 	 * @param delta, time since last update
 	 */
 	public void move(double delta) {
+		previousX = x;
+		previousY = y;
 		x += getVelocity().getX() * delta;
 		y += getVelocity().getY() * delta;
 	}

@@ -123,7 +123,7 @@ public class TileGrid {
 	 * @param object The interactive object.
 	 * @return The distance he is inside a tile to his left;
 	 */
-	public int leftSideIntersection(InteractiveObject object) {
+	public double leftSideIntersection(InteractiveObject object) {
 		
 		int leftX = getTilePosFromRealPos(object.getX());
 		int topY = getTilePosFromRealPos(object.getY());
@@ -131,7 +131,7 @@ public class TileGrid {
 		
 		for (int y = topY; y <= bottomY; y++) {
 			if (get(leftX, y).isSolid() == true)
-				return (int)(leftX * Constants.TILESIZE - object.getX());
+				return (leftX * Constants.TILESIZE - object.getX());
 		}
 		return 0;
 	}
@@ -141,7 +141,7 @@ public class TileGrid {
 	 * @param object The interactive object.
 	 * @return The distance he is inside a tile to his right;
 	 */
-	public int rightSideIntersection(InteractiveObject object) {
+	public double rightSideIntersection(InteractiveObject object) {
 		
 		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
 		int topY = getTilePosFromRealPos(object.getY());
@@ -149,7 +149,7 @@ public class TileGrid {
 		
 		for (int y = topY; y <= bottomY; y++) {
 			if (get(rightX, y).isSolid() == true)
-				return (int)(object.getX() + object.getWidth() - rightX * Constants.TILESIZE);
+				return (object.getX() + object.getWidth() - rightX * Constants.TILESIZE);
 		}
 		return 0;
 	}
@@ -159,7 +159,7 @@ public class TileGrid {
 	 * @param object The interactive object.
 	 * @return The distance he is inside a tile under him;
 	 */
-	public int bottomSideIntersection(InteractiveObject object) {
+	public double bottomSideIntersection(InteractiveObject object) {
 
 		int leftX = getTilePosFromRealPos(object.getX());
 		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
@@ -167,7 +167,7 @@ public class TileGrid {
 		
 		for (int x = leftX; x <= rightX; x++) {
 			if (get(x, bottomY).isSolid() == true)
-				return (int)(object.getY() + object.getHeight() - bottomY * Constants.TILESIZE);
+				return (object.getY() + object.getHeight() - bottomY * Constants.TILESIZE);
 		}
 		return 0;
 	}
@@ -177,7 +177,7 @@ public class TileGrid {
 	 * @param object The interactive object.
 	 * @return The distance he is inside a tile over him;
 	 */
-	public int topSideIntersection(InteractiveObject object) {
+	public double topSideIntersection(InteractiveObject object) {
 
 		int leftX = getTilePosFromRealPos(object.getX());
 		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
@@ -185,7 +185,7 @@ public class TileGrid {
 		
 		for (int x = leftX; x <= rightX; x++) {
 			if (get(x, topY).isSolid() == true)
-				return (int)(topY * Constants.TILESIZE - object.getY());
+				return (topY * Constants.TILESIZE - object.getY());
 		}
 		return 0;
 	}

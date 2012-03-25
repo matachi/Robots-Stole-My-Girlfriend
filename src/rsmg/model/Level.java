@@ -1,9 +1,7 @@
 package rsmg.model;
 
 import java.awt.Point;
-
-import rsmg.io.IO;
-import rsmg.util.Vector2d;
+import java.util.ArrayList;
 
 /**
  * Class representing a level.
@@ -37,8 +35,8 @@ public class Level {
 		Tile[][] grid = {
 			{g, g, g, g, g, g, g, g, g},
 			{g, a, a, a, a, a, a, a, g},
-			{g, a, s, a, a, a, a, a, g},
-			{g, a, a, a, a, g, g, a, g},
+			{g, g, a, s, a, a, a, a, g},
+			{g, g, a, a, a, g, g, a, g},
 			{g, a, a, g, a, a, g, a, g},
 			{g, g, g, g, g, g, g, g, g}};
 		tGrid = new TileGrid(grid);
@@ -67,7 +65,7 @@ public class Level {
 		outsideMapCheck();
 		//Apply gravity to the character.
 //		if (isAirbourne(character)){
-		character.applyGravity(delta);
+			character.applyGravity(delta);
 //		}
 		
 		// Move the character.
@@ -95,6 +93,35 @@ public class Level {
 			character.setY(0);
 		}
 	}
+	private void applyNormalForce4(InteractiveObject obj){
+		if (tGrid.intersectsWith(obj)) {
+		//determine what tiles the char is colliding with
+		ArrayList<Double> tileOffset= new ArrayList<Double>();
+			tileOffset.add(tGrid.bottomSideIntersection(obj));
+			tileOffset.add(tGrid.topSideIntersection(obj));
+			tileOffset.add(tGrid.leftSideIntersection(obj));
+			tileOffset.add(tGrid.rightSideIntersection(obj));
+			
+			double offset = Math.min(tileOffset.get(0), Math.min(tileOffset.get(1), Math.min(tileOffset.get(2), tileOffset.get(3))));
+			int index = tileOffset.indexOf(offset);
+			System.out.println(offset);
+			System.out.println(index);
+			switch(index){
+			case 0:
+				obj.setY(obj.getY()+Math.abs(offset));
+				break;
+			case 1:
+				obj.setY(obj.getY()-Math.abs(offset));
+				break;
+			case 2:
+				obj.setX(obj.getX()-Math.abs(offset));
+				break;
+			case 3:
+				obj.setX(obj.getX()+Math.abs(offset));
+			}
+			
+		}
+	}
 	
 	private void applyNormalForce3(InteractiveObject obj) {
 		if (tGrid.intersectsWith(obj)) {
@@ -102,19 +129,37 @@ public class Level {
 				moveUp(obj);
 				obj.getVelocity().setY(0);
 			}
+			if (cameFromBelow(obj)) {
+				moveDown(obj);
+				obj.getVelocity().setY(0);
+			}
+			///if (tGrid.intersectsWith(obj)){
+				
+			//}
 		}
+
 	}
 	
 	private void moveUp(InteractiveObject obj) {
 		double i = tGrid.bottomSideIntersection(obj);
-		obj.setY((int)(obj.getY() - i));
+		obj.setY((obj.getY() - i));
+	}
+	private void moveDown(InteractiveObject obj) {
+		double i = tGrid.topSideIntersection(obj);
+		obj.setY(obj.getY() + i);
+	}
+	
+	private boolean cameFromBelow(InteractiveObject obj){
+		return obj.getPY() >= (tGrid.getTilePosFromRealPos(obj.getY())+1)*Constants.TILESIZE;
 	}
 	
 	private boolean cameFromAbove(InteractiveObject obj) {
-		return obj.getVelocity().getY() > 0;
+		
+		return obj.getPY()+obj.getHeight() <= tGrid.getTilePosFromRealPos(obj.getY()+obj.getHeight())*Constants.TILESIZE; 
 	}
 	
 	private void applyNormalForce2(InteractiveObject obj) {
+		
 		/**
 		 * Check if the object intersects with any tiles.
 		 */
