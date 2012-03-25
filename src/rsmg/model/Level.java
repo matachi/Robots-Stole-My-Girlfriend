@@ -46,11 +46,11 @@ public class Level {
 	 */
 	public void update(double delta){
 		outsideMapCheck();
+		applyNormalForce(character);
+		character.move(delta);
 		//if (isAirbourne(character)){
 			character.applyGravity(delta);
 		//}
-		character.move(delta);
-		applyNormalForce2(character, delta);
 	}
 	/**
 	 * 
@@ -58,7 +58,7 @@ public class Level {
 	 * @return true if there is no tile underneath specified object
 	 */
 	private boolean isAirbourne(InteractiveObject obj){
-		double y = obj.getY()+obj.getHeight()+1;
+		double y = obj.getY()+obj.getHeight()+2;
 		return !(tileIntersect(obj.getX(), y) || tileIntersect(obj.getX()+obj.getWidth(), y));
 	}
 	private void outsideMapCheck(){
@@ -74,50 +74,50 @@ public class Level {
 	 * The method moves an object that inside a tile outside of said tile and slows it down
 	 * TODO might require tweaks
 	 */
-	private void applyNormalForce(InteractiveObject obj) {
+	private void applyNormalForce(InteractiveObject obj){
 		double x = obj.getX()+obj.getWidth();
 		double y = obj.getY()+obj.getHeight();
 		int tileSize = Constants.TILESIZE;
 		Vector2d vector = obj.getVelocity();
-		
-		if (tGrid.intersectsWith(obj)){
-			System.out.println("Solid!");
-			double newX = (x%tileSize);
-			double newY = (y%tileSize);
-			
-			if(vector.getX() < 0){
-				newX*=-1; 
-			}
-			
-			if(vector.getY() < 0){
-					newY*=-1;
-			}
-			obj.setX((int)(x/tileSize)*tileSize-obj.getWidth());
-			obj.setY((int)(y/tileSize)*tileSize-obj.getHeight());
-			//obj.setX(obj.getX() - newX);
-			//obj.setY(obj.getY()+newY);
-		}
-	}
-	private void applyNormalForce2(InteractiveObject obj, double delta){
-		double x = obj.getX()+obj.getWidth();
-		double y = obj.getY()+obj.getHeight();
-		int tileSize = Constants.TILESIZE;
-		Vector2d vector = obj.getVector();
 		//TODO FIX NORMALFORCE
-		if (tileIntersect(x, y)){
+		if (tileIntersect(x-1, y-1)){
 			System.out.println("Solid!");
-			double oldX = obj.getX()-obj.getVector().getX()*delta;
-			double oldY = obj.getY()-obj.getVector().getY()*delta;
-			
-			if(obj.getX() > oldX ){
-				obj.setX((int)(x/tileSize)*tileSize-obj.getWidth());
-			}else if(obj.getX() < oldX){
-				obj.setX((int)(x/tileSize+1)*tileSize);
+			//approximates where the previous x coordinate was
+			double oldX = obj.getX()-obj.getVelocity().getX();
+			double oldY = obj.getY()-obj.getVelocity().getY();
+
+			//if object descended or ascended into tile
+			if((int)(oldX/tileSize) != (int)(x/tileSize)){
+				if(x > oldX){
+					//moveLeft()
+					obj.setX((int)(x/tileSize)*tileSize-obj.getWidth());
+				}else{ //if (x < oldX)
+					//moveRight()
+					obj.setX((int)((x/tileSize)+1)*tileSize);
+				}
+				obj.getVelocity().setX(0);
 			}
-			if(tileIntersect(x,y)){
-				
+			//if object horizontally entered the tile
+			if((int)(oldY/tileSize) == (int)(y/tileSize)){
+				System.out.println(oldY/tileSize);
+				System.out.println(" | ");
+				System.out.println(y/tileSize);
+				if(y > oldY){
+					//moveUp()
+					obj.setY((int)(y/tileSize)*tileSize-obj.getHeight());
+				}else{ //if ( y < oldY)
+					//moveDown()
+					obj.setY((int)((y/tileSize))*tileSize);
+
+				}
+				obj.getVelocity().setY(0);
 			}
 			
+			
+//			if(obj.getX() > oldX ){
+//				obj.setX((int)(x/tileSize)*tileSize-obj.getWidth());
+//			}else if(obj.getX() < oldX){
+//				obj.setX((int)(x/tileSize+1)*tileSize);			
 //			if(obj.getY() > oldY){
 //				obj.setY((int)(y/tileSize)*tileSize+obj.getHeight());
 //			}
