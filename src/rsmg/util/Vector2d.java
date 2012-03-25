@@ -41,8 +41,8 @@ public class Vector2d {
 	 * @param y The Y length that should be added.
 	 */
 	public void add(double x, double y) {
-		this.x = x;
-		this.y = y;
+		this.x += x;
+		this.y += y;
 	}
 	
 	/**
