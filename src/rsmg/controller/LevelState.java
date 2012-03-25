@@ -34,6 +34,8 @@ public class LevelState extends State {
 	 * The character that the player controls.
 	 */
 	private Animation character;
+	private Animation characterRight;
+	private Animation characterLeft;
 	
 	/**
 	 * Reference to the level model.
@@ -62,9 +64,19 @@ public class LevelState extends State {
 		boxTile = new Image("res/sprites/level/boxTile.png", false, Image.FILTER_NEAREST);
 		boxTile = boxTile.getScaledCopy(2f);
 
+		/**
+		 * Make an animation for when the character is running to the right;
+		 */
 		Image characterImage = new Image("res/sprites/level/charPistolRunningSheet.png", false, Image.FILTER_NEAREST);
 		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(2f), 64, 46);
-		character = new Animation(characterSheet, 140);
+		character = characterRight = new Animation(characterSheet, 140);
+		
+		/**
+		 * Make an animation for when the character is running to the left;
+		 */
+		characterImage = characterImage.getFlippedCopy(true, false);
+		characterSheet = new SpriteSheet(characterImage.getScaledCopy(2f), 64, 46);
+		characterLeft = new Animation(characterSheet, 140);
 		
 		level = new Level();
 	}
@@ -104,7 +116,7 @@ public class LevelState extends State {
 	 * Draw the character/protagonist on the screen.
 	 */
 	private void drawCharacter() {
-		character.draw((float)level.getCharacter().getX()*2, (float)level.getCharacter().getY()*2);
+		character.draw((float)level.getCharacter().getX()*2-12, (float)level.getCharacter().getY()*2);
 	}
 
 	/**
@@ -119,6 +131,11 @@ public class LevelState extends State {
 		// Update the model and give it the time that has passed since last
 		// update as seconds.
 		level.update((double)delta / 1000);
+		
+		if (level.getCharacter().isMovingLeft())
+			character = characterLeft;
+		else if (level.getCharacter().isMovingRight())
+			character = characterRight;
 	}
 	
 	/**

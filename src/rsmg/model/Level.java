@@ -33,12 +33,12 @@ public class Level {
 		GroundTile g = new GroundTile();
 		SpawnTile s = new SpawnTile();
 		Tile[][] grid = {
-			{g, g, g, g, g, g, g, g, g},
-			{g, a, a, a, a, a, a, a, g},
-			{g, g, a, s, a, a, a, a, g},
-			{g, g, a, a, a, g, g, a, g},
-			{g, a, a, g, a, a, g, a, g},
-			{g, g, g, g, g, g, g, g, g}};
+			{g, g, g, g, g, g, g, g, g, g, g, g, g},
+			{g, a, a, a, a, a, a, a, a, a, a, a, g},
+			{g, g, a, s, a, a, a, a, a, a, g, g, g},
+			{g, g, a, a, a, g, g, a, a, g, g, a, g},
+			{g, a, a, g, a, a, g, a, g, g, g, g, g},
+			{g, g, g, g, g, g, g, g, g, g, g, g, g}};
 		tGrid = new TileGrid(grid);
 		
 		spawnChar();
@@ -63,10 +63,9 @@ public class Level {
 	 */
 	public void update(double delta) {
 		outsideMapCheck();
+		
 		//Apply gravity to the character.
-//		if (isAirbourne(character)){
-			character.applyGravity(delta);
-//		}
+		character.applyGravity(delta);
 		
 		// Move the character.
 		character.move(delta);
@@ -75,6 +74,9 @@ public class Level {
 		//applyNormalForce2(character);
 //		applyNormalForce(character, delta);
 		applyNormalForce3(character);
+
+		if (!isAirbourne(character))
+			character.getVelocity().setX(0);
 	}
 	/**
 	 * 
@@ -124,6 +126,9 @@ public class Level {
 	}
 	
 	private void applyNormalForce3(InteractiveObject obj) {
+		/**
+		 * Check if the object intersects with the grid.
+		 */
 		if (tGrid.intersectsWith(obj)) {
 			if (cameFromAbove(obj)) {
 				moveUp(obj);
@@ -133,29 +138,64 @@ public class Level {
 				moveDown(obj);
 				obj.getVelocity().setY(0);
 			}
-			///if (tGrid.intersectsWith(obj)){
-				
-			//}
+		}
+		if (tGrid.intersectsWith(obj)){
+			if (cameFromLeft(obj)) {
+				moveLeft(obj);
+				obj.getVelocity().setX(0);
+			}
+			if (cameFromRight(obj)) {
+				moveRight(obj);
+				obj.getVelocity().setX(0);
+			}
+		}
+		if (tGrid.intersectsWith(obj)) {
+			if (cameFromAbove(obj)) {
+				moveUp(obj);
+				obj.getVelocity().setY(0);
+			}
+			if (cameFromBelow(obj)) {
+				moveDown(obj);
+				obj.getVelocity().setY(0);
+			}
 		}
 
 	}
 	
-	private void moveUp(InteractiveObject obj) {
-		double i = tGrid.bottomSideIntersection(obj);
-		obj.setY((obj.getY() - i));
-	}
-	private void moveDown(InteractiveObject obj) {
-		double i = tGrid.topSideIntersection(obj);
-		obj.setY(obj.getY() + i);
+	private boolean cameFromAbove(InteractiveObject obj) {
+		return obj.getPY()+obj.getHeight() <= tGrid.getTilePosFromRealPos(obj.getY()+obj.getHeight())*Constants.TILESIZE; 
 	}
 	
-	private boolean cameFromBelow(InteractiveObject obj){
+	private void moveUp(InteractiveObject obj) {
+		double i = tGrid.bottomSideIntersection(obj);
+		obj.setY(obj.getY() - i - 0.001);
+	}
+	
+	private boolean cameFromBelow(InteractiveObject obj) {
 		return obj.getPY() >= (tGrid.getTilePosFromRealPos(obj.getY())+1)*Constants.TILESIZE;
 	}
 	
-	private boolean cameFromAbove(InteractiveObject obj) {
-		
-		return obj.getPY()+obj.getHeight() <= tGrid.getTilePosFromRealPos(obj.getY()+obj.getHeight())*Constants.TILESIZE; 
+	private void moveDown(InteractiveObject obj) {
+		double i = tGrid.topSideIntersection(obj);
+		obj.setY(obj.getY() + i + 0.001);
+	}
+	
+	private boolean cameFromLeft(InteractiveObject obj) {
+		return obj.getPX()+obj.getWidth() <= tGrid.getTilePosFromRealPos(obj.getX()+obj.getWidth())*Constants.TILESIZE; 
+	}
+	
+	private void moveLeft(InteractiveObject obj) {
+		double i = tGrid.rightSideIntersection(obj);
+		obj.setX(obj.getX() - i - 1);
+	}
+	
+	private boolean cameFromRight(InteractiveObject obj) {
+		return obj.getPX() >= (tGrid.getTilePosFromRealPos(obj.getX())+1)*Constants.TILESIZE; 
+	}
+	
+	private void moveRight(InteractiveObject obj) {
+		double i = tGrid.leftSideIntersection(obj);
+		obj.setX(obj.getX() + i + 1);
 	}
 	
 	private void applyNormalForce2(InteractiveObject obj) {

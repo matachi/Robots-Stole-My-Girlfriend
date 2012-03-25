@@ -125,6 +125,18 @@ public abstract class InteractiveObject {
 //		return (getY() - obj.getY() < obj.getHeight() && getY() < obj.getY()) ||
 //			   (obj.getY() - getY() < getHeight()) && (obj.getY() < getY());
 //	}
+
+	public boolean isStandingStill() {
+		return getX() == getPX();
+	}
+
+	public boolean isMovingLeft() {
+		return getX() < getPX();
+	}
+
+	public boolean isMovingRight() {
+		return getX() > getPX();
+	}
 	
 	/**
 	 * class for specifying what happens when this objects collides with another InteractiveObject

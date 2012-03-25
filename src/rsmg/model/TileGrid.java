@@ -2,8 +2,6 @@ package rsmg.model;
 
 import java.awt.Point;
 
-import rsmg.io.IO;
-
 /**
  * Contains information about the Tile[][]
  */
@@ -131,7 +129,7 @@ public class TileGrid {
 		
 		for (int y = topY; y <= bottomY; y++) {
 			if (get(leftX, y).isSolid() == true)
-				return (leftX * Constants.TILESIZE - object.getX());
+				return (leftX + 1) * Constants.TILESIZE - object.getX();
 		}
 		return 0;
 	}
@@ -149,7 +147,7 @@ public class TileGrid {
 		
 		for (int y = topY; y <= bottomY; y++) {
 			if (get(rightX, y).isSolid() == true)
-				return (object.getX() + object.getWidth() - rightX * Constants.TILESIZE);
+				return object.getX() + object.getWidth() - rightX * Constants.TILESIZE;
 		}
 		return 0;
 	}
@@ -167,7 +165,7 @@ public class TileGrid {
 		
 		for (int x = leftX; x <= rightX; x++) {
 			if (get(x, bottomY).isSolid() == true)
-				return (object.getY() + object.getHeight() - bottomY * Constants.TILESIZE);
+				return object.getY() + object.getHeight() - bottomY * Constants.TILESIZE;
 		}
 		return 0;
 	}
@@ -185,7 +183,7 @@ public class TileGrid {
 		
 		for (int x = leftX; x <= rightX; x++) {
 			if (get(x, topY).isSolid() == true)
-				return (topY * Constants.TILESIZE - object.getY());
+				return topY * Constants.TILESIZE - object.getY();
 		}
 		return 0;
 	}

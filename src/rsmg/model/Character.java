@@ -40,5 +40,4 @@ public class Character extends InteractiveObject {
 	public void moveRight(){
 		this.getVelocity().setX(Constants.CHARACTERSPEED);
 	}
-
 }
