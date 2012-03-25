@@ -74,11 +74,11 @@ public class Level {
 	 * The method moves an object that inside a tile outside of said tile and slows it down
 	 * TODO might require tweaks
 	 */
-	private void applyNormalForce(InteractiveObject obj){
+	private void applyNormalForce(InteractiveObject obj) {
 		double x = obj.getX()+obj.getWidth();
 		double y = obj.getY()+obj.getHeight();
 		int tileSize = Constants.TILESIZE;
-		Vector2d vector = obj.getVector();
+		Vector2d vector = obj.getVelocity();
 		
 		if (tGrid.intersectsWith(obj)){
 			System.out.println("Solid!");

@@ -8,57 +8,66 @@ import rsmg.util.Vector2d;
  *
  */
 public abstract class InteractiveObject {
-	protected double x;
-	protected double y;
+	
+	private double x;
+	private double y;
 	private double height;
 	private double width;
-	private Vector2d velocity = new Vector2d();
 	
-	public InteractiveObject(double x, double y){
-		this.x=x;
-		this.y=y;
+	/**
+	 * Store the velocity as a 2d vector.
+	 */
+	private Vector2d velocity;
+	
+	public InteractiveObject(double x, double y) {
+		this(x, y, 0, 0);
 	}
-	public InteractiveObject(double x, double y, double width, double height ){
-		this.x=x;
-		this.y=y;
-		this.height=height;
-		this.width=width;
+	public InteractiveObject(double x, double y, double width, double height ) {
+		this.x = x;
+		this.y = y;
+		this.height = height;
+		this.width = width;
+		this.velocity = new Vector2d();
 	}
 	
-	public Vector2d getVector(){
+	/**
+	 * Get the velocity vector.
+	 * @return The velocity vector.
+	 */
+	public Vector2d getVelocity() {
 		return velocity;
 	}
 	
-	public double getVelocity(){
-		return velocity.getlength();
-	}
-	
-	public void addVector(Vector2d vector){
+	public void addVelocity(Vector2d vector) {
 		velocity.add(vector);
 	}
 	
-	public double getX(){
-		return x;
+	public void addVelocity(double x, double y) {
+		velocity.add(x, y);
 	}
-	
-	public double getY(){
-		return y;
-	}
-	
-	public double getHeight(){
+
+	public double getHeight() {
 		return height;
 	}
-	
-	public double getWidth(){
+
+	public double getWidth() {
 		return width;
 	}
-	
-	public void setX(double x){
-		this.x=x;
+
+	public double getX() {
+		return x;
 	}
-	
-	public void setY(double y){
-		this.y=y;
+
+	public double getY() {
+		return y;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public void setY(double y) {
+		this.y = y;
 	}
 	
 	/**
@@ -66,35 +75,48 @@ public abstract class InteractiveObject {
 	 * a vector with the strength of 1 is equivalent to a speed of 1pixel/s
 	 * @param delta, time since last update
 	 */
-	public void move(double delta){
-		this.x += this.getVector().getX()*delta;
-		this.y += this.getVector().getY()*delta;
+	public void move(double delta) {
+		x += getVelocity().getX() * delta;
+		y += getVelocity().getY() * delta;
 	}
-	
+
 	/**
 	 * applies a gravity vector to this InteractiveObject 
 	 * @param delta
 	 */
-	public void applyGravity(double delta){
-		addVector(new Vector2d(0, Constants.GRAVITYSTRENGTH*delta));
+	public void applyGravity(double delta) {
+		addVelocity(0, Constants.GRAVITYSTRENGTH*delta);
 	}
 	
 	/**
-	 * 
+	 * Checks if the two objects have collided with each other.
 	 * @param obj
 	 * @return true if the two InteractiveObjects have collided, otherwise it returns false
 	 */
 	public boolean hasCollidedWith(InteractiveObject obj){
-		if (obj == null){
+		if (obj == null) {
 			return false;
-		}
-		else{
+		} else {
+//			if (verticalCollision(obj)) {
+//				return horizontalCollision(obj);
+//			}
 			return (((this.getX() - obj.getX() < (obj.getWidth()) && (this.getX() > obj.getX()) &&
 					((this.getY() - obj.getY()) < obj.getHeight()) && (this.getY() > obj.getY()) ) ||
 					((obj.getX() - this.getX() < this.getWidth()) && (obj.getX() > this.getX()) &&
 						(obj.getY() - this.getY() < this.getHeight()) && (obj.getY() > this.getY()))));
 		}
-	}	
+	}
+	
+//	private boolean verticalCollision(InteractiveObject obj) {
+//		return (getX() - obj.getX() < obj.getWidth() && getX() > obj.getX()) ||
+//			   (obj.getX() - getX() < getWidth() && obj.getX() > getX());
+//	}
+//	
+//	private boolean horizontalCollision(InteractiveObject obj) {
+//		return (getY() - obj.getY() < obj.getHeight() && getY() < obj.getY()) ||
+//			   (obj.getY() - getY() < getHeight()) && (obj.getY() < getY());
+//	}
+	
 	/**
 	 * class for specifying what happens when this objects collides with another InteractiveObject
 	 */

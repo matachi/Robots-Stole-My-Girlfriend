@@ -1,6 +1,5 @@
 package rsmg.model;
 
-import rsmg.util.Vector2d;
 
 /**
  * Class for representing the playable Character
@@ -25,21 +24,21 @@ public class Character extends InteractiveObject {
 	 * Adds a vertical vector to the character sending him up in the air
 	 */
 	public void jump(){
-		this.getVector().add(new Vector2d(0, -Constants.JUMPSTRENGTH));
+		this.addVelocity(0, -Constants.JUMPSTRENGTH);
 	}
 	
 	/**
 	 * Adds a horizontal vector to the character sending him westwards
 	 */
 	public void moveLeft(){
-		this.getVector().setX(-Constants.CHARACTERSPEED);
+		this.getVelocity().setX(-Constants.CHARACTERSPEED);
 	}
 	
 	/**
 	 * Adds a horizontal vector to the character sending him eastwards
 	 */
 	public void moveRight(){
-		this.getVector().setX(Constants.CHARACTERSPEED);
+		this.getVelocity().setX(Constants.CHARACTERSPEED);
 	}
 
 }
