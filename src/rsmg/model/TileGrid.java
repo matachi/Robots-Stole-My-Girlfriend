@@ -35,7 +35,7 @@ public class TileGrid {
 	 *            The tile to be set
 	 */
 	public void set(int x, int y, Tile tile) {
-		grid[x][y] = tile;
+		grid[y][x] = tile;
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class TileGrid {
 	 * @return The Tile in the matrix
 	 */
 	public Tile get(int x, int y) {
-		return grid[x][y];
+		return grid[y][x];
 	}
 	
 	/**
@@ -56,7 +56,7 @@ public class TileGrid {
 	 * @return Number of tiles horizontally.
 	 */
 	public int getWidth() {
-		return grid.length;
+		return grid[0].length;
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class TileGrid {
 	 * @return Number of tiles vertically.
 	 */
 	public int getHeight() {
-		return grid[0].length;
+		return grid.length;
 	}
 	
 	/**
