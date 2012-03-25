@@ -4,7 +4,12 @@ import java.awt.Point;
 
 import rsmg.util.Vector2d;
 
-
+/**
+ * Class representing a level.
+ * This Class is in charge of storing and updating information about a level
+ * @author Johan Grönvall, Johan Rignäs
+ *
+ */
 public class Level {
 	
 	private Character character;
@@ -46,15 +51,19 @@ public class Level {
 	 */
 	public void update(double delta) {
 		outsideMapCheck();
-
-		// Apply gravity to the character.
-		character.applyGravity(delta);
+		//Apply gravity to the character.
+		if (isAirbourne(character)){
+			character.applyGravity(delta);
+		}
 		
 		// Move the character.
 		character.move(delta);
 		
 		// Check so the character isn't inside a solid tile.
-		applyNormalForce2(character);
+		//applyNormalForce2(character);
+		applyNormalForce(character, delta);
+
+
 	}
 	/**
 	 * 
@@ -120,9 +129,10 @@ public class Level {
 			//approximates where the previous coordinate was
 			double oldX = obj.getX()-obj.getVelocity().getX()*delta;
 			double oldY = obj.getY()-obj.getVelocity().getY()*delta;
-
+			int oldXTileIndex = (int)(oldX/tileSize);
+			int yTileIndex = (int)(y/tileSize);
 			//if object descended or ascended into tile
-			if((int)(oldX/tileSize) != (int)(x/tileSize)){
+			if(oldXTileIndex != (int)(x/tileSize) && !tGrid.get((oldXTileIndex),(int)(yTileIndex)).isSolid()){
 				if(x > oldX){
 					//moveLeft()
 					obj.setX((int)(x/tileSize)*tileSize-obj.getWidth());
@@ -133,7 +143,7 @@ public class Level {
 				obj.getVelocity().setX(0);
 			}
 			//if object horizontally entered the tile
-			if((int)(oldY/tileSize) != (int)(y/tileSize)){
+			if((int)(oldY/tileSize) != (int)(y/tileSize) && tGrid.get((oldXTileIndex),(int)(yTileIndex)).isSolid()){
 				if(y > oldY){
 					//moveUp()
 					obj.setY((int)(y/tileSize)*tileSize-obj.getHeight());
@@ -144,9 +154,7 @@ public class Level {
 				}
 				obj.getVelocity().setY(0);
 			}
-
 		}
-			
 	}
 	/**
 	 * 

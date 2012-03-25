@@ -6,11 +6,11 @@ package rsmg.model;
  */
 public enum Constants{
 	;
-	public static final int CHARACTERWIDTH = 9;
+	public static final int CHARACTERWIDTH = 8;
 	public static final int CHARACTERHEIGHT = 14;
 	public static final int CHARACTERHEALTH = 100;
-	public static final int JUMPSTRENGTH = 100;
+	public static final int JUMPSTRENGTH = 150;
 	public static final int CHARACTERSPEED = 100;
 	public static final int TILESIZE = 30;
-	public static final int GRAVITYSTRENGTH = 100;
+	public static final int GRAVITYSTRENGTH = 300;
 }
