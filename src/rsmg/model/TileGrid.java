@@ -119,6 +119,78 @@ public class TileGrid {
 		}
 		return false;
 	}
+	
+	/**
+	 * Returns how much the object is inside a tile to his left;
+	 * @param object The interactive object.
+	 * @return The distance he is inside a tile to his left;
+	 */
+	public double leftSideIntersection(InteractiveObject object) {
+		
+		int leftX = getTilePosFromRealPos(object.getX());
+		int topY = getTilePosFromRealPos(object.getY());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		
+		for (int y = topY; y <= bottomY; y++) {
+			if (get(leftX, y).isSolid() == true)
+				return leftX * Constants.TILESIZE - object.getX();
+		}
+		return 0;
+	}
+	
+	/**
+	 * Returns how much the object is inside a tile to his right;
+	 * @param object The interactive object.
+	 * @return The distance he is inside a tile to his right;
+	 */
+	public double rightSideIntersection(InteractiveObject object) {
+		
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
+		int topY = getTilePosFromRealPos(object.getY());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		
+		for (int y = topY; y <= bottomY; y++) {
+			if (get(rightX, y).isSolid() == true)
+				return object.getX() - rightX * Constants.TILESIZE;
+		}
+		return 0;
+	}
+	
+	/**
+	 * Returns how much the object is inside a tile under him;
+	 * @param object The interactive object.
+	 * @return The distance he is inside a tile under him;
+	 */
+	public double bottomSideIntersection(InteractiveObject object) {
+
+		int leftX = getTilePosFromRealPos(object.getX());
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		
+		for (int x = leftX; x <= rightX; x++) {
+			if (get(x, bottomY).isSolid() == true)
+				return object.getY() - bottomY * Constants.TILESIZE;
+		}
+		return 0;
+	}
+	
+	/**
+	 * Returns how much the object is inside a tile over him;
+	 * @param object The interactive object.
+	 * @return The distance he is inside a tile over him;
+	 */
+	public double topSideIntersection(InteractiveObject object) {
+
+		int leftX = getTilePosFromRealPos(object.getX());
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
+		int topY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		
+		for (int x = leftX; x <= rightX; x++) {
+			if (get(x, topY).isSolid() == true)
+				return topY * Constants.TILESIZE - object.getY();
+		}
+		return 0;
+	}
 
 	/**
 	 * Test to display grid in console
