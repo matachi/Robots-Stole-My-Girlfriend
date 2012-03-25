@@ -134,17 +134,24 @@ public class Level {
 	 * TODO requires tweaks
 	 */
 	private void applyNormalForce(InteractiveObject obj, double delta){
-		double x = obj.getX()+obj.getWidth();
-		double y = obj.getY()+obj.getHeight();
+		double right = obj.getX()+obj.getWidth();
+		double bottom = obj.getY()+obj.getHeight();
+		double left = obj.getX();
+		normalForce(right, bottom, obj, delta);
+		normalForce(left, bottom, obj, delta);
+
+	}
+	private void normalForce(double x, double y, InteractiveObject obj, double delta){
 		int tileSize = Constants.TILESIZE;
-		Vector2d vector = obj.getVelocity();
-		if (tileIntersect(x-1, y-1)){
+		if (tileIntersect(x, y-1)){
 			System.out.println("Solid!");
 			//approximates where the previous coordinate was
 			double oldX = obj.getX()-obj.getVelocity().getX()*delta;
 			double oldY = obj.getY()-obj.getVelocity().getY()*delta;
+			
 			int oldXTileIndex = (int)(oldX/tileSize);
 			int yTileIndex = (int)(y/tileSize);
+			
 			//if object descended or ascended into tile
 			if(oldXTileIndex != (int)(x/tileSize) && !tGrid.get((oldXTileIndex),(int)(yTileIndex)).isSolid()){
 				if(x > oldX){
@@ -156,6 +163,7 @@ public class Level {
 				}
 				obj.getVelocity().setX(0);
 			}
+			
 			//if object horizontally entered the tile
 			if((int)(oldY/tileSize) != (int)(y/tileSize) && tGrid.get((oldXTileIndex),(int)(yTileIndex)).isSolid()){
 				if(y > oldY){
@@ -164,7 +172,6 @@ public class Level {
 				}else{ //if ( y < oldY)
 					//moveDown()
 					obj.setY((int)((y/tileSize))*tileSize);
-
 				}
 				obj.getVelocity().setY(0);
 			}
