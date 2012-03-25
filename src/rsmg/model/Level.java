@@ -50,7 +50,7 @@ public class Level {
 			character.applyGravity(delta);
 		//}
 		character.move(delta);
-		applyNormalForce(character);
+		applyNormalForce2(character, delta);
 	}
 	/**
 	 * 
@@ -82,18 +82,52 @@ public class Level {
 		
 		if (tGrid.intersectsWith(obj)){
 			System.out.println("Solid!");
-//			double newX = tileSize-(x%tileSize);
-//			double newY = tileSize-(y%tileSize);
-//			
-//			if(vector.getX() < 0){
-//				newX*=-1;
+			double newX = (x%tileSize);
+			double newY = (y%tileSize);
+			
+			if(vector.getX() < 0){
+				newX*=-1; 
+			}
+			
+			if(vector.getY() < 0){
+					newY*=-1;
+			}
+			obj.setX((int)(x/tileSize)*tileSize-obj.getWidth());
+			obj.setY((int)(y/tileSize)*tileSize-obj.getHeight());
+			//obj.setX(obj.getX() - newX);
+			//obj.setY(obj.getY()+newY);
+		}
+	}
+	private void applyNormalForce2(InteractiveObject obj, double delta){
+		double x = obj.getX()+obj.getWidth();
+		double y = obj.getY()+obj.getHeight();
+		int tileSize = Constants.TILESIZE;
+		Vector2d vector = obj.getVector();
+		//TODO FIX NORMALFORCE
+		if (tileIntersect(x, y)){
+			System.out.println("Solid!");
+			double oldX = obj.getX()-obj.getVector().getX()*delta;
+			double oldY = obj.getY()-obj.getVector().getY()*delta;
+			
+			if(obj.getX() > oldX ){
+				obj.setX((int)(x/tileSize)*tileSize-obj.getWidth());
+			}else if(obj.getX() < oldX){
+				obj.setX((int)(x/tileSize+1)*tileSize);
+			}
+			if(tileIntersect(x,y)){
+				
+			}
+			
+//			if(obj.getY() > oldY){
+//				obj.setY((int)(y/tileSize)*tileSize+obj.getHeight());
 //			}
-//			if(vector.getY() < 0){
-//				newY*=-1;
+//			else if(oldY > obj.getY()){
+//				obj.setY((int)(y/tileSize)*tileSize);
 //			}
-//				
-//			obj.setX(obj.getX()+newX);
-//			obj.setY(obj.getY()+newY);
+			//obj.setX((int)(x/tileSize)*tileSize-obj.getWidth());
+			//obj.setY((int)(y/tileSize)*tileSize-obj.getHeight());
+			//obj.setX(obj.getX() - newX);
+			//obj.setY(obj.getY()+newY);
 		}
 			
 	}
@@ -167,7 +201,9 @@ public class Level {
 	 * Jump with the character.
 	 */
 	public void jump() {
-		character.jump();
+		if(!isAirbourne(character)){
+			character.jump();
+		}
 	}
 	
 	/**
