@@ -44,13 +44,17 @@ public class Level {
 	 * method which handles necessary updates to the levels state
 	 * @param delta Time since last update in seconds.
 	 */
-	public void update(double delta){
+	public void update(double delta) {
 		outsideMapCheck();
-		applyNormalForce(character, delta);
+
+		// Apply gravity to the character.
+		character.applyGravity(delta);
+		
+		// Move the character.
 		character.move(delta);
-		if (isAirbourne(character)){
-			character.applyGravity(delta);
-		}
+		
+		// Check so the character isn't inside a solid tile.
+		applyNormalForce2(character);
 	}
 	/**
 	 * 
@@ -67,6 +71,38 @@ public class Level {
 		}
 		if (character.getY() < 0){
 			character.setY(0);
+		}
+	}
+	
+	private void applyNormalForce2(InteractiveObject obj) {
+		/**
+		 * Check if the object intersects with any tiles.
+		 */
+		if (tGrid.intersectsWith(obj)) {
+
+			double i = tGrid.bottomSideIntersection(obj);
+			// If the object fell into a tile under himself
+			if (i > 0) {
+				obj.setY((int)(obj.getY() - i));
+			}
+			
+			i = tGrid.topSideIntersection(obj);
+			// If the object jumped into a tile over himself
+			if (i > 0) {
+				obj.setY(obj.getY() + i);
+			}
+			
+			i = tGrid.leftSideIntersection(obj);
+			// If the object walked into a tile to his left
+			if (i > 0) {
+				obj.setX(obj.getX() + i);
+			}
+			
+			i = tGrid.rightSideIntersection(obj);
+			// If the object walked into a tile to his right
+			if (i > 0) {
+				obj.setX(obj.getX() - i);
+			}
 		}
 	}
 	/**
