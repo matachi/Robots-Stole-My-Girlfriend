@@ -66,18 +66,17 @@ public class Level {
 	public void update(double delta) {
 		outsideMapCheck();
 		//Apply gravity to the character.
-		if (isAirbourne(character)){
-			character.applyGravity(delta);
-		}
+//		if (isAirbourne(character)){
+		character.applyGravity(delta);
+//		}
 		
 		// Move the character.
 		character.move(delta);
 		
 		// Check so the character isn't inside a solid tile.
 		//applyNormalForce2(character);
-		applyNormalForce(character, delta);
-
-
+//		applyNormalForce(character, delta);
+		applyNormalForce3(character);
 	}
 	/**
 	 * 
@@ -95,6 +94,24 @@ public class Level {
 		if (character.getY() < 0){
 			character.setY(0);
 		}
+	}
+	
+	private void applyNormalForce3(InteractiveObject obj) {
+		if (tGrid.intersectsWith(obj)) {
+			if (cameFromAbove(obj)) {
+				moveUp(obj);
+				obj.getVelocity().setY(0);
+			}
+		}
+	}
+	
+	private void moveUp(InteractiveObject obj) {
+		double i = tGrid.bottomSideIntersection(obj);
+		obj.setY((int)(obj.getY() - i));
+	}
+	
+	private boolean cameFromAbove(InteractiveObject obj) {
+		return obj.getVelocity().getY() > 0;
 	}
 	
 	private void applyNormalForce2(InteractiveObject obj) {
