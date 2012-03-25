@@ -17,10 +17,8 @@ public class TileGrid {
 	 * @param levelReached
 	 *            Level that are going to run
 	 */
-	public TileGrid(int levelReached) {
-		IO io = new IO();
-		grid = io.getLevel(levelReached);
-
+	public TileGrid(Tile[][] grid) {
+		this.grid = grid;
 		showGrid();
 	}
 

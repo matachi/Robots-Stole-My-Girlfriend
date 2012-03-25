@@ -2,6 +2,7 @@ package rsmg.model;
 
 import java.awt.Point;
 
+import rsmg.io.IO;
 import rsmg.util.Vector2d;
 
 /**
@@ -26,10 +27,23 @@ public class Level {
 	 * Constructor of Level
 	 */
 	public Level() {
-		tGrid = new TileGrid(levelReached); // Should check which level the user
-											// have selected(not reached)
+		
+//		IO io = new IO();
+//		tGrid = new TileGrid(io.getLevel(levelReached));
+		
+		AirTile a = new AirTile();
+		GroundTile g = new GroundTile();
+		SpawnTile s = new SpawnTile();
+		Tile[][] grid = {
+			{g, g, g, g, g, g, g, g, g},
+			{g, a, a, a, a, a, a, a, g},
+			{g, a, s, a, a, a, a, a, g},
+			{g, a, a, a, a, g, g, a, g},
+			{g, a, a, g, a, a, g, a, g},
+			{g, g, g, g, g, g, g, g, g}};
+		tGrid = new TileGrid(grid);
+		
 		spawnChar();
-		//TODO spawn enemies and such
 	}
 	/**
 	 * method for spawning the character
