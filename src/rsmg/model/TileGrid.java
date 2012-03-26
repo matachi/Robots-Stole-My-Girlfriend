@@ -35,15 +35,22 @@ public class TileGrid {
 	}
 
 	/**
-	 * Get specified Tile in matrix
-	 * 
-	 * @param x
-	 *            x coordinate in matrix
-	 * @param y
-	 *            y coordinate in matrix
-	 * @return The Tile in the matrix
+	 * Get the Tile placed on the given game coordinate.
+	 * @param x X coordinate in the model.
+	 * @param y Y coordinate in the model.
+	 * @return The Tile on the game coordinate.
 	 */
-	public Tile get(int x, int y) {
+	public Tile getTile(double x, double y) {
+		return grid[(int)y/Constants.TILESIZE][(int)x/Constants.TILESIZE];
+	}
+	
+	/**
+	 * Get the Tile on a grid coordinate.
+	 * @param x X coordinate in the grid.
+	 * @param y y coordinate in the grid.
+	 * @return The Tile on the given grid coordinate.
+	 */
+	public Tile getFromCoord(int x, int y) {
 		return grid[y][x];
 	}
 	
@@ -71,7 +78,7 @@ public class TileGrid {
 	public Point getSpawnPoint() throws Exception {
 		for(int x = 0; x < getWidth(); x++) {
 			for(int y = 0; y < getHeight(); y++) {
-				if (get(x,y) instanceof SpawnTile) {
+				if (grid[y][x] instanceof SpawnTile) {
 					return new Point(x*Constants.TILESIZE, y*Constants.TILESIZE);
 				}
 			}
@@ -109,7 +116,7 @@ public class TileGrid {
 		// of those are solid.
 		for (int x = leftX; x <= rightX; x++) {
 			for (int y = topY; y <= bottomY; y++) {
-				if (get(x,y).isSolid() == true)
+				if (grid[y][x].isSolid() == true)
 					return true;
 			}
 		}
@@ -128,7 +135,7 @@ public class TileGrid {
 		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int y = topY; y <= bottomY; y++) {
-			if (get(leftX, y).isSolid() == true)
+			if (grid[y][leftX].isSolid() == true)
 				return (leftX + 1) * Constants.TILESIZE - object.getX();
 		}
 		return 0;
@@ -146,7 +153,7 @@ public class TileGrid {
 		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int y = topY; y <= bottomY; y++) {
-			if (get(rightX, y).isSolid() == true)
+			if (grid[y][rightX].isSolid() == true)
 				return object.getX() + object.getWidth() - rightX * Constants.TILESIZE;
 		}
 		return 0;
@@ -164,7 +171,7 @@ public class TileGrid {
 		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int x = leftX; x <= rightX; x++) {
-			if (get(x, bottomY).isSolid() == true)
+			if (grid[bottomY][x].isSolid() == true)
 				return object.getY() + object.getHeight() - bottomY * Constants.TILESIZE;
 		}
 		return 0;
@@ -182,7 +189,7 @@ public class TileGrid {
 		int topY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int x = leftX; x <= rightX; x++) {
-			if (get(x, topY).isSolid() == true)
+			if (grid[topY][x].isSolid() == true)
 				return topY * Constants.TILESIZE - object.getY();
 		}
 		return 0;
@@ -194,7 +201,7 @@ public class TileGrid {
 	public void showGrid() {
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
-				System.out.print(get(x,y).isSolid() + " | ");
+				System.out.print(getTile(x,y).isSolid() + " | ");
 			}
 			System.out.println("");
 		}

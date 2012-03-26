@@ -106,7 +106,7 @@ public class LevelState extends State {
 	private void drawEnvironment() {
 		for (int y = 0; y < level.getTileGrid().getHeight(); y++) {
 			for (int x = 0; x < level.getTileGrid().getWidth(); x++) {
-				if (level.getTileGrid().get(x, y).isSolid())
+				if (level.getTileGrid().getFromCoord(x, y).isSolid())
 					boxTile.draw(x * 64, y * 64);
 			}
 		}
