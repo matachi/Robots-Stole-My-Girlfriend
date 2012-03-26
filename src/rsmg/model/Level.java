@@ -65,6 +65,7 @@ public class Level {
 		outsideMapCheck();
 		
 		//Apply gravity to the character.
+		
 		character.applyGravity(delta);
 		
 		// Move the character.
@@ -138,28 +139,18 @@ public class Level {
 				moveDown(obj);
 				obj.getVelocity().setY(0);
 			}
+			if (tGrid.intersectsWith(obj)){
+				if (cameFromLeft(obj)) {
+					moveLeft(obj);
+					obj.getVelocity().setX(0);
+				}
+				if (cameFromRight(obj)) {
+					moveRight(obj);
+					obj.getVelocity().setX(0);
+				}
+			}
+			System.out.println(character.getVelocity().getY());
 		}
-		if (tGrid.intersectsWith(obj)){
-			if (cameFromLeft(obj)) {
-				moveLeft(obj);
-				obj.getVelocity().setX(0);
-			}
-			if (cameFromRight(obj)) {
-				moveRight(obj);
-				obj.getVelocity().setX(0);
-			}
-		}
-		if (tGrid.intersectsWith(obj)) {
-			if (cameFromAbove(obj)) {
-				moveUp(obj);
-				obj.getVelocity().setY(0);
-			}
-			if (cameFromBelow(obj)) {
-				moveDown(obj);
-				obj.getVelocity().setY(0);
-			}
-		}
-
 	}
 	
 	private boolean cameFromAbove(InteractiveObject obj) {
@@ -168,7 +159,7 @@ public class Level {
 	
 	private void moveUp(InteractiveObject obj) {
 		double i = tGrid.bottomSideIntersection(obj);
-		obj.setY(obj.getY() - i - 0.001);
+		obj.setY(Math.round(obj.getY() - i));
 	}
 	
 	private boolean cameFromBelow(InteractiveObject obj) {
@@ -177,7 +168,7 @@ public class Level {
 	
 	private void moveDown(InteractiveObject obj) {
 		double i = tGrid.topSideIntersection(obj);
-		obj.setY(obj.getY() + i + 0.001);
+		obj.setY(Math.round(obj.getY() + i));
 	}
 	
 	private boolean cameFromLeft(InteractiveObject obj) {
@@ -186,7 +177,7 @@ public class Level {
 	
 	private void moveLeft(InteractiveObject obj) {
 		double i = tGrid.rightSideIntersection(obj);
-		obj.setX(obj.getX() - i - 1);
+		obj.setX(Math.round(obj.getX() - i));
 	}
 	
 	private boolean cameFromRight(InteractiveObject obj) {
@@ -195,7 +186,7 @@ public class Level {
 	
 	private void moveRight(InteractiveObject obj) {
 		double i = tGrid.leftSideIntersection(obj);
-		obj.setX(obj.getX() + i + 1);
+		obj.setX(Math.round(obj.getX() + i));
 	}
 	
 	private void applyNormalForce2(InteractiveObject obj) {
