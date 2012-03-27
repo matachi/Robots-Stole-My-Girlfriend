@@ -21,15 +21,10 @@ public class TestTileGrid {
 	}
 	
 	@Test
-	public void testGet() {
-		assertFalse(grid.get(1, 0).isSolid());
-	}
-	
-	@Test
 	public void testSet() {
-		assertFalse(grid.get(1, 0).isSolid());
+		assertFalse(grid.getFromCoord(1, 0).isSolid());
 		grid.set(1, 0, new GroundTile());
-		assertTrue(grid.get(1, 0).isSolid());
+		assertTrue(grid.getFromCoord(1, 0).isSolid());
 	}
 	
 	@Test
