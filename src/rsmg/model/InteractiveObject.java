@@ -32,11 +32,27 @@ public abstract class InteractiveObject {
 	}
 	
 	/**
-	 * Get the velocity vector.
-	 * @return The velocity vector.
+	 * Get the Object's velocity.
+	 * @return The velocity.
 	 */
-	public Vector2d getVelocity() {
-		return velocity;
+	public double getVelocity() {
+		return velocity.getlength();
+	}
+
+	public double getVelocityX() {
+		return velocity.getX();
+	}
+
+	public double getVelocityY() {
+		return velocity.getY();
+	}
+	
+	public void setVelocityX(double x) {
+		velocity.setX(x);
+	}
+	
+	public void setVelocityY(double y) {
+		velocity.setY(y);
 	}
 	
 	public void addVelocity(Vector2d vector) {
@@ -85,8 +101,8 @@ public abstract class InteractiveObject {
 	public void move(double delta) {
 		previousX = x;
 		previousY = y;
-		x += getVelocity().getX() * delta;
-		y += getVelocity().getY() * delta;
+		x += getVelocityX() * delta;
+		y += getVelocityY() * delta;
 	}
 
 	/**

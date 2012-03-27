@@ -57,7 +57,7 @@ public class LevelState extends State {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		
-		background = new Image("res/art/conceptLevel.jpg", false, Image.FILTER_NEAREST);
+		background = new Image("res/sprites/level/bg.jpg", false, Image.FILTER_NEAREST);
 		
 		airTile = new Image("res/sprites/level/airTile.png", false, Image.FILTER_NEAREST);
 		airTile = airTile.getScaledCopy(2f);

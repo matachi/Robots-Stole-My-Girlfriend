@@ -31,13 +31,13 @@ public class Character extends InteractiveObject {
 	 * Adds a horizontal vector to the character sending him westwards
 	 */
 	public void moveLeft(){
-		this.getVelocity().setX(-Constants.CHARACTERSPEED);
+		this.setVelocityX(-Constants.CHARACTERSPEED);
 	}
 	
 	/**
 	 * Adds a horizontal vector to the character sending him eastwards
 	 */
 	public void moveRight(){
-		this.getVelocity().setX(Constants.CHARACTERSPEED);
+		this.setVelocityX(Constants.CHARACTERSPEED);
 	}
 }
