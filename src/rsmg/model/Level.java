@@ -77,8 +77,6 @@ public class Level {
 		
 		// Reset the X velocity back to zero.
 		character.setVelocityX(0);
-		
-		System.out.println(character.getY());
 	}
 	
 	/**
@@ -251,6 +249,11 @@ public class Level {
 		if(!isAirbourne(character)){
 			character.jump();
 		}
+	}
+	
+	public void jumpReleased() {
+		if (character.getVelocityY() < Constants.RELEASED_JUMP_VELOCITY)
+			character.setVelocityY(Constants.RELEASED_JUMP_VELOCITY);
 	}
 	
 	/**

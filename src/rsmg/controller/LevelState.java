@@ -43,6 +43,11 @@ public class LevelState extends State {
 	private Level level;
 	
 	/**
+	 * Track if the up key is down or not.
+	 */
+	private boolean upKeyIsDown;
+	
+	/**
 	 * Construct the level.
 	 * @param stateID The ID to the state.
 	 */
@@ -148,8 +153,12 @@ public class LevelState extends State {
 		else if (input.isKeyDown(Input.KEY_RIGHT))
 			level.moveRight();
 
-		if (input.isKeyPressed(Input.KEY_UP))
-			level.jump();
+		if (input.isKeyDown(Input.KEY_UP)) {
+			if (!upKeyIsDown)
+				level.jump();
+			upKeyIsDown = true;
+		} else if (upKeyIsReleased())
+			level.jumpReleased();
 
 		if (input.isKeyDown(Input.KEY_E))
 			level.attack();
@@ -157,5 +166,17 @@ public class LevelState extends State {
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
 		}
+	}
+	
+	/**
+	 * Returns if the up key has been released since last loop.
+	 * @return If the up key has been released.
+	 */
+	private boolean upKeyIsReleased() {
+		if (upKeyIsDown) {
+			upKeyIsDown = false;
+			return true;
+		}
+		return false;
 	}
 }
