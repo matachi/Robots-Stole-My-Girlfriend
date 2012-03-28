@@ -2,10 +2,12 @@ package rsmg.model;
 
 import java.awt.Point;
 
+import rsmg.io.IO;
+
 /**
  * Class representing a level.
  * This Class is in charge of storing and updating information about a level
- * @author Johan Grönvall, Johan Rignäs
+ * @author Johan Grï¿½nvall, Johan Rignï¿½s
  *
  */
 public class Level {
@@ -31,13 +33,18 @@ public class Level {
 		AirTile a = new AirTile();
 		GroundTile g = new GroundTile();
 		SpawnTile s = new SpawnTile();
+		
+		IO io = new IO();
+		Tile[][] grid = io.getLevel(1);
+		/**
 		Tile[][] grid = {
 			{g, g, g, g, g, g, g, g, g, g, g, g, g},
-			{g, a, a, a, a, a, g, a, a, a, a, a, g},
+			{g, a, a, a, a, a, a, a, a, a, a, a, g},
 			{g, g, a, s, a, a, a, a, a, a, g, g, g},
 			{g, g, a, a, a, g, g, a, a, g, g, a, g},
 			{g, a, a, g, a, a, g, a, g, g, g, g, g},
 			{g, g, g, g, g, g, g, g, g, g, g, g, g}};
+			*/
 		tGrid = new TileGrid(grid);
 		
 		spawnChar();
@@ -76,7 +83,9 @@ public class Level {
 		applyNormalForce(character);
 		
 		// Reset the X velocity back to zero.
-		character.setVelocityX(0);
+		character.getVelocity().setX(0);
+		
+		System.out.println(character.getY()+character.getHeight());
 	}
 	
 	/**
@@ -85,8 +94,8 @@ public class Level {
 	 * @return true If there is no solid tile underneath specified object.
 	 */
 	private boolean isAirbourne(InteractiveObject obj) {
-		double y = obj.getY() + obj.getHeight() + 0.00001;
-		return !(tileIntersect(obj.getX(), y) || tileIntersect(obj.getX() + obj.getWidth()-0.00001, y));
+		double y = obj.getY() + obj.getHeight() + 1;
+		return !(tileIntersect(obj.getX(), y) || tileIntersect(obj.getX() + obj.getWidth(), y));
 	}
 	
 	/**
@@ -111,18 +120,19 @@ public class Level {
 		 * Check if the object intersects with the grid.
 		 */
 		if (tGrid.intersectsWith(obj)) {
+			
 			// Check if the the object came from the left
 			if (cameFromLeft(obj)) {
 				// Move the object back to the left
 				moveLeft(obj);
 				// Set the object's x velocity to zero
-				obj.setVelocityX(0);
+				obj.getVelocity().setX(0);
 			}
 			
 			// Check if the object came from the right
 			if (cameFromRight(obj)) {
 				moveRight(obj);
-				obj.setVelocityX(0);
+				obj.getVelocity().setX(0);
 			}
 			
 			/**
@@ -132,18 +142,18 @@ public class Level {
 			if (tGrid.intersectsWith(obj)) {
 				if (cameFromAbove(obj)) {
 					moveUp(obj);
-					obj.setVelocityY(0);
+					obj.getVelocity().setY(0);
 				}
 				if (cameFromBelow(obj)) {
 					moveDown(obj);
-					obj.setVelocityY(0);
+					obj.getVelocity().setY(0);
 				}
 			}
 		}
 	}
 	
 	private boolean cameFromAbove(InteractiveObject obj) {
-		return obj.getPY()+obj.getHeight()-0.00001 <= tGrid.getTilePosFromRealPos(obj.getY()+obj.getHeight())*Constants.TILESIZE; 
+		return obj.getPY()+obj.getHeight() <= tGrid.getTilePosFromRealPos(obj.getY()+obj.getHeight())*Constants.TILESIZE; 
 	}
 	
 	private boolean cameFromBelow(InteractiveObject obj) {
@@ -151,7 +161,7 @@ public class Level {
 	}
 	
 	private boolean cameFromLeft(InteractiveObject obj) {
-		return obj.getPX()+obj.getWidth()-0.00001 <= tGrid.getTilePosFromRealPos(obj.getX()+obj.getWidth())*Constants.TILESIZE; 
+		return obj.getPX()+obj.getWidth() <= tGrid.getTilePosFromRealPos(obj.getX()+obj.getWidth())*Constants.TILESIZE; 
 	}
 	
 	private boolean cameFromRight(InteractiveObject obj) {
@@ -249,11 +259,6 @@ public class Level {
 		if(!isAirbourne(character)){
 			character.jump();
 		}
-	}
-	
-	public void jumpReleased() {
-		if (character.getVelocityY() < Constants.RELEASED_JUMP_VELOCITY)
-			character.setVelocityY(Constants.RELEASED_JUMP_VELOCITY);
 	}
 	
 	/**
