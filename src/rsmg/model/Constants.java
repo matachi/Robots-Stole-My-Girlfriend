@@ -18,7 +18,6 @@ public enum Constants{
 	 * alreadt has a lower speed upwards or is falling downwards.
 	 */
 	public static final int RELEASED_JUMP_VELOCITY = -60;
-	
 	public static final int TILESIZE = 32;
 	public static final int GRAVITYSTRENGTH = 300;
 }

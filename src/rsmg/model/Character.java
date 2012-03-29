@@ -1,5 +1,7 @@
 package rsmg.model;
 
+import java.util.ArrayList;
+
 
 /**
  * Class for representing the playable Character
@@ -9,9 +11,19 @@ package rsmg.model;
 
 public class Character extends LivingObject {
 	private boolean airbourne;
-	//Weapon currentWeapon;
+	IWeapon currentWeapon;
+	ArrayList<Bullet> bulletList;
+	long lastAttacktime = 0;
+	
+	public Character(double x, double y, ArrayList<Bullet> bulletList) {
+		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH);
+		this.bulletList = bulletList;	
+		currentWeapon = new LaserPistol(this, bulletList);
+		
+	}
 	public Character(double x, double y) {
 		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH);
+		this.bulletList = bulletList;
 	}
 	
 	@Override
@@ -72,6 +84,9 @@ public class Character extends LivingObject {
 	 * his gun.
 	 */
 	public void attack() {
-		// character.attack();
+		if (lastAttacktime + currentWeapon.getCooldown() < System.currentTimeMillis()){
+			currentWeapon.shoot();
+			lastAttacktime = System.currentTimeMillis(); 
+		}
 	}
 }

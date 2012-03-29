@@ -19,7 +19,6 @@ public class Bullet extends InteractiveObject {
 		this.setVelocity(velocity);
 		this.bulletType=bulletType;
 		this.knockback=knockback;
-		
 	}
 
 	@Override

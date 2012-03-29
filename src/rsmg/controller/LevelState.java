@@ -1,5 +1,7 @@
 package rsmg.controller;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -10,8 +12,9 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.BlobbyTransition;
 
-import rsmg.model.Level;
+import rsmg.model.Bullet;
 import rsmg.model.Character;
+import rsmg.model.Level;
 
 /**
  * The state where the levels are played out.
@@ -20,6 +23,7 @@ import rsmg.model.Character;
  */
 public class LevelState extends State {
 
+	
 	/**
 	 * The background image behind the tile grid.
 	 */
@@ -30,6 +34,7 @@ public class LevelState extends State {
 	 */
 	private Image airTile;
 	private Image boxTile;
+	private Image laserBullet;
 	
 	/**
 	 * The character that the player controls.
@@ -69,6 +74,8 @@ public class LevelState extends State {
 		airTile = airTile.getScaledCopy(2f);
 		boxTile = new Image("res/sprites/level/boxTile.png", false, Image.FILTER_NEAREST);
 		boxTile = boxTile.getScaledCopy(2f);
+		laserBullet = new Image("res/sprites/level/laserBullet.png", false, Image.FILTER_NEAREST);
+		laserBullet = laserBullet.getScaledCopy(2f);
 
 		/**
 		 * Make an animation for when the character is running to the right;
@@ -97,13 +104,21 @@ public class LevelState extends State {
 		drawBackground();
 		drawEnvironment();
 		drawCharacter();
+		drawBullets(level.getABulletList());
 	}
-	
+
+
 	/**
 	 * Draw a background image behind the tile grid.
 	 */
 	private void drawBackground() {
 		background.draw(0, 0);
+	}
+	
+	private void drawBullets(ArrayList<Bullet> bulletList) {
+		for(Bullet bullet : bulletList){
+			laserBullet.draw((float)bullet.getX()*2, (float)bullet.getY()*2);
+		}
 	}
 	
 	/**
@@ -117,7 +132,7 @@ public class LevelState extends State {
 			}
 		}
 	}
-	
+
 	/**
 	 * Draw the character/protagonist on the screen.
 	 */
@@ -164,14 +179,14 @@ public class LevelState extends State {
 		} else if (upKeyIsReleased())
 			modelCharacter.jumpReleased();
 
-		if (input.isKeyDown(Input.KEY_E))
+		if (input.isKeyDown(Input.KEY_SPACE))
 			modelCharacter.attack();
 		
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
 		}
 	}
-	
+
 	/**
 	 * Returns if the up key has been released since last loop.
 	 * @return If the up key has been released.

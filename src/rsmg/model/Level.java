@@ -1,6 +1,7 @@
 package rsmg.model;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import rsmg.io.IO;
 
@@ -18,7 +19,8 @@ public class Level {
 	 * Keeps track of which level the user have reached
 	 */
 	// private int levelReached = 1;
-
+	
+	private ArrayList<Bullet> aBullets; 
 	/**
 	 * The grid layout of the level
 	 */
@@ -30,21 +32,8 @@ public class Level {
 	public Level() {
 
 		IO io = new IO();
-		
+		aBullets = new ArrayList<Bullet>();  
 		tGrid = new TileGrid(io.getLevel(1));
-
-		AirTile a = new AirTile();
-		GroundTile g = new GroundTile();
-		SpawnTile s = new SpawnTile();
-		
-//		Tile[][] grid = { { g, g, g, g, g, g, g, g, g, g, g, g, g },
-//				{ g, a, a, a, a, a, g, a, a, a, a, a, g },
-//				{ g, g, a, s, a, a, a, a, a, a, g, g, g },
-//				{ g, g, a, a, a, g, g, a, a, g, g, a, g },
-//				{ g, a, a, g, a, a, g, a, g, g, g, g, g },
-//				{ g, g, g, g, g, g, g, g, g, g, g, g, g } };
-//		tGrid = new TileGrid(grid);
-
 		spawnChar();
 	}
 
@@ -55,9 +44,9 @@ public class Level {
 	private void spawnChar() {
 		try {
 			Point spawnPoint = tGrid.getSpawnPoint();
-			character = new Character(spawnPoint.getX(), spawnPoint.getY());
+			character = new Character(spawnPoint.getX(), spawnPoint.getY(), aBullets);
 		} catch (Exception e) { // TODO change to specific exception
-			character = new Character(0, 0);
+			character = new Character(0, 0, aBullets);
 		}
 	}
 
@@ -70,6 +59,10 @@ public class Level {
 	public void update(double delta) {
 		outsideMapCheck();
 
+		for(Bullet bullet : aBullets){
+			bullet.move(delta);
+		}
+		
 		// Update whether the character is in the air or standing on the ground.
 		updateAirbourne();
 		
@@ -83,6 +76,7 @@ public class Level {
 		// him outside it.
 		applyNormalForce(character);
 
+		
 		// Reset the X velocity back to zero.
 		character.setVelocityX(0);
 	}
@@ -254,5 +248,8 @@ public class Level {
 	 */
 	public Character getCharacter() {
 		return character;
+	}
+	public ArrayList<Bullet> getABulletList(){
+		return aBullets;
 	}
 }
