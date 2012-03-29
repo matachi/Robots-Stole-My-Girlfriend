@@ -83,7 +83,7 @@ public class Level {
 		applyNormalForce(character);
 		
 		// Reset the X velocity back to zero.
-		character.getVelocity().setX(0);
+		character.setVelocityX(0);
 		
 		System.out.println(character.getY()+character.getHeight());
 	}
@@ -126,13 +126,13 @@ public class Level {
 				// Move the object back to the left
 				moveLeft(obj);
 				// Set the object's x velocity to zero
-				obj.getVelocity().setX(0);
+				obj.setVelocityX(0);
 			}
 			
 			// Check if the object came from the right
 			if (cameFromRight(obj)) {
 				moveRight(obj);
-				obj.getVelocity().setX(0);
+				obj.setVelocityX(0);
 			}
 			
 			/**
@@ -142,11 +142,11 @@ public class Level {
 			if (tGrid.intersectsWith(obj)) {
 				if (cameFromAbove(obj)) {
 					moveUp(obj);
-					obj.getVelocity().setY(0);
+					obj.setVelocityX(0);
 				}
 				if (cameFromBelow(obj)) {
 					moveDown(obj);
-					obj.getVelocity().setY(0);
+					obj.setVelocityX(0);
 				}
 			}
 		}

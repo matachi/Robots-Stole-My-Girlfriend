@@ -158,7 +158,7 @@ public class LevelState extends State {
 				level.jump();
 			upKeyIsDown = true;
 		} else if (upKeyIsReleased())
-			level.jumpReleased();
+			//level.jumpReleased();
 
 		if (input.isKeyDown(Input.KEY_E))
 			level.attack();
