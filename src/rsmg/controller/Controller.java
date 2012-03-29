@@ -16,6 +16,8 @@ public class Controller extends StateBasedGame {
 	
 	public static final int LEVEL1_STATE = 1;
 	
+	public static final int LEVEL_SELECTION_STATE = 2;
+	
 	/**
 	 * 
 	 */
@@ -30,6 +32,7 @@ public class Controller extends StateBasedGame {
 	public void initStatesList(GameContainer container) throws SlickException {
 		this.addState(new MainMenuState(MAINMENU_STATE));
 		this.addState(new LevelState(LEVEL1_STATE));
+		this.addState(new LevelSelectionState(LEVEL_SELECTION_STATE));
 //		this.getState(MAINMENU_STATE).init(container, this);
 //		this.getState(LEVEL1_STATE).init(container, this);
 	}

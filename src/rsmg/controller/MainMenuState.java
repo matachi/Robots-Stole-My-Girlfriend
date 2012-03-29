@@ -135,7 +135,7 @@ public class MainMenuState extends State {
 		if (selectedButton == 3)
 			gc.exit();
 		else
-			sbg.enterState(Controller.LEVEL1_STATE, null, new FadeInTransition());
+			sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
 	}
 	
 	/**
