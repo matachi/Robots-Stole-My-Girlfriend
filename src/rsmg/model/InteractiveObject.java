@@ -141,15 +141,27 @@ public abstract class InteractiveObject {
 //		return (getY() - obj.getY() < obj.getHeight() && getY() < obj.getY()) ||
 //			   (obj.getY() - getY() < getHeight()) && (obj.getY() < getY());
 //	}
-
+	/**
+	 * 
+	 * @return true if object did not move horizontally last time
+	 *  the move() function was called
+	 */
 	public boolean isStandingStill() {
 		return getX() == getPX();
 	}
-
+	/**
+	 * 
+	 * @return true if the objects X coordinate is lower now than
+	 *  it was last time the move() function was called
+	 */
 	public boolean isMovingLeft() {
 		return getX() < getPX();
 	}
-
+	/**
+	 * 
+	 * @return true if the objects X coordinate is higher now than
+	 *  it was last time the move() function was called
+	 */
 	public boolean isMovingRight() {
 		return getX() > getPX();
 	}
