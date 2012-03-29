@@ -6,13 +6,12 @@ package rsmg.model;
  * @author Johan Grönvall
  * @author Daniel Jonsson
  */
-public class Character extends InteractiveObject {
-	int health;
+
+public class Character extends LivingObject {
 	private boolean airbourne;
 	//Weapon currentWeapon;
 	public Character(double x, double y) {
-		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT);
-		health =  Constants.CHARACTERHEALTH;
+		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH);
 	}
 	
 	@Override

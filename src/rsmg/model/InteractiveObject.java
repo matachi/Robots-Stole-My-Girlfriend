@@ -47,6 +47,10 @@ public abstract class InteractiveObject {
 		return velocity.getY();
 	}
 	
+	public void setVelocity(Vector2d velocity) {
+		this.velocity=velocity;
+	}
+	
 	public void setVelocityX(double x) {
 		velocity.setX(x);
 	}
@@ -166,9 +170,11 @@ public abstract class InteractiveObject {
 		return getX() > getPX();
 	}
 	
+	
 	/**
 	 * class for specifying what happens when this objects collides with another InteractiveObject
 	 */
 	public abstract void collide(InteractiveObject obj);
+
 	
 }
