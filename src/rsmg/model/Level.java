@@ -70,10 +70,11 @@ public class Level {
 	public void update(double delta) {
 		outsideMapCheck();
 
-		// Apply gravity to the character if he is in the air, in other words,
-		// not standing on the ground.
-		if (isAirbourne(character))
-			character.applyGravity(delta);
+		// Update whether the character is in the air or standing on the ground.
+		updateAirbourne();
+		
+		// Apply gravity to the character so he will fall down if he is in the air.
+		character.applyGravity(delta);
 
 		// Move the character.
 		character.move(delta);
@@ -97,6 +98,13 @@ public class Level {
 		double y = obj.getY() + obj.getHeight() + 0.00001;
 		return !(tileIntersect(obj.getX(), y) || tileIntersect(
 				obj.getX() + obj.getWidth() - 0.00001, y));
+	}
+	
+	/**
+	 * Update whether the character is in the air or standing on the ground.
+	 */
+	private void updateAirbourne() {
+		character.setAirbourne(isAirbourne(character));
 	}
 
 	/**
@@ -246,40 +254,5 @@ public class Level {
 	 */
 	public Character getCharacter() {
 		return character;
-	}
-
-	/**
-	 * Move the character to the left.
-	 */
-	public void moveLeft() {
-		character.moveLeft();
-	}
-
-	/**
-	 * Move the character to the right.
-	 */
-	public void moveRight() {
-		character.moveRight();
-	}
-
-	/**
-	 * Jump with the character.
-	 */
-	public void jump() {
-		if (!isAirbourne(character)) {
-			character.jump();
-		}
-	}
-
-	public void jumpReleased() {
-		if (character.getVelocityY() < Constants.RELEASED_JUMP_VELOCITY)
-			character.setVelocityY(Constants.RELEASED_JUMP_VELOCITY);
-	}
-
-	/**
-	 * Attack with the character.
-	 */
-	public void attack() {
-		// character.attack();
 	}
 }

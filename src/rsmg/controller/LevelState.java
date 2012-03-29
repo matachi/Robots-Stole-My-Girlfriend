@@ -11,6 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.BlobbyTransition;
 
 import rsmg.model.Level;
+import rsmg.model.Character;
 
 /**
  * The state where the levels are played out.
@@ -148,20 +149,23 @@ public class LevelState extends State {
 	 * @param input
 	 */
 	public void handleKeyboardEvents(Input input, StateBasedGame sbg) {
+		
+		Character modelCharacter = level.getCharacter();
+		
 		if (input.isKeyDown(Input.KEY_LEFT))
-			level.moveLeft();
+			modelCharacter.moveLeft();
 		else if (input.isKeyDown(Input.KEY_RIGHT))
-			level.moveRight();
+			modelCharacter.moveRight();
 
 		if (input.isKeyDown(Input.KEY_UP)) {
 			if (!upKeyIsDown)
-				level.jump();
+				modelCharacter.jump();
 			upKeyIsDown = true;
 		} else if (upKeyIsReleased())
-			level.jumpReleased();
+			modelCharacter.jumpReleased();
 
 		if (input.isKeyDown(Input.KEY_E))
-			level.attack();
+			modelCharacter.attack();
 		
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
