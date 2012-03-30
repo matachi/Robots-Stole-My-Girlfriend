@@ -80,7 +80,7 @@ public class LevelState extends State {
 		/**
 		 * Make an animation for when the character is running to the right;
 		 */
-		Image characterImage = new Image("res/sprites/level/charPistolRunningSheet.png", false, Image.FILTER_NEAREST);
+		Image characterImage = new Image("res/sprites/level/charLaserPistolRunningSheet.png", false, Image.FILTER_NEAREST);
 		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(2f), 64, 46);
 		character = characterRight = new Animation(characterSheet, 140);
 		
