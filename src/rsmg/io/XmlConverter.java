@@ -48,25 +48,28 @@ public class XmlConverter {
 			int width = Integer.parseInt(sizeElem.getChildText("width"));
 			grid = new Tile[height][width];
 
-			List list = rootNode.getChildren("tile");
-			for (int i = 0; i < list.size(); i++) {
-				Element tileElem = (Element) list.get(i);
-				int x = Integer.parseInt(tileElem.getChildText("x"));
-				int y = Integer.parseInt(tileElem.getChildText("y"));
+			List rows = rootNode.getChildren("row");
+			for (int y = 0; y < rows.size(); y++) {
+				Element cellsElem = (Element) rows.get(y);
+				List cells = cellsElem.getChildren("cell");
 
-				String tileType = tileElem.getChildText("type");
-				Tile tile;
-				if (tileType.equals("AirTile"))
-					tile = new AirTile();
-				else if(tileType.equals("GroundTile"))
-					tile = new GroundTile();
-				else if(tileType.equals("SpawnTile"))
-					tile = new SpawnTile();
-				else if(tileType.equals("EndTile"))
-					tile = new EndTile();
-				else
-					tile = new AirTile();
-				grid[y][x] = tile;
+				for (int x = 0; x < cells.size(); x++) {
+
+					Element cell = (Element) cells.get(x);
+					String cellValue = cell.getText();
+					Tile tile;
+					if (cellValue.equals("AirTile"))
+						tile = new AirTile();
+					else if (cellValue.equals("GroundTile"))
+						tile = new GroundTile();
+					else if (cellValue.equals("SpawnTile"))
+						tile = new SpawnTile();
+					else if (cellValue.equals("EndTile"))
+						tile = new EndTile();
+					else
+						tile = new AirTile();
+					grid[y][x] = tile;
+				}
 			}
 			return grid;
 		} catch (IOException io) {
@@ -76,5 +79,5 @@ public class XmlConverter {
 		}
 		System.out.println("error!!");
 		return null;
-	}	
+	}
 }
