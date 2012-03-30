@@ -108,9 +108,9 @@ public class TileGrid {
 		
 		// Get the object's boundaries in the tile grid.
 		int leftX = getTilePosFromRealPos(object.getX());
-		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth()-0.00001);
 		int topY = getTilePosFromRealPos(object.getY());
-		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight()-0.00001);
 		
 		// Walk through all tiles that the object is lying over and check if any
 		// of those are solid.

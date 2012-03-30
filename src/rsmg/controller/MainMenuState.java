@@ -6,6 +6,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -68,6 +69,10 @@ public class MainMenuState extends State {
 		// Set which button is initially selected
 		selectedButton = 0;
 		menuButtons.get(selectedButton).toggleSelected();
+		
+		// Start some background music.
+		Music backgroundMusic = new Music("res/music/WolfRock-WelcomeToTheTemple.ogg", true);
+		backgroundMusic.loop(1, 0.1f);
 	}
 
 	/**
@@ -135,7 +140,7 @@ public class MainMenuState extends State {
 		if (selectedButton == 3)
 			gc.exit();
 		else
-			sbg.enterState(Controller.LEVEL1_STATE, null, new FadeInTransition());
+			sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
 	}
 	
 	/**

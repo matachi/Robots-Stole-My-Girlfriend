@@ -1,7 +1,6 @@
 package rsmg.model;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
 
@@ -48,31 +47,42 @@ public class TestTileGrid {
 	
 	@Test
 	public void testTilePosFromRealPos() {
-		// TODO
+		assertTrue(grid.getTilePosFromRealPos(50) == 1);
 	}
 	
 	@Test
 	public void testIntersectsWith() {
-		// TODO
+		Character character = new Character(50, 64);
+		
+		assertTrue(grid.intersectsWith(character));
 	}
 	
 	@Test
 	public void testLeftSideIntersection() {
-		// TODO
+	    Character character = new Character(50, 64);
+        
+        assertTrue(grid.leftSideIntersection(character) == 14);
 	}
+	
 	@Test
 	public void testRightSideIntersection() {
-		// TODO
+	    Character character = new Character(50, 64);
+        
+	    assertTrue(grid.rightSideIntersection(character) == 14);
 	}
 	
 	@Test
 	public void testBottomSideIntersection() {
-		// TODO
+	    Character character = new Character(50, 64);
+        
+        assertTrue(grid.bottomSideIntersection(character) == 22);
 	}
 	
 	@Test
 	public void testTopSideIntersection() {
-		// TODO
+	    Character character = new Character(50, 64);
+        
+        assertTrue(grid.topSideIntersection(character) == -22);
 	}	
 	
 }

@@ -32,11 +32,31 @@ public abstract class InteractiveObject {
 	}
 	
 	/**
-	 * Get the velocity vector.
-	 * @return The velocity vector.
+	 * Get the Object's velocity.
+	 * @return The velocity.
 	 */
-	public Vector2d getVelocity() {
-		return velocity;
+	public double getVelocity() {
+		return velocity.getlength();
+	}
+
+	public double getVelocityX() {
+		return velocity.getX();
+	}
+
+	public double getVelocityY() {
+		return velocity.getY();
+	}
+	
+	public void setVelocity(Vector2d velocity) {
+		this.velocity=velocity;
+	}
+	
+	public void setVelocityX(double x) {
+		velocity.setX(x);
+	}
+	
+	public void setVelocityY(double y) {
+		velocity.setY(y);
 	}
 	
 	public void addVelocity(Vector2d vector) {
@@ -85,8 +105,8 @@ public abstract class InteractiveObject {
 	public void move(double delta) {
 		previousX = x;
 		previousY = y;
-		x += getVelocity().getX() * delta;
-		y += getVelocity().getY() * delta;
+		x += getVelocityX() * delta;
+		y += getVelocityY() * delta;
 	}
 
 	/**
@@ -125,22 +145,36 @@ public abstract class InteractiveObject {
 //		return (getY() - obj.getY() < obj.getHeight() && getY() < obj.getY()) ||
 //			   (obj.getY() - getY() < getHeight()) && (obj.getY() < getY());
 //	}
-
+	/**
+	 * 
+	 * @return true if object did not move horizontally last time
+	 *  the move() function was called
+	 */
 	public boolean isStandingStill() {
 		return getX() == getPX();
 	}
-
+	/**
+	 * 
+	 * @return true if the objects X coordinate is lower now than
+	 *  it was last time the move() function was called
+	 */
 	public boolean isMovingLeft() {
 		return getX() < getPX();
 	}
-
+	/**
+	 * 
+	 * @return true if the objects X coordinate is higher now than
+	 *  it was last time the move() function was called
+	 */
 	public boolean isMovingRight() {
 		return getX() > getPX();
 	}
+	
 	
 	/**
 	 * class for specifying what happens when this objects collides with another InteractiveObject
 	 */
 	public abstract void collide(InteractiveObject obj);
+
 	
 }
