@@ -71,6 +71,7 @@ public class Level {
 
 		// Move the character.
 		character.move(delta);
+		character.updateFacing();
 
 		// Check so the character isn't inside a solid tile, and if so, move
 		// him outside it.

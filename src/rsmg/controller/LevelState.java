@@ -153,10 +153,11 @@ public class LevelState extends State {
 		// update as seconds.
 		level.update((double)delta / 1000);
 		
-		if (level.getCharacter().isMovingLeft())
-			character = characterLeft;
-		else if (level.getCharacter().isMovingRight())
+		if (level.getCharacter().isFacingRight())
 			character = characterRight;
+
+		else
+			character = characterLeft;
 	}
 	
 	/**
@@ -179,7 +180,7 @@ public class LevelState extends State {
 		} else if (upKeyIsReleased())
 			modelCharacter.jumpReleased();
 
-		if (input.isKeyDown(Input.KEY_SPACE))
+		if (input.isKeyPressed(Input.KEY_SPACE))
 			modelCharacter.attack();
 		
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {

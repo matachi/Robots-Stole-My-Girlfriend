@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import rsmg.util.Vector2d;
 
 public class LaserPistol implements IWeapon{
-	private InteractiveObject wielder;
+	private LivingObject wielder;
 	private ArrayList<Bullet> bulletList;
 	
-	public LaserPistol(InteractiveObject wielder, ArrayList<Bullet> bulletList) {
+	public LaserPistol(LivingObject wielder, ArrayList<Bullet> bulletList) {
 		this.wielder = wielder;
 		this.bulletList = bulletList;
 		
@@ -25,13 +25,13 @@ public class LaserPistol implements IWeapon{
 		int offsetX;
 		int offsetY;
 
-		if (wielder.isMovingLeft()){
-			bulletVelocity.setX(-bulletSpeed);
-			offsetX = -5;
-			offsetY = 5;
-		}else{
+		if (wielder.isFacingRight()){
 			bulletVelocity.setX(bulletSpeed);
 			offsetX = 25;
+			offsetY = 5;
+		}else{
+			bulletVelocity.setX(-bulletSpeed);
+			offsetX = -5;
 			offsetY = 5;
 		}
 		
