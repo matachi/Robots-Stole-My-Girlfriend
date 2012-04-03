@@ -42,7 +42,8 @@ public class LevelState extends State {
 	private Animation character;
 	private Animation characterRight;
 	private Animation characterLeft;
-	
+	private Animation characterStillR;
+	private Animation characterStillL;
 	/**
 	 * Reference to the level model.
 	 */
@@ -76,7 +77,6 @@ public class LevelState extends State {
 		boxTile = boxTile.getScaledCopy(2f);
 		laserBullet = new Image("res/sprites/level/laserBullet.png", false, Image.FILTER_NEAREST);
 		laserBullet = laserBullet.getScaledCopy(2f);
-
 		/**
 		 * Make an animation for when the character is running to the right;
 		 */
@@ -90,6 +90,19 @@ public class LevelState extends State {
 		characterImage = characterImage.getFlippedCopy(true, false);
 		characterSheet = new SpriteSheet(characterImage.getScaledCopy(2f), 64, 46);
 		characterLeft = new Animation(characterSheet, 140);
+		
+		/**
+		 * Make an animation for when the character is standing still facing to the left;
+		 */
+		Image charStill = new Image("res/sprites/level/char.png", false, Image.FILTER_NEAREST).getScaledCopy(2f);
+		characterStillL = new Animation(false);
+		characterStillL.addFrame(charStill, 1);
+		
+		/**
+		 * Make an animation for when the character is standing still facing the right;
+		 */
+		characterStillR = new Animation(false);
+		characterStillR.addFrame(charStill.getFlippedCopy(true, false), 1);
 		
 		level = new Level();
 	}
@@ -152,12 +165,22 @@ public class LevelState extends State {
 		// Update the model and give it the time that has passed since last
 		// update as seconds.
 		level.update((double)delta / 1000);
-		
-		if (level.getCharacter().isFacingRight())
-			character = characterRight;
-
-		else
-			character = characterLeft;
+		if (level.getCharacter().isStandingStill()) {
+			
+			if (level.getCharacter().isFacingRight()){
+				character = characterStillR;
+				
+			}else{ //if isFacingLeft
+				character = characterStillL;
+			}
+			
+		}else { //if character isn't standing still
+			if (level.getCharacter().isFacingRight())
+				character = characterRight;
+	
+			else
+				character = characterLeft;
+		}
 	}
 	
 	/**
