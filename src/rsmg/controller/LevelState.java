@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Renderable;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
@@ -39,11 +40,13 @@ public class LevelState extends State {
 	/**
 	 * The character that the player controls.
 	 */
-	private Animation character;
-	private Animation characterRight;
-	private Animation characterLeft;
-	private Animation characterStillR;
-	private Animation characterStillL;
+	private Renderable character;
+	private Animation characterRunningR;
+	private Animation characterRunningL;
+	private Image characterStandingR;
+	private Image characterStandingL;
+	private Image characterJumpingR;
+	private Image characterJumpingL;
 	/**
 	 * Reference to the level model.
 	 */
@@ -77,33 +80,44 @@ public class LevelState extends State {
 		boxTile = boxTile.getScaledCopy(2f);
 		laserBullet = new Image("res/sprites/level/laserBullet.png", false, Image.FILTER_NEAREST);
 		laserBullet = laserBullet.getScaledCopy(2f);
-		/**
-		 * Make an animation for when the character is running to the right;
-		 */
-		Image characterImage = new Image("res/sprites/level/charLaserPistolRunningSheet.png", false, Image.FILTER_NEAREST);
-		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(2f), 64, 46);
-		character = characterRight = new Animation(characterSheet, 140);
 		
 		/**
-		 * Make an animation for when the character is running to the left;
+		 * Make an animation for when the character is running to the right.
+		 */
+		Image characterImage = new Image("res/sprites/level/charPistolRunningSheet.png", false, Image.FILTER_NEAREST);
+		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(2f), 64, 46);
+		characterRunningR = new Animation(characterSheet, 140);
+		
+		/**
+		 * Make an animation for when the character is running to the left.
 		 */
 		characterImage = characterImage.getFlippedCopy(true, false);
 		characterSheet = new SpriteSheet(characterImage.getScaledCopy(2f), 64, 46);
-		characterLeft = new Animation(characterSheet, 140);
+		characterRunningL = new Animation(characterSheet, 140);
 		
 		/**
-		 * Make an animation for when the character is standing still facing to the left;
+		 * Make an image for when the character is standing still facing the right.
 		 */
-		Image charStill = new Image("res/sprites/level/char.png", false, Image.FILTER_NEAREST).getScaledCopy(2f);
-		characterStillL = new Animation(false);
-		characterStillL.addFrame(charStill, 1);
+		characterStandingR = new Image("res/sprites/level/charPistolStanding.png", false, Image.FILTER_NEAREST).getScaledCopy(2f);
 		
 		/**
-		 * Make an animation for when the character is standing still facing the right;
+		 * Make an image for when the character is standing still facing to the left.
 		 */
-		characterStillR = new Animation(false);
-		characterStillR.addFrame(charStill.getFlippedCopy(true, false), 1);
+		characterStandingL = characterStandingR.getFlippedCopy(true, false);
 		
+		/**
+		 * Make an image for when the character is standing still facing the right.
+		 */
+		character = characterJumpingR = new Image("res/sprites/level/charPistolJumping.png", false, Image.FILTER_NEAREST).getScaledCopy(2f);
+		
+		/**
+		 * Make an image for when the character is standing still facing to the left.
+		 */
+		characterJumpingL = characterJumpingR.getFlippedCopy(true, false);
+		
+		/**
+		 * Create the level model.
+		 */
 		level = new Level();
 	}
 
@@ -117,7 +131,7 @@ public class LevelState extends State {
 		drawBackground();
 		drawEnvironment();
 		drawCharacter();
-		drawBullets(level.getABulletList());
+		drawBullets();
 	}
 
 
@@ -128,10 +142,13 @@ public class LevelState extends State {
 		background.draw(0, 0);
 	}
 	
-	private void drawBullets(ArrayList<Bullet> bulletList) {
-		for(Bullet bullet : bulletList){
+	/**
+	 * Draw bullets on the screen.
+	 */
+	private void drawBullets() {
+		ArrayList<Bullet> bulletList = level.getABulletList();
+		for(Bullet bullet : bulletList)
 			laserBullet.draw((float)bullet.getX()*2, (float)bullet.getY()*2);
-		}
 	}
 	
 	/**
@@ -162,24 +179,36 @@ public class LevelState extends State {
 		
 		handleKeyboardEvents(gc.getInput(), sbg);
 		
-		// Update the model and give it the time that has passed since last
-		// update as seconds.
+		/**
+		 * Update the model and give it the time that has passed since last
+		 * update as seconds.
+		 */
 		level.update((double)delta / 1000);
-		if (level.getCharacter().isStandingStill()) {
-			
-			if (level.getCharacter().isFacingRight()){
-				character = characterStillR;
-				
-			}else{ //if isFacingLeft
-				character = characterStillL;
-			}
-			
-		}else { //if character isn't standing still
+		
+		/**
+		 * Fix so the right character sprite is shown on the next render()
+		 */
+		if (level.getCharacter().isAirborne()) {
+
 			if (level.getCharacter().isFacingRight())
-				character = characterRight;
-	
+				character = characterJumpingR;
 			else
-				character = characterLeft;
+				character = characterJumpingL;
+
+		} else if (level.getCharacter().isStandingStill()) {
+
+			if (level.getCharacter().isFacingRight())
+				character = characterStandingR;
+			else
+				character = characterStandingL;
+
+		} else { // is running
+
+			if (level.getCharacter().isFacingRight())
+				character = characterRunningR;
+			else
+				character = characterRunningL;
+
 		}
 	}
 	

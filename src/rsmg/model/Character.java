@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 
 public class Character extends LivingObject {
-	private boolean airbourne;
+	private boolean airborne;
 	IWeapon currentWeapon;
 	ArrayList<Bullet> bulletList;
 	long lastAttacktime = 0;
@@ -36,16 +36,24 @@ public class Character extends LivingObject {
 	public void applyGravity(double delta) {
 		// Apply gravity to the character if he is in the air, in other words,
 		// not standing on the ground.
-		if (airbourne)
+		if (airborne)
 			super.applyGravity(delta);
 	}
 	
 	/**
 	 * Update whether the character is in the air or standing on the ground.
-	 * @param airbourne If the character is in the air.
+	 * @param airborne If the character is in the air.
 	 */
-	public void setAirbourne(boolean airbourne) {
-		this.airbourne = airbourne;
+	public void setAirborne(boolean airborne) {
+		this.airborne = airborne;
+	}
+	
+	/**
+	 * Is the character airborne, i.e. in the air.
+	 * @return If the character is in the air.
+	 */
+	public boolean isAirborne() {
+		return airborne;
 	}
 	
 	/**
@@ -53,7 +61,7 @@ public class Character extends LivingObject {
 	 */
 	public void jump() {
 		// Only jump if the character is standing on the ground.
-		if (!airbourne)
+		if (!airborne)
 			this.addVelocity(0, -Constants.JUMPSTRENGTH);
 	}
 	

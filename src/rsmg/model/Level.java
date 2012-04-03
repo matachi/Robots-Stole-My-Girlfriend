@@ -99,7 +99,7 @@ public class Level {
 	 * Update whether the character is in the air or standing on the ground.
 	 */
 	private void updateAirbourne() {
-		character.setAirbourne(isAirbourne(character));
+		character.setAirborne(isAirbourne(character));
 	}
 
 	/**
