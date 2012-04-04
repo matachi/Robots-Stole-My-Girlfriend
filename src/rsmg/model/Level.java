@@ -57,10 +57,9 @@ public class Level {
 	 *            Time since last update in seconds.
 	 */
 	public void update(double delta) {
-		outsideMapCheck();
-
 		for(Bullet bullet : aBullets){
 			bullet.move(delta);
+			
 		}
 		
 		// Update whether the character is in the air or standing on the ground.
@@ -80,6 +79,7 @@ public class Level {
 		
 		// Reset the X velocity back to zero.
 		character.setVelocityX(0);
+		
 	}
 
 	/**
@@ -105,13 +105,10 @@ public class Level {
 	/**
 	 * Check so the character isn't outside the level's boundaries.
 	 */
-	private void outsideMapCheck() {
-		if (character.getX() < 0) {
-			character.setX(0);
-		}
-		if (character.getY() < 0) {
-			character.setY(0);
-		}
+	private boolean isOutSideMap(InteractiveObject obj){
+		return obj.getX() < 0 || obj.getY() < 0 ||
+				obj.getX() > tGrid.getWidth()*Constants.TILESIZE
+				||  obj.getY() > tGrid.getHeight()*Constants.TILESIZE;
 	}
 
 	/**
