@@ -137,10 +137,19 @@ public class MainMenuState extends State {
 	}
 	
 	private void changeState(GameContainer gc, StateBasedGame sbg) {
-		if (selectedButton == 3)
-			gc.exit();
-		else
+		switch (selectedButton) {
+		case 0:
 			sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
+			break;
+		case 1:
+			break;
+		case 2:
+			sbg.enterState(Controller.OPTIONS_STATE, null, new FadeInTransition());
+			break;
+		case 3:
+			gc.exit();
+			break;
+		}
 	}
 	
 	/**

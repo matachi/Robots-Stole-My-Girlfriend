@@ -1,0 +1,265 @@
+package rsmg.controller;
+
+import java.util.ArrayList;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
+/**
+ * The options view state. In this state is the user able to change some settings
+ * in the game. Like if the music should be on or off, or if he wants to play
+ * in full screen.
+ * @author Daniel Jonsson
+ *
+ */
+public class OptionsState extends State {
+
+	/**
+	 * The options view's various images.
+	 */
+	private Image background;
+	private Image title;
+	private Image on;
+	private Image off;
+	private ArrayList<OptionEntry> options;
+	private Image selected;
+	
+	/**
+	 * The position that the title image will have.
+	 */
+	private float titleXPos;
+	private float titleYPos;
+	
+	/**
+	 * How far the on/off controller will be placed from the option entry on the x-axis.
+	 */
+	private float onOffOffset;
+	
+	/**
+	 * How far the selected marker will be placed from the selected option entry on the x-axis.
+	 */
+	private float selectedOffset;
+	
+	/**
+	 * Keeps track of which of the buttons that is currently selected.
+	 */
+	private int selectedEntry;
+	
+	/**
+	 * Create the options view state.
+	 * @param stateID
+	 */
+	public OptionsState(int stateID) {
+		super(stateID);
+	}
+
+	/**
+	 * Will be initialized when the state is created.
+	 */
+	@Override
+	public void init(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		
+		// Folder path to the sprites.
+		String folderPath = "res/sprites/options/";
+		
+		// Create the bg image and scale it to fit the window's width
+		background = new Image(folderPath+"bg.jpg");
+		float scale = (float)gc.getWidth() / (float)background.getWidth();
+		background = background.getScaledCopy(scale);
+		
+		// Create the title image with the same scale as the background image
+		title = new Image(folderPath+"title.png");
+		title = title.getScaledCopy(scale);
+
+		// Set the title's position
+		titleXPos = 651 * scale;
+		titleYPos = 100 * scale;
+		
+		// Create an image to show which entry is selected
+		selected = new Image(folderPath+"selected.png");
+		selected = selected.getScaledCopy(scale);
+		
+		// How far from the entry on the x-axis the selected image will be placed
+		selectedOffset = -100 * scale;
+		
+		// Create an image that is shown when an option is turned ON
+		on = new Image(folderPath+"on.png");
+		on = on.getScaledCopy(scale);
+		
+		// Create an image that is shown when an option is turned OFF
+		off = new Image(folderPath+"off.png");
+		off = off.getScaledCopy(scale);
+
+		// How far from the entry on the x-axis the on/off controller image will be placed
+		onOffOffset = 400 * scale;
+
+		// Create the options entries
+		OptionEntry fullScreen = new OptionEntry(folderPath+"fullScreen.png", 650, 400, false, scale);
+		OptionEntry music = new OptionEntry(folderPath+"music.png", 650, 500, true, scale);
+		OptionEntry soundEffects = new OptionEntry(folderPath+"soundEffects.png", 650, 600, false, scale);
+		
+		// Store the options buttons in an ArrayList for convenience
+		options = new ArrayList<OptionEntry>();
+		options.add(fullScreen);
+		options.add(music);
+		options.add(soundEffects);
+		
+		// Set which button is initially selected
+		selectedEntry = 0;
+		options.get(selectedEntry).toggleSelected();
+	}
+	
+	/**
+	 * This method is run when the controller enter this state.
+	 */
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		super.enter(gc, sbg);
+		
+		// To prevent the selected option in the menu to be toggled when entering the state
+		gc.getInput().clearKeyPressedRecord();
+	}
+
+	/**
+	 * This method is run between every frame. Here is key inputs handled.
+	 */
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
+			throws SlickException {
+		Input input = gc.getInput();
+		handleInputs(input, gc, sbg);
+	}
+
+	/**
+	 * Handle and respond to various key inputs.
+	 * @param input
+	 * @param gc
+	 * @param sbg
+	 */
+	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) {
+		if (input.isKeyPressed(Input.KEY_UP)) {
+			navigateUpInMenu();
+		} else if (input.isKeyPressed(Input.KEY_DOWN)) {
+			navigateDownInMenu();
+		} else if (input.isKeyPressed(Input.KEY_ENTER)) {
+			options.get(selectedEntry).toggleOn();
+		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+			sbg.enterState(Controller.MAINMENU_STATE);
+		}
+	}
+	
+	/**
+	 * Navigate up in the menu.
+	 */
+	private void navigateUpInMenu() {
+		if (selectedEntry > 0) {
+			options.get(selectedEntry).toggleSelected();
+			selectedEntry--;
+			options.get(selectedEntry).toggleSelected();
+		}
+	}
+	
+	/**
+	 * Navigate down in the menu.
+	 */
+	private void navigateDownInMenu() {
+		if (selectedEntry < options.size()-1) {
+			options.get(selectedEntry).toggleSelected();
+			selectedEntry++;
+			options.get(selectedEntry).toggleSelected();
+		}
+	}
+
+	/**
+	 * This method is called multiply times every second to draw the graphics on
+	 * the screen. Here is all images being drawn.
+	 */
+	@Override
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
+			throws SlickException {
+		background.draw(0, 0);
+		title.draw(titleXPos, titleYPos);
+		
+		for (OptionEntry o : options) {
+			o.getImage().draw(o.getX(), o.getY());
+			
+			if (o.getOn())
+				on.draw(o.getX() + onOffOffset, o.getY());
+			else
+				off.draw(o.getX() + onOffOffset, o.getY());
+			
+			if (o.getSelected())
+				selected.draw(o.getX() + selectedOffset, o.getY());
+		}
+	}
+	
+	/**
+	 * A class containing data about a option menu entry.
+	 * @author Daniel Jonsson
+	 *
+	 */
+	private class OptionEntry {
+		
+		private Image entry;
+		private float x;
+		private float y;
+		private boolean on;
+		private boolean selected;
+
+		/**
+		 * Create an option entry in the menu.
+		 * @param entry The path to the entry image.
+		 * @param x The x position for the entry.
+		 * @param y The y position for the entry.
+		 * @param on If the option is turned on or off.
+		 * @param scale How much the image and position should be scaled.
+		 * @throws SlickException
+		 */
+		public OptionEntry(String entry, float x, float y, boolean on, float scale) throws SlickException {
+
+			this.entry = new Image(entry).getScaledCopy(scale);
+			
+			this.x = x * scale;
+			this.y = y * scale;
+			
+			this.on = on;
+			
+			this.selected = false;
+		}
+		
+		public Image getImage() {
+			return entry;
+		}
+		
+		public float getX() {
+			return x;
+		}
+		
+		public float getY() {
+			return y;
+		}
+		
+		public void toggleOn() {
+			on = !on;
+		}
+		
+		public boolean getOn() {
+			return on;
+		}
+		
+		public void toggleSelected() {
+			selected = !selected;
+		}
+		
+		public boolean getSelected() {
+			return selected;
+		}
+	}
+
+}
