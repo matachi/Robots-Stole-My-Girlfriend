@@ -11,6 +11,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
+import rsmg.io.Config;
+
 /**
  * The main menu state.
  * @author Daniel Jonsson
@@ -71,8 +73,10 @@ public class MainMenuState extends State {
 		menuButtons.get(selectedButton).toggleSelected();
 		
 		// Start some background music.
-		Music backgroundMusic = new Music("res/music/WolfRock-WelcomeToTheTemple.ogg", true);
-		backgroundMusic.loop(1, 0.1f);
+		if (Config.musicOn()) {
+			Music backgroundMusic = new Music("res/music/WolfRock-WelcomeToTheTemple.ogg", true);
+			backgroundMusic.loop(1, 0.1f);
+		}
 	}
 
 	/**

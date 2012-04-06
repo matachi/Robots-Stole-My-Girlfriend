@@ -8,6 +8,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.BlobbyTransition;
+
+import rsmg.io.Config;
 
 /**
  * The options view state. In this state is the user able to change some settings
@@ -18,6 +21,13 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class OptionsState extends State {
 
+	/**
+	 * 
+	 */
+	private static final int FULLSCREEN_SETTING = 0;
+	private static final int MUSIC_SETTING = 1;
+	private static final int SOUNDEFFECTS_SETTING = 3;
+	
 	/**
 	 * The options view's various images.
 	 */
@@ -98,10 +108,10 @@ public class OptionsState extends State {
 		// How far from the entry on the x-axis the on/off controller image will be placed
 		onOffOffset = 400 * scale;
 
-		// Create the options entries
-		OptionEntry fullScreen = new OptionEntry(folderPath+"fullScreen.png", 650, 400, false, scale);
-		OptionEntry music = new OptionEntry(folderPath+"music.png", 650, 500, true, scale);
-		OptionEntry soundEffects = new OptionEntry(folderPath+"soundEffects.png", 650, 600, false, scale);
+		// Create the options entries and initialize them with the settings from the config file
+		OptionEntry fullScreen = new OptionEntry(folderPath+"fullScreen.png", 650, 400, Config.fullScreenOn(), scale);
+		OptionEntry music = new OptionEntry(folderPath+"music.png", 650, 500, Config.musicOn(), scale);
+		OptionEntry soundEffects = new OptionEntry(folderPath+"soundEffects.png", 650, 600, Config.soundEffectsOn(), scale);
 		
 		// Store the options buttons in an ArrayList for convenience
 		options = new ArrayList<OptionEntry>();
@@ -127,6 +137,18 @@ public class OptionsState extends State {
 	}
 
 	/**
+	 * This method in run when the controller leaves this state.
+	 */
+	@Override
+	public void leave(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		super.leave(container, game);
+		
+		// Write the configuration settings to the hard drive
+		Config.saveConfigFile();
+	}
+
+	/**
 	 * This method is run between every frame. Here is key inputs handled.
 	 */
 	@Override
@@ -149,8 +171,20 @@ public class OptionsState extends State {
 			navigateDownInMenu();
 		} else if (input.isKeyPressed(Input.KEY_ENTER)) {
 			options.get(selectedEntry).toggleOn();
+			boolean settingOn = options.get(selectedEntry).getOn();
+			switch (selectedEntry) {
+			case FULLSCREEN_SETTING:
+				Config.setFullScreenOn(settingOn);
+				break;
+			case MUSIC_SETTING:
+				Config.setMusicOn(settingOn);
+				break;
+			case SOUNDEFFECTS_SETTING:
+				Config.setSoundEffectsOn(settingOn);
+				break;
+			}
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			sbg.enterState(Controller.MAINMENU_STATE);
+			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
 		}
 	}
 	

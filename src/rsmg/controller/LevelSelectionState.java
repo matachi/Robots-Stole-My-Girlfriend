@@ -8,6 +8,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.BlobbyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
 /**
@@ -161,7 +162,7 @@ public class LevelSelectionState extends State {
 	
 	private void changeState(GameContainer gc, StateBasedGame sbg, int select) {
 		if (select == 1)
-			sbg.enterState(Controller.MAINMENU_STATE, null, new FadeInTransition());
+			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
 		else
 			sbg.enterState(Controller.LEVEL1_STATE, null, new FadeInTransition());
 	}
