@@ -9,6 +9,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Renderable;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.BlobbyTransition;
@@ -121,6 +122,20 @@ public class LevelState extends State {
 		level = new Level();
 	}
 
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		super.enter(gc, sbg);
+		gc.setMusicOn(false);
+	}
+
+	@Override
+	public void leave(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		super.leave(gc, sbg);
+		gc.setMusicOn(true);
+	}
+
 	/**
 	 * Draw everything from the game model on the screen.
 	 */
@@ -133,7 +148,6 @@ public class LevelState extends State {
 		drawCharacter();
 		drawBullets();
 	}
-
 
 	/**
 	 * Draw a background image behind the tile grid.
@@ -210,6 +224,12 @@ public class LevelState extends State {
 				character = characterRunningL;
 
 		}
+		
+		/**
+		 * Play a sound if the character has fired his weapon.
+		 */
+		if (level.getCharacter().getWeapon().shot())
+			new Sound("res/sounds/shot.wav").play();
 	}
 	
 	/**

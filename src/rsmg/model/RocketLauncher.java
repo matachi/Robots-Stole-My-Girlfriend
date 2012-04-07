@@ -7,11 +7,12 @@ import rsmg.util.Vector2d;
 public class RocketLauncher implements IWeapon{
 	private LivingObject wielder;
 	private ArrayList<Bullet> bulletList;
+	private boolean shot;
 	
 	public RocketLauncher(LivingObject wielder, ArrayList<Bullet> bulletList) {
 		this.wielder = wielder;
 		this.bulletList = bulletList;
-		
+		shot = false;
 	}
 	@Override
 	public void shoot() {
@@ -35,6 +36,8 @@ public class RocketLauncher implements IWeapon{
 		}
 		
 		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, 2, bulletVelocity, knockback, bulletDamage));
+		
+		shot = true;
 	}
 
 	@Override
@@ -42,4 +45,12 @@ public class RocketLauncher implements IWeapon{
 		return 800;
 	}
 	
+	@Override
+	public boolean shot() {
+		if (shot) {
+			shot = !shot;
+			return true;
+		}
+		return false;
+	}
 }

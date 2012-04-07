@@ -41,6 +41,14 @@ public class Character extends LivingObject {
 	}
 	
 	/**
+	 * Returns a reference to the weapon that the character is currently wielding.
+	 * @return A reference to the weapon that the character is currently wielding.
+	 */
+	public IWeapon getWeapon() {
+		return currentWeapon;
+	}
+	
+	/**
 	 * Update whether the character is in the air or standing on the ground.
 	 * @param airborne If the character is in the air.
 	 */

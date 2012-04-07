@@ -7,11 +7,12 @@ import rsmg.util.Vector2d;
 public class LaserPistol implements IWeapon{
 	private LivingObject wielder;
 	private ArrayList<Bullet> bulletList;
+	private boolean shot;
 	
 	public LaserPistol(LivingObject wielder, ArrayList<Bullet> bulletList) {
 		this.wielder = wielder;
 		this.bulletList = bulletList;
-		
+		this.shot = false;
 	}
 	
 	@Override
@@ -36,10 +37,21 @@ public class LaserPistol implements IWeapon{
 		}
 		
 		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, 1, bulletVelocity, knockback, bulletDamage));
+		
+		shot = true;
 	}
 
 	@Override
 	public long getCooldown() {
 		return 300;
+	}
+	
+	@Override
+	public boolean shot() {
+		if (shot) {
+			shot = !shot;
+			return true;
+		}
+		return false;
 	}
 }
