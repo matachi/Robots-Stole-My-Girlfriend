@@ -8,6 +8,7 @@ public class RocketLauncher implements IWeapon{
 	private LivingObject wielder;
 	private ArrayList<Bullet> bulletList;
 	private boolean shot;
+	public int clipSize = 2;
 	
 	public RocketLauncher(LivingObject wielder, ArrayList<Bullet> bulletList) {
 		this.wielder = wielder;
@@ -39,6 +40,9 @@ public class RocketLauncher implements IWeapon{
 		
 		shot = true;
 	}
+	public int getClipSize(){
+		return clipSize;
+	}
 
 	@Override
 	public long getCooldown() {
@@ -52,5 +56,10 @@ public class RocketLauncher implements IWeapon{
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public long getReloadTime() {
+		
+		return 1000;
 	}
 }

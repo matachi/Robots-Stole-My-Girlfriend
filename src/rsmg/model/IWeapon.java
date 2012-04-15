@@ -10,4 +10,6 @@ public interface IWeapon {
 	 * @return If the weapon has been fired.
 	 */
 	public boolean shot();
+	public int getClipSize();
+	public long getReloadTime();
 }

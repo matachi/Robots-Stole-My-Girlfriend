@@ -31,6 +31,7 @@ public abstract class InteractiveObject {
 		this.velocity = new Vector2d();
 	}
 	
+	
 	/**
 	 * Get the Object's velocity.
 	 * @return The velocity.

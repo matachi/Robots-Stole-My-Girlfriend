@@ -8,6 +8,7 @@ public class LaserPistol implements IWeapon{
 	private LivingObject wielder;
 	private ArrayList<Bullet> bulletList;
 	private boolean shot;
+	private int clipSize;
 	
 	public LaserPistol(LivingObject wielder, ArrayList<Bullet> bulletList) {
 		this.wielder = wielder;
@@ -43,6 +44,14 @@ public class LaserPistol implements IWeapon{
 
 	@Override
 	public long getCooldown() {
+		return 300;
+	}
+	
+	public int getClipSize(){
+		return clipSize;
+	}
+	
+	public long getReloadTime(){
 		return 300;
 	}
 	

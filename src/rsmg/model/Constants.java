@@ -20,4 +20,5 @@ public enum Constants{
 	public static final int RELEASED_JUMP_VELOCITY = -60;
 	public static final int TILESIZE = 32;
 	public static final int GRAVITYSTRENGTH = 300;
+	public static final int DASHSPEED = 300;
 }

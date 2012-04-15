@@ -11,9 +11,11 @@ import java.util.ArrayList;
 
 public class Character extends LivingObject {
 	private boolean airborne;
-	IWeapon currentWeapon;
-	ArrayList<Bullet> bulletList;
-	long lastAttacktime = 0;
+	private IWeapon currentWeapon;
+	private ArrayList<Bullet> bulletList;
+	private long lastAttacktime = 0;
+	private int ammo;
+	private boolean isDashing = false;
 	
 	public Character(double x, double y, ArrayList<Bullet> bulletList) {
 		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH);
@@ -23,7 +25,6 @@ public class Character extends LivingObject {
 	}
 	public Character(double x, double y) {
 		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH);
-		this.bulletList = bulletList;
 	}
 	
 	@Override
@@ -32,12 +33,20 @@ public class Character extends LivingObject {
 		
 	}
 	
+	public void reload(){
+		currentWeapon.getReloadTime();
+	}
+	
 	@Override
 	public void applyGravity(double delta) {
 		// Apply gravity to the character if he is in the air, in other words,
 		// not standing on the ground.
 		if (airborne)
 			super.applyGravity(delta);
+	}
+	
+	public void setDashing(boolean isDashing){
+		this.isDashing = isDashing;
 	}
 	
 	/**
@@ -103,6 +112,16 @@ public class Character extends LivingObject {
 		if (lastAttacktime + currentWeapon.getCooldown() < System.currentTimeMillis()){
 			currentWeapon.shoot();
 			lastAttacktime = System.currentTimeMillis(); 
+		}
+	}
+	/**
+	 * Make the character perform the "dash" move
+	 */
+	public void dash() {
+		if (this.isFacingRight()){
+			this.addVelocity(Constants.DASHSPEED, 0);
+		}else{
+			this.addVelocity(-Constants.DASHSPEED, 0);
 		}
 	}
 }
