@@ -39,9 +39,15 @@ public class LevelSelectionState extends State {
 	private boolean backgroundScrollingRight;
 	
 	/**
-	 * How much everything should be multiplied with. Scale = 1 is Full HD.
+	 * How much everything should be multiplied with.
 	 */
-	private float scale = 0.5f;
+	private float scale;
+	
+	/**
+	 * How far the view should be drawn from the top of the screen. If the screen hasn't
+	 * the aspect radio 16:9, there will be black borders over and under the view.
+	 */
+	private float topOffset;
 	
 	/**
 	 * Number of unlocked levels.
@@ -61,6 +67,10 @@ public class LevelSelectionState extends State {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 
+		scale = (float)gc.getWidth() / 1920;
+		
+		topOffset = (gc.getHeight() - 1080 * scale) / 2;
+		
 		// Create the bg image and scale it to fit the window's width
 		background = new Image(folderPath+"bg.jpg");
 		background = background.getScaledCopy(scale);
@@ -79,11 +89,12 @@ public class LevelSelectionState extends State {
 		completed = new Image(folderPath+"completed.png");
 		completed = completed.getScaledCopy(scale);
 
-		// Create the menu buttons
-		LevelButton level1 = new LevelButton(folderPath+"level1unlocked.png", folderPath+"level1locked.png", (gc.getWidth()-155*scale)/2-150, 450, true);
-		LevelButton level2 = new LevelButton(folderPath+"level2unlocked.png", folderPath+"level2locked.png", (gc.getWidth()-155*scale)/2-50, 450, true);
-		LevelButton level3 = new LevelButton(folderPath+"level3unlocked.png", folderPath+"level3locked.png", (gc.getWidth()-155*scale)/2+50, 450, true);
-		LevelButton level4 = new LevelButton(folderPath+"level4unlocked.png", folderPath+"level4locked.png", (gc.getWidth()-155*scale)/2+150, 450, false);
+		// Create the menu buttons.
+		// 77.5 is the half width of a button, and is needed to place them centered horizontally on the screen.
+		LevelButton level1 = new LevelButton(folderPath+"level1unlocked.png", folderPath+"level1locked.png", 660-77.5f, 450, true);
+		LevelButton level2 = new LevelButton(folderPath+"level2unlocked.png", folderPath+"level2locked.png", 860-77.5f, 450, true);
+		LevelButton level3 = new LevelButton(folderPath+"level3unlocked.png", folderPath+"level3locked.png", 1060-77.5f, 450, true);
+		LevelButton level4 = new LevelButton(folderPath+"level4unlocked.png", folderPath+"level4locked.png", 1260-77.5f, 450, false);
 		
 		// Store the menu buttons in an ArrayList for convenience
 		levelButtons = new ArrayList<LevelButton>();
@@ -103,10 +114,10 @@ public class LevelSelectionState extends State {
 			throws SlickException {
 		
 		// Draw the scrolling background image.
-		background.draw(backgroundXPosition, 0);
+		background.draw(backgroundXPosition, topOffset);
 		
 		// Draw the title text.
-		title.draw((gc.getWidth()-title.getWidth())/2, 50*scale);
+		title.draw((gc.getWidth()-title.getWidth())/2, 50*scale + topOffset);
 		
 		// Draw the level selection buttons.
 		for (int i = 0; i < levelButtons.size(); i++) {
@@ -198,8 +209,8 @@ public class LevelSelectionState extends State {
 			this.lockedButton = new Image(pathToLockedButton);
 			this.lockedButton = this.lockedButton.getScaledCopy(scale);
 			
-			this.x = x;
-			this.y = y * scale;
+			this.x = x * scale;
+			this.y = y * scale + topOffset;
 			
 			this.unlocked = unlocked;
 		}

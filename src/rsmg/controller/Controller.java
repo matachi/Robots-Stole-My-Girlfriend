@@ -31,7 +31,7 @@ public class Controller extends StateBasedGame {
 	 * Initializes all states in the game.
 	 */
 	@Override
-	public void initStatesList(GameContainer container) throws SlickException {
+	public void initStatesList(GameContainer gc) throws SlickException {
 		this.addState(new MainMenuState(MAINMENU_STATE));
 		this.addState(new LevelState(LEVEL1_STATE));
 		this.addState(new LevelSelectionState(LEVEL_SELECTION_STATE));

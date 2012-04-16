@@ -32,6 +32,17 @@ public class MainMenuState extends State {
 	 */
 	private int selectedButton;
 	
+	/**
+	 * How much everything should be multiplied with.
+	 */
+	private float scale;
+	
+	/**
+	 * How far the view should be drawn from the top of the screen. If the screen hasn't
+	 * the aspect radio 16:9, there will be black borders over and under the view.
+	 */
+	private float topOffset;
+	
 	public MainMenuState(int stateID) {
 		super(stateID);
 	}
@@ -43,12 +54,15 @@ public class MainMenuState extends State {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 
+		scale = (float)gc.getWidth() / 1920;
+		
+		topOffset = (gc.getHeight() - 1080 * scale) / 2;
+		
 		// Folder path to the sprites.
 		String folderPath = "res/sprites/mainMenu/";
 		
 		// Create the bg image and scale it to fit the window's width
 		background = new Image("res/sprites/mainMenu/bg.jpg");
-		float scale = (float)gc.getWidth() / (float)background.getWidth();
 		background = background.getScaledCopy(scale);
 		
 		// Create the title image with the same scale as the background image
@@ -95,11 +109,11 @@ public class MainMenuState extends State {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		
-		background.draw(0, 0);
-		title.draw((gc.getWidth() - title.getWidth()) / 2, 40);
+		background.draw(0, topOffset);
+		title.draw((gc.getWidth() - title.getWidth()) / 2, 40+topOffset);
 		
 		for (MenuButton m : menuButtons) {
-			m.getImage().draw(m.getX(), m.getY());
+			m.getImage().draw(m.getX(), m.getY()+topOffset);
 		}
 	}
 	

@@ -62,6 +62,11 @@ public class LevelState extends State {
 	private boolean upKeyIsDown;
 	
 	/**
+	 * Store how much everything should be scaled in the view.
+	 */
+	private int scale;
+	
+	/**
 	 * Construct the level.
 	 * @param stateID The ID to the state.
 	 */
@@ -75,34 +80,33 @@ public class LevelState extends State {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+
+		scale = (int) ((float)gc.getWidth() / 480);
 		
-		background = new Image("res/sprites/level/bg.jpg", false, Image.FILTER_NEAREST);
+		background = new Image("res/sprites/level/bg.jpg", false, Image.FILTER_NEAREST).getScaledCopy(scale);
 		
-		airTile = new Image("res/sprites/level/airTile.png", false, Image.FILTER_NEAREST);
-		airTile = airTile.getScaledCopy(2f);
-		boxTile = new Image("res/sprites/level/boxTile.png", false, Image.FILTER_NEAREST);
-		boxTile = boxTile.getScaledCopy(2f);
-		laserBullet = new Image("res/sprites/level/laserBullet.png", false, Image.FILTER_NEAREST);
-		laserBullet = laserBullet.getScaledCopy(2f);
+		airTile = new Image("res/sprites/level/airTile.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
+		boxTile = new Image("res/sprites/level/boxTile.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
+		laserBullet = new Image("res/sprites/level/laserBullet.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
 		
 		/**
 		 * Make an animation for when the character is running to the right.
 		 */
 		Image characterImage = new Image("res/sprites/level/charPistolRunningSheet.png", false, Image.FILTER_NEAREST);
-		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(2f), 64, 46);
+		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
 		characterRunningR = new Animation(characterSheet, 140);
 		
 		/**
 		 * Make an animation for when the character is running to the left.
 		 */
 		characterImage = characterImage.getFlippedCopy(true, false);
-		characterSheet = new SpriteSheet(characterImage.getScaledCopy(2f), 64, 46);
+		characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
 		characterRunningL = new Animation(characterSheet, 140);
 		
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		characterStandingR = new Image("res/sprites/level/charPistolStanding.png", false, Image.FILTER_NEAREST).getScaledCopy(2f);
+		characterStandingR = new Image("res/sprites/level/charPistolStanding.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
@@ -112,7 +116,7 @@ public class LevelState extends State {
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		character = characterJumpingR = new Image("res/sprites/level/charPistolJumping.png", false, Image.FILTER_NEAREST).getScaledCopy(2f);
+		character = characterJumpingR = new Image("res/sprites/level/charPistolJumping.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
@@ -170,7 +174,7 @@ public class LevelState extends State {
 	private void drawBullets() {
 		ArrayList<Bullet> bulletList = level.getABulletList();
 		for(Bullet bullet : bulletList)
-			laserBullet.draw((float)bullet.getX()*2, (float)bullet.getY()*2);
+			laserBullet.draw((float)bullet.getX()*scale, (float)bullet.getY()*scale);
 	}
 	private void drawEnemies() {
 		ArrayList<Enemy> enemies = level.getEnemies();
@@ -188,7 +192,7 @@ public class LevelState extends State {
 		for (int y = 0; y < level.getTileGrid().getHeight(); y++) {
 			for (int x = 0; x < level.getTileGrid().getWidth(); x++) {
 				if (level.getTileGrid().getFromCoord(x, y).isSolid())
-					boxTile.draw(x * 64, y * 64);
+					boxTile.draw(x*32*scale, y*32*scale);
 			}
 		}
 	}
@@ -197,7 +201,7 @@ public class LevelState extends State {
 	 * Draw the character/protagonist on the screen.
 	 */
 	private void drawCharacter() {
-		character.draw((float)level.getCharacter().getX()*2-12, (float)level.getCharacter().getY()*2);
+		character.draw(((float)level.getCharacter().getX()-6)*scale, (float)level.getCharacter().getY()*scale);
 	}
 
 	/**

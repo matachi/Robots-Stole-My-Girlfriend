@@ -60,6 +60,17 @@ public class OptionsState extends State {
 	private int selectedEntry;
 	
 	/**
+	 * How much everything should be multiplied with.
+	 */
+	private float scale;
+	
+	/**
+	 * How far the view should be drawn from the top of the screen. If the screen hasn't
+	 * the aspect radio 16:9, there will be black borders over and under the view.
+	 */
+	private float topOffset;
+	
+	/**
 	 * Create the options view state.
 	 * @param stateID
 	 */
@@ -73,13 +84,16 @@ public class OptionsState extends State {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+
+		scale = (float)gc.getWidth() / 1920;
+		
+		topOffset = (gc.getHeight() - 1080 * scale) / 2;
 		
 		// Folder path to the sprites.
 		String folderPath = "res/sprites/options/";
 		
 		// Create the bg image and scale it to fit the window's width
 		background = new Image(folderPath+"bg.jpg");
-		float scale = (float)gc.getWidth() / (float)background.getWidth();
 		background = background.getScaledCopy(scale);
 		
 		// Create the title image with the same scale as the background image
@@ -217,19 +231,19 @@ public class OptionsState extends State {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		background.draw(0, 0);
-		title.draw(titleXPos, titleYPos);
+		background.draw(0, topOffset);
+		title.draw(titleXPos, titleYPos+topOffset);
 		
 		for (OptionEntry o : options) {
-			o.getImage().draw(o.getX(), o.getY());
+			o.getImage().draw(o.getX(), o.getY()+topOffset);
 			
 			if (o.getOn())
-				on.draw(o.getX() + onOffOffset, o.getY());
+				on.draw(o.getX() + onOffOffset, o.getY()+topOffset);
 			else
-				off.draw(o.getX() + onOffOffset, o.getY());
+				off.draw(o.getX() + onOffOffset, o.getY()+topOffset);
 			
 			if (o.getSelected())
-				selected.draw(o.getX() + selectedOffset, o.getY());
+				selected.draw(o.getX() + selectedOffset, o.getY()+topOffset);
 		}
 	}
 	
