@@ -28,8 +28,13 @@ public abstract class LivingObject extends InteractiveObject{
 			
 		}
 	}
+	
 	public boolean isFacingRight(){
 		return facingRight;
+	}
+	
+	public boolean isDead(){
+		return health < 1;
 	}
 	
 }

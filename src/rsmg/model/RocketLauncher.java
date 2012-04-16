@@ -15,6 +15,7 @@ public class RocketLauncher implements IWeapon{
 		this.bulletList = bulletList;
 		shot = false;
 	}
+	
 	@Override
 	public void shoot() {
 		int bulletWidth = 5;
@@ -22,7 +23,6 @@ public class RocketLauncher implements IWeapon{
 		int bulletDamage = 10;
 		int bulletSpeed = 400;
 		Vector2d bulletVelocity = new Vector2d();
-		Vector2d knockback = new Vector2d(10, -3);
 		int offsetX;
 		int offsetY;
 
@@ -36,7 +36,7 @@ public class RocketLauncher implements IWeapon{
 			offsetY = 5;
 		}
 		
-		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, 2, bulletVelocity, knockback, bulletDamage));
+		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, 2, bulletVelocity, bulletDamage));
 		
 		shot = true;
 	}

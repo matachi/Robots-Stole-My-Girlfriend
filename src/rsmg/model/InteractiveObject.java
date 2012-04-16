@@ -20,10 +20,10 @@ public abstract class InteractiveObject {
 	 */
 	private Vector2d velocity;
 	
-	public InteractiveObject(double x, double y) {
+	protected InteractiveObject(double x, double y) {
 		this(x, y, 0, 0);
 	}
-	public InteractiveObject(double x, double y, double width, double height ) {
+	protected InteractiveObject(double x, double y, double width, double height ) {
 		this.x = x;
 		this.y = y;
 		this.height = height;
@@ -173,7 +173,7 @@ public abstract class InteractiveObject {
 	
 	
 	/**
-	 * class for specifying what happens when this objects collides with another InteractiveObject
+	 * method for specifying what happens to this object when it collides with another InteractiveObject
 	 */
 	public abstract void collide(InteractiveObject obj);
 

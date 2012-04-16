@@ -16,7 +16,9 @@ import org.newdawn.slick.state.transition.BlobbyTransition;
 
 import rsmg.model.Bullet;
 import rsmg.model.Character;
+import rsmg.model.Enemy;
 import rsmg.model.Level;
+import rsmg.model.Tankbot;
 
 /**
  * The state where the levels are played out.
@@ -48,6 +50,7 @@ public class LevelState extends State {
 	private Image characterStandingL;
 	private Image characterJumpingR;
 	private Image characterJumpingL;
+	private Image tankbot;
 	/**
 	 * Reference to the level model.
 	 */
@@ -115,6 +118,10 @@ public class LevelState extends State {
 		 * Make an image for when the character is standing still facing to the left.
 		 */
 		characterJumpingL = characterJumpingR.getFlippedCopy(true, false);
+		/**
+		 * create an image for how the tankBot looks
+		 */
+		tankbot = new Image("res/sprites/level/tankbot.png", false, Image.FILTER_NEAREST);
 		
 		/**
 		 * Create the level model.
@@ -147,6 +154,7 @@ public class LevelState extends State {
 		drawEnvironment();
 		drawCharacter();
 		drawBullets();
+		drawEnemies();
 	}
 
 	/**
@@ -163,6 +171,14 @@ public class LevelState extends State {
 		ArrayList<Bullet> bulletList = level.getABulletList();
 		for(Bullet bullet : bulletList)
 			laserBullet.draw((float)bullet.getX()*2, (float)bullet.getY()*2);
+	}
+	private void drawEnemies() {
+		ArrayList<Enemy> enemies = level.getEnemies();
+		for(Enemy enemy: enemies){
+			if (enemy instanceof Tankbot){
+				tankbot.draw((float)enemy.getX()*2, (float)enemy.getY()*2);
+			}
+		}
 	}
 	
 	/**

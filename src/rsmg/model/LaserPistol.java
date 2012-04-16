@@ -23,7 +23,6 @@ public class LaserPistol implements IWeapon{
 		int bulletDamage = 10;
 		int bulletSpeed = 500;
 		Vector2d bulletVelocity = new Vector2d();
-		Vector2d knockback = new Vector2d(10, -3);
 		int offsetX;
 		int offsetY;
 
@@ -37,7 +36,7 @@ public class LaserPistol implements IWeapon{
 			offsetY = 5;
 		}
 		
-		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, 1, bulletVelocity, knockback, bulletDamage));
+		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, 1, bulletVelocity, bulletDamage));
 		
 		shot = true;
 	}

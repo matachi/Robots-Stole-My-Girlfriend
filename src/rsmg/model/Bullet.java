@@ -5,7 +5,6 @@ import rsmg.util.Vector2d;
 public class Bullet extends InteractiveObject {
 	int bulletType;
 	int dmg;
-	Vector2d knockback;
 	/**
 	 * 
 	 * @param x horizontal coordinate for where the bullet spawns
@@ -14,16 +13,18 @@ public class Bullet extends InteractiveObject {
 	 * @param height height of the bullet
 	 * @param bulletType integer value representing what kind of bullet this is (used for graphics)
 	 */
-	public Bullet(double x, double y, double width, double height, int bulletType, Vector2d velocity, Vector2d knockback, int dmg) {
+	public Bullet(double x, double y, double width, double height, int bulletType, Vector2d velocity, int dmg) {
 		super(x, y, width, height);
 		this.setVelocity(velocity);
 		this.bulletType=bulletType;
-		this.knockback=knockback;
+		this.dmg=dmg;
 	}
 
 	@Override
 	public void collide(InteractiveObject obj) {
-		((LivingObject)obj).damage(dmg);
-		obj.addVelocity(knockback);
+		//nothing really
+	}
+	public int getDamage(){
+		return dmg;
 	}
 }

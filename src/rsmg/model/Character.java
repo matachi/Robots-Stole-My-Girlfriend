@@ -118,6 +118,7 @@ public class Character extends LivingObject {
 	 * Make the character perform the "dash" move
 	 */
 	public void dash() {
+		//TODO fix this function (make it work)
 		if (this.isFacingRight()){
 			this.addVelocity(Constants.DASHSPEED, 0);
 		}else{

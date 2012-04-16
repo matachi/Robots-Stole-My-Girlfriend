@@ -20,7 +20,8 @@ public class Level {
 	 */
 	// private int levelReached = 1;
 	
-	private ArrayList<Bullet> aBullets; 
+	private ArrayList<Bullet> aBullets;
+	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	/**
 	 * The grid layout of the level
 	 */
@@ -61,6 +62,11 @@ public class Level {
 			bullet.move(delta);
 			
 		}
+		if(enemies.isEmpty()){
+			//temporary enemy
+			Enemy tempEnemy = new Tankbot(90, 35); 
+			enemies.add(tempEnemy);
+		}
 		
 		// Update whether the character is in the air or standing on the ground.
 		updateAirbourne();
@@ -80,6 +86,39 @@ public class Level {
 		// Reset the X velocity back to zero.
 		character.setVelocityX(0);
 		
+		updateEnemies(delta);
+		
+	}
+	//perform a "isDeadCheck" and handle collision detection
+	private void updateEnemies(double delta) {
+		if(!enemies.isEmpty()){
+			for(int i = 0; i < enemies.size(); i++){
+				if(enemies.get(i).isDead()) {
+					enemies.remove(i);
+			}
+				
+			for(Enemy enemy : enemies) {
+				
+				//see if enemy has collided with the character and act approrietly
+				if(enemy.hasCollidedWith(character)) {
+					character.collide(enemy);
+					enemy.collide(character);
+				}
+				
+				//see if enemy has collided with any bullets and act approrietly
+				for(Bullet bullet : aBullets) {
+					
+					if(enemy.hasCollidedWith(bullet)) {
+						enemy.collide(bullet);
+						bullet.collide(enemy);
+					}
+				}
+				enemy.applyGravity(delta);
+				applyNormalForce(enemy);
+				enemy.move(delta);
+				}
+			}
+		}
 	}
 
 	/**
@@ -247,7 +286,18 @@ public class Level {
 	public Character getCharacter() {
 		return character;
 	}
+	/**
+	 * returns the list of allied bullets
+	 * @return the list of allied bullets
+	 */
 	public ArrayList<Bullet> getABulletList(){
 		return aBullets;
+	}
+	/**
+	 * returns the list of alive enemies
+	 * @return the list of alive enemies
+	 */
+	public ArrayList<Enemy> getEnemies(){
+		return enemies;
 	}
 }
