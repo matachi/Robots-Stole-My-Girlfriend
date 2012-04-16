@@ -25,7 +25,7 @@ import rsmg.model.Tankbot;
  * @author Daniel Jonsson
  *
  */
-public class LevelState extends State {
+class LevelState extends State {
 
 	
 	/**
@@ -70,7 +70,7 @@ public class LevelState extends State {
 	 * Construct the level.
 	 * @param stateID The ID to the state.
 	 */
-	public LevelState(int stateID) {
+	LevelState(int stateID) {
 		super(stateID);
 	}
 	

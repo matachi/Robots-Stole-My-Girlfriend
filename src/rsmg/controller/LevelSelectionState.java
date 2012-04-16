@@ -16,7 +16,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
  * @author Daniel Jonsson.
  *
  */
-public class LevelSelectionState extends State {
+class LevelSelectionState extends State {
 
 	/**
 	 * Folder path to the sprites.
@@ -59,7 +59,7 @@ public class LevelSelectionState extends State {
 	 */
 	private int selectedButton;
 	
-	public LevelSelectionState(int stateID) {
+	LevelSelectionState(int stateID) {
 		super(stateID);
 	}
 

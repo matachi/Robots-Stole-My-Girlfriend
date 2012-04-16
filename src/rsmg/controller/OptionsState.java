@@ -19,7 +19,7 @@ import rsmg.io.Config;
  * @author Daniel Jonsson
  *
  */
-public class OptionsState extends State {
+class OptionsState extends State {
 
 	/**
 	 * 
@@ -74,7 +74,7 @@ public class OptionsState extends State {
 	 * Create the options view state.
 	 * @param stateID
 	 */
-	public OptionsState(int stateID) {
+	OptionsState(int stateID) {
 		super(stateID);
 	}
 

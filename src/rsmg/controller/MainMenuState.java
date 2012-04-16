@@ -18,7 +18,7 @@ import rsmg.io.Config;
  * @author Daniel Jonsson
  *
  */
-public class MainMenuState extends State {
+class MainMenuState extends State {
 
 	/**
 	 * The main menu's images.
@@ -43,7 +43,7 @@ public class MainMenuState extends State {
 	 */
 	private float topOffset;
 	
-	public MainMenuState(int stateID) {
+	MainMenuState(int stateID) {
 		super(stateID);
 	}
 

@@ -9,11 +9,11 @@ import org.newdawn.slick.state.BasicGameState;
  * @author Daniel Jonsson
  *
  */
-public abstract class State extends BasicGameState  {
+abstract class State extends BasicGameState  {
 
 	private int stateID;
 	
-	public State(int stateID) {
+	State(int stateID) {
 		this.stateID = stateID;
 	}
 

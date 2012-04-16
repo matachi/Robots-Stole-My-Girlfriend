@@ -10,20 +10,20 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author Daniel Jonsson
  *
  */
-public class Controller extends StateBasedGame {
+class Controller extends StateBasedGame {
 
-	public static final int MAINMENU_STATE = 0;
+	static final int MAINMENU_STATE = 0;
 	
-	public static final int LEVEL1_STATE = 1;
+	static final int LEVEL1_STATE = 1;
 	
-	public static final int LEVEL_SELECTION_STATE = 2;
+	static final int LEVEL_SELECTION_STATE = 2;
 	
-	public static final int OPTIONS_STATE = 3;
+	static final int OPTIONS_STATE = 3;
 	
 	/**
 	 * 
 	 */
-	public Controller() {
+	Controller() {
 		super("Robots Stole My Girlfriend");
 	}
 
