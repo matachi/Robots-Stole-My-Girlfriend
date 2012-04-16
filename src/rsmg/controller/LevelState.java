@@ -176,12 +176,15 @@ public class LevelState extends State {
 		for(Bullet bullet : bulletList)
 			laserBullet.draw((float)bullet.getX()*scale, (float)bullet.getY()*scale);
 	}
+	
+	/**
+	 * Draw enemies on the screen.
+	 */
 	private void drawEnemies() {
 		ArrayList<Enemy> enemies = level.getEnemies();
-		for(Enemy enemy: enemies){
-			if (enemy instanceof Tankbot){
-				tankbot.draw((float)enemy.getX()*2, (float)enemy.getY()*2);
-			}
+		for (Enemy enemy : enemies) {
+			if (enemy instanceof Tankbot)
+				tankbot.draw((float)enemy.getX()*scale, (float)enemy.getY()*scale);
 		}
 	}
 	
