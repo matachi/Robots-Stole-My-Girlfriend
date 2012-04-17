@@ -64,7 +64,7 @@ public class Level {
 		}
 		if(enemies.isEmpty()){
 			//temporary enemy
-			Enemy tempEnemy = new Tankbot(90, 35); 
+			Enemy tempEnemy = new Tankbot(90, 40); 
 			enemies.add(tempEnemy);
 		}
 		
@@ -85,7 +85,6 @@ public class Level {
 		
 		// Reset the X velocity back to zero.
 		character.setVelocityX(0);
-		
  		updateEnemies(delta);
 		
 	}
@@ -115,8 +114,8 @@ public class Level {
 				}
 			}
 			enemy.applyGravity(delta);
-			applyNormalForce(enemy);
 			enemy.move(delta);
+			applyNormalForce(enemy);
 		}
 	}
 

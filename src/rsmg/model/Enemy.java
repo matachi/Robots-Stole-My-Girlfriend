@@ -12,4 +12,5 @@ public abstract class Enemy extends LivingObject{
 			this.damage(((Bullet)obj).getDamage());
 		}
 	}
+	public abstract int getTouchDamage();
 }

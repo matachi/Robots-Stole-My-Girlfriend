@@ -29,7 +29,9 @@ public class Character extends LivingObject {
 	
 	@Override
 	public void collide(InteractiveObject obj) {
-		// TODO Auto-generated method stub
+		if (obj instanceof Enemy){
+			this.damage(((Enemy) obj).getTouchDamage());
+		}
 		
 	}
 	
