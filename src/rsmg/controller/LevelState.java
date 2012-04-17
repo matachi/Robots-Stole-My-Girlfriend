@@ -122,10 +122,11 @@ class LevelState extends State {
 		 * Make an image for when the character is standing still facing to the left.
 		 */
 		characterJumpingL = characterJumpingR.getFlippedCopy(true, false);
+		
 		/**
 		 * create an image for how the tankBot looks
 		 */
-		tankbot = new Image("res/sprites/level/tankbot.png", false, Image.FILTER_NEAREST);
+		tankbot = new Image("res/sprites/level/tankbot.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
 		
 		/**
 		 * Create the level model.

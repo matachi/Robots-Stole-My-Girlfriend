@@ -86,40 +86,37 @@ public class Level {
 		// Reset the X velocity back to zero.
 		character.setVelocityX(0);
 		
-		updateEnemies(delta);
+ 		updateEnemies(delta);
 		
 	}
 	//perform a "isDeadCheck" and handle collision detection
 	private void updateEnemies(double delta) {
-		if (!enemies.isEmpty()) {
+		for (int i = 0; i < enemies.size(); i++) {
 
-			for (int i = 0; i < enemies.size(); i++) {
-
-				Enemy enemy = enemies.get(i);
-				
-				if (enemy.isDead()) {
-					enemies.remove(i);
-					continue;
-				}
-				
-				//see if enemy has collided with the character and act approrietly
-				if (enemy.hasCollidedWith(character)) {
-					character.collide(enemy);
-					enemy.collide(character);
-				}
-				
-				//see if enemy has collided with any bullets and act approrietly
-				for (Bullet bullet : aBullets) {
-					
-					if(enemy.hasCollidedWith(bullet)) {
-						enemy.collide(bullet);
-						bullet.collide(enemy);
-					}
-				}
-				enemy.applyGravity(delta);
-				applyNormalForce(enemy);
-				enemy.move(delta);
+			Enemy enemy = enemies.get(i);
+			
+			if (enemy.isDead()) {
+				enemies.remove(i);
+				continue;
 			}
+			
+			//see if enemy has collided with the character and act approrietly
+			if (enemy.hasCollidedWith(character)) {
+				character.collide(enemy);
+				enemy.collide(character);
+			}
+			
+			//see if enemy has collided with any bullets and act approrietly
+			for (Bullet bullet : aBullets) {
+				
+				if(enemy.hasCollidedWith(bullet)) {
+					enemy.collide(bullet);
+					bullet.collide(enemy);
+				}
+			}
+			enemy.applyGravity(delta);
+			applyNormalForce(enemy);
+			enemy.move(delta);
 		}
 	}
 
