@@ -51,6 +51,9 @@ class LevelState extends State {
 	private Image characterJumpingR;
 	private Image characterJumpingL;
 	private Image tankbot;
+	private Image characterDashingR;
+	private Image characterDashingL;
+	
 	/**
 	 * Reference to the level model.
 	 */
@@ -122,6 +125,16 @@ class LevelState extends State {
 		 * Make an image for when the character is standing still facing to the left.
 		 */
 		characterJumpingL = characterJumpingR.getFlippedCopy(true, false);
+		
+		/**
+		 * Make an image for when the character is dashing to the right
+		 */
+		characterDashingR = new Image("res/sprites/level/charDashing.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
+		
+		/**
+		 * Make an image for when the character is dashing to the right
+		 */
+		characterDashingL = characterDashingR.getFlippedCopy(true, false);
 		
 		/**
 		 * create an image for how the tankBot looks
@@ -226,27 +239,36 @@ class LevelState extends State {
 		/**
 		 * Fix so the right character sprite is shown on the next render()
 		 */
-		if (level.getCharacter().isAirborne()) {
-
-			if (level.getCharacter().isFacingRight())
-				character = characterJumpingR;
-			else
-				character = characterJumpingL;
-
-		} else if (level.getCharacter().isStandingStill()) {
-
-			if (level.getCharacter().isFacingRight())
-				character = characterStandingR;
-			else
-				character = characterStandingL;
-
-		} else { // is running
-
-			if (level.getCharacter().isFacingRight())
-				character = characterRunningR;
-			else
-				character = characterRunningL;
-
+		if(level.getCharacter().isDashing()) {
+			if(level.getCharacter().isFacingRight()) {
+				character = characterDashingR;
+			} else {
+				character = characterDashingL;
+			}
+			
+		} else {
+			if (level.getCharacter().isAirborne()) {
+		
+				if (level.getCharacter().isFacingRight())
+					character = characterJumpingR;
+				else
+					character = characterJumpingL;
+		
+			} else if (level.getCharacter().isStandingStill()) {
+		
+				if (level.getCharacter().isFacingRight())
+					character = characterStandingR;
+				else
+					character = characterStandingL;
+		
+			} else { // is running
+		
+				if (level.getCharacter().isFacingRight())
+					character = characterRunningR;
+				else
+					character = characterRunningL;
+		
+			}
 		}
 		
 		/**
@@ -265,9 +287,12 @@ class LevelState extends State {
 		Character modelCharacter = level.getCharacter();
 		
 		if (input.isKeyDown(Input.KEY_LEFT))
-			modelCharacter.moveLeft();
-		else if (input.isKeyDown(Input.KEY_RIGHT))
-			modelCharacter.moveRight();
+			if(!modelCharacter.isDashing())
+				modelCharacter.moveLeft();
+		
+		if (input.isKeyDown(Input.KEY_RIGHT))
+			if(!modelCharacter.isDashing())
+				modelCharacter.moveRight();
 
 		if (input.isKeyDown(Input.KEY_UP)) {
 			if (!upKeyIsDown)
@@ -282,8 +307,10 @@ class LevelState extends State {
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new BlobbyTransition());
 		}
-		if (input.isKeyPressed(Input.KEY_X)){
-			modelCharacter.setDashing(true);
+		if (input.isKeyPressed(Input.KEY_X)) {
+			if (modelCharacter.canDash()) {
+				modelCharacter.setDashing(true);
+			}
 		}
 	}
 

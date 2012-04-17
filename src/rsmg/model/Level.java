@@ -65,34 +65,40 @@ public class Level {
 	public void update(double delta) {
 		for(Bullet bullet : aBullets){
 			bullet.move(delta);
-			
+		
 		}
+		updateCharacter(delta);
+
+		
 		if(enemies.isEmpty()){
 			//temporary enemy
 			Enemy tempEnemy = new Tankbot(90, 40); 
 			enemies.add(tempEnemy);
 		}
-		
-		// Update whether the character is in the air or standing on the ground.
-		updateAirbourne();
-		
-		// Apply gravity to the character so he will fall down if he is in the air.
-		character.applyGravity(delta);
 
-		// Move the character.
-		character.move(delta);
-		character.updateFacing();
-
-		// Check so the character isn't inside a solid tile, and if so, move
-		// him outside it.
-		applyNormalForce(character);
-
-		
-		// Reset the X velocity back to zero.
-		character.setVelocityX(0);
  		updateEnemies(delta);
 		
 	}
+	private void updateCharacter(double delta) {
+		
+		// Update whether the character is in the air or standing on the ground.
+		character.setAirborne(isAirbourne(character));
+		// Apply gravity to the character so he will fall down if he is in the air.
+		character.applyGravity(delta);
+		
+		// Move the character.
+		character.move(delta);
+		
+		// update what direction the character is facing towards
+		character.updateFacing();
+		
+		// Check so the character isn't inside a solid tile, and if so, move
+		// him outside it.
+		applyNormalForce(character);
+		character.setVelocityX(0);
+		character.updateDashing(delta);
+	}
+	
 	//perform a "isDeadCheck" and handle collision detection
 	private void updateEnemies(double delta) {
 		for (int i = 0; i < enemies.size(); i++) {
@@ -133,13 +139,6 @@ public class Level {
 		double y = obj.getY() + obj.getHeight() + 0.00001;
 		return !(tileIntersect(obj.getX(), y) || tileIntersect(
 				obj.getX() + obj.getWidth() - 0.00001, y));
-	}
-	
-	/**
-	 * Update whether the character is in the air or standing on the ground.
-	 */
-	private void updateAirbourne() {
-		character.setAirborne(isAirbourne(character));
 	}
 
 //	/**
