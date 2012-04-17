@@ -2,6 +2,8 @@ package rsmg.model;
 
 import java.util.ArrayList;
 
+import rsmg.util.Vector2d;
+
 
 /**
  * Class for representing the playable Character
@@ -15,7 +17,9 @@ public class Character extends LivingObject {
 	private ArrayList<Bullet> bulletList;
 	private long lastAttacktime = 0;
 	private int ammo;
+	private double distanceDashed = 0;
 	private boolean isDashing = false;
+	private boolean canDash = true;
 	
 	public Character(double x, double y, ArrayList<Bullet> bulletList) {
 		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH);
@@ -119,12 +123,32 @@ public class Character extends LivingObject {
 	/**
 	 * Make the character perform the "dash" move
 	 */
-	public void dash() {
-		//TODO fix this function (make it work)
+	public void dash(double delta) {
+		distanceDashed+=Constants.DASHSPEED*delta;
+		
 		if (this.isFacingRight()){
-			this.addVelocity(Constants.DASHSPEED, 0);
+			this.addVelocity(new Vector2d(Constants.DASHSPEED, 0));
 		}else{
-			this.addVelocity(-Constants.DASHSPEED, 0);
+			this.addVelocity(new Vector2d(-Constants.DASHSPEED, 0));
 		}
+	}
+	public boolean isDashing() {
+		return isDashing;
+	}
+
+	public boolean canDash(){
+		return canDash;
+	}
+	
+	public void updateDashing(double delta) {
+		//tell the character to perfrom the dash move if the boolean "isDashing" is set to true
+		if(distanceDashed > Constants.DASHLENGTH){
+			setDashing(false);
+			distanceDashed = 0;
+		}
+		if (isDashing){
+			dash(delta);
+		}
+		
 	}
 }
