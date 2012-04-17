@@ -91,22 +91,25 @@ public class Level {
 	}
 	//perform a "isDeadCheck" and handle collision detection
 	private void updateEnemies(double delta) {
-		if(!enemies.isEmpty()){
-			for(int i = 0; i < enemies.size(); i++){
-				if(enemies.get(i).isDead()) {
-					enemies.remove(i);
-			}
+		if (!enemies.isEmpty()) {
+
+			for (int i = 0; i < enemies.size(); i++) {
+
+				Enemy enemy = enemies.get(i);
 				
-			for(Enemy enemy : enemies) {
+				if (enemy.isDead()) {
+					enemies.remove(i);
+					continue;
+				}
 				
 				//see if enemy has collided with the character and act approrietly
-				if(enemy.hasCollidedWith(character)) {
+				if (enemy.hasCollidedWith(character)) {
 					character.collide(enemy);
 					enemy.collide(character);
 				}
 				
 				//see if enemy has collided with any bullets and act approrietly
-				for(Bullet bullet : aBullets) {
+				for (Bullet bullet : aBullets) {
 					
 					if(enemy.hasCollidedWith(bullet)) {
 						enemy.collide(bullet);
@@ -116,7 +119,6 @@ public class Level {
 				enemy.applyGravity(delta);
 				applyNormalForce(enemy);
 				enemy.move(delta);
-				}
 			}
 		}
 	}
