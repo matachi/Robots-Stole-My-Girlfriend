@@ -9,21 +9,28 @@ import rsmg.io.IO;
  * Class representing a level. This Class is in charge of storing and updating
  * information about a level
  * 
- * @author Johan Grönvall, Johan Rignäs
+ * @author Johan Grönvall, Johan Rignäs, Daniel Jonsson
  * 
  */
 public class Level {
 
-	private Character character;
 	/**
-	 * Keeps track of which level the user have reached
+	 * Reference to the character that the user controls.
 	 */
-	// private int levelReached = 1;
+	private Character character;
 	
-	private ArrayList<Bullet> aBullets;
-	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	/**
-	 * The grid layout of the level
+	 * List where bullets from guns are stored.
+	 */
+	private ArrayList<Bullet> aBullets;
+	
+	/**
+	 * List where references to all living enemies in the level are stored.
+	 */
+	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	
+	/**
+	 * The grid layout of the level. (I.e. the environment.)
 	 */
 	private TileGrid tGrid;
 
@@ -46,16 +53,14 @@ public class Level {
 		try {
 			Point spawnPoint = tGrid.getSpawnPoint();
 			character = new Character(spawnPoint.getX(), spawnPoint.getY(), aBullets);
-		} catch (Exception e) { // TODO change to specific exception
+		} catch (Exception NullPointerException) {
 			character = new Character(0, 0, aBullets);
 		}
 	}
 
 	/**
-	 * method which handles necessary updates to the levels state
-	 * 
-	 * @param delta
-	 *            Time since last update in seconds.
+	 * This method handles all updating that should occur between every game frame.
+	 * @param delta Time since last update in seconds.
 	 */
 	public void update(double delta) {
 		for(Bullet bullet : aBullets){
@@ -121,9 +126,7 @@ public class Level {
 
 	/**
 	 * Check if the object is flying (i.e. not standing on a solid tile).
-	 * 
-	 * @param obj
-	 *            The InteractiveObject.
+	 * @param obj The InteractiveObject.
 	 * @return true If there is no solid tile underneath specified object.
 	 */
 	private boolean isAirbourne(InteractiveObject obj) {
@@ -139,21 +142,19 @@ public class Level {
 		character.setAirborne(isAirbourne(character));
 	}
 
-	/**
-	 * Check so the character isn't outside the level's boundaries.
-	 */
-	private boolean isOutSideMap(InteractiveObject obj){
-		return obj.getX() < 0 || obj.getY() < 0 ||
-				obj.getX() > tGrid.getWidth()*Constants.TILESIZE
-				||  obj.getY() > tGrid.getHeight()*Constants.TILESIZE;
-	}
+//	/**
+//	 * Check so the character isn't outside the level's boundaries.
+//	 */
+//	private boolean isOutSideMap(InteractiveObject obj){
+//		return obj.getX() < 0 || obj.getY() < 0 ||
+//				obj.getX() > tGrid.getWidth()*Constants.TILESIZE
+//				||  obj.getY() > tGrid.getHeight()*Constants.TILESIZE;
+//	}
 
 	/**
 	 * Check if the object collides with any solid tiles. And if that is the
 	 * case, move the object back outside the tile.
-	 * 
-	 * @param obj
-	 *            An InteractiveObject
+	 * @param obj An InteractiveObject
 	 */
 	private void applyNormalForce(InteractiveObject obj) {
 		/**
@@ -244,32 +245,7 @@ public class Level {
 	}
 
 	/**
-	 * Pause the game by stopping tick() in Controller. Pause should be from GUI
-	 * to Controller. Not in Model:Level
-	 */
-	public void pause() {
-		// controll.pause();
-	}
-
-	/**
-	 * Are called when a level is completed. Increase level the user have
-	 * completed and navigate to LevelMenu
-	 */
-	public void completedLevel() {
-		// levelReached++;
-		// Change state to LevelMenu where Level will be reloaded again
-		// controll.goToLevelMenu();
-	}
-
-	/**
-	 * public int getLevelReached() { return levelReached; }
-	 * 
-	 * public void setLevelReached(int level) { levelReached = level; }
-	 */
-
-	/**
 	 * Returns the tile grid.
-	 * 
 	 * @return The tile grid.
 	 */
 	public TileGrid getTileGrid() {
@@ -278,22 +254,21 @@ public class Level {
 
 	/**
 	 * Returns the character.
-	 * 
 	 * @return The character.
 	 */
 	public Character getCharacter() {
 		return character;
 	}
 	/**
-	 * returns the list of allied bullets
-	 * @return the list of allied bullets
+	 * Returns the list of bullets.
+	 * @return The list of bullets.
 	 */
 	public ArrayList<Bullet> getABulletList(){
 		return aBullets;
 	}
 	/**
-	 * returns the list of alive enemies
-	 * @return the list of alive enemies
+	 * Returns the list of alive enemies.
+	 * @return The list of alive enemies.
 	 */
 	public ArrayList<Enemy> getEnemies(){
 		return enemies;

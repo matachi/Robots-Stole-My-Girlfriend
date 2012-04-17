@@ -17,7 +17,6 @@ public class TileGrid {
 	 */
 	public TileGrid(Tile[][] grid) {
 		this.grid = grid;
-		showGrid();
 	}
 
 	/**
@@ -116,7 +115,7 @@ public class TileGrid {
 		// of those are solid.
 		for (int x = leftX; x <= rightX; x++) {
 			for (int y = topY; y <= bottomY; y++) {
-				if (grid[y][x].isSolid() == true)
+				if (grid[y][x].isSolid())
 					return true;
 			}
 		}
@@ -132,10 +131,10 @@ public class TileGrid {
 		
 		int leftX = getTilePosFromRealPos(object.getX());
 		int topY = getTilePosFromRealPos(object.getY());
-		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight()-0.00001);
 		
 		for (int y = topY; y <= bottomY; y++) {
-			if (grid[y][leftX].isSolid() == true)
+			if (grid[y][leftX].isSolid())
 				return (leftX + 1) * Constants.TILESIZE - object.getX();
 		}
 		return 0;
@@ -148,13 +147,13 @@ public class TileGrid {
 	 */
 	public double rightSideIntersection(InteractiveObject object) {
 		
-		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth()-0.00001);
 		int topY = getTilePosFromRealPos(object.getY());
-		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight()-0.00001);
 		
 		for (int y = topY; y <= bottomY; y++) {
-			if (grid[y][rightX].isSolid() == true)
-				return object.getX() + object.getWidth() - rightX * Constants.TILESIZE;
+			if (grid[y][rightX].isSolid())
+				return object.getX() + object.getWidth() - rightX * Constants.TILESIZE - 0.00001;
 		}
 		return 0;
 	}
@@ -167,12 +166,12 @@ public class TileGrid {
 	public double bottomSideIntersection(InteractiveObject object) {
 
 		int leftX = getTilePosFromRealPos(object.getX());
-		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
-		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth()-0.00001);
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight()-0.00001);
 		
 		for (int x = leftX; x <= rightX; x++) {
-			if (grid[bottomY][x].isSolid() == true)
-				return object.getY() + object.getHeight() - bottomY * Constants.TILESIZE;
+			if (grid[bottomY][x].isSolid())
+				return object.getY() + object.getHeight() - bottomY * Constants.TILESIZE - 0.00001;
 		}
 		return 0;
 	}
@@ -185,11 +184,11 @@ public class TileGrid {
 	public double topSideIntersection(InteractiveObject object) {
 
 		int leftX = getTilePosFromRealPos(object.getX());
-		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth()-0.00001);
 		int topY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int x = leftX; x <= rightX; x++) {
-			if (grid[topY][x].isSolid() == true)
+			if (grid[topY][x].isSolid())
 				return topY * Constants.TILESIZE - object.getY();
 		}
 		return 0;
