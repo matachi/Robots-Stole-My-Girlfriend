@@ -1,5 +1,6 @@
 Group 8 - Robots Stole My Girlfriend
 ====================================
+Daniel Jonsson, Johan Grönvall, Johan Rignäs and Victor Rådmark.
 
 Directories
 -----------
