@@ -14,13 +14,15 @@ class Controller extends StateBasedGame {
 
 	static final int MAINMENU_STATE = 0;
 	
-	static final int LEVEL1_STATE = 1;
+	static final int LEVEL_STATE = 1;
 	
 	static final int LEVEL_SELECTION_STATE = 2;
 	
 	static final int OPTIONS_STATE = 3;
 	
 	static final int PAUSE_MENU_STATE = 4;
+	
+	private LevelState levelState;
 	
 	/**
 	 * 
@@ -34,12 +36,22 @@ class Controller extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
+		levelState = new LevelState(LEVEL_STATE);
 		this.addState(new MainMenuState(MAINMENU_STATE));
-		this.addState(new LevelState(LEVEL1_STATE));
-		this.addState(new LevelSelectionState(LEVEL_SELECTION_STATE));
+		this.addState(levelState);
+		this.addState(new LevelSelectionState(LEVEL_SELECTION_STATE, this));
 		this.addState(new OptionsState(OPTIONS_STATE));
 		this.addState(new PauseMenuState(PAUSE_MENU_STATE));
 //		this.getState(MAINMENU_STATE).init(container, this);
 //		this.getState(LEVEL1_STATE).init(container, this);
+	}
+	
+
+	/**
+	 * Initialize level data in LevelState.
+	 * @param levelNumber The level number.
+	 */
+	public void initLevel(int levelNumber) {
+		levelState.initLevel(levelNumber);
 	}
 }

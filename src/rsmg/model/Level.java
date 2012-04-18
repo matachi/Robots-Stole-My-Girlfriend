@@ -3,15 +3,14 @@ package rsmg.model;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import rsmg.model.item.*;
 
-import rsmg.io.IO;
+import rsmg.model.item.Item;
 
 /**
  * Class representing a level. This Class is in charge of storing and updating
  * information about a level
  * 
- * @author Johan Grï¿½nvall, Johan Rignï¿½s, Daniel Jonsson
+ * @author Johan Grönvall, Johan Rignäs, Daniel Jonsson
  * 
  */
 public class Level {
@@ -44,12 +43,11 @@ public class Level {
 	/**
 	 * Constructor of Level
 	 */
-	public Level() {
+	public Level(TileGrid tileGrid, List<Item> items) {
 
-		IO io = new IO();
 		aBullets = new ArrayList<Bullet>();  
-		tGrid = new TileGrid(io.getLevel(1));
-		aItems = io.getItemList();
+		tGrid = tileGrid;
+		aItems = items;
 		spawnChar();
 	}
 

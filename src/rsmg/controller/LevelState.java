@@ -13,13 +13,15 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.BlobbyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
 
+import rsmg.io.IO;
 import rsmg.model.Bullet;
 import rsmg.model.Character;
 import rsmg.model.Enemy;
 import rsmg.model.Level;
 import rsmg.model.Tankbot;
+import rsmg.model.TileGrid;
 import rsmg.model.item.Item;
 
 /**
@@ -144,11 +146,15 @@ class LevelState extends State {
 		 * create an image for how the tankBot looks
 		 */
 		tankbot = new Image("res/sprites/level/tankbot.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
-		
-		/**
-		 * Create the level model.
-		 */
-		level = new Level();
+	}
+	
+	/**
+	 * Initialize a level.
+	 * @param levelNumber The level's number.
+	 */
+	public void initLevel(int levelNumber) {
+		IO io = new IO();
+		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList());
 	}
 
 	@Override
@@ -322,7 +328,7 @@ class LevelState extends State {
 			modelCharacter.attack();
 		
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			sbg.enterState(Controller.PAUSE_MENU_STATE, null, new BlobbyTransition());
+			sbg.enterState(Controller.PAUSE_MENU_STATE, null, new FadeInTransition());
 		}
 		if (input.isKeyPressed(Input.KEY_X)) {
 			if (modelCharacter.canDash()) {

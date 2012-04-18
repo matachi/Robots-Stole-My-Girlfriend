@@ -59,8 +59,24 @@ class LevelSelectionState extends State {
 	 */
 	private int selectedButton;
 	
-	LevelSelectionState(int stateID) {
+	/**
+	 * Reference to the controller. Is needed to be able to tell LevelState what
+	 * level data that should be initialized.
+	 */
+	private Controller controller;
+	
+	/**
+	 * Create the level selection state.
+	 * 
+	 * @param stateID
+	 *            The state's ID.
+	 * @param controller
+	 *            Reference to the controller. Is needed to be able to tell
+	 *            LevelState what level data that should be initialized.
+	 */
+	LevelSelectionState(int stateID, Controller controller) {
 		super(stateID);
+		this.controller = controller;
 	}
 
 	@Override
@@ -105,8 +121,16 @@ class LevelSelectionState extends State {
 		
 		// Set the number of unlocked levels.
 		unlockedLevels = 3;
+		
 		// Set which button is initially selected
-		selectedButton = 2;
+		selectedButton = 0;
+	}
+	
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		super.enter(gc, sbg);
+		gc.getInput().clearKeyPressedRecord();
 	}
 
 	@Override
@@ -156,9 +180,11 @@ class LevelSelectionState extends State {
 		else if (input.isKeyPressed(Input.KEY_RIGHT))
 			navigateRightInMenu();
 		else if (input.isKeyPressed(Input.KEY_ESCAPE))
-			changeState(gc, sbg, 1);
-		else if (input.isKeyDown(Input.KEY_ENTER))
-			changeState(gc, sbg, 2);
+			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
+		else if (input.isKeyDown(Input.KEY_ENTER)) {
+			controller.initLevel(selectedButton+1);
+			sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());
+		}
 	}
 	
 	private void navigateLeftInMenu() {
@@ -171,12 +197,12 @@ class LevelSelectionState extends State {
 			selectedButton++;
 	}
 	
-	private void changeState(GameContainer gc, StateBasedGame sbg, int select) {
-		if (select == 1)
-			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
-		else
-			sbg.enterState(Controller.LEVEL1_STATE, null, new FadeInTransition());
-	}
+//	private void changeState(GameContainer gc, StateBasedGame sbg, int select) {
+//		if (select == 1)
+//			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
+//		else
+//			sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());
+//	}
 	
 	/**
 	 * A class containing data about a level button.

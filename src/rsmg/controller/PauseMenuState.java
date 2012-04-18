@@ -8,6 +8,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.BlobbyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
 /**
@@ -119,7 +120,16 @@ class PauseMenuState extends State {
 		} else if (input.isKeyPressed(Input.KEY_DOWN)) {
 			navigateDownInMenu();
 		} else if (input.isKeyDown(Input.KEY_ENTER) || input.isKeyDown(Input.KEY_RIGHT)) {
-			changeState(gc, sbg);
+			switch (selectedButton) {
+			case 0:
+				sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());
+				break;
+			case 1:
+				sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new BlobbyTransition());
+				break;
+			}
+		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+			sbg.enterState(Controller.LEVEL_STATE, null, new BlobbyTransition());
 		}
 	}
 	
@@ -136,17 +146,6 @@ class PauseMenuState extends State {
 			menuButtons.get(selectedButton).toggleSelected();
 			selectedButton++;
 			menuButtons.get(selectedButton).toggleSelected();
-		}
-	}
-	
-	private void changeState(GameContainer gc, StateBasedGame sbg) {
-		switch (selectedButton) {
-		case 0:
-			sbg.enterState(Controller.LEVEL1_STATE, null, new FadeInTransition());
-			break;
-		case 1:
-			sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
-			break;
 		}
 	}
 	
