@@ -1,6 +1,7 @@
 package rsmg.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
@@ -19,6 +20,7 @@ import rsmg.model.Character;
 import rsmg.model.Enemy;
 import rsmg.model.Level;
 import rsmg.model.Tankbot;
+import rsmg.model.item.Item;
 
 /**
  * The state where the levels are played out.
@@ -39,6 +41,7 @@ class LevelState extends State {
 	private Image airTile;
 	private Image boxTile;
 	private Image laserBullet;
+	private Image itemHealthPack;
 	
 	/**
 	 * The character that the player controls.
@@ -91,6 +94,7 @@ class LevelState extends State {
 		airTile = new Image("res/sprites/level/airTile.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
 		boxTile = new Image("res/sprites/level/boxTile.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
 		laserBullet = new Image("res/sprites/level/laserBullet.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
+		itemHealthPack = new Image("res/sprites/level/healthPack.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);		
 		
 		/**
 		 * Make an animation for when the character is running to the right.
@@ -173,6 +177,7 @@ class LevelState extends State {
 		drawCharacter();
 		drawBullets();
 		drawEnemies();
+		drawItems();
 	}
 
 	/**
@@ -199,6 +204,18 @@ class LevelState extends State {
 		for (Enemy enemy : enemies) {
 			if (enemy instanceof Tankbot)
 				tankbot.draw((float)enemy.getX()*scale, (float)enemy.getY()*scale);
+		}
+	}
+	
+	/**
+	 * Draw items on the screen.
+	 */
+	private void drawItems() {
+		List<Item> itemList = level.getItemList();
+		for(Item item : itemList){
+			if(!item.isPickedup() && (item.getType()).equals("healthPack"))
+				itemHealthPack.draw((float)item.getX()*2-12, (float)item.getY()*2-12);
+			// TODO MORE
 		}
 	}
 	

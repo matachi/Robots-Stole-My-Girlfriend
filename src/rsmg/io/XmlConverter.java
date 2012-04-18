@@ -4,6 +4,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.w3c.dom.*;
@@ -11,10 +12,13 @@ import org.w3c.dom.*;
 //import org.xml.sax.SAXParseException;
 //import org.w3c.dom.Document;
 import rsmg.model.AirTile;
+import rsmg.model.Constants;
 import rsmg.model.EndTile;
 import rsmg.model.GroundTile;
 import rsmg.model.SpawnTile;
 import rsmg.model.Tile;
+import rsmg.model.item.HealthPack;
+import rsmg.model.item.Item;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -26,6 +30,7 @@ import org.jdom.input.SAXBuilder;
  */
 public class XmlConverter {
 
+	private List<Item> itemList = new LinkedList<Item>();
 	/**
 	 * Converts the XML file to Tile matrix by setting appropriate Tiles in the
 	 * matrix according to the XML file
@@ -69,6 +74,16 @@ public class XmlConverter {
 					else
 						tile = new AirTile();
 					grid[y][x] = tile;
+					
+					// Retrieve items
+					String itemValue = cell.getAttributeValue("item");
+					if(itemValue != null){
+						Item item;
+						if(itemValue.equals("healthPack")){
+							 item = new HealthPack(x*Constants.TILESIZE,y*Constants.TILESIZE,Constants.TILESIZE,Constants.TILESIZE);
+							 itemList.add(item);
+						}
+					}
 				}
 			}
 			return grid;
@@ -79,5 +94,9 @@ public class XmlConverter {
 		}
 		System.out.println("error!!");
 		return null;
+	}
+			
+	public List<Item> getItemList(){
+		return itemList;
 	}
 }

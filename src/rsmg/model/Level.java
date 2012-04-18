@@ -2,6 +2,8 @@ package rsmg.model;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
+import rsmg.model.item.*;
 
 import rsmg.io.IO;
 
@@ -9,7 +11,7 @@ import rsmg.io.IO;
  * Class representing a level. This Class is in charge of storing and updating
  * information about a level
  * 
- * @author Johan Grönvall, Johan Rignäs, Daniel Jonsson
+ * @author Johan Grï¿½nvall, Johan Rignï¿½s, Daniel Jonsson
  * 
  */
 public class Level {
@@ -23,6 +25,11 @@ public class Level {
 	 * List where bullets from guns are stored.
 	 */
 	private ArrayList<Bullet> aBullets;
+	
+	/**
+	 *  List where all the items are stored
+	 */
+	private List<Item> aItems;
 	
 	/**
 	 * List where references to all living enemies in the level are stored.
@@ -42,6 +49,7 @@ public class Level {
 		IO io = new IO();
 		aBullets = new ArrayList<Bullet>();  
 		tGrid = new TileGrid(io.getLevel(1));
+		aItems = io.getItemList();
 		spawnChar();
 	}
 
@@ -77,8 +85,19 @@ public class Level {
 		}
 
  		updateEnemies(delta);
-		
+ 		
+ 		// Checks if the items are picked-up
+		updateItems();		
 	}
+	
+	// Check if the items are picked-up
+	public void updateItems(){
+		for(Item i : aItems){
+			if(character.hasCollidedWith(i))
+				i.pickup();
+		}
+	}
+	
 	private void updateCharacter(double delta) {
 		
 		// Update whether the character is in the air or standing on the ground.
@@ -271,5 +290,9 @@ public class Level {
 	 */
 	public ArrayList<Enemy> getEnemies(){
 		return enemies;
+	}
+	
+	public List<Item> getItemList(){
+		return aItems;
 	}
 }

@@ -1,7 +1,9 @@
 package rsmg.io;
 
 import java.io.File;
+import java.util.List;
 
+import rsmg.model.item.Item;
 import rsmg.model.Tile;
 
 /**
@@ -9,6 +11,9 @@ import rsmg.model.Tile;
  */
 public class IO {
 
+	// Is set when the map is loaded
+	private List<Item> itemList;
+	
 	/**
 	 * Get the level as a Tile matrix
 	 * 
@@ -20,6 +25,11 @@ public class IO {
 		File file = new File("src/rsmg/io/Level" + iLevel + ".xml");
 		XmlConverter converter = new XmlConverter();
 		Tile[][] grid = converter.xmlToTiles(file);
+		itemList = converter.getItemList();
 		return grid;
+	}
+	
+	public List<Item> getItemList(){
+		return itemList;
 	}
 }
