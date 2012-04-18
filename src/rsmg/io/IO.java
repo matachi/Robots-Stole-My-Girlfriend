@@ -22,7 +22,7 @@ public class IO {
 	 * @return A Tile matrix representing a level
 	 */
 	public Tile[][] getLevel(int iLevel) {
-		File file = new File("src/rsmg/io/Level" + iLevel + ".xml");
+		File file = new File("res/data/level/Level" + iLevel + ".xml");
 		XmlConverter converter = new XmlConverter();
 		Tile[][] grid = converter.xmlToTiles(file);
 		itemList = converter.getItemList();
