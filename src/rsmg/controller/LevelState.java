@@ -322,7 +322,7 @@ class LevelState extends State {
 			modelCharacter.attack();
 		
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new BlobbyTransition());
+			sbg.enterState(Controller.PAUSE_MENU_STATE, null, new BlobbyTransition());
 		}
 		if (input.isKeyPressed(Input.KEY_X)) {
 			if (modelCharacter.canDash()) {

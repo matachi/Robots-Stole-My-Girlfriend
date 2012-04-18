@@ -20,6 +20,8 @@ class Controller extends StateBasedGame {
 	
 	static final int OPTIONS_STATE = 3;
 	
+	static final int PAUSE_MENU_STATE = 4;
+	
 	/**
 	 * 
 	 */
@@ -36,6 +38,7 @@ class Controller extends StateBasedGame {
 		this.addState(new LevelState(LEVEL1_STATE));
 		this.addState(new LevelSelectionState(LEVEL_SELECTION_STATE));
 		this.addState(new OptionsState(OPTIONS_STATE));
+		this.addState(new PauseMenuState(PAUSE_MENU_STATE));
 //		this.getState(MAINMENU_STATE).init(container, this);
 //		this.getState(LEVEL1_STATE).init(container, this);
 	}
