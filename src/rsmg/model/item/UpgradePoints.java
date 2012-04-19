@@ -2,7 +2,6 @@ package rsmg.model.item;
 
 public class UpgradePoints extends Item {
 	
-	private boolean pickup = false;
 	private String type;
 	
 	/**
@@ -14,14 +13,6 @@ public class UpgradePoints extends Item {
 	public UpgradePoints(double x, double y, double width, double height) {
 		super(x, y, width, height);
 		type = "upgradePoints";
-	}
-
-	public void pickup(){
-		pickup = true;
-	}
-	
-	public boolean isPickedup(){
-		return pickup;
 	}
 	
 	public String getType(){

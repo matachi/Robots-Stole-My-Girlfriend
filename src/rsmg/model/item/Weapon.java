@@ -1,8 +1,7 @@
 package rsmg.model.item;
 
 public class Weapon extends Item {
-	
-	private boolean pickup = false;
+
 	private String type;
 	
 	/**
@@ -16,14 +15,6 @@ public class Weapon extends Item {
 		type = "weapon";
 	}
 
-	public void pickup(){
-		pickup = true;
-	}
-	
-	public boolean isPickedup(){
-		return pickup;
-	}
-	
 	public String getType(){
 		return type;
 	}

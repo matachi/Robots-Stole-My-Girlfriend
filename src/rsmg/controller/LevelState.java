@@ -219,7 +219,7 @@ class LevelState extends State {
 	private void drawItems() {
 		List<Item> itemList = level.getItemList();
 		for(Item item : itemList){
-			if(!item.isPickedup() && (item.getType()).equals("healthPack"))
+			if((item.getType()).equals("healthPack"))
 				itemHealthPack.draw((float)item.getX()*2-12, (float)item.getY()*2-12);
 			// TODO MORE
 		}

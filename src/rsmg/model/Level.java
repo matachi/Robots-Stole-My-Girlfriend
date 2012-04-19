@@ -10,7 +10,7 @@ import rsmg.model.item.Item;
  * Class representing a level. This Class is in charge of storing and updating
  * information about a level
  * 
- * @author Johan Grönvall, Johan Rignäs, Daniel Jonsson
+ * @author Johan Grï¿½nvall, Johan Rignï¿½s, Daniel Jonsson
  * 
  */
 public class Level {
@@ -88,11 +88,12 @@ public class Level {
 		updateItems();		
 	}
 	
-	// Check if the items are picked-up
+	// Remove item if it is picked-up
 	public void updateItems(){
-		for(Item i : aItems){
-			if(character.hasCollidedWith(i))
-				i.pickup();
+		for(int i=0; i<aItems.size(); i++){
+			Item item = aItems.get(i);
+			if(character.hasCollidedWith(item))
+				aItems.remove(i);
 		}
 	}
 	

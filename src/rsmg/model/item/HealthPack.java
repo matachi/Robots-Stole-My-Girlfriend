@@ -1,8 +1,7 @@
 package rsmg.model.item;
 
 public class HealthPack extends Item {
-	
-	private boolean pickup = false;
+
 	private String type;
 	
 	/**
@@ -14,14 +13,6 @@ public class HealthPack extends Item {
 	public HealthPack(double x, double y, double width, double height) {
 		super(x, y, width, height);
 		type = "healthPack";
-	}
-
-	public void pickup(){
-		pickup = true;
-	}
-	
-	public boolean isPickedup(){
-		return pickup;
 	}
 	
 	public String getType(){

@@ -14,10 +14,7 @@ public abstract class Item extends InteractiveObject {
 		super(x, y, width, height);
 	}
 
-	public abstract void pickup();
-	public abstract boolean isPickedup();
 	public abstract String getType();
-	
 	
 	@Override
 	public void collide(InteractiveObject obj) {
