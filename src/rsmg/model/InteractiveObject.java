@@ -14,23 +14,28 @@ public abstract class InteractiveObject {
 	private double y;
 	private double height;
 	private double width;
+	private String name;
 	
 	/**
 	 * Store the velocity as a 2d vector.
 	 */
 	private Vector2d velocity;
 	
-	protected InteractiveObject(double x, double y) {
-		this(x, y, 0, 0);
+	protected InteractiveObject(double x, double y, String name) {
+		this(x, y, 0, 0, name);
 	}
-	protected InteractiveObject(double x, double y, double width, double height ) {
+	protected InteractiveObject(double x, double y, double width, double height, String name) {
 		this.x = x;
 		this.y = y;
 		this.height = height;
 		this.width = width;
 		this.velocity = new Vector2d();
+		this.name = name;
 	}
 	
+	public String getName() {
+		return name;
+	}
 	
 	/**
 	 * Get the Object's velocity.
@@ -176,6 +181,4 @@ public abstract class InteractiveObject {
 	 * method for specifying what happens to this object when it collides with another InteractiveObject
 	 */
 	public abstract void collide(InteractiveObject obj);
-
-	
 }

@@ -2,12 +2,16 @@ package rsmg.model;
 
 public abstract class Tile {
 
-	private int size = Constants.TILESIZE;
+	private final int size = Constants.TILESIZE;
+	
+	private String name;
 
 	/**
 	 * Constructor of Tile
 	 */
-	public Tile() {}
+	public Tile(String name) {
+		this.name = name;
+	}
 
 	public abstract boolean isSolid();
 
@@ -16,5 +20,9 @@ public abstract class Tile {
 	 */
 	public int getSize() {
 		return size;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }

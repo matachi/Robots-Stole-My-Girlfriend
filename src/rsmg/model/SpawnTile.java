@@ -7,6 +7,7 @@ public class SpawnTile extends Tile {
 	 * Constructor of SpawnTile. Sets solid value
 	 */
 	public SpawnTile() {
+		super(ObjectName.SPAWN_TILE);
 		solid = false;
 	}
 

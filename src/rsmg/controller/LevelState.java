@@ -1,7 +1,7 @@
 package rsmg.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
@@ -20,7 +20,7 @@ import rsmg.model.Bullet;
 import rsmg.model.Character;
 import rsmg.model.Enemy;
 import rsmg.model.Level;
-import rsmg.model.Tankbot;
+import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
 import rsmg.model.item.Item;
 
@@ -38,12 +38,12 @@ class LevelState extends State {
 	private Image background;
 	
 	/**
-	 * The tiles building up the environment.
+	 * Maps containing images.
 	 */
-	private Image airTile;
-	private Image boxTile;
-	private Image laserBullet;
-	private Image itemHealthPack;
+	private Map<String, Image> tiles;
+	private Map<String, Image> bullets;
+	private Map<String, Image> items;
+	private Map<String, Image> enemies;
 	
 	/**
 	 * The character that the player controls.
@@ -55,7 +55,6 @@ class LevelState extends State {
 	private Image characterStandingL;
 	private Image characterJumpingR;
 	private Image characterJumpingL;
-	private Image tankbot;
 	private Image characterDashingR;
 	private Image characterDashingL;
 	
@@ -90,18 +89,14 @@ class LevelState extends State {
 			throws SlickException {
 
 		scale = (int) ((float)gc.getWidth() / 480);
+		int filter = Image.FILTER_NEAREST;
 		
-		background = new Image("res/sprites/level/bg.jpg", false, Image.FILTER_NEAREST).getScaledCopy(scale);
-		
-		airTile = new Image("res/sprites/level/airTile.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
-		boxTile = new Image("res/sprites/level/boxTile.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
-		laserBullet = new Image("res/sprites/level/laserBullet.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
-		itemHealthPack = new Image("res/sprites/level/healthPack.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);		
+		background = new Image("res/sprites/level/bg.jpg", false, filter).getScaledCopy(scale);	
 		
 		/**
 		 * Make an animation for when the character is running to the right.
 		 */
-		Image characterImage = new Image("res/sprites/level/charPistolRunningSheet.png", false, Image.FILTER_NEAREST);
+		Image characterImage = new Image("res/sprites/level/charPistolRunningSheet.png", false, filter);
 		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
 		characterRunningR = new Animation(characterSheet, 140);
 		
@@ -115,7 +110,7 @@ class LevelState extends State {
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		characterStandingR = new Image("res/sprites/level/charPistolStanding.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
+		characterStandingR = new Image("res/sprites/level/charPistolStanding.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
@@ -125,7 +120,7 @@ class LevelState extends State {
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		character = characterJumpingR = new Image("res/sprites/level/charPistolJumping.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
+		character = characterJumpingR = new Image("res/sprites/level/charPistolJumping.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
@@ -135,7 +130,7 @@ class LevelState extends State {
 		/**
 		 * Make an image for when the character is dashing to the right
 		 */
-		characterDashingR = new Image("res/sprites/level/charDashing.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
+		characterDashingR = new Image("res/sprites/level/charDashing.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is dashing to the right
@@ -143,9 +138,35 @@ class LevelState extends State {
 		characterDashingL = characterDashingR.getFlippedCopy(true, false);
 		
 		/**
-		 * create an image for how the tankBot looks
+		 * Create a map with all enemy images.
 		 */
-		tankbot = new Image("res/sprites/level/tankbot.png", false, Image.FILTER_NEAREST).getScaledCopy(scale);
+		enemies = new HashMap<String, Image>();
+		Image tankbot = new Image("res/sprites/level/tankbot.png", false, filter).getScaledCopy(scale);
+		enemies.put(ObjectName.TANKBOT, tankbot);
+		
+		/**
+		 * Create a map with all item images.
+		 */
+		items = new HashMap<String, Image>();
+		Image healthPack = new Image("res/sprites/level/healthPack.png", false, filter).getScaledCopy(scale);	
+		items.put(ObjectName.HEALTH_PACK, healthPack);
+		
+		/**
+		 * Create a map with all bullet images.
+		 */
+		bullets = new HashMap<String, Image>();
+		Image laserBullet = new Image("res/sprites/level/laserBullet.png", false, filter).getScaledCopy(scale);
+		bullets.put(ObjectName.LASER_BULLET, laserBullet);
+		
+		/**
+		 * Create a map with all tile images.
+		 */
+		tiles = new HashMap<String, Image>();
+		Image boxTile = new Image("res/sprites/level/boxTile.png", false, filter).getScaledCopy(scale);
+		Image airTile = new Image("res/sprites/level/airTile.png", false, filter).getScaledCopy(scale);
+		tiles.put(ObjectName.BOX_TILE, boxTile);
+		tiles.put(ObjectName.AIR_TILE, airTile);
+		
 	}
 	
 	/**
@@ -197,44 +218,33 @@ class LevelState extends State {
 	 * Draw bullets on the screen.
 	 */
 	private void drawBullets() {
-		ArrayList<Bullet> bulletList = level.getABulletList();
-		for(Bullet bullet : bulletList)
-			laserBullet.draw((float)bullet.getX()*scale, (float)bullet.getY()*scale);
+		for(Bullet bullet : level.getABulletList())
+			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale, (float)bullet.getY()*scale);
 	}
 	
 	/**
 	 * Draw enemies on the screen.
 	 */
 	private void drawEnemies() {
-		ArrayList<Enemy> enemies = level.getEnemies();
-		for (Enemy enemy : enemies) {
-			if (enemy instanceof Tankbot)
-				tankbot.draw((float)enemy.getX()*scale, (float)enemy.getY()*scale);
-		}
+		for (Enemy enemy : level.getEnemies())
+			enemies.get(enemy.getName()).draw((float)enemy.getX()*scale, (float)enemy.getY()*scale);
 	}
 	
 	/**
 	 * Draw items on the screen.
 	 */
 	private void drawItems() {
-		List<Item> itemList = level.getItemList();
-		for(Item item : itemList){
-			if((item.getType()).equals("healthPack"))
-				itemHealthPack.draw((float)item.getX()*2-12, (float)item.getY()*2-12);
-			// TODO MORE
-		}
+		for(Item item : level.getItemList())
+			enemies.get(item.getName()).draw((float)item.getX()*scale, (float)item.getY()*scale);
 	}
 	
 	/**
 	 * Draw the environment which consists of the tiles.
 	 */
 	private void drawEnvironment() {
-		for (int y = 0; y < level.getTileGrid().getHeight(); y++) {
-			for (int x = 0; x < level.getTileGrid().getWidth(); x++) {
-				if (level.getTileGrid().getFromCoord(x, y).isSolid())
-					boxTile.draw(x*32*scale, y*32*scale);
-			}
-		}
+		for (int y = 0; y < level.getTileGrid().getHeight(); y++)
+			for (int x = 0; x < level.getTileGrid().getWidth(); x++)
+				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*32*scale, y*32*scale);
 	}
 
 	/**

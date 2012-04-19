@@ -6,8 +6,8 @@ public abstract class LivingObject extends InteractiveObject{
 	boolean facingRight;
 	int health;
 	
-	public LivingObject(double x, double y, double width, double height, int health) {
-		super(x, y, width, height);
+	public LivingObject(double x, double y, double width, double height, int health, String name) {
+		super(x, y, width, height, name);
 		this.health=health;
 		facingRight = true;
 		

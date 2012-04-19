@@ -1,8 +1,8 @@
 package rsmg.model.item;
 
-public class Weapon extends Item {
+import rsmg.model.ObjectName;
 
-	private String type;
+public class Weapon extends Item {
 	
 	/**
 	 * @param x horizontal coordinate for where the Item location
@@ -11,11 +11,6 @@ public class Weapon extends Item {
 	 * @param height height of the item
 	 */
 	public Weapon(double x, double y, double width, double height) {
-		super(x, y, width, height);
-		type = "weapon";
-	}
-
-	public String getType(){
-		return type;
+		super(x, y, width, height, ObjectName.WEAPON);
 	}
 }

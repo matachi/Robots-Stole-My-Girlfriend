@@ -8,6 +8,7 @@ public class EndTile extends Tile {
 	 * Constructor of EndTile. Sets the solid value
 	 */
 	public EndTile() {
+		super(ObjectName.END_TILE);
 		solid = false;
 	}
 

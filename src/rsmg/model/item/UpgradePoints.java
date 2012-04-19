@@ -1,8 +1,8 @@
 package rsmg.model.item;
 
+import rsmg.model.ObjectName;
+
 public class UpgradePoints extends Item {
-	
-	private String type;
 	
 	/**
 	 * @param x horizontal coordinate for where the Item location
@@ -11,11 +11,6 @@ public class UpgradePoints extends Item {
 	 * @param height height of the item
 	 */
 	public UpgradePoints(double x, double y, double width, double height) {
-		super(x, y, width, height);
-		type = "upgradePoints";
-	}
-	
-	public String getType(){
-		return type;
+		super(x, y, width, height, ObjectName.UPGRADE_POINT);
 	}
 }

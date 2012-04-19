@@ -2,8 +2,8 @@ package rsmg.model;
 
 public abstract class Enemy extends LivingObject{
 
-	public Enemy(double x, double y, double width, double height, int health) {
-		super(x, y, width, height, health);
+	public Enemy(double x, double y, double width, double height, int health, String name) {
+		super(x, y, width, height, health, name);
 	}
 	
 	@Override

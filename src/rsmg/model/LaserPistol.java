@@ -36,7 +36,7 @@ public class LaserPistol implements IWeapon{
 			offsetY = 5;
 		}
 		
-		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, 1, bulletVelocity, bulletDamage));
+		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, 1, bulletVelocity, bulletDamage, ObjectName.LASER_BULLET));
 		
 		shot = true;
 	}

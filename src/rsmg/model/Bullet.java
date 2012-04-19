@@ -12,9 +12,10 @@ public class Bullet extends InteractiveObject {
 	 * @param width width of the bullet
 	 * @param height height of the bullet
 	 * @param bulletType integer value representing what kind of bullet this is (used for graphics)
+	 * @param name Name of the bullet.
 	 */
-	public Bullet(double x, double y, double width, double height, int bulletType, Vector2d velocity, int dmg) {
-		super(x, y, width, height);
+	public Bullet(double x, double y, double width, double height, int bulletType, Vector2d velocity, int dmg, String name) {
+		super(x, y, width, height, name);
 		this.setVelocity(velocity);
 		this.bulletType=bulletType;
 		this.dmg=dmg;

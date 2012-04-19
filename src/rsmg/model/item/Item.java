@@ -9,12 +9,11 @@ public abstract class Item extends InteractiveObject {
 	 * @param y vertical coordinate for where the Item location
 	 * @param width width of the item
 	 * @param height height of the item
+	 * @param name name of the item
 	 */
-	public Item(double x, double y, double width, double height) {
-		super(x, y, width, height);
+	public Item(double x, double y, double width, double height, String name) {
+		super(x, y, width, height, name);
 	}
-
-	public abstract String getType();
 	
 	@Override
 	public void collide(InteractiveObject obj) {

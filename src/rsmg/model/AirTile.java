@@ -8,6 +8,7 @@ public class AirTile extends Tile {
 	 * Constructor of AirTile. Sets the solid value
 	 */
 	public AirTile() {
+		super(ObjectName.AIR_TILE);
 		solid = false;
 	}
 

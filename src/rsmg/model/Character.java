@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import rsmg.util.Vector2d;
 
-
 /**
  * Class for representing the playable Character
  * @author Johan Grönvall
@@ -22,13 +21,13 @@ public class Character extends LivingObject {
 	private boolean canDash = true;
 	
 	public Character(double x, double y, ArrayList<Bullet> bulletList) {
-		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH);
+		this(x, y);
 		this.bulletList = bulletList;	
 		currentWeapon = new LaserPistol(this, bulletList);
 		
 	}
 	public Character(double x, double y) {
-		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH);
+		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 	}
 	
 	@Override

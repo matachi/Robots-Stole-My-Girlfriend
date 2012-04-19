@@ -8,6 +8,7 @@ public class HazardousTile extends Tile {
 	 * Constructor of HazardousTile. Sets the solid value
 	 */
 	public HazardousTile() {
+		super(ObjectName.HAZARDOUS_TILE);
 		solid = true;
 	}
 
