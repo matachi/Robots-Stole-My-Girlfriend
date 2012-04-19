@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -12,6 +13,7 @@ import org.newdawn.slick.Renderable;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
@@ -36,6 +38,13 @@ class LevelState extends State {
 	 * The background image behind the tile grid.
 	 */
 	private Image background;
+	
+	/**
+	 * The health bar images.
+	 */
+	private Image healthBar;
+	private Rectangle healthBarOverlayRectangle;
+	private Graphics healthBarOverlayGraphics;
 	
 	/**
 	 * Maps containing images.
@@ -90,13 +99,22 @@ class LevelState extends State {
 
 		scale = (int) ((float)gc.getWidth() / 480);
 		int filter = Image.FILTER_NEAREST;
+		String folderPath = "res/sprites/level/";
 		
-		background = new Image("res/sprites/level/bg.jpg", false, filter).getScaledCopy(scale);	
+		/**
+		 * The background image in the level.
+		 */
+		background = new Image(folderPath+"bg.jpg", false, filter).getScaledCopy(scale);
+		
+		healthBar = new Image(folderPath+"healthBar.png", false, filter);
+		healthBarOverlayRectangle = new Rectangle(23, 23, 148, 17);
+		healthBarOverlayGraphics = new Graphics();
+		healthBarOverlayGraphics.setColor(new Color(0.85f, 0.3f, 0.3f, 0.5f));
 		
 		/**
 		 * Make an animation for when the character is running to the right.
 		 */
-		Image characterImage = new Image("res/sprites/level/charPistolRunningSheet.png", false, filter);
+		Image characterImage = new Image(folderPath+"charPistolRunningSheet.png", false, filter);
 		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
 		characterRunningR = new Animation(characterSheet, 140);
 		
@@ -110,7 +128,7 @@ class LevelState extends State {
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		characterStandingR = new Image("res/sprites/level/charPistolStanding.png", false, filter).getScaledCopy(scale);
+		characterStandingR = new Image(folderPath+"charPistolStanding.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
@@ -120,7 +138,7 @@ class LevelState extends State {
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		character = characterJumpingR = new Image("res/sprites/level/charPistolJumping.png", false, filter).getScaledCopy(scale);
+		character = characterJumpingR = new Image(folderPath+"charPistolJumping.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
@@ -130,7 +148,7 @@ class LevelState extends State {
 		/**
 		 * Make an image for when the character is dashing to the right
 		 */
-		characterDashingR = new Image("res/sprites/level/charDashing.png", false, filter).getScaledCopy(scale);
+		characterDashingR = new Image(folderPath+"charDashing.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is dashing to the right
@@ -141,29 +159,29 @@ class LevelState extends State {
 		 * Create a map with all enemy images.
 		 */
 		enemies = new HashMap<String, Image>();
-		Image tankbot = new Image("res/sprites/level/tankbot.png", false, filter).getScaledCopy(scale);
+		Image tankbot = new Image(folderPath+"tankbot.png", false, filter).getScaledCopy(scale);
 		enemies.put(ObjectName.TANKBOT, tankbot);
 		
 		/**
 		 * Create a map with all item images.
 		 */
 		items = new HashMap<String, Image>();
-		Image healthPack = new Image("res/sprites/level/healthPack.png", false, filter).getScaledCopy(scale);	
+		Image healthPack = new Image(folderPath+"healthPack.png", false, filter).getScaledCopy(scale);	
 		items.put(ObjectName.HEALTH_PACK, healthPack);
 		
 		/**
 		 * Create a map with all bullet images.
 		 */
 		bullets = new HashMap<String, Image>();
-		Image laserBullet = new Image("res/sprites/level/laserBullet.png", false, filter).getScaledCopy(scale);
+		Image laserBullet = new Image(folderPath+"laserBullet.png", false, filter).getScaledCopy(scale);
 		bullets.put(ObjectName.LASER_BULLET, laserBullet);
 		
 		/**
 		 * Create a map with all tile images.
 		 */
 		tiles = new HashMap<String, Image>();
-		Image boxTile = new Image("res/sprites/level/boxTile.png", false, filter).getScaledCopy(scale);
-		Image airTile = new Image("res/sprites/level/airTile.png", false, filter).getScaledCopy(scale);
+		Image boxTile = new Image(folderPath+"boxTile.png", false, filter).getScaledCopy(scale);
+		Image airTile = new Image(folderPath+"airTile.png", false, filter).getScaledCopy(scale);
 		tiles.put(ObjectName.BOX_TILE, boxTile);
 		tiles.put(ObjectName.AIR_TILE, airTile);
 		
@@ -205,6 +223,7 @@ class LevelState extends State {
 		drawBullets();
 		drawEnemies();
 		drawItems();
+		drawHealthBar();
 	}
 
 	/**
@@ -252,6 +271,14 @@ class LevelState extends State {
 	 */
 	private void drawCharacter() {
 		character.draw(((float)level.getCharacter().getX()-6)*scale, (float)level.getCharacter().getY()*scale);
+	}
+	
+	/**
+	 * Draw the health bar.
+	 */
+	private void drawHealthBar() {
+		healthBar.draw(20, 20);
+		healthBarOverlayGraphics.fill(healthBarOverlayRectangle);
 	}
 
 	/**
@@ -302,6 +329,11 @@ class LevelState extends State {
 					character = characterRunningL;
 		
 			}
+			
+			/**
+			 * Update health bar's overlay size.
+			 */
+			healthBarOverlayRectangle.setWidth(146 * level.getCharacter().getHealth() / level.getCharacter().getMaxHealth());
 		}
 		
 		/**
