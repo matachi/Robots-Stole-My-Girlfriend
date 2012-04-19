@@ -1,16 +1,16 @@
 package rsmg.model;
 
-import java.util.List;
+import java.util.Collection;
 
 import rsmg.util.Vector2d;
 
 public class LaserPistol implements IWeapon{
 	private LivingObject wielder;
-	private List<Bullet> bulletList;
+	private Collection<Bullet> bulletList;
 	private boolean shot;
 	private int clipSize;
 	
-	public LaserPistol(LivingObject wielder, List<Bullet> bulletList) {
+	public LaserPistol(LivingObject wielder, Collection<Bullet> bulletList) {
 		this.wielder = wielder;
 		this.bulletList = bulletList;
 		this.shot = false;

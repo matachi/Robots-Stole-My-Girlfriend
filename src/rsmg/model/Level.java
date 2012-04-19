@@ -2,6 +2,7 @@ package rsmg.model;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,17 +25,17 @@ public class Level {
 	/**
 	 * List where bullets from guns are stored.
 	 */
-	private List<Bullet> bullets;
+	private Collection<Bullet> bullets;
 	
 	/**
 	 *  List where all the items are stored
 	 */
-	private List<Item> items;
+	private Collection<Item> items;
 	
 	/**
 	 * List where references to all living enemies in the level are stored.
 	 */
-	private List<Enemy> enemies;
+	private Collection<Enemy> enemies;
 	
 	/**
 	 * The grid layout of the level. (I.e. the environment.)
@@ -111,12 +112,12 @@ public class Level {
 	 * @param delta Time sine last update.
 	 */
 	private void updateEnemies(double delta) {
-		for (int i = 0; i < enemies.size(); i++) {
+		for (Iterator<Enemy> i = enemies.iterator(); i.hasNext(); ) {
 
-			Enemy enemy = enemies.get(i);
+			Enemy enemy = i.next();
 			
 			if (enemy.isDead()) {
-				enemies.remove(i);
+				i.remove();
 				continue;
 			}
 
@@ -142,7 +143,7 @@ public class Level {
 					if (bullet.getName() == ObjectName.ROCKET)
 						bullets.add(new Explosion(bullet.getX(), bullet.getY()));
 					
-					bullets.remove(j);
+					j.remove();
 				}
 			}
 		}
@@ -175,10 +176,10 @@ public class Level {
 	 * Remove item if it is picked-up.
 	 */
 	public void updateItems() {
-		for (int i = 0; i < items.size(); i++) {
-			Item item = items.get(i);
+		for (Iterator<Item> i = items.iterator(); i.hasNext(); ) {
+			Item item = i.next();
 			if (character.hasCollidedWith(item)) {
-				items.remove(i);
+				i.remove();
 				character.collide(item);
 			}
 		}
@@ -298,7 +299,7 @@ public class Level {
 	 * Returns the list of bullets.
 	 * @return The list of bullets.
 	 */
-	public List<Bullet> getBulletList() {
+	public Collection<Bullet> getBulletList() {
 		return bullets;
 	}
 
@@ -306,7 +307,7 @@ public class Level {
 	 * Returns the list of alive enemies.
 	 * @return The list of alive enemies.
 	 */
-	public List<Enemy> getEnemies() {
+	public Collection<Enemy> getEnemies() {
 		return enemies;
 	}
 
@@ -314,7 +315,7 @@ public class Level {
 	 * Returns the list of all items currently in the level.
 	 * @return The list of all items currently in the level.
 	 */
-	public List<Item> getItemList() {
+	public Collection<Item> getItemList() {
 		return items;
 	}
 }

@@ -1,6 +1,6 @@
 package rsmg.model;
 
-import java.util.List;
+import java.util.Collection;
 
 import rsmg.util.Vector2d;
 
@@ -13,14 +13,14 @@ import rsmg.util.Vector2d;
 public class Character extends LivingObject {
 	private boolean airborne;
 	private IWeapon currentWeapon;
-	private List<Bullet> bulletList;
+	private Collection<Bullet> bulletList;
 	private long lastAttacktime = 0;
 	private int ammo;
 	private double distanceDashed = 0;
 	private boolean isDashing = false;
 	private boolean canDash = true;
 	
-	public Character(double x, double y, List<Bullet> bulletList) {
+	public Character(double x, double y, Collection<Bullet> bulletList) {
 		this(x, y);
 		this.bulletList = bulletList;	
 		currentWeapon = new LaserPistol(this, bulletList);
