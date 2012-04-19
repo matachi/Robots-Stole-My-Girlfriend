@@ -1,7 +1,6 @@
 package rsmg.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.newdawn.slick.Animation;
@@ -219,13 +218,8 @@ class LevelState extends State {
 	 * Draw bullets on the screen.
 	 */
 	private void drawBullets() {
-		List<Bullet> bulletList = level.getABulletList();
-		if(!bulletList.isEmpty()) {
-			for(int i = 0; i < bulletList.size(); i++){
-				Bullet bullet = bulletList.get(i);
-				bullets.get(bullet.getName()).draw((float)bullet.getX()*scale, (float)bullet.getY()*scale);
-			}
-		}
+		for (Bullet bullet : level.getABulletList())
+			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale, (float)bullet.getY()*scale);
 	}
 	
 	/**

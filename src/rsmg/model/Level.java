@@ -23,7 +23,7 @@ public class Level {
 	/**
 	 * List where bullets from guns are stored.
 	 */
-	private ArrayList<Bullet> aBullets = new ArrayList<Bullet>();
+	private List<Bullet> aBullets;
 	
 	/**
 	 *  List where all the items are stored
@@ -33,7 +33,7 @@ public class Level {
 	/**
 	 * List where references to all living enemies in the level are stored.
 	 */
-	private List<Enemy> enemies = new ArrayList<Enemy>();
+	private List<Enemy> enemies;
 	
 	/**
 	 * The grid layout of the level. (I.e. the environment.)
@@ -48,6 +48,7 @@ public class Level {
 		tGrid = tileGrid;
 		aItems = items;
 		enemies = aEnemies;
+		aBullets = new ArrayList<Bullet>();
 		spawnChar();
 	}
 
@@ -298,7 +299,7 @@ public class Level {
 	 * Returns the list of bullets.
 	 * @return The list of bullets.
 	 */
-	public ArrayList<Bullet> getABulletList(){
+	public List<Bullet> getABulletList(){
 		return aBullets;
 	}
 	/**
