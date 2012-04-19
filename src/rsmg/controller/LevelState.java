@@ -330,6 +330,7 @@ class LevelState extends State {
 		if (input.isKeyDown(Input.KEY_UP)) {
 			if (!upKeyIsDown)
 				modelCharacter.jump();
+			
 			upKeyIsDown = true;
 		} else if (upKeyIsReleased())
 			modelCharacter.jumpReleased();
