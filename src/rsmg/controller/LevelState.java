@@ -218,7 +218,7 @@ class LevelState extends State {
 	 * Draw bullets on the screen.
 	 */
 	private void drawBullets() {
-		for (Bullet bullet : level.getABulletList())
+		for (Bullet bullet : level.getBulletList())
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale, (float)bullet.getY()*scale);
 	}
 	

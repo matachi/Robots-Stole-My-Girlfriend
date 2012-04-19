@@ -195,6 +195,16 @@ public class TileGrid {
 	}
 
 	/**
+	 * Checks if the tile at a given coordinate is solid.
+	 * @param x X coordinate.
+	 * @param y Y coordinate.
+	 * @return If the tile is solid.
+	 */
+	public boolean tileIntersect(double x, double y) {
+		return getTile(x, y).isSolid();
+	}
+
+	/**
 	 * Test to display grid in console
 	 */
 	public void showGrid() {

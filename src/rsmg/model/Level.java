@@ -2,6 +2,7 @@ package rsmg.model;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import rsmg.model.item.Item;
@@ -10,7 +11,7 @@ import rsmg.model.item.Item;
  * Class representing a level. This Class is in charge of storing and updating
  * information about a level
  * 
- * @author Johan Grï¿½nvall, Johan Rignï¿½s, Daniel Jonsson
+ * @author Johan Grönvall, Johan Rignäs, Daniel Jonsson
  * 
  */
 public class Level {
@@ -23,12 +24,12 @@ public class Level {
 	/**
 	 * List where bullets from guns are stored.
 	 */
-	private List<Bullet> aBullets;
+	private List<Bullet> bullets;
 	
 	/**
 	 *  List where all the items are stored
 	 */
-	private List<Item> aItems;
+	private List<Item> items;
 	
 	/**
 	 * List where references to all living enemies in the level are stored.
@@ -38,30 +39,33 @@ public class Level {
 	/**
 	 * The grid layout of the level. (I.e. the environment.)
 	 */
-	private TileGrid tGrid;
+	private TileGrid tileGrid;
 
 	/**
-	 * Constructor of Level
+	 * Creates a level.
+	 * @param tileGrid The tile grid that the level shall use.
+	 * @param items The items that should be in the level.
+	 * @param enemies The enemies in the level.
 	 */
-	public Level(TileGrid tileGrid, List<Item> items, List<Enemy> aEnemies) {
-
-		tGrid = tileGrid;
-		aItems = items;
-		enemies = aEnemies;
-		aBullets = new ArrayList<Bullet>();
+	public Level(TileGrid tileGrid, List<Item> items, List<Enemy> enemies) {
+		this.tileGrid = tileGrid;
+		this.items = items;
+		this.enemies = enemies;
+		bullets = new ArrayList<Bullet>();
 		spawnChar();
 	}
 
 	/**
-	 * method for spawning the character spawns the character at spawn location,
-	 * if no spawn location is found the character is spawned at 0,0
+	 * Method for spawning the character.
+	 * If a spawning point in the tile grid can't be found, the character will be
+	 * spawned at 0, 0.
 	 */
 	private void spawnChar() {
 		try {
-			Point spawnPoint = tGrid.getSpawnPoint();
-			character = new Character(spawnPoint.getX(), spawnPoint.getY(), aBullets);
+			Point spawnPoint = tileGrid.getSpawnPoint();
+			character = new Character(spawnPoint.getX(), spawnPoint.getY(), bullets);
 		} catch (Exception NullPointerException) {
-			character = new Character(0, 0, aBullets);
+			character = new Character(0, 0, bullets);
 		}
 	}
 
@@ -70,10 +74,6 @@ public class Level {
 	 * @param delta Time since last update in seconds.
 	 */
 	public void update(double delta) {
-		for(Bullet bullet : aBullets){
-			bullet.move(delta);
-
-		}
 		updateCharacter(delta);
  		updateEnemies(delta);
  		updateBullets(delta);
@@ -81,17 +81,10 @@ public class Level {
 		updateItems();		
 	}
 	
-	// Remove item if it is picked-up
-	public void updateItems(){
-		for(int i=0; i<aItems.size(); i++){
-			Item item = aItems.get(i);
-			if(character.hasCollidedWith(item)){
-				aItems.remove(i);
-				character.collide(item);
-			}
-		}
-	}
-	
+	/**
+	 * Move the character, apply gravity, check for collisions etc.
+	 * @param delta Time sine last update.
+	 */
 	private void updateCharacter(double delta) {
 		
 		// Update whether the character is in the air or standing on the ground.
@@ -112,7 +105,11 @@ public class Level {
 		character.updateDashing(delta);
 	}
 
-	//perform a "isDeadCheck" and handle collision detection
+	/**
+	 * Update the enemies. Moves them, checks for collisions, checks if any
+	 * enemy has died etc.
+	 * @param delta Time sine last update.
+	 */
 	private void updateEnemies(double delta) {
 		for (int i = 0; i < enemies.size(); i++) {
 
@@ -123,50 +120,70 @@ public class Level {
 				continue;
 			}
 
-			//see if enemy has collided with the character and act approrietly
+			enemy.applyGravity(delta);
+			enemy.move(delta);
+			applyNormalForce(enemy);
+
+			// see if enemy has collided with the character and act appropriately
 			if (enemy.hasCollidedWith(character)) {
 				character.collide(enemy);
 				enemy.collide(character);
 			}
 			
-			//see if enemy has collided with any bullets and act approrietly
-			for(int j = 0; j < aBullets.size(); j++ ) {
-				Bullet bullet = aBullets.get(j);
-				if(enemy.hasCollidedWith(bullet)) {
-					enemy.collide(bullet); 
+			//see if enemy has collided with any bullets and act appropriately
+			for (Iterator<Bullet> j = bullets.iterator(); j.hasNext(); ) {
+				Bullet bullet = j.next();
+				if (enemy.hasCollidedWith(bullet)) {
+					enemy.collide(bullet);
 					bullet.collide(enemy);
+
+					// this shouldn't be levels responsibility, but I do not
+					// know where to put it otherwise
+					if (bullet.getName() == ObjectName.ROCKET)
+						bullets.add(new Explosion(bullet.getX(), bullet.getY()));
 					
-					//this shouldn't be levels responsibility, but I do not know where to put it otherwise 
-					if (bullet.getName() == "rocket"){
-						aBullets.add(new Explosion(bullet.getX(), bullet.getY()));
-					}
-					aBullets.remove(j);
+					bullets.remove(j);
 				}
 			}
-			enemy.applyGravity(delta);
-			enemy.move(delta);
-			applyNormalForce(enemy);
 		}
 	}
-	private void updateBullets(double delta){
-		for(int i = 0; i < aBullets.size(); i++) {
-			Bullet bullet = aBullets.get(i);
+	
+	/**
+	 * Update all bullets in the level.
+	 * @param delta Time sine last update.
+	 */
+	private void updateBullets(double delta) {
+		for (Iterator<Bullet> i = bullets.iterator(); i.hasNext(); ) {
+			Bullet bullet = i.next();
+			
+			bullet.move(delta);
 			bullet.update(delta);
 			
-			if(tGrid.intersectsWith(bullet)) {
+			if (tileGrid.intersectsWith(bullet)) {
 				
-				if (bullet.getName() == "rocket"){
-					aBullets.add(new Explosion(bullet.getX(), bullet.getY()));
-				}
-
-				if(!(bullet.getName() == "explosion"));
-					aBullets.remove(i);
+				if (bullet.getName() == ObjectName.ROCKET)
+					bullets.add(new Explosion(bullet.getX(), bullet.getY()));
+				
+				if (bullet.getName() != ObjectName.EXPLOSION)
+					i.remove();
 
 			}
 		}
 	}
 	
-
+	/**
+	 * Remove item if it is picked-up.
+	 */
+	public void updateItems() {
+		for (int i = 0; i < items.size(); i++) {
+			Item item = items.get(i);
+			if (character.hasCollidedWith(item)) {
+				items.remove(i);
+				character.collide(item);
+			}
+		}
+	}
+	
 	/**
 	 * Check if the object is flying (i.e. not standing on a solid tile).
 	 * @param obj The InteractiveObject.
@@ -174,18 +191,9 @@ public class Level {
 	 */
 	private boolean isAirbourne(InteractiveObject obj) {
 		double y = obj.getY() + obj.getHeight() + 0.00001;
-		return !(tileIntersect(obj.getX(), y) || tileIntersect(
-				obj.getX() + obj.getWidth() - 0.00001, y));
+		return !(tileGrid.tileIntersect(obj.getX(), y) ||
+				tileGrid.tileIntersect(obj.getX() + obj.getWidth() - 0.00001, y));
 	}
-
-//	/**
-//	 * Check so the character isn't outside the level's boundaries.
-//	 */
-//	private boolean isOutSideMap(InteractiveObject obj){
-//		return obj.getX() < 0 || obj.getY() < 0 ||
-//				obj.getX() > tGrid.getWidth()*Constants.TILESIZE
-//				||  obj.getY() > tGrid.getHeight()*Constants.TILESIZE;
-//	}
 
 	/**
 	 * Check if the object collides with any solid tiles. And if that is the
@@ -196,7 +204,7 @@ public class Level {
 		/**
 		 * Check if the object intersects with the grid.
 		 */
-		if (tGrid.intersectsWith(obj)) {
+		if (tileGrid.intersectsWith(obj)) {
 			// Check if the the object came from the left
 			if (cameFromLeft(obj)) {
 				// Move the object back to the left
@@ -215,7 +223,7 @@ public class Level {
 			 * Check if the object is still colliding with any solid tiles. Then
 			 * he must have collided with the tile from above or below.
 			 */
-			if (tGrid.intersectsWith(obj)) {
+			if (tileGrid.intersectsWith(obj)) {
 				if (cameFromAbove(obj)) {
 					moveUp(obj);
 					obj.setVelocityY(0);
@@ -229,55 +237,45 @@ public class Level {
 	}
 
 	private boolean cameFromAbove(InteractiveObject obj) {
-		return obj.getPY() + obj.getHeight() - 0.00001 <= tGrid
+		return obj.getPY() + obj.getHeight() - 0.00001 <= tileGrid
 				.getTilePosFromRealPos(obj.getY() + obj.getHeight())
 				* Constants.TILESIZE;
 	}
 
 	private boolean cameFromBelow(InteractiveObject obj) {
-		return obj.getPY() >= (tGrid.getTilePosFromRealPos(obj.getY()) + 1)
+		return obj.getPY() >= (tileGrid.getTilePosFromRealPos(obj.getY()) + 1)
 				* Constants.TILESIZE;
 	}
 
 	private boolean cameFromLeft(InteractiveObject obj) {
-		return obj.getPX() + obj.getWidth() - 0.00001 <= tGrid
+		return obj.getPX() + obj.getWidth() - 0.00001 <= tileGrid
 				.getTilePosFromRealPos(obj.getX() + obj.getWidth())
 				* Constants.TILESIZE;
 	}
 
 	private boolean cameFromRight(InteractiveObject obj) {
-		return obj.getPX() >= (tGrid.getTilePosFromRealPos(obj.getX()) + 1)
+		return obj.getPX() >= (tileGrid.getTilePosFromRealPos(obj.getX()) + 1)
 				* Constants.TILESIZE;
 	}
 
 	private void moveUp(InteractiveObject obj) {
-		double i = tGrid.bottomSideIntersection(obj);
+		double i = tileGrid.bottomSideIntersection(obj);
 		obj.setY(Math.floor(obj.getY() - i));
 	}
 
 	private void moveDown(InteractiveObject obj) {
-		double i = tGrid.topSideIntersection(obj);
+		double i = tileGrid.topSideIntersection(obj);
 		obj.setY(Math.floor(obj.getY() + i));
 	}
 
 	private void moveLeft(InteractiveObject obj) {
-		double i = tGrid.rightSideIntersection(obj);
+		double i = tileGrid.rightSideIntersection(obj);
 		obj.setX(Math.round(obj.getX() - i));
 	}
 
 	private void moveRight(InteractiveObject obj) {
-		double i = tGrid.leftSideIntersection(obj);
+		double i = tileGrid.leftSideIntersection(obj);
 		obj.setX(Math.round(obj.getX() + i));
-	}
-
-	/**
-	 * 
-	 * @param obj
-	 * @param tile
-	 * @return true coordinates are inside one of the
-	 */
-	private boolean tileIntersect(double x, double y) {
-		return tGrid.getTile(x, y).isSolid();
 	}
 
 	/**
@@ -285,7 +283,7 @@ public class Level {
 	 * @return The tile grid.
 	 */
 	public TileGrid getTileGrid() {
-		return tGrid;
+		return tileGrid;
 	}
 
 	/**
@@ -295,22 +293,28 @@ public class Level {
 	public Character getCharacter() {
 		return character;
 	}
+	
 	/**
 	 * Returns the list of bullets.
 	 * @return The list of bullets.
 	 */
-	public List<Bullet> getABulletList(){
-		return aBullets;
+	public List<Bullet> getBulletList() {
+		return bullets;
 	}
+
 	/**
 	 * Returns the list of alive enemies.
 	 * @return The list of alive enemies.
 	 */
-	public List<Enemy> getEnemies(){
+	public List<Enemy> getEnemies() {
 		return enemies;
 	}
-	
-	public List<Item> getItemList(){
-		return aItems;
+
+	/**
+	 * Returns the list of all items currently in the level.
+	 * @return The list of all items currently in the level.
+	 */
+	public List<Item> getItemList() {
+		return items;
 	}
 }
