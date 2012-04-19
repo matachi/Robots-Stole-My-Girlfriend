@@ -23,4 +23,5 @@ public enum Constants{
 	public static final int DASHSPEED = 300;
 	public static final int DASHLENGTH = 60;
 	public static final int DASHCOOLDOWN = 3;
+	public static final int EXPLOSIONDMG = 20;
 }

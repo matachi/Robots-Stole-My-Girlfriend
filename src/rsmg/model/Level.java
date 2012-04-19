@@ -23,7 +23,7 @@ public class Level {
 	/**
 	 * List where bullets from guns are stored.
 	 */
-	private ArrayList<Bullet> aBullets;
+	private ArrayList<Bullet> aBullets = new ArrayList<Bullet>();
 	
 	/**
 	 *  List where all the items are stored
@@ -45,7 +45,6 @@ public class Level {
 	 */
 	public Level(TileGrid tileGrid, List<Item> items, List<Enemy> aEnemies) {
 
-		aBullets = new ArrayList<Bullet>();  
 		tGrid = tileGrid;
 		aItems = items;
 		enemies = aEnemies;
@@ -72,20 +71,11 @@ public class Level {
 	public void update(double delta) {
 		for(Bullet bullet : aBullets){
 			bullet.move(delta);
-		
+
 		}
 		updateCharacter(delta);
-
-		/**
-		if(enemies.isEmpty()){
-			//temporary enemy
-			Enemy tempEnemy = new Tankbot(90, 40); 
-			enemies.add(tempEnemy);
-		}
-		*/
-
  		updateEnemies(delta);
- 		
+ 		updateBullets(delta);
  		// Checks if the items are picked-up
 		updateItems();		
 	}
@@ -120,7 +110,7 @@ public class Level {
 		character.setVelocityX(0);
 		character.updateDashing(delta);
 	}
-	
+
 	//perform a "isDeadCheck" and handle collision detection
 	private void updateEnemies(double delta) {
 		for (int i = 0; i < enemies.size(); i++) {
@@ -131,7 +121,7 @@ public class Level {
 				enemies.remove(i);
 				continue;
 			}
-			
+
 			//see if enemy has collided with the character and act approrietly
 			if (enemy.hasCollidedWith(character)) {
 				character.collide(enemy);
@@ -139,11 +129,17 @@ public class Level {
 			}
 			
 			//see if enemy has collided with any bullets and act approrietly
-			for (Bullet bullet : aBullets) {
-				
+			for(int j = 0; j < aBullets.size(); j++ ) {
+				Bullet bullet = aBullets.get(j);
 				if(enemy.hasCollidedWith(bullet)) {
-					enemy.collide(bullet);
+					enemy.collide(bullet); 
 					bullet.collide(enemy);
+					
+					//this shouldn't be levels responsibility, but I do not know where to put it otherwise 
+					if (bullet.getName() == "rocket"){
+						aBullets.add(new Explosion(bullet.getX(), bullet.getY()));
+					}
+					aBullets.remove(j);
 				}
 			}
 			enemy.applyGravity(delta);
@@ -151,6 +147,24 @@ public class Level {
 			applyNormalForce(enemy);
 		}
 	}
+	private void updateBullets(double delta){
+		for(int i = 0; i < aBullets.size(); i++) {
+			Bullet bullet = aBullets.get(i);
+			bullet.update(delta);
+			
+			if(tGrid.intersectsWith(bullet)) {
+				
+				if (bullet.getName() == "rocket"){
+					aBullets.add(new Explosion(bullet.getX(), bullet.getY()));
+				}
+
+				if(!(bullet.getName() == "explosion"));
+					aBullets.remove(i);
+
+			}
+		}
+	}
+	
 
 	/**
 	 * Check if the object is flying (i.e. not standing on a solid tile).

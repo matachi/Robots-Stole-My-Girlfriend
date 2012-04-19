@@ -35,7 +35,6 @@ public class Character extends LivingObject {
 		if (obj instanceof Enemy){
 			this.damage(((Enemy) obj).getTouchDamage());
 		}
-		
 	}
 	
 	public void reload(){
@@ -140,7 +139,7 @@ public class Character extends LivingObject {
 	}
 	
 	public void updateDashing(double delta) {
-		//tell the character to perfrom the dash move if the boolean "isDashing" is set to true
+		//tell the character to perform the dash move if the boolean "isDashing" is set to true
 		if(distanceDashed > Constants.DASHLENGTH){
 			setDashing(false);
 			distanceDashed = 0;
@@ -148,6 +147,5 @@ public class Character extends LivingObject {
 		if (isDashing){
 			dash(delta);
 		}
-		
 	}
 }

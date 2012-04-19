@@ -36,10 +36,11 @@ public class RocketLauncher implements IWeapon{
 			offsetY = 5;
 		}
 		
-		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, 2, bulletVelocity, bulletDamage));
+		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKET, bulletDamage, bulletVelocity));
 		
 		shot = true;
 	}
+	
 	public int getClipSize(){
 		return clipSize;
 	}
@@ -57,6 +58,7 @@ public class RocketLauncher implements IWeapon{
 		}
 		return false;
 	}
+	
 	@Override
 	public long getReloadTime() {
 		

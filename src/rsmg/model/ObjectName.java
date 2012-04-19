@@ -21,7 +21,7 @@ public enum ObjectName {
 	 * The enemies' names.
 	 */
 	public static final String TANKBOT = "tankbot";
-
+	public static final String EXPLOSION = "explosion";
 	/**
 	 * The items' names.
 	 */
@@ -34,6 +34,7 @@ public enum ObjectName {
 	 */
 	public static final String PISTOL_BULLET = "bullet";
 	public static final String LASER_BULLET = "laserBullet";
+	public static final String ROCKET = "rocket";
 
 	/**
 	 * The tiles' names.
