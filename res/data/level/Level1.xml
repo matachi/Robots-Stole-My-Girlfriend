@@ -44,9 +44,9 @@
     <cell>EndTile</cell>
     <cell>SpawnTile</cell>
     <cell>AirTile</cell>
+    <cell item="healthPack">AirTile</cell>
     <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell enemy="ballbot">AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>

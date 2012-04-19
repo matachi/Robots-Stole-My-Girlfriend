@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import rsmg.model.item.Item;
+import rsmg.model.Enemy;
 import rsmg.model.Tile;
 
 /**
@@ -13,6 +14,7 @@ public class IO {
 
 	// Is set when the map is loaded
 	private List<Item> itemList;
+	private List<Enemy> enemyList;
 	
 	/**
 	 * Get the level as a Tile matrix
@@ -26,10 +28,15 @@ public class IO {
 		XmlConverter converter = new XmlConverter();
 		Tile[][] grid = converter.xmlToTiles(file);
 		itemList = converter.getItemList();
+		enemyList = converter.getEnemyList();
 		return grid;
 	}
 	
 	public List<Item> getItemList(){
 		return itemList;
+	}
+	
+	public List<Enemy> getEnemyList(){
+		return enemyList;
 	}
 }

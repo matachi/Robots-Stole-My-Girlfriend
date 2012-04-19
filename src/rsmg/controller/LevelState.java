@@ -175,7 +175,7 @@ class LevelState extends State {
 	 */
 	public void initLevel(int levelNumber) {
 		IO io = new IO();
-		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList());
+		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getEnemyList());
 	}
 
 	@Override
@@ -235,7 +235,7 @@ class LevelState extends State {
 	 */
 	private void drawItems() {
 		for(Item item : level.getItemList())
-			enemies.get(item.getName()).draw((float)item.getX()*scale, (float)item.getY()*scale);
+			items.get(item.getName()).draw((float)item.getX()*scale, (float)item.getY()*scale);
 	}
 	
 	/**

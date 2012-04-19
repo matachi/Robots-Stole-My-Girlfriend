@@ -33,7 +33,7 @@ public class Level {
 	/**
 	 * List where references to all living enemies in the level are stored.
 	 */
-	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	private List<Enemy> enemies = new ArrayList<Enemy>();
 	
 	/**
 	 * The grid layout of the level. (I.e. the environment.)
@@ -43,11 +43,12 @@ public class Level {
 	/**
 	 * Constructor of Level
 	 */
-	public Level(TileGrid tileGrid, List<Item> items) {
+	public Level(TileGrid tileGrid, List<Item> items, List<Enemy> aEnemies) {
 
 		aBullets = new ArrayList<Bullet>();  
 		tGrid = tileGrid;
 		aItems = items;
+		enemies = aEnemies;
 		spawnChar();
 	}
 
@@ -75,12 +76,13 @@ public class Level {
 		}
 		updateCharacter(delta);
 
-		
+		/**
 		if(enemies.isEmpty()){
 			//temporary enemy
 			Enemy tempEnemy = new Tankbot(90, 40); 
 			enemies.add(tempEnemy);
 		}
+		*/
 
  		updateEnemies(delta);
  		
@@ -92,8 +94,10 @@ public class Level {
 	public void updateItems(){
 		for(int i=0; i<aItems.size(); i++){
 			Item item = aItems.get(i);
-			if(character.hasCollidedWith(item))
+			if(character.hasCollidedWith(item)){
 				aItems.remove(i);
+				character.collide(item);
+			}
 		}
 	}
 	
@@ -287,7 +291,7 @@ public class Level {
 	 * Returns the list of alive enemies.
 	 * @return The list of alive enemies.
 	 */
-	public ArrayList<Enemy> getEnemies(){
+	public List<Enemy> getEnemies(){
 		return enemies;
 	}
 	

@@ -10,7 +10,8 @@ public class UpgradePoints extends Item {
 	 * @param width width of the item
 	 * @param height height of the item
 	 */
-	public UpgradePoints(double x, double y, double width, double height) {
-		super(x, y, width, height, ObjectName.UPGRADE_POINT);
+	public UpgradePoints(double x, double y) {
+		// TODO: Set size
+		super(x, y, 32, 32, ObjectName.UPGRADE_POINT);
 	}
 }

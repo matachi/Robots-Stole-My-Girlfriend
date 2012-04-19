@@ -10,7 +10,8 @@ public class HealthPack extends Item {
 	 * @param width width of the item
 	 * @param height height of the item
 	 */
-	public HealthPack(double x, double y, double width, double height) {
-		super(x, y, width, height, ObjectName.HEALTH_PACK);
+	public HealthPack(double x, double y) {
+		// Make the item start at the bottom(32-15)
+		super(x, y+32-15, 15, 15, ObjectName.HEALTH_PACK);
 	}
 }
