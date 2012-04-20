@@ -11,13 +11,13 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 import rsmg.model.Constants;
-import rsmg.model.Enemy;
 import rsmg.model.ObjectName;
-import rsmg.model.Tankbot;
 import rsmg.model.object.item.HealthPack;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.item.UpgradePoints;
 import rsmg.model.object.item.Weapon;
+import rsmg.model.object.livingobject.Enemy;
+import rsmg.model.object.livingobject.Tankbot;
 import rsmg.model.tile.AirTile;
 import rsmg.model.tile.EndTile;
 import rsmg.model.tile.GroundTile;

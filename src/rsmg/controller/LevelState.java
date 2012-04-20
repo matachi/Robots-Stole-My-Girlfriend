@@ -19,12 +19,11 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.IO;
 import rsmg.model.Bullet;
-import rsmg.model.Character;
-import rsmg.model.Enemy;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
 import rsmg.model.object.item.Item;
+import rsmg.model.object.livingobject.Enemy;
 
 /**
  * The state where the levels are played out.

@@ -1,5 +1,6 @@
-package rsmg.model;
+package rsmg.model.object.livingobject;
 
+import rsmg.model.ObjectName;
 
 public class Tankbot extends Enemy{
 	

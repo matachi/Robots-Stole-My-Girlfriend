@@ -1,4 +1,7 @@
-package rsmg.model;
+package rsmg.model.object.livingobject;
+
+import rsmg.model.Bullet;
+import rsmg.model.object.InteractiveObject;
 
 public abstract class Enemy extends LivingObject{
 

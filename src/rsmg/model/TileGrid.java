@@ -2,6 +2,7 @@ package rsmg.model;
 
 import java.awt.Point;
 
+import rsmg.model.object.InteractiveObject;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
 
