@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import rsmg.model.Enemy;
-import rsmg.model.item.Item;
+import rsmg.model.object.item.Item;
 import rsmg.model.tile.Tile;
 
 /**

@@ -1,4 +1,4 @@
-package rsmg.model.item;
+package rsmg.model.object.item;
 
 import rsmg.model.InteractiveObject;
 

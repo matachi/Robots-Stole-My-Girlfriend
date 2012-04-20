@@ -2,7 +2,7 @@ package rsmg.model;
 
 import java.util.Collection;
 
-import rsmg.model.item.Item;
+import rsmg.model.object.item.Item;
 import rsmg.model.weapon.IWeapon;
 import rsmg.model.weapon.LaserPistol;
 import rsmg.util.Vector2d;

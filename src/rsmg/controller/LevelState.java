@@ -24,7 +24,7 @@ import rsmg.model.Enemy;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
-import rsmg.model.item.Item;
+import rsmg.model.object.item.Item;
 
 /**
  * The state where the levels are played out.

@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import rsmg.model.item.Item;
+import rsmg.model.object.item.Item;
 
 /**
  * Class representing a level. This Class is in charge of storing and updating
