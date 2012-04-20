@@ -30,7 +30,7 @@ public class Level {
 	/**
 	 * List where bullets from guns are stored.
 	 */
-	private Collection<Bullet> bullets;
+	private List<Bullet> bullets;
 	
 	/**
 	 *  List where all the items are stored
@@ -159,8 +159,8 @@ public class Level {
 	 * @param delta Time sine last update.
 	 */
 	private void updateBullets(double delta) {
-		for (Iterator<Bullet> i = bullets.iterator(); i.hasNext(); ) {
-			Bullet bullet = i.next();
+		for (int i = 0; i < bullets.size(); i++) {
+			Bullet bullet = bullets.get(i);
 			
 			bullet.move(delta);
 			bullet.update(delta);
@@ -171,7 +171,7 @@ public class Level {
 					bullets.add(new Explosion(bullet.getX(), bullet.getY()));
 				
 				if (bullet.getName() != ObjectName.EXPLOSION)
-					i.remove();
+					bullets.remove(i);
 
 			}
 		}

@@ -28,9 +28,10 @@ public class PCharacter extends LivingObject {
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		this(x, y);
 		this.bulletList = bulletList;	
-		currentWeapon = new LaserPistol(this, bulletList);
+		currentWeapon = new RocketLauncher(this, bulletList);
 		
 	}
+	
 	public PCharacter(double x, double y) {
 		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 	}
@@ -51,7 +52,7 @@ public class PCharacter extends LivingObject {
 			}
 		}
 	}
-	
+
 	public void reload(){
 		currentWeapon.getReloadTime();
 	}

@@ -43,4 +43,4 @@ public class Bullet extends InteractiveObject {
 	public void update(double delta){
 		//nothing at this point
 	}
-	}
+}

@@ -1,6 +1,6 @@
 package rsmg.model.object.unit;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
@@ -8,11 +8,11 @@ import rsmg.util.Vector2d;
 
 public class RocketLauncher implements IWeapon{
 	private LivingObject wielder;
-	private ArrayList<Bullet> bulletList;
+	private Collection<Bullet> bulletList;
 	private boolean shot;
 	public int clipSize = 2;
 	
-	public RocketLauncher(LivingObject wielder, ArrayList<Bullet> bulletList) {
+	public RocketLauncher(LivingObject wielder, Collection<Bullet> bulletList) {
 		this.wielder = wielder;
 		this.bulletList = bulletList;
 		shot = false;

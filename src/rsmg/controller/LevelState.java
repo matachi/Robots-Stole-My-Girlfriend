@@ -49,10 +49,10 @@ class LevelState extends State {
 	/**
 	 * Maps containing images.
 	 */
-	private Map<String, Image> tiles;
-	private Map<String, Image> bullets;
-	private Map<String, Image> items;
-	private Map<String, Image> enemies;
+	private Map<String, Renderable> tiles;
+	private Map<String, Renderable> bullets;
+	private Map<String, Renderable> items;
+	private Map<String, Renderable> enemies;
 	
 	/**
 	 * The character that the player controls.
@@ -158,14 +158,14 @@ class LevelState extends State {
 		/**
 		 * Create a map with all enemy images.
 		 */
-		enemies = new HashMap<String, Image>();
+		enemies = new HashMap<String, Renderable>();
 		Image tankbot = new Image(folderPath+"tankbot.png", false, filter).getScaledCopy(scale);
 		enemies.put(ObjectName.TANKBOT, tankbot);
 		
 		/**
 		 * Create a map with all item images.
 		 */
-		items = new HashMap<String, Image>();
+		items = new HashMap<String, Renderable>();
 		Image healthPack = new Image(folderPath+"healthPack.png", false, filter).getScaledCopy(scale);	
 		Image laserPistol = new Image(folderPath+"laserPistol.png", false, filter).getScaledCopy(scale);
 		items.put(ObjectName.HEALTH_PACK, healthPack);
@@ -174,14 +174,30 @@ class LevelState extends State {
 		/**
 		 * Create a map with all bullet images.
 		 */
-		bullets = new HashMap<String, Image>();
+		bullets = new HashMap<String, Renderable>();
 		Image laserBullet = new Image(folderPath+"laserBullet.png", false, filter).getScaledCopy(scale);
 		bullets.put(ObjectName.LASER_BULLET, laserBullet);
 		
 		/**
+		 * create an animation for the rocket
+		 */
+		Image rocketImage = new Image(folderPath+"rocketSheet.png", false, filter);
+		SpriteSheet rocketSheet = new SpriteSheet(rocketImage.getScaledCopy(scale), 15*scale, 14*scale);
+		Animation rocket = new Animation(rocketSheet, 140);
+		bullets.put("rocket", rocket);
+		
+		/**
+		 * create an animation for explosions
+		 */
+		Image explosionImage = new Image(folderPath+"explosion.png", false, filter);
+		SpriteSheet explosionSheet = new SpriteSheet(explosionImage.getScaledCopy(scale), 30*scale, 30*scale);
+		Animation explosion = new Animation(explosionSheet,140);
+		bullets.put("explosion", explosion);
+		
+		/**
 		 * Create a map with all tile images.
 		 */
-		tiles = new HashMap<String, Image>();
+		tiles = new HashMap<String, Renderable>();
 		Image boxTile = new Image(folderPath+"boxTile.png", false, filter).getScaledCopy(scale);
 		Image airTile = new Image(folderPath+"airTile.png", false, filter).getScaledCopy(scale);
 		tiles.put(ObjectName.BOX_TILE, boxTile);
