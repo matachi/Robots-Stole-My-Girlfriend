@@ -3,30 +3,26 @@ package rsmg.io;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
-//import org.xml.sax.SAXException;
-//import org.xml.sax.SAXParseException;
-//import org.w3c.dom.Document;
-import rsmg.model.AirTile;
-import rsmg.model.Constants;
-import rsmg.model.EndTile;
-import rsmg.model.Enemy;
-import rsmg.model.GroundTile;
-import rsmg.model.ObjectName;
-import rsmg.model.SpawnTile;
-import rsmg.model.Tankbot;
-import rsmg.model.Tile;
-import rsmg.model.item.HealthPack;
-import rsmg.model.item.Item;
-import rsmg.model.item.UpgradePoints;
-import rsmg.model.item.Weapon;
 
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+
+import rsmg.model.Constants;
+import rsmg.model.Enemy;
+import rsmg.model.ObjectName;
+import rsmg.model.Tankbot;
+import rsmg.model.item.HealthPack;
+import rsmg.model.item.Item;
+import rsmg.model.item.UpgradePoints;
+import rsmg.model.item.Weapon;
+import rsmg.model.tile.AirTile;
+import rsmg.model.tile.EndTile;
+import rsmg.model.tile.GroundTile;
+import rsmg.model.tile.SpawnTile;
+import rsmg.model.tile.Tile;
 
 /**
  * Converts to/from XML to/from Tile[][]

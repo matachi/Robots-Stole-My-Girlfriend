@@ -1,4 +1,6 @@
-package rsmg.model;
+package rsmg.model.tile;
+
+import rsmg.model.Constants;
 
 public abstract class Tile {
 

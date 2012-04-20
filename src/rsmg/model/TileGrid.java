@@ -2,6 +2,9 @@ package rsmg.model;
 
 import java.awt.Point;
 
+import rsmg.model.tile.SpawnTile;
+import rsmg.model.tile.Tile;
+
 /**
  * Contains information about the Tile[][]
  */
