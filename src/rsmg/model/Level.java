@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import rsmg.model.object.InteractiveObject;
+import rsmg.model.object.bullet.Bullet;
+import rsmg.model.object.bullet.Explosion;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.livingobject.Enemy;
 import rsmg.model.object.livingobject.PCharacter;

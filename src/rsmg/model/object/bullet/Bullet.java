@@ -1,4 +1,4 @@
-package rsmg.model;
+package rsmg.model.object.bullet;
 
 import rsmg.model.object.InteractiveObject;
 import rsmg.util.Vector2d;

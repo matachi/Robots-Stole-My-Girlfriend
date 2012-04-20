@@ -2,8 +2,8 @@ package rsmg.model.weapon;
 
 import java.util.Collection;
 
-import rsmg.model.Bullet;
 import rsmg.model.ObjectName;
+import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.livingobject.LivingObject;
 import rsmg.util.Vector2d;
 
