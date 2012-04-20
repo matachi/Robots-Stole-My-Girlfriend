@@ -1,6 +1,6 @@
-package rsmg.model.item;
+package rsmg.model.object.item;
 
-import rsmg.model.InteractiveObject;
+import rsmg.model.object.InteractiveObject;
 
 public abstract class Item extends InteractiveObject {
 	/**

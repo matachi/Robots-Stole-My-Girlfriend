@@ -1,4 +1,6 @@
-package rsmg.model;
+package rsmg.model.object;
+
+import rsmg.model.Constants;
 import rsmg.util.Vector2d;
 
 /**

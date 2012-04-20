@@ -1,19 +1,21 @@
-package rsmg.model;
+package rsmg.model.object.unit;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
+import rsmg.model.ObjectName;
+import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
 
-public class LaserPistol implements IWeapon{
+public class RocketLauncher implements IWeapon{
 	private LivingObject wielder;
-	private Collection<Bullet> bulletList;
+	private ArrayList<Bullet> bulletList;
 	private boolean shot;
-	private int clipSize;
+	public int clipSize = 2;
 	
-	public LaserPistol(LivingObject wielder, Collection<Bullet> bulletList) {
+	public RocketLauncher(LivingObject wielder, ArrayList<Bullet> bulletList) {
 		this.wielder = wielder;
 		this.bulletList = bulletList;
-		this.shot = false;
+		shot = false;
 	}
 	
 	@Override
@@ -21,7 +23,7 @@ public class LaserPistol implements IWeapon{
 		int bulletWidth = 5;
 		int bulletHeight = 3;
 		int bulletDamage = 10;
-		int bulletSpeed = 500;
+		int bulletSpeed = 400;
 		Vector2d bulletVelocity = new Vector2d();
 		int offsetX;
 		int offsetY;
@@ -36,22 +38,18 @@ public class LaserPistol implements IWeapon{
 			offsetY = 5;
 		}
 		
-		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, ObjectName.LASER_BULLET, bulletDamage, bulletVelocity));
+		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKET, bulletDamage, bulletVelocity));
 		
 		shot = true;
-	}
-
-	@Override
-	public long getCooldown() {
-		return 300;
 	}
 	
 	public int getClipSize(){
 		return clipSize;
 	}
-	
-	public long getReloadTime(){
-		return 300;
+
+	@Override
+	public long getCooldown() {
+		return 800;
 	}
 	
 	@Override
@@ -61,5 +59,11 @@ public class LaserPistol implements IWeapon{
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public long getReloadTime() {
+		
+		return 1000;
 	}
 }

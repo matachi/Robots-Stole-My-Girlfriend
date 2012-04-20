@@ -1,17 +1,21 @@
-package rsmg.model;
+package rsmg.model.object.unit;
 
 import java.util.Collection;
 
-import rsmg.model.item.Item;
+import rsmg.model.Constants;
+import rsmg.model.ObjectName;
+import rsmg.model.object.InteractiveObject;
+import rsmg.model.object.bullet.Bullet;
+import rsmg.model.object.item.Item;
 import rsmg.util.Vector2d;
 
 /**
  * Class for representing the playable Character
- * @author Johan Gr�nvall
+ * @author Johan Gronvall
  * @author Daniel Jonsson
  */
 
-public class Character extends LivingObject {
+public class PCharacter extends LivingObject {
 	private boolean airborne;
 	private IWeapon currentWeapon;
 	private Collection<Bullet> bulletList;
@@ -21,13 +25,13 @@ public class Character extends LivingObject {
 	private boolean isDashing = false;
 	private boolean canDash = true;
 	
-	public Character(double x, double y, Collection<Bullet> bulletList) {
+	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		this(x, y);
 		this.bulletList = bulletList;	
 		currentWeapon = new LaserPistol(this, bulletList);
 		
 	}
-	public Character(double x, double y) {
+	public PCharacter(double x, double y) {
 		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 	}
 	

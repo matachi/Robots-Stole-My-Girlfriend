@@ -18,13 +18,13 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.IO;
-import rsmg.model.Bullet;
-import rsmg.model.Character;
-import rsmg.model.Enemy;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
-import rsmg.model.item.Item;
+import rsmg.model.object.bullet.Bullet;
+import rsmg.model.object.item.Item;
+import rsmg.model.object.unit.Enemy;
+import rsmg.model.object.unit.PCharacter;
 
 /**
  * The state where the levels are played out.
@@ -351,7 +351,7 @@ class LevelState extends State {
 	 */
 	public void handleKeyboardEvents(Input input, StateBasedGame sbg) {
 		
-		Character modelCharacter = level.getCharacter();
+		PCharacter modelCharacter = level.getCharacter();
 		
 		if (input.isKeyDown(Input.KEY_LEFT))
 			if(!modelCharacter.isDashing())

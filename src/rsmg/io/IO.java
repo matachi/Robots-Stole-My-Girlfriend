@@ -3,9 +3,9 @@ package rsmg.io;
 import java.io.File;
 import java.util.List;
 
-import rsmg.model.item.Item;
-import rsmg.model.Enemy;
-import rsmg.model.Tile;
+import rsmg.model.object.item.Item;
+import rsmg.model.object.unit.Enemy;
+import rsmg.model.tile.Tile;
 
 /**
  * Load and store data by reading files

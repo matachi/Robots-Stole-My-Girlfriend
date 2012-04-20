@@ -1,4 +1,4 @@
-package rsmg.model;
+package rsmg.model.object.unit;
 
 import static org.junit.Assert.assertTrue;
 
@@ -14,9 +14,9 @@ import org.junit.Test;
  * @author Daniel Jonsson
  *
  */
-public class TestCharacter {
+public class TestPCharacter {
 
-	Character character;
+	PCharacter character;
 	
 	@BeforeClass
 	public static void beforeClass() {
@@ -28,7 +28,7 @@ public class TestCharacter {
 
 	@Before
 	public void before() {
-		character = new Character(0, 0);
+		character = new PCharacter(0, 0);
 	}
 
 	@After

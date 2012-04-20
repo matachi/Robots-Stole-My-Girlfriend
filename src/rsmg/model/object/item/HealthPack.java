@@ -1,8 +1,8 @@
-package rsmg.model.item;
+package rsmg.model.object.item;
 
 import rsmg.model.ObjectName;
 
-public class UpgradePoints extends Item {
+public class HealthPack extends Item {
 	
 	/**
 	 * @param x horizontal coordinate for where the Item location
@@ -10,8 +10,8 @@ public class UpgradePoints extends Item {
 	 * @param width width of the item
 	 * @param height height of the item
 	 */
-	public UpgradePoints(double x, double y) {
-		// TODO: Set size
-		super(x, y, 32, 32, ObjectName.UPGRADE_POINT);
+	public HealthPack(double x, double y) {
+		// Make the item start at the bottom(32-15)
+		super(x, y+32-15, 15, 15, ObjectName.HEALTH_PACK);
 	}
 }

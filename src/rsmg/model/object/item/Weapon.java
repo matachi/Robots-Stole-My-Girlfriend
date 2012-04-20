@@ -1,8 +1,8 @@
-package rsmg.model.item;
+package rsmg.model.object.item;
 
 import rsmg.model.ObjectName;
 
-public class HealthPack extends Item {
+public class Weapon extends Item {
 	
 	/**
 	 * @param x horizontal coordinate for where the Item location
@@ -10,8 +10,7 @@ public class HealthPack extends Item {
 	 * @param width width of the item
 	 * @param height height of the item
 	 */
-	public HealthPack(double x, double y) {
-		// Make the item start at the bottom(32-15)
-		super(x, y+32-15, 15, 15, ObjectName.HEALTH_PACK);
+	public Weapon(double x, double y, String weponType) {
+		super(x, y+32-15, 15, 15, weponType);
 	}
 }

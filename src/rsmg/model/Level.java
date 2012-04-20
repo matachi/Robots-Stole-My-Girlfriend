@@ -6,7 +6,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import rsmg.model.item.Item;
+import rsmg.model.object.InteractiveObject;
+import rsmg.model.object.bullet.Bullet;
+import rsmg.model.object.bullet.Explosion;
+import rsmg.model.object.item.Item;
+import rsmg.model.object.unit.Enemy;
+import rsmg.model.object.unit.PCharacter;
 
 /**
  * Class representing a level. This Class is in charge of storing and updating
@@ -20,7 +25,7 @@ public class Level {
 	/**
 	 * Reference to the character that the user controls.
 	 */
-	private Character character;
+	private PCharacter character;
 	
 	/**
 	 * List where bullets from guns are stored.
@@ -64,9 +69,9 @@ public class Level {
 	private void spawnChar() {
 		try {
 			Point spawnPoint = tileGrid.getSpawnPoint();
-			character = new Character(spawnPoint.getX(), spawnPoint.getY(), bullets);
+			character = new PCharacter(spawnPoint.getX(), spawnPoint.getY(), bullets);
 		} catch (Exception NullPointerException) {
-			character = new Character(0, 0, bullets);
+			character = new PCharacter(0, 0, bullets);
 		}
 	}
 
@@ -291,7 +296,7 @@ public class Level {
 	 * Returns the character.
 	 * @return The character.
 	 */
-	public Character getCharacter() {
+	public PCharacter getCharacter() {
 		return character;
 	}
 	

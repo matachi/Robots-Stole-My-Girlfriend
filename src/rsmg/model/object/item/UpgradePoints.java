@@ -1,8 +1,8 @@
-package rsmg.model.item;
+package rsmg.model.object.item;
 
 import rsmg.model.ObjectName;
 
-public class Weapon extends Item {
+public class UpgradePoints extends Item {
 	
 	/**
 	 * @param x horizontal coordinate for where the Item location
@@ -10,7 +10,8 @@ public class Weapon extends Item {
 	 * @param width width of the item
 	 * @param height height of the item
 	 */
-	public Weapon(double x, double y, String weponType) {
-		super(x, y+32-15, 15, 15, weponType);
+	public UpgradePoints(double x, double y) {
+		// TODO: Set size
+		super(x, y, 32, 32, ObjectName.UPGRADE_POINT);
 	}
 }

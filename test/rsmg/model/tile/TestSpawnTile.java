@@ -1,14 +1,13 @@
-package rsmg.model;
+package rsmg.model.tile;
 
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
-public class TestAirTile {
+public class TestSpawnTile {
 
 	@Test
 	public void testSolid() {
-		AirTile tile = new AirTile();
+		SpawnTile tile = new SpawnTile();
 		assertTrue(tile.isSolid() == false);
 	}
 }

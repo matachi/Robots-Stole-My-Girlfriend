@@ -1,5 +1,6 @@
-package rsmg.model;
+package rsmg.model.object.unit;
 
+import rsmg.model.object.InteractiveObject;
 
 public abstract class LivingObject extends InteractiveObject{
 	

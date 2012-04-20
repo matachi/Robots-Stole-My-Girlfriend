@@ -1,5 +1,7 @@
-package rsmg.model;
+package rsmg.model.object.bullet;
 
+import rsmg.model.Constants;
+import rsmg.model.ObjectName;
 import rsmg.util.Vector2d;
 
 public class Explosion extends Bullet {
