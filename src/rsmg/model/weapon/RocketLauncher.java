@@ -1,7 +1,10 @@
-package rsmg.model;
+package rsmg.model.weapon;
 
 import java.util.ArrayList;
 
+import rsmg.model.Bullet;
+import rsmg.model.LivingObject;
+import rsmg.model.ObjectName;
 import rsmg.util.Vector2d;
 
 public class RocketLauncher implements IWeapon{

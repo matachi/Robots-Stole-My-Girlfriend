@@ -3,11 +3,13 @@ package rsmg.model;
 import java.util.Collection;
 
 import rsmg.model.item.Item;
+import rsmg.model.weapon.IWeapon;
+import rsmg.model.weapon.LaserPistol;
 import rsmg.util.Vector2d;
 
 /**
  * Class for representing the playable Character
- * @author Johan Gr�nvall
+ * @author Johan Gronvall
  * @author Daniel Jonsson
  */
 
