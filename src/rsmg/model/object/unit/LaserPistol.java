@@ -1,10 +1,9 @@
-package rsmg.model.weapon;
+package rsmg.model.object.unit;
 
 import java.util.Collection;
 
 import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
-import rsmg.model.object.livingobject.LivingObject;
 import rsmg.util.Vector2d;
 
 public class LaserPistol implements IWeapon{

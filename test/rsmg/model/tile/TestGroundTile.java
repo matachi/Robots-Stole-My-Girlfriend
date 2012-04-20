@@ -1,14 +1,13 @@
-package rsmg.model;
+package rsmg.model.tile;
 
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
-public class TestHazardousTile {
+public class TestGroundTile {
 
 	@Test
 	public void testSolid() {
-		HazardousTile tile = new HazardousTile();
+		GroundTile tile = new GroundTile();
 		assertTrue(tile.isSolid() == true);
 	}
 }

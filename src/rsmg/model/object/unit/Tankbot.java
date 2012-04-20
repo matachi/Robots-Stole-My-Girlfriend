@@ -1,4 +1,4 @@
-package rsmg.model.object.livingobject;
+package rsmg.model.object.unit;
 
 import rsmg.model.ObjectName;
 

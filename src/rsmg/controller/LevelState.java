@@ -23,8 +23,8 @@ import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
-import rsmg.model.object.livingobject.Enemy;
-import rsmg.model.object.livingobject.PCharacter;
+import rsmg.model.object.unit.Enemy;
+import rsmg.model.object.unit.PCharacter;
 
 /**
  * The state where the levels are played out.

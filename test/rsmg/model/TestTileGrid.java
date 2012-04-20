@@ -1,11 +1,19 @@
 package rsmg.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import rsmg.model.object.unit.PCharacter;
+import rsmg.model.tile.AirTile;
+import rsmg.model.tile.EndTile;
+import rsmg.model.tile.GroundTile;
+import rsmg.model.tile.SpawnTile;
+import rsmg.model.tile.Tile;
 
 public class TestTileGrid {
 
@@ -52,35 +60,35 @@ public class TestTileGrid {
 	
 	@Test
 	public void testIntersectsWith() {
-		Character character = new Character(50, 64);
+		PCharacter character = new PCharacter(50, 64);
 		
 		assertTrue(grid.intersectsWith(character));
 	}
 	
 	@Test
 	public void testLeftSideIntersection() {
-	    Character character = new Character(50, 64);
+		PCharacter character = new PCharacter(50, 64);
         
         assertTrue(grid.leftSideIntersection(character) == 14);
 	}
 	
 	@Test
 	public void testRightSideIntersection() {
-	    Character character = new Character(50, 64);
+		PCharacter character = new PCharacter(50, 64);
         
 	    assertTrue(grid.rightSideIntersection(character) == 14);
 	}
 	
 	@Test
 	public void testBottomSideIntersection() {
-	    Character character = new Character(50, 64);
+	    PCharacter character = new PCharacter(50, 64);
         
         assertTrue(grid.bottomSideIntersection(character) == 22);
 	}
 	
 	@Test
 	public void testTopSideIntersection() {
-	    Character character = new Character(50, 64);
+		PCharacter character = new PCharacter(50, 64);
         
         assertTrue(grid.topSideIntersection(character) == -22);
 	}	

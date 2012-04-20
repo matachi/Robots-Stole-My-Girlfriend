@@ -1,4 +1,4 @@
-package rsmg.model.object.livingobject;
+package rsmg.model.object.unit;
 
 import java.util.Collection;
 
@@ -7,8 +7,6 @@ import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
-import rsmg.model.weapon.IWeapon;
-import rsmg.model.weapon.LaserPistol;
 import rsmg.util.Vector2d;
 
 /**

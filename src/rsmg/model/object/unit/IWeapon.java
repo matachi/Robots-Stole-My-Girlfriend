@@ -1,4 +1,4 @@
-package rsmg.model.weapon;
+package rsmg.model.object.unit;
 
 public interface IWeapon {
 	public void shoot();
