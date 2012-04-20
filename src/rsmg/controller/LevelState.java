@@ -24,6 +24,7 @@ import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.livingobject.Enemy;
+import rsmg.model.object.livingobject.PCharacter;
 
 /**
  * The state where the levels are played out.
@@ -350,7 +351,7 @@ class LevelState extends State {
 	 */
 	public void handleKeyboardEvents(Input input, StateBasedGame sbg) {
 		
-		Character modelCharacter = level.getCharacter();
+		PCharacter modelCharacter = level.getCharacter();
 		
 		if (input.isKeyDown(Input.KEY_LEFT))
 			if(!modelCharacter.isDashing())

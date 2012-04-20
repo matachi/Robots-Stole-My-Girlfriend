@@ -17,7 +17,7 @@ import rsmg.util.Vector2d;
  * @author Daniel Jonsson
  */
 
-public class Character extends LivingObject {
+public class PCharacter extends LivingObject {
 	private boolean airborne;
 	private IWeapon currentWeapon;
 	private Collection<Bullet> bulletList;
@@ -27,13 +27,13 @@ public class Character extends LivingObject {
 	private boolean isDashing = false;
 	private boolean canDash = true;
 	
-	public Character(double x, double y, Collection<Bullet> bulletList) {
+	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		this(x, y);
 		this.bulletList = bulletList;	
 		currentWeapon = new LaserPistol(this, bulletList);
 		
 	}
-	public Character(double x, double y) {
+	public PCharacter(double x, double y) {
 		super(x, y, (double)Constants.CHARACTERWIDTH, (double)Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 	}
 	
