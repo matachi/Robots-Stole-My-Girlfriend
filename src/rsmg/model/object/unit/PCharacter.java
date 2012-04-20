@@ -46,6 +46,7 @@ public class PCharacter extends LivingObject {
 				System.out.println("laserPistol picked up");
 			}
 			else if(obj.getName().equals(ObjectName.HEALTH_PACK)){
+				addHealth();
 				System.out.println("healthPack picked up");
 			}
 		}
