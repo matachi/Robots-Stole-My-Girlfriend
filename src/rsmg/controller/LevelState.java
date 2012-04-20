@@ -167,7 +167,9 @@ class LevelState extends State {
 		 */
 		items = new HashMap<String, Image>();
 		Image healthPack = new Image(folderPath+"healthPack.png", false, filter).getScaledCopy(scale);	
+		Image laserPistol = new Image(folderPath+"laserPistol.png", false, filter).getScaledCopy(scale);
 		items.put(ObjectName.HEALTH_PACK, healthPack);
+		items.put(ObjectName.LASER_PISTOL, laserPistol);
 		
 		/**
 		 * Create a map with all bullet images.

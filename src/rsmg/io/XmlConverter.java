@@ -14,6 +14,7 @@ import rsmg.model.Constants;
 import rsmg.model.EndTile;
 import rsmg.model.Enemy;
 import rsmg.model.GroundTile;
+import rsmg.model.ObjectName;
 import rsmg.model.SpawnTile;
 import rsmg.model.Tankbot;
 import rsmg.model.Tile;
@@ -84,12 +85,12 @@ public class XmlConverter {
 					String itemValue = cell.getAttributeValue("item");
 					if(itemValue != null){
 						Item item;
-						if(itemValue.equals("healthPack"))
+						if(itemValue.equals(ObjectName.HEALTH_PACK))
 							item = new HealthPack(x*scale,y*scale);
-						else if(itemValue.equals("upgradePoint"))
+						else if(itemValue.equals(ObjectName.UPGRADE_POINT))
 							item = new UpgradePoints(x*scale,y*scale);
 						else
-							item = new Weapon(x*scale,y*scale,"laserGun");
+							item = new Weapon(x*scale,y*scale,ObjectName.LASER_PISTOL);
 						itemList.add(item);
 					}
 					
@@ -99,7 +100,7 @@ public class XmlConverter {
 						Enemy enemy;
 						if(enemyValue.equals("ballbot"))
 							enemy = new Tankbot(x*scale,y*scale);
-						else if(enemyValue.equals("tankbot"))
+						else if(enemyValue.equals(ObjectName.TANKBOT))
 							enemy = new Tankbot(x*scale,y*scale);
 						else
 							enemy = new Tankbot(x*scale,y*scale);

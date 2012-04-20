@@ -11,7 +11,6 @@ public class Weapon extends Item {
 	 * @param height height of the item
 	 */
 	public Weapon(double x, double y, String weponType) {
-		// TODO: Set size and weponType
-		super(x, y, 32, 32, ObjectName.WEAPON);
+		super(x, y+32-15, 15, 15, weponType);
 	}
 }

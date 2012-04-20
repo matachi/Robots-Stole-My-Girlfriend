@@ -2,11 +2,12 @@ package rsmg.model;
 
 import java.util.Collection;
 
+import rsmg.model.item.Item;
 import rsmg.util.Vector2d;
 
 /**
  * Class for representing the playable Character
- * @author Johan Grönvall
+ * @author Johan Grï¿½nvall
  * @author Daniel Jonsson
  */
 
@@ -34,6 +35,15 @@ public class Character extends LivingObject {
 	public void collide(InteractiveObject obj) {
 		if (obj instanceof Enemy){
 			this.damage(((Enemy) obj).getTouchDamage());
+		}
+		if (obj instanceof Item){
+			if(obj.getName().equals("laserPistol")){
+				currentWeapon = new LaserPistol(this, bulletList);
+				System.out.println("laserPistol picked up");
+			}
+			else if(obj.getName().equals(ObjectName.HEALTH_PACK)){
+				System.out.println("healthPack picked up");
+			}
 		}
 	}
 	

@@ -22,13 +22,14 @@ public enum ObjectName {
 	 */
 	public static final String TANKBOT = "tankbot";
 	public static final String EXPLOSION = "explosion";
+
 	/**
 	 * The items' names.
 	 */
 	public static final String HEALTH_PACK = "healthPack";
 	public static final String UPGRADE_POINT = "upgradePoint";
-	public static final String WEAPON = "weapon";
-
+	public static final String LASER_PISTOL = "laserPistol";
+	
 	/**
 	 * The bullets' names.
 	 */
