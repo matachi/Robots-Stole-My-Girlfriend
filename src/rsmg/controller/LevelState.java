@@ -202,14 +202,12 @@ class LevelState extends State {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.enter(gc, sbg);
-		gc.setMusicOn(false);
 	}
 
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.leave(gc, sbg);
-		gc.setMusicOn(true);
 	}
 
 	/**
