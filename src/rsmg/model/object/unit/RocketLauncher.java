@@ -20,8 +20,8 @@ public class RocketLauncher implements IWeapon{
 	
 	@Override
 	public void shoot() {
-		int bulletWidth = 5;
-		int bulletHeight = 3;
+		int bulletWidth = 14;
+		int bulletHeight = 14;
 		int bulletDamage = 10;
 		int bulletSpeed = 400;
 		Vector2d bulletVelocity = new Vector2d();

@@ -81,8 +81,8 @@ public class Level {
 	 */
 	public void update(double delta) {
 		updateCharacter(delta);
- 		updateEnemies(delta);
  		updateBullets(delta);
+ 		updateEnemies(delta);
  		// Checks if the items are picked-up
 		updateItems();		
 	}
@@ -134,21 +134,24 @@ public class Level {
 				character.collide(enemy);
 				enemy.collide(character);
 			}
-			
+
 			//see if enemy has collided with any bullets and act appropriately
 			List<Bullet> newBullets = new ArrayList<Bullet>();
 			for (Iterator<Bullet> j = bullets.iterator(); j.hasNext(); ) {
 				Bullet bullet = j.next();
+
 				if (enemy.hasCollidedWith(bullet)) {
 					enemy.collide(bullet);
 					bullet.collide(enemy);
 
 					// this shouldn't be levels responsibility, but I do not
 					// know where to put it otherwise
-					if (bullet.getName() == ObjectName.ROCKET)
-						newBullets.add(new Explosion(bullet.getX(), bullet.getY()));
+
+					if (bullet.getName() == ObjectName.ROCKET){
+						newBullets.add(new Explosion(bullet));
+					}
 					
-					j.remove();
+					bullets.remove(j);
 				}
 			}
 			bullets.addAll(newBullets);
@@ -169,11 +172,15 @@ public class Level {
 			if (tileGrid.intersectsWith(bullet)) {
 				
 				if (bullet.getName() == ObjectName.ROCKET)
-					bullets.add(new Explosion(bullet.getX(), bullet.getY()));
+					bullets.add(new Explosion(bullet));
 				
-				if (bullet.getName() != ObjectName.EXPLOSION)
+				if (bullet.getName() == ObjectName.EXPLOSION){
+					if(((Explosion)bullet).getAge() > Constants.EXPLOSIONDURATION){
+						bullets.remove(i);
+					}
+				}else{
 					bullets.remove(i);
-
+				}
 			}
 		}
 	}

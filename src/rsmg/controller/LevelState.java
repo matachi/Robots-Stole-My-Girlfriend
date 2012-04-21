@@ -1,6 +1,7 @@
 package rsmg.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.newdawn.slick.Animation;
@@ -58,25 +59,43 @@ class LevelState extends State {
 	 * The character that the player controls.
 	 */
 	private Renderable character;
-	private Animation characterRunningR;
-	private Animation characterRunningL;
-	private Image characterStandingR;
-	private Image characterStandingL;
-	private Image characterJumpingR;
-	private Image characterJumpingL;
+	
+	/**
+	 * pistol
+	 */
+	private Animation characterPistolRunningR;
+	private Animation characterPistolRunningL;
+	private Image characterPistolStandingR;
+	private Image characterPistolStandingL;
+	private Image characterPistolJumpingR;
+	private Image characterPistolJumpingL;
+	
+	/**
+	 * 
+	 */
+	private Animation characterRPGRunningR;
+	private Animation characterRPGRunningL;
+	private Image characterRPGStandingR;
+	private Image characterRPGStandingL;
+	private Image characterRPGJumpingR;
+	private Image characterRPGJumpingL;
+	
+	/**
+	 * dash
+	 */
 	private Image characterDashingR;
 	private Image characterDashingL;
-	
+
 	/**
 	 * Reference to the level model.
 	 */
 	private Level level;
-	
+
 	/**
 	 * Track if the up key is down or not.
 	 */
 	private boolean upKeyIsDown;
-	
+
 	/**
 	 * Store how much everything should be scaled in the view.
 	 */
@@ -116,34 +135,34 @@ class LevelState extends State {
 		 */
 		Image characterImage = new Image(folderPath+"charPistolRunningSheet.png", false, filter);
 		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
-		characterRunningR = new Animation(characterSheet, 140);
+		characterPistolRunningR = new Animation(characterSheet, 140);
 		
 		/**
 		 * Make an animation for when the character is running to the left.
 		 */
 		characterImage = characterImage.getFlippedCopy(true, false);
 		characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
-		characterRunningL = new Animation(characterSheet, 140);
+		characterPistolRunningL = new Animation(characterSheet, 140);
 		
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		characterStandingR = new Image(folderPath+"charPistolStanding.png", false, filter).getScaledCopy(scale);
+		characterPistolStandingR = new Image(folderPath+"charPistolStanding.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
 		 */
-		characterStandingL = characterStandingR.getFlippedCopy(true, false);
+		characterPistolStandingL = characterPistolStandingR.getFlippedCopy(true, false);
 		
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		character = characterJumpingR = new Image(folderPath+"charPistolJumping.png", false, filter).getScaledCopy(scale);
+		character = characterPistolJumpingR = new Image(folderPath+"charPistolJumping.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
 		 */
-		characterJumpingL = characterJumpingR.getFlippedCopy(true, false);
+		characterPistolJumpingL = characterPistolJumpingR.getFlippedCopy(true, false);
 		
 		/**
 		 * Make an image for when the character is dashing to the right
@@ -181,7 +200,8 @@ class LevelState extends State {
 		/**
 		 * create an animation for the rocket
 		 */
-		Image rocketImage = new Image(folderPath+"rocketSheet.png", false, filter);
+		
+		Image rocketImage = new Image(folderPath+"rocketSheet.png", true, filter);
 		SpriteSheet rocketSheet = new SpriteSheet(rocketImage.getScaledCopy(scale), 15*scale, 14*scale);
 		Animation rocket = new Animation(rocketSheet, 140);
 		bullets.put("rocket", rocket);
@@ -265,7 +285,7 @@ class LevelState extends State {
 			enemies.get(enemy.getName()).draw((float)enemy.getX()*scale, (float)enemy.getY()*scale);
 	}
 	
-	/**
+	/**	
 	 * Draw items on the screen.
 	 */
 	private void drawItems() {
@@ -288,7 +308,7 @@ class LevelState extends State {
 	private void drawCharacter() {
 		character.draw(((float)level.getCharacter().getX()-6)*scale, (float)level.getCharacter().getY()*scale);
 	}
-	
+
 	/**
 	 * Draw the health bar.
 	 */
@@ -296,7 +316,8 @@ class LevelState extends State {
 		healthBar.draw(20, 20);
 		healthBarOverlayGraphics.fill(healthBarOverlayRectangle);
 	}
-
+	
+	
 	/**
 	 * Handle inputs from the user and update the model.
 	 */
@@ -312,6 +333,8 @@ class LevelState extends State {
 		 */
 		level.update((double)delta / 1000);
 		
+		
+		
 		/**
 		 * Fix so the right character sprite is shown on the next render()
 		 */
@@ -326,23 +349,23 @@ class LevelState extends State {
 			if (level.getCharacter().isAirborne()) {
 		
 				if (level.getCharacter().isFacingRight())
-					character = characterJumpingR;
+					character = characterPistolJumpingR;
 				else
-					character = characterJumpingL;
+					character = characterPistolJumpingL;
 		
 			} else if (level.getCharacter().isStandingStill()) {
 		
 				if (level.getCharacter().isFacingRight())
-					character = characterStandingR;
+					character = characterPistolStandingR;
 				else
-					character = characterStandingL;
+					character = characterPistolStandingL;
 		
 			} else { // is running
 		
 				if (level.getCharacter().isFacingRight())
-					character = characterRunningR;
+					character = characterPistolRunningR;
 				else
-					character = characterRunningL;
+					character = characterPistolRunningL;
 		
 			}
 			
