@@ -34,14 +34,16 @@ public abstract class LivingObject extends InteractiveObject{
 	 */
 	public void damage(int dmg) {
 		health = health-dmg;
+		if (health < 0)
+			health = 0;
 	}
 	
 	/**
 	 * Give the LivingObject more health
 	 */
 	public void addHealth(){
-//		health += 10;
-//		if(health > maxHealth)
+		health += 10;
+		if(health > maxHealth)
 			health = maxHealth;
 	}
 	
