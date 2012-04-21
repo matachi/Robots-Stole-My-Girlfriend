@@ -21,7 +21,7 @@ public class Config {
 	/**
 	 * Path to the configuration file.
 	 */
-	private static final String configFilePath = "res/config/config.txt";
+	private static final String configFilePath = "res/data/config/config.xml";
 	
 	/**
 	 * Make this class to a singleton.
