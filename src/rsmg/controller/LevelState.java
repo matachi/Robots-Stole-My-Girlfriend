@@ -107,7 +107,7 @@ class LevelState extends State {
 		background = new Image(folderPath+"bg.jpg", false, filter).getScaledCopy(scale);
 		
 		healthBar = new Image(folderPath+"healthBar.png", false, filter);
-		healthBarOverlayRectangle = new Rectangle(23, 23, 148, 17);
+		healthBarOverlayRectangle = new Rectangle(23, 23, 147, 17);
 		healthBarOverlayGraphics = new Graphics();
 		healthBarOverlayGraphics.setColor(new Color(0.85f, 0.3f, 0.3f, 0.5f));
 		
@@ -349,7 +349,7 @@ class LevelState extends State {
 			/**
 			 * Update health bar's overlay size.
 			 */
-			healthBarOverlayRectangle.setWidth(146 * level.getCharacter().getHealth() / level.getCharacter().getMaxHealth());
+			healthBarOverlayRectangle.setWidth(147 * level.getCharacter().getHealth() / level.getCharacter().getMaxHealth());
 		}
 		
 		/**
