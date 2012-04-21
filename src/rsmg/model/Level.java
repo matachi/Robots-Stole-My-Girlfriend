@@ -108,7 +108,6 @@ public class Level {
 		// him outside it.
 		applyNormalForce(character);
 		character.setVelocityX(0);
-		character.updateDashing(delta);
 	}
 
 	/**

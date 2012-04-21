@@ -367,33 +367,33 @@ class LevelState extends State {
 		
 		PCharacter modelCharacter = level.getCharacter();
 		
+		// left arrow key
 		if (input.isKeyDown(Input.KEY_LEFT))
-			if(!modelCharacter.isDashing())
-				modelCharacter.moveLeft();
+			modelCharacter.moveLeft();
 		
+		// right arrow key
 		if (input.isKeyDown(Input.KEY_RIGHT))
-			if(!modelCharacter.isDashing())
-				modelCharacter.moveRight();
+			modelCharacter.moveRight();
 
+		// up arrow key
 		if (input.isKeyDown(Input.KEY_UP)) {
 			if (!upKeyIsDown)
 				modelCharacter.jump();
-			
 			upKeyIsDown = true;
 		} else if (upKeyIsReleased())
 			modelCharacter.jumpReleased();
 
+		// space bar
 		if (input.isKeyPressed(Input.KEY_SPACE))
 			modelCharacter.attack();
+
+		// x key
+		if (input.isKeyPressed(Input.KEY_X))
+			modelCharacter.dash();
 		
-		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+		// escape key
+		if (input.isKeyPressed(Input.KEY_ESCAPE))
 			sbg.enterState(Controller.PAUSE_MENU_STATE, null, new FadeInTransition());
-		}
-		if (input.isKeyPressed(Input.KEY_X)) {
-			if (modelCharacter.canDash()) {
-				modelCharacter.setDashing(true);
-			}
-		}
 	}
 
 	/**
