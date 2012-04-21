@@ -137,6 +137,7 @@ public class Level {
 			}
 			
 			//see if enemy has collided with any bullets and act appropriately
+			List<Bullet> newBullets = new ArrayList<Bullet>();
 			for (Iterator<Bullet> j = bullets.iterator(); j.hasNext(); ) {
 				Bullet bullet = j.next();
 				if (enemy.hasCollidedWith(bullet)) {
@@ -146,11 +147,12 @@ public class Level {
 					// this shouldn't be levels responsibility, but I do not
 					// know where to put it otherwise
 					if (bullet.getName() == ObjectName.ROCKET)
-						bullets.add(new Explosion(bullet.getX(), bullet.getY()));
+						newBullets.add(new Explosion(bullet.getX(), bullet.getY()));
 					
 					j.remove();
 				}
 			}
+			bullets.addAll(newBullets);
 		}
 	}
 	
