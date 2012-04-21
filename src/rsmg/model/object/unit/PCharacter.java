@@ -164,7 +164,8 @@ public class PCharacter extends LivingObject {
 	 * Dash with the character.
 	 */
 	public void dash() {
-		isDashing = true;
+		if (canDash)
+			isDashing = true;
 	}
 
 	/**
@@ -190,13 +191,5 @@ public class PCharacter extends LivingObject {
 	 */
 	public boolean isDashing() {
 		return isDashing;
-	}
-
-	/**
-	 * If the player can dash.
-	 * @return
-	 */
-	public boolean canDash() {
-		return canDash;
 	}
 }

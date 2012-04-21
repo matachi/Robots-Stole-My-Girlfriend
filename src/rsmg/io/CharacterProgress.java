@@ -37,7 +37,7 @@ public class CharacterProgress {
 	private Map<String, Integer> progress;
 	
 	private static final int TRUE = 1;
-	private static final int FALSE = 1;
+	private static final int FALSE = 0;
 	
 	/**
 	 * Make this class to a singleton. Reads the settings from the character
