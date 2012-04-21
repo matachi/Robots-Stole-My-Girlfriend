@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<progress>
+	<unlockedLevels>2</unlockedLevels>
+	<unlockedWeapons>
+		<rpg>true</rpg>
+		<shotgun>false</shotgun>
+		<assaultRifle>false</assaultRifle>
+	</unlockedWeapons>
+	<upgradePoints>5</upgradePoints>
+	<unlockedUpgrades>
+		<dash>true</dash>
+	</unlockedUpgrades>
+</progress>

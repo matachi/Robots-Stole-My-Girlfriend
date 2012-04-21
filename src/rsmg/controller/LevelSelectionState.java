@@ -12,6 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.BlobbyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
+import rsmg.io.CharacterProgress;
 import rsmg.io.Config;
 
 /**
@@ -108,12 +109,15 @@ class LevelSelectionState extends State {
 		completed = new Image(folderPath+"completed.png");
 		completed = completed.getScaledCopy(scale);
 
+		// Set the number of unlocked levels.
+		unlockedLevels = CharacterProgress.unlockedLevels();
+
 		// Create the menu buttons.
 		// 77.5 is the half width of a button, and is needed to place them centered horizontally on the screen.
-		LevelButton level1 = new LevelButton(folderPath+"level1unlocked.png", folderPath+"level1locked.png", 660-77.5f, 450, true);
-		LevelButton level2 = new LevelButton(folderPath+"level2unlocked.png", folderPath+"level2locked.png", 860-77.5f, 450, true);
-		LevelButton level3 = new LevelButton(folderPath+"level3unlocked.png", folderPath+"level3locked.png", 1060-77.5f, 450, true);
-		LevelButton level4 = new LevelButton(folderPath+"level4unlocked.png", folderPath+"level4locked.png", 1260-77.5f, 450, false);
+		LevelButton level1 = new LevelButton(folderPath+"level1unlocked.png", folderPath+"level1locked.png", 660-77.5f, 450, unlockedLevels >= 1);
+		LevelButton level2 = new LevelButton(folderPath+"level2unlocked.png", folderPath+"level2locked.png", 860-77.5f, 450, unlockedLevels >= 2);
+		LevelButton level3 = new LevelButton(folderPath+"level3unlocked.png", folderPath+"level3locked.png", 1060-77.5f, 450, unlockedLevels >= 3);
+		LevelButton level4 = new LevelButton(folderPath+"level4unlocked.png", folderPath+"level4locked.png", 1260-77.5f, 450, unlockedLevels >= 4);
 		
 		// Store the menu buttons in an ArrayList for convenience
 		levelButtons = new ArrayList<LevelButton>();
@@ -121,9 +125,6 @@ class LevelSelectionState extends State {
 		levelButtons.add(level2);
 		levelButtons.add(level3);
 		levelButtons.add(level4);
-		
-		// Set the number of unlocked levels.
-		unlockedLevels = 3;
 		
 		// Set which button is initially selected
 		selectedButton = 0;
