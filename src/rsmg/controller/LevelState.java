@@ -18,6 +18,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
+import rsmg.io.CharacterProgress;
 import rsmg.io.IO;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
@@ -100,6 +101,11 @@ class LevelState extends State {
 	 * Store how much everything should be scaled in the view.
 	 */
 	private int scale;
+	
+	/**
+	 * Store the level number.
+	 */
+	private int levelNumber;
 	
 	/**
 	 * Construct the level.
@@ -230,6 +236,7 @@ class LevelState extends State {
 	 * @param levelNumber The level's number.
 	 */
 	public void initLevel(int levelNumber) {
+		this.levelNumber = levelNumber;
 		IO io = new IO();
 		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getEnemyList());
 	}
@@ -373,6 +380,15 @@ class LevelState extends State {
 			 * Update health bar's overlay size.
 			 */
 			healthBarOverlayRectangle.setWidth(147 * level.getCharacter().getHealth() / level.getCharacter().getMaxHealth());
+			
+			/**
+			 * Check if the player has won the level. If he has, change state to next level.
+			 */
+			if (level.hasWon()) {
+				CharacterProgress.setUnlockedLevels(levelNumber+1);
+				CharacterProgress.saveFile();
+				Controller.initLevel(++levelNumber);
+			}
 		}
 		
 		/**

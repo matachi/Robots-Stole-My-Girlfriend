@@ -3,6 +3,7 @@ package rsmg.model;
 import java.awt.Point;
 
 import rsmg.model.object.InteractiveObject;
+import rsmg.model.tile.EndTile;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
 
@@ -206,6 +207,30 @@ public class TileGrid {
 	 */
 	public boolean tileIntersect(double x, double y) {
 		return getTile(x, y).isSolid();
+	}
+	
+	/**
+	 * Check if an interactive object intersects with the end tile.
+	 * @param object The interactive object.
+	 * @return If the object intersects with the end tile.
+	 */
+	public boolean intersectsWithEndTile(InteractiveObject object) {
+		
+		// Get the object's boundaries in the tile grid.
+		int leftX = getTilePosFromRealPos(object.getX());
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth()-0.00001);
+		int topY = getTilePosFromRealPos(object.getY());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight()-0.00001);
+		
+		// Walk through all tiles that the object is lying over and check if any
+		// of them is the end tile.
+		for (int x = leftX; x <= rightX; x++) {
+			for (int y = topY; y <= bottomY; y++) {
+				if (grid[y][x] instanceof EndTile)
+					return true;
+			}
+		}
+		return false;
 	}
 
 	/**

@@ -46,6 +46,11 @@ public class Level {
 	 * The grid layout of the level. (I.e. the environment.)
 	 */
 	private TileGrid tileGrid;
+	
+	/**
+	 * Stores if the character has won the level.
+	 */
+	private boolean hasWon;
 
 	/**
 	 * Creates a level.
@@ -84,7 +89,7 @@ public class Level {
  		updateBullets(delta);
  		updateEnemies(delta);
  		// Checks if the items are picked-up
-		updateItems();		
+		updateItems();
 	}
 	
 	/**
@@ -100,6 +105,9 @@ public class Level {
 		
 		// Move the character.
 		character.move(delta);
+
+		// Check if the character has reached the end tile.
+		checkVictory();
 		
 		// update what direction the character is facing towards
 		character.updateFacing();
@@ -207,6 +215,21 @@ public class Level {
 		double y = obj.getY() + obj.getHeight() + 0.00001;
 		return !(tileGrid.tileIntersect(obj.getX(), y) ||
 				tileGrid.tileIntersect(obj.getX() + obj.getWidth() - 0.00001, y));
+	}
+	
+	/**
+	 * Checks if the character has reached the end tile.
+	 */
+	private void checkVictory() {
+		hasWon = tileGrid.intersectsWithEndTile(character);
+	}
+	
+	/**
+	 * Returns whether or not the level has been completed.
+	 * @return If the level has been completed.
+	 */
+	public boolean hasWon() {
+		return hasWon;
 	}
 
 	/**

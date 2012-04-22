@@ -64,12 +64,6 @@ class LevelSelectionState extends State {
 	private int selectedButton;
 	
 	/**
-	 * Reference to the controller. Is needed to be able to tell LevelState what
-	 * level data that should be initialized.
-	 */
-	private Controller controller;
-	
-	/**
 	 * Create the level selection state.
 	 * 
 	 * @param stateID
@@ -78,9 +72,8 @@ class LevelSelectionState extends State {
 	 *            Reference to the controller. Is needed to be able to tell
 	 *            LevelState what level data that should be initialized.
 	 */
-	LevelSelectionState(int stateID, Controller controller) {
+	LevelSelectionState(int stateID) {
 		super(stateID);
-		this.controller = controller;
 	}
 
 	@Override
@@ -135,6 +128,10 @@ class LevelSelectionState extends State {
 			throws SlickException {
 		super.enter(gc, sbg);
 		gc.getInput().clearKeyPressedRecord();
+		unlockedLevels = CharacterProgress.unlockedLevels();
+		for (int i = 0; i < CharacterProgress.unlockedLevels(); i++)
+			if (!levelButtons.get(i).isUnlocked())
+				levelButtons.get(i).toggleUnlocked();
 	}
 
 	@Override
@@ -186,7 +183,7 @@ class LevelSelectionState extends State {
 		else if (input.isKeyPressed(Input.KEY_ESCAPE))
 			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
 		else if (input.isKeyDown(Input.KEY_ENTER)) {
-			controller.initLevel(selectedButton+1);
+			Controller.initLevel(selectedButton+1);
 			sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());
 			if (Config.musicOn()) {
 				Music backgroundMusic = new Music("res/music/WolfRock-NightOfTheMutants.ogg", true);
@@ -247,6 +244,14 @@ class LevelSelectionState extends State {
 			this.y = y * scale + topOffset;
 			
 			this.unlocked = unlocked;
+		}
+		
+		private boolean isUnlocked() {
+			return unlocked;
+		}
+		
+		private void toggleUnlocked() {
+			unlocked = !unlocked;
 		}
 		
 		public Image getImage() {

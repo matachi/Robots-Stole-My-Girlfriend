@@ -22,7 +22,7 @@ class Controller extends StateBasedGame {
 	
 	static final int PAUSE_MENU_STATE = 4;
 	
-	private LevelState levelState;
+	private static LevelState levelState;
 	
 	/**
 	 * 
@@ -39,7 +39,7 @@ class Controller extends StateBasedGame {
 		levelState = new LevelState(LEVEL_STATE);
 		this.addState(new MainMenuState(MAINMENU_STATE));
 		this.addState(levelState);
-		this.addState(new LevelSelectionState(LEVEL_SELECTION_STATE, this));
+		this.addState(new LevelSelectionState(LEVEL_SELECTION_STATE));
 		this.addState(new OptionsState(OPTIONS_STATE));
 		this.addState(new PauseMenuState(PAUSE_MENU_STATE));
 //		this.getState(MAINMENU_STATE).init(container, this);
@@ -51,7 +51,7 @@ class Controller extends StateBasedGame {
 	 * Initialize level data in LevelState.
 	 * @param levelNumber The level number.
 	 */
-	public void initLevel(int levelNumber) {
+	public static void initLevel(int levelNumber) {
 		levelState.initLevel(levelNumber);
 	}
 }

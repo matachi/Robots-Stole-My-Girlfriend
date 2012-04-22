@@ -41,7 +41,7 @@
   <row>
     <cell>GroundTile</cell>
     <cell>AirTile</cell>
-    <cell>EndTile</cell>
+    <cell>AirTile</cell>
     <cell>SpawnTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
@@ -52,7 +52,7 @@
     <cell>AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell>EndTile</cell>
     <cell>GroundTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>

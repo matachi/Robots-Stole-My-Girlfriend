@@ -105,7 +105,7 @@ public class CharacterProgress {
 	 * Set methods.
 	 */
 	public static void setUnlockedLevels(int i) {
-		setVariable("unlockedLevels", 1);
+		setVariable("unlockedLevels", i);
 	}
 	
 	public static void setUpgradePoints(int i) {
@@ -133,7 +133,7 @@ public class CharacterProgress {
 	 * Until this is run, changed settings are only available in the current
 	 * session, and lost when closing the game.
 	 */
-	public static void saveConfigFile() {
+	public static void saveFile() {
 		SAXBuilder builder = new SAXBuilder();
         try {
         	// Instance of the config document
