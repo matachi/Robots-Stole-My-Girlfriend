@@ -85,8 +85,10 @@ public class XmlConverter {
 							item = new HealthPack(x*scale,y*scale);
 						else if(itemValue.equals(ObjectName.UPGRADE_POINT))
 							item = new UpgradePoints(x*scale,y*scale);
+						else if(itemValue.equals(ObjectName.LASER_PISTOL))
+							item = new Weapon(x*scale,y*scale, 15, 15, ObjectName.LASER_PISTOL);
 						else
-							item = new Weapon(x*scale,y*scale,ObjectName.LASER_PISTOL);
+							item = new Weapon(x*scale,y*scale, 20, 15, ObjectName.ROCKET_LAUNCHER);
 						itemList.add(item);
 					}
 					

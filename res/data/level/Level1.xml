@@ -47,7 +47,7 @@
     <cell enemy="ballbot">AirTile</cell>
     <cell item="laserPistol">AirTile</cell>
     <cell item="healthPack">AirTile</cell>
-    <cell>AirTile</cell>
+    <cell item="rocketLauncher">AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>

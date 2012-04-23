@@ -29,6 +29,7 @@ public enum ObjectName {
 	public static final String HEALTH_PACK = "healthPack";
 	public static final String UPGRADE_POINT = "upgradePoint";
 	public static final String LASER_PISTOL = "laserPistol";
+	public static final String ROCKET_LAUNCHER = "rocketLauncher";
 	
 	/**
 	 * The bullets' names.

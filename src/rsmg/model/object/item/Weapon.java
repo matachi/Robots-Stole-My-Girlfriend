@@ -10,7 +10,7 @@ public class Weapon extends Item {
 	 * @param width width of the item
 	 * @param height height of the item
 	 */
-	public Weapon(double x, double y, String weponType) {
-		super(x, y+32-15, 15, 15, weponType);
+	public Weapon(double x, double y, double width, double height, String weponType) {
+		super(x, y+32-height, width, height, weponType);
 	}
 }
