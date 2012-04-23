@@ -4,12 +4,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.unit.PCharacter;
 import rsmg.model.tile.AirTile;
 import rsmg.model.tile.EndTile;
@@ -62,37 +60,53 @@ public class TestTileGrid {
 	
 	@Test
 	public void testIntersectsWith() {
-		PCharacter character = new PCharacter(50, 64, new LinkedList<Bullet>());
+		PCharacter character = new PCharacter(50, 64, null);
 		
 		assertTrue(grid.intersectsWith(character));
 	}
 	
 	@Test
 	public void testLeftSideIntersection() {
-		PCharacter character = new PCharacter(50, 64, new LinkedList<Bullet>());
+		int charX = 50;
+		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT;
+		PCharacter character = new PCharacter(charX, notYIntersect, null);
+        assertTrue(grid.leftSideIntersection(character) == 0);
         
-        assertTrue(grid.leftSideIntersection(character) == 14);
+        int yIntersect = notYIntersect+1;
+        character.setY(yIntersect);
+        int leftIntersect = Constants.TILESIZE*2-charX;
+        assertTrue(grid.leftSideIntersection(character) == leftIntersect);
 	}
 	
-	//@Test
+	@Test
 	public void testRightSideIntersection() {
-		PCharacter character = new PCharacter(24, 24, new LinkedList<Bullet>());
-        assertTrue(grid.rightSideIntersection(character) == 14);
+		int charX = 35;
+		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT;
+		PCharacter character = new PCharacter(charX, notYIntersect, null);
+		assertTrue(grid.rightSideIntersection(character) == 0);
+        
+        int yIntersect = notYIntersect+1;
+        character.setY(yIntersect);
+        double rightIntersect = charX + Constants.CHARACTERWIDTH - Constants.TILESIZE - 0.00001;
+        assertTrue(grid.rightSideIntersection(character) == rightIntersect);
 	}
 	
-	//@Test
+	@Test
 	public void testBottomSideIntersection() {
-	    PCharacter character = new PCharacter(50, 64, new LinkedList<Bullet>());
-        //character.getHeight()
-	    System.out.println(grid.rightSideIntersection(character));
-        assertTrue(grid.bottomSideIntersection(character) == 22);
+		int charX = 35;
+		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT;
+		PCharacter character = new PCharacter(charX, notYIntersect, null);
+		assertTrue(grid.bottomSideIntersection(character) == 0);
+        
+		int intersectLength = 12;
+        int yIntersect = notYIntersect+intersectLength;
+        character.setY(yIntersect);
+        assertTrue(grid.bottomSideIntersection(character) == intersectLength - 0.00001);
 	}
 	
+	// No top atm
 	//@Test
 	public void testTopSideIntersection() {
-		PCharacter character = new PCharacter(50, 64, new LinkedList<Bullet>());
-        
-        assertTrue(grid.topSideIntersection(character) == -22);
+
 	}	
-	
 }
