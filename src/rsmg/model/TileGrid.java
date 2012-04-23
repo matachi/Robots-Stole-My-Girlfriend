@@ -136,7 +136,7 @@ public class TileGrid {
 		
 		int leftX = getTilePosFromRealPos(object.getX());
 		int topY = getTilePosFromRealPos(object.getY());
-		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight()-0.00001);
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int y = topY; y <= bottomY; y++) {
 			if (grid[y][leftX].isSolid())
@@ -152,9 +152,9 @@ public class TileGrid {
 	 */
 	public double rightSideIntersection(InteractiveObject object) {
 		
-		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth()-0.00001);
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
 		int topY = getTilePosFromRealPos(object.getY());
-		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight()-0.00001);
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int y = topY; y <= bottomY; y++) {
 			if (grid[y][rightX].isSolid())
@@ -171,8 +171,8 @@ public class TileGrid {
 	public double bottomSideIntersection(InteractiveObject object) {
 
 		int leftX = getTilePosFromRealPos(object.getX());
-		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth()-0.00001);
-		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight()-0.00001);
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int x = leftX; x <= rightX; x++) {
 			if (grid[bottomY][x].isSolid())
@@ -189,7 +189,7 @@ public class TileGrid {
 	public double topSideIntersection(InteractiveObject object) {
 
 		int leftX = getTilePosFromRealPos(object.getX());
-		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth()-0.00001);
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
 		int topY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int x = leftX; x <= rightX; x++) {
@@ -218,9 +218,9 @@ public class TileGrid {
 		
 		// Get the object's boundaries in the tile grid.
 		int leftX = getTilePosFromRealPos(object.getX());
-		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth()-0.00001);
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
 		int topY = getTilePosFromRealPos(object.getY());
-		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight()-0.00001);
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		// Walk through all tiles that the object is lying over and check if any
 		// of them is the end tile.
