@@ -2,11 +2,15 @@ package rsmg.model.object.unit;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.LinkedList;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import rsmg.model.object.bullet.Bullet;
 
 
 /**
@@ -28,7 +32,7 @@ public class TestPCharacter {
 
 	@Before
 	public void before() {
-		character = new PCharacter(0, 0);
+		character = new PCharacter(0, 0, new LinkedList<Bullet>());
 	}
 
 	@After
