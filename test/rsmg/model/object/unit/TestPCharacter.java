@@ -131,12 +131,19 @@ public class TestPCharacter {
 //	public void testApplyGravity() {
 //		fail("Not yet implemented");
 //	}
-//
-//	@Test
-//	public void testHasCollidedWith() {
-//		fail("Not yet implemented");
-//	}
-	
-	
 
+	@Test
+	public void testHasCollidedWith() {
+		
+		PCharacter character = new PCharacter(0, 0, null);
+		PCharacter character2 = new PCharacter(0, 0, null);
+		
+		boolean test1 = character.hasCollidedWith(character2);
+		
+		character.setX(character.getWidth());
+		character.setY(character.getHeight());
+		
+		boolean test2 = character.hasCollidedWith(character2);
+		assertTrue(test1 && test2);
+	}
 }
