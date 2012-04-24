@@ -64,4 +64,9 @@ public class LaserPistol implements IWeapon{
 		}
 		return false;
 	}
+	
+	@Override
+	public String getName() {
+		return "pistol";
+	}
 }

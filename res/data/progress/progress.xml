@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <progress>
-	<unlockedLevels>4</unlockedLevels>
+	<unlockedLevels>2</unlockedLevels>
 	<unlockedWeapons>
 		<rpg>true</rpg>
 		<shotgun>false</shotgun>

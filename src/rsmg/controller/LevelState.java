@@ -55,31 +55,37 @@ class LevelState extends State {
 	private Map<String, Renderable> bullets;
 	private Map<String, Renderable> items;
 	private Map<String, Renderable> enemies;
+	private Map<String, Renderable> characterMap;
 	
 	/**
 	 * The character that the player controls.
 	 */
 	private Renderable character;
-	
+
 	/**
 	 * pistol
 	 */
-	private Animation characterPistolRunningR;
-	private Animation characterPistolRunningL;
-	private Image characterPistolStandingR;
-	private Image characterPistolStandingL;
-	private Image characterPistolJumpingR;
-	private Image characterPistolJumpingL;
+	private HashMap<String, Renderable> pistolMap;
+	
+//	private Animation characterPistolRunningR;
+//	private Animation characterPistolRunningL;
+//	private Image characterPistolStandingR;
+//	private Image characterPistolStandingL;
+//	private Image characterPistolJumpingR;
+//	private Image characterPistolJumpingL;
 	
 	/**
-	 * 
+	 * rocket launcher
 	 */
-	private Animation characterRPGRunningR;
-	private Animation characterRPGRunningL;
-	private Image characterRPGStandingR;
-	private Image characterRPGStandingL;
-	private Image characterRPGJumpingR;
-	private Image characterRPGJumpingL;
+	
+	private Map<String, Renderable> rpgMap;
+	
+//	private Animation characterRPGRunningR;
+//	private Animation characterRPGRunningL;
+//	private Image characterRPGStandingR;
+//	private Image characterRPGStandingL;
+//	private Image characterRPGJumpingR;
+//	private Image characterRPGJumpingL;
 	
 	/**
 	 * dash
@@ -136,39 +142,61 @@ class LevelState extends State {
 		healthBarOverlayGraphics = new Graphics();
 		healthBarOverlayGraphics.setColor(new Color(0.85f, 0.3f, 0.3f, 0.5f));
 		
+		String runRightKey = "runRight";
+		String runLeftKey = "runLeft";
+		String standRightKey = "standRight";
+		String standLeftKey = "standLeft";
+		String jumpRKey = "jumpRight";
+		String jumpLKey = "jumpLeft";
+		characterMap = new HashMap<String, Renderable>();
+		pistolMap = new HashMap<String, Renderable>();
+		rpgMap = new HashMap<String, Renderable>();
+		
 		/**
 		 * Make an animation for when the character is running to the right.
 		 */
 		Image characterImage = new Image(folderPath+"charPistolRunningSheet.png", false, filter);
 		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
-		characterPistolRunningR = new Animation(characterSheet, 140);
+		Animation characterPistolRunningR = new Animation(characterSheet, 140);
 		
 		/**
 		 * Make an animation for when the character is running to the left.
 		 */
 		characterImage = characterImage.getFlippedCopy(true, false);
 		characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
-		characterPistolRunningL = new Animation(characterSheet, 140);
+		Animation characterPistolRunningL = new Animation(characterSheet, 140);
 		
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		characterPistolStandingR = new Image(folderPath+"charPistolStanding.png", false, filter).getScaledCopy(scale);
+		Image characterPistolStandingR = new Image(folderPath+"charPistolStanding.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
 		 */
-		characterPistolStandingL = characterPistolStandingR.getFlippedCopy(true, false);
+		Image characterPistolStandingL = characterPistolStandingR.getFlippedCopy(true, false);
 		
 		/**
 		 * Make an image for when the character is standing still facing the right.
 		 */
-		character = characterPistolJumpingR = new Image(folderPath+"charPistolJumping.png", false, filter).getScaledCopy(scale);
+		Image characterPistolJumpingR = new Image(folderPath+"charPistolJumping.png", false, filter).getScaledCopy(scale);
 		
 		/**
 		 * Make an image for when the character is standing still facing to the left.
 		 */
-		characterPistolJumpingL = characterPistolJumpingR.getFlippedCopy(true, false);
+		Image characterPistolJumpingL = characterPistolJumpingR.getFlippedCopy(true, false);
+		
+		/**
+		 * Add all the images and animation for the pistol in a hashmap
+		 */
+		pistolMap.put(jumpLKey, characterPistolJumpingL);
+		pistolMap.put(jumpRKey, characterPistolJumpingR);
+		pistolMap.put(standLeftKey, characterPistolStandingL);
+		pistolMap.put(standRightKey, characterPistolStandingR);
+		pistolMap.put(runLeftKey, characterPistolRunningL);
+		pistolMap.put(runRightKey, characterPistolRunningR);
+		character = pistolMap.get(jumpRKey);
+
 		
 		/**
 		 * Make an image for when the character is dashing to the right
@@ -183,15 +211,27 @@ class LevelState extends State {
 		/**
 		 * Makes images for when the character is holding a rocket launcher
 		 */
-		characterRPGStandingR = new Image(folderPath+"charRPGStanding.png", false, filter).getScaledCopy(scale);
-		characterRPGStandingL = characterRPGStandingR.getFlippedCopy(true, false);
-		characterRPGJumpingR = new Image(folderPath+"charRPGJumping.png", false, filter).getScaledCopy(scale);
-		characterRPGJumpingL = characterRPGJumpingR.getFlippedCopy(true, false);
+		Image characterRPGStandingR = new Image(folderPath+"charRPGStanding.png", false, filter).getScaledCopy(scale);
+		Image characterRPGStandingL = characterRPGStandingR.getFlippedCopy(true, false);
+		Image characterRPGJumpingR = new Image(folderPath+"charRPGJumping.png", false, filter).getScaledCopy(scale);
+		Image characterRPGJumpingL = characterRPGJumpingR.getFlippedCopy(true, false);
+		
 		
 		Image charRPGRunningImage = new Image(folderPath+"charRPGRunningSheet.png", false, filter);
-		SpriteSheet RPGRunningSheet = new SpriteSheet(charRPGRunningImage.getScaledCopy(scale), 32*scale, 23*scale);
-		characterRPGRunningR = new Animation(RPGRunningSheet, 140);
+		SpriteSheet rpgRunningSheet = new SpriteSheet(charRPGRunningImage.getScaledCopy(scale), 33*scale, 24*scale);
+		Animation characterRPGRunningR = new Animation(rpgRunningSheet, 140);
 		
+		rpgRunningSheet = new SpriteSheet(charRPGRunningImage.getScaledCopy(scale).getFlippedCopy(true, false), 33*scale, 24*scale);
+		Animation characterRPGRunningL = new Animation(rpgRunningSheet, 140);
+		
+
+		rpgMap.put(jumpLKey, characterRPGJumpingL);
+		rpgMap.put(jumpRKey, characterRPGJumpingR);
+		rpgMap.put(standLeftKey, characterRPGStandingL);
+		rpgMap.put(standRightKey, characterRPGStandingR);
+		rpgMap.put(runLeftKey, characterRPGRunningL);
+		rpgMap.put(runRightKey, characterRPGRunningR);
+				
 		/**
 		 * Create a map with all enemy images.
 		 */
@@ -354,39 +394,47 @@ class LevelState extends State {
 		 */
 		level.update((double)delta / 1000);
 		
-		
-		
 		/**
 		 * Fix so the right character sprite is shown on the next render()
 		 */
+		String weaponName = level.getCharacter().getWeapon().getName();
+		if (weaponName.equals("pistol")) {
+			characterMap = pistolMap;
+		}else if(weaponName.equals("rocketLauncher")) {
+			characterMap = rpgMap;
+		}
+		
 		if(level.getCharacter().isDashing()) {
 			if(level.getCharacter().isFacingRight()) {
 				character = characterDashingR;
 			} else {
 				character = characterDashingL;
-			}
-			
+			}		
+
+
 		} else {
 			if (level.getCharacter().isAirborne()) {
 		
 				if (level.getCharacter().isFacingRight())
-					character = characterPistolJumpingR;
+					character = characterMap.get("jumpRight");
 				else
-					character = characterPistolJumpingL;
+					character = characterMap.get("jumpLeft");
 		
 			} else if (level.getCharacter().isStandingStill()) {
 		
 				if (level.getCharacter().isFacingRight())
-					character = characterPistolStandingR;
+					character = characterMap.get("standRight");
+
 				else
-					character = characterPistolStandingL;
-		
+					character = characterMap.get("standLeft");
+
 			} else { // is running
 		
 				if (level.getCharacter().isFacingRight())
-					character = characterPistolRunningR;
+					character = characterMap.get("runRight");
+
 				else
-					character = characterPistolRunningL;
+					character = characterMap.get("runLeft");
 		
 			}
 			

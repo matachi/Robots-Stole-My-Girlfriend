@@ -62,7 +62,7 @@ public class PCharacter extends LivingObject {
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 		this.bulletList = bulletList;	
-		currentWeapon = new RocketLauncher(this, bulletList);
+		currentWeapon = new LaserPistol(this, bulletList);
 		canDash = CharacterProgress.dashUnlocked();
 	}
 	

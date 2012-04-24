@@ -12,4 +12,5 @@ public interface IWeapon {
 	public boolean shot();
 	public int getClipSize();
 	public long getReloadTime();
+	public String getName();
 }
