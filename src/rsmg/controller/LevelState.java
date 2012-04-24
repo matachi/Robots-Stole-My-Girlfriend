@@ -181,6 +181,18 @@ class LevelState extends State {
 		characterDashingL = characterDashingR.getFlippedCopy(true, false);
 		
 		/**
+		 * Makes images for when the character is holding a rocket launcher
+		 */
+		characterRPGStandingR = new Image(folderPath+"charRPGStanding.png", false, filter).getScaledCopy(scale);
+		characterRPGStandingL = characterRPGStandingR.getFlippedCopy(true, false);
+		characterRPGJumpingR = new Image(folderPath+"charRPGJumping.png", false, filter).getScaledCopy(scale);
+		characterRPGJumpingL = characterRPGJumpingR.getFlippedCopy(true, false);
+		
+		Image charRPGRunningImage = new Image(folderPath+"charRPGRunningSheet.png", false, filter);
+		SpriteSheet RPGRunningSheet = new SpriteSheet(charRPGRunningImage.getScaledCopy(scale), 32*scale, 23*scale);
+		characterRPGRunningR = new Animation(RPGRunningSheet, 140);
+		
+		/**
 		 * Create a map with all enemy images.
 		 */
 		enemies = new HashMap<String, Renderable>();
