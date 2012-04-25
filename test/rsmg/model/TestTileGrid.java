@@ -68,7 +68,7 @@ public class TestTileGrid {
 	@Test
 	public void testLeftSideIntersection() {
 		int charX = 50;
-		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT;
+		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT-1;
 		PCharacter character = new PCharacter(charX, notYIntersect, null);
         assertTrue(grid.leftSideIntersection(character) == 0);
         
@@ -81,7 +81,7 @@ public class TestTileGrid {
 	@Test
 	public void testRightSideIntersection() {
 		int charX = 35;
-		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT;
+		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT-1;
 		PCharacter character = new PCharacter(charX, notYIntersect, null);
 		assertTrue(grid.rightSideIntersection(character) == 0);
         
@@ -94,14 +94,14 @@ public class TestTileGrid {
 	@Test
 	public void testBottomSideIntersection() {
 		int charX = 35;
-		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT;
+		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT-1;
 		PCharacter character = new PCharacter(charX, notYIntersect, null);
 		assertTrue(grid.bottomSideIntersection(character) == 0);
         
 		int intersectLength = 12;
         int yIntersect = notYIntersect+intersectLength;
         character.setY(yIntersect);
-        assertTrue(grid.bottomSideIntersection(character) == intersectLength - 0.00001);
+        assertTrue(grid.bottomSideIntersection(character) == intersectLength-1-0.00001);
 	}
 	
 	// No top atm
