@@ -66,26 +66,12 @@ class LevelState extends State {
 	 * pistol
 	 */
 	private HashMap<String, Renderable> pistolMap;
-	
-//	private Animation characterPistolRunningR;
-//	private Animation characterPistolRunningL;
-//	private Image characterPistolStandingR;
-//	private Image characterPistolStandingL;
-//	private Image characterPistolJumpingR;
-//	private Image characterPistolJumpingL;
-	
+		
 	/**
 	 * rocket launcher
 	 */
 	
 	private Map<String, Renderable> rpgMap;
-	
-//	private Animation characterRPGRunningR;
-//	private Animation characterRPGRunningL;
-//	private Image characterRPGStandingR;
-//	private Image characterRPGStandingL;
-//	private Image characterRPGJumpingR;
-//	private Image characterRPGJumpingL;
 	
 	/**
 	 * dash

@@ -31,11 +31,11 @@ public class RocketLauncher implements IWeapon{
 		if (wielder.isFacingRight()){
 			bulletVelocity.setX(bulletSpeed);
 			offsetX = 25;
-			offsetY = 5;
+			offsetY = 0;
 		}else{
 			bulletVelocity.setX(-bulletSpeed);
 			offsetX = -5;
-			offsetY = 5;
+			offsetY = 0;
 		}
 		
 		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKET, bulletDamage, bulletVelocity));
