@@ -57,6 +57,12 @@ class LevelState extends State {
 	private Map<String, Renderable> enemies;
 	private Map<String, Renderable> characterMap;
 	
+	private String runRightKey = "runRight";
+	private String runLeftKey = "runLeft";
+	private String standRightKey = "standRight";
+	private String standLeftKey = "standLeft";
+	private String jumpRKey = "jumpRight";
+	private String jumpLKey = "jumpLeft";
 	/**
 	 * The character that the player controls.
 	 */
@@ -72,6 +78,7 @@ class LevelState extends State {
 	 */
 	
 	private Map<String, Renderable> rpgMap;
+	private Map<String, Renderable> shotgunMap;
 	
 	/**
 	 * dash
@@ -127,16 +134,10 @@ class LevelState extends State {
 		healthBarOverlayRectangle = new Rectangle(23, 23, 147, 17);
 		healthBarOverlayGraphics = new Graphics();
 		healthBarOverlayGraphics.setColor(new Color(0.85f, 0.3f, 0.3f, 0.5f));
-		
-		String runRightKey = "runRight";
-		String runLeftKey = "runLeft";
-		String standRightKey = "standRight";
-		String standLeftKey = "standLeft";
-		String jumpRKey = "jumpRight";
-		String jumpLKey = "jumpLeft";
 		characterMap = new HashMap<String, Renderable>();
 		pistolMap = new HashMap<String, Renderable>();
 		rpgMap = new HashMap<String, Renderable>();
+		shotgunMap = new HashMap<String, Renderable>();
 		
 		/**
 		 * Make an animation for when the character is running to the right.
@@ -217,7 +218,30 @@ class LevelState extends State {
 		rpgMap.put(standRightKey, characterRPGStandingR);
 		rpgMap.put(runLeftKey, characterRPGRunningL);
 		rpgMap.put(runRightKey, characterRPGRunningR);
-				
+		
+		/**
+		 * Makes images for when the character is holding a shotgun
+		 */
+		Image characterShotgunStandingR = new Image(folderPath+"charShotgunStanding.png", false, filter).getScaledCopy(scale);
+		Image characterShotgunStandingL = characterShotgunStandingR.getFlippedCopy(true, false);
+		Image characterShotgunJumpingR = new Image(folderPath+"charShotgunJumping.png", false, filter).getScaledCopy(scale);
+		Image characterShotgunJumpingL = characterShotgunJumpingR.getFlippedCopy(true, false);
+		
+		
+		Image charShotgunRunningImage = new Image(folderPath+"charShotgunRunningSheet.png", false, filter);
+		SpriteSheet ShotgunRunningSheet = new SpriteSheet(charShotgunRunningImage.getScaledCopy(scale), 36*scale, 23*scale);
+		Animation characterShotgunRunningR = new Animation(ShotgunRunningSheet, 140);
+		
+		ShotgunRunningSheet = new SpriteSheet(charShotgunRunningImage.getScaledCopy(scale).getFlippedCopy(true, false), 36*scale, 23*scale);
+		Animation characterShotgunRunningL = new Animation(ShotgunRunningSheet, 140);
+		
+		shotgunMap.put(jumpLKey, characterShotgunJumpingL);
+		shotgunMap.put(jumpRKey, characterShotgunJumpingR);
+		shotgunMap.put(runRightKey, characterShotgunRunningR);
+		shotgunMap.put(runLeftKey, characterShotgunRunningL);
+		shotgunMap.put(standLeftKey, characterShotgunStandingL);
+		shotgunMap.put(standRightKey, characterShotgunStandingR);
+		
 		/**
 		 * Create a map with all enemy images.
 		 */
@@ -244,6 +268,8 @@ class LevelState extends State {
 		bullets = new HashMap<String, Renderable>();
 		Image laserBullet = new Image(folderPath+"laserBullet.png", false, filter).getScaledCopy(scale);
 		bullets.put(ObjectName.LASER_BULLET, laserBullet);
+		Image shotgunBullet = new Image(folderPath+"shotgunBullet.png", false, filter).getScaledCopy(scale);
+		bullets.put(ObjectName.SHOTGUN_BULLET, shotgunBullet);
 		
 		/**
 		 * create an animation for the rocket
@@ -386,10 +412,12 @@ class LevelState extends State {
 		 * Fix so the right character sprite is shown on the next render()
 		 */
 		String weaponName = level.getCharacter().getWeapon().getName();
-		if (weaponName.equals("pistol")) {
+		if (weaponName.equals(ObjectName.PISTOL)) {
 			characterMap = pistolMap;
-		}else if(weaponName.equals("rocketLauncher")) {
+		}else if(weaponName.equals(ObjectName.ROCKET_LAUNCHER)) {
 			characterMap = rpgMap;
+		}else if(weaponName.equals(ObjectName.SHOTGUN)) {
+			characterMap = shotgunMap;
 		}
 		
 		if(level.getCharacter().isDashing()) {

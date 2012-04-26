@@ -14,8 +14,11 @@ public class RocketLauncher implements IWeapon{
 	private LivingObject wielder;
 	private Collection<Bullet> bulletList;
 	private boolean shot;
-	public int clipSize = 2;
-	
+	private static int bulletWidth = 14;
+	private static int bulletHeight = 14;
+	private static int bulletDamage = 10;
+	private static int bulletSpeed = 400;
+
 	public RocketLauncher(LivingObject wielder, Collection<Bullet> bulletList) {
 		this.wielder = wielder;
 		this.bulletList = bulletList;
@@ -24,14 +27,11 @@ public class RocketLauncher implements IWeapon{
 	
 	@Override
 	public void shoot() {
-		int bulletWidth = 14;
-		int bulletHeight = 14;
-		int bulletDamage = 10;
-		int bulletSpeed = 400;
+
 		Vector2d bulletVelocity = new Vector2d();
 		int offsetX;
 		int offsetY;
-
+		
 		if (wielder.isFacingRight()){
 			bulletVelocity.setX(bulletSpeed);
 			offsetX = 25;
@@ -45,10 +45,6 @@ public class RocketLauncher implements IWeapon{
 		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKET, bulletDamage, bulletVelocity));
 		
 		shot = true;
-	}
-	
-	public int getClipSize(){
-		return clipSize;
 	}
 
 	@Override

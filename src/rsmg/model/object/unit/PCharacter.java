@@ -67,7 +67,7 @@ public class PCharacter extends LivingObject {
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 		this.bulletList = bulletList;	
-		currentWeapon = new Pistol(this, bulletList);
+		currentWeapon = new Shotgun(this, bulletList);
 		canDash = CharacterProgress.dashUnlocked();
 	}
 	
@@ -103,7 +103,7 @@ public class PCharacter extends LivingObject {
 		
 		super.move(delta);
 	}
-	
+
 	/**
 	 * Returns a reference to the weapon that the character is currently wielding.
 	 * @return A reference to the weapon that the character is currently wielding.
@@ -111,7 +111,7 @@ public class PCharacter extends LivingObject {
 	public IWeapon getWeapon() {
 		return currentWeapon;
 	}
-	
+
 	/**
 	 * Update whether the character is in the air or standing on the ground.
 	 * @param airborne If the character is in the air.
@@ -119,7 +119,7 @@ public class PCharacter extends LivingObject {
 	public void setAirborne(boolean airborne) {
 		this.airborne = airborne;
 	}
-	
+
 	/**
 	 * Is the character airborne, i.e. in the air.
 	 * @return If the character is in the air.
@@ -127,7 +127,7 @@ public class PCharacter extends LivingObject {
 	public boolean isAirborne() {
 		return airborne;
 	}
-	
+
 	/**
 	 * Adds a velocity upwards to the character, sending him up in the air.
 	 */
@@ -136,14 +136,14 @@ public class PCharacter extends LivingObject {
 		if (!airborne)
 			this.addVelocity(0, -Constants.JUMPSTRENGTH);
 	}
-	
+
 	/**
 	 * Changes the character's velocity, moving him westwards in next loop.
 	 */
 	public void moveLeft() {
 		this.setVelocityX(-Constants.CHARACTERSPEED);
 	}
-	
+
 	/**
 	 * Changes the character's velocity, moving him eastwards in next loop.
 	 */
@@ -193,7 +193,7 @@ public class PCharacter extends LivingObject {
 			distanceDashed = 0;
 		}
 	}
-	
+
 	/**
 	 * If the character is dashing.
 	 * @return If the character is dashing.

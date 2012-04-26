@@ -10,7 +10,14 @@ public class Pistol implements IWeapon{
 	private LivingObject wielder;
 	private Collection<Bullet> bulletList;
 	private boolean shot;
-	private int clipSize;
+
+	private static int bulletWidth = 5;
+	private static int bulletHeight = 3;
+	private static int bulletDamage = 10;
+	private static int bulletSpeed = 500;
+	private Vector2d bulletVelocity = new Vector2d();
+	private int offsetX;
+	private int offsetY;
 	
 	public Pistol(LivingObject wielder, Collection<Bullet> bulletList) {
 		this.wielder = wielder;
@@ -20,13 +27,7 @@ public class Pistol implements IWeapon{
 	
 	@Override
 	public void shoot() {
-		int bulletWidth = 5;
-		int bulletHeight = 3;
-		int bulletDamage = 10;
-		int bulletSpeed = 500;
-		Vector2d bulletVelocity = new Vector2d();
-		int offsetX;
-		int offsetY;
+
 
 		if (wielder.isFacingRight()){
 			bulletVelocity.setX(bulletSpeed);
@@ -47,14 +48,6 @@ public class Pistol implements IWeapon{
 	public long getCooldown() {
 		return 300;
 	}
-	
-//	public int getClipSize(){
-//		return clipSize;
-//	}
-//	
-//	public long getReloadTime(){
-//		return 300;
-//	}
 	
 	@Override
 	public boolean shot() {
