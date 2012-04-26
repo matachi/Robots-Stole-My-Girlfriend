@@ -47,16 +47,17 @@ public class XmlConverter {
 			Document document = (Document) builder.build(xmlFile);
 			Element rootNode = document.getRootElement();
 
-			List sizeList = rootNode.getChildren("size");
-			Element sizeElem = (Element) sizeList.get(0);
+			Element sizeElem = rootNode.getChild("size");
 			int height = Integer.parseInt(sizeElem.getChildText("height"));
 			int width = Integer.parseInt(sizeElem.getChildText("width"));
 			grid = new Tile[height][width];
 
-			List rows = rootNode.getChildren("row");
+			@SuppressWarnings("unchecked")
+			List<Element> rows = rootNode.getChildren("row");
 			for (int y = 0; y < rows.size(); y++) {
 				Element cellsElem = (Element) rows.get(y);
-				List cells = cellsElem.getChildren("cell");
+				@SuppressWarnings("unchecked")
+				List<Element> cells = cellsElem.getChildren("cell");
 
 				for (int x = 0; x < cells.size(); x++) {
 

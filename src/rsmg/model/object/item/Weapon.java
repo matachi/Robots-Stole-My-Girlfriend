@@ -1,6 +1,5 @@
 package rsmg.model.object.item;
 
-import rsmg.model.ObjectName;
 
 public class Weapon extends Item {
 	
