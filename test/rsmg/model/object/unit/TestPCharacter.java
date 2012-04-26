@@ -56,94 +56,19 @@ public class TestPCharacter {
 		character.moveRight();
 		assertTrue(character.getVelocityX() > 0);
 	}
-	
-//	@Test
-//	public void testCollide() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testCharacter() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testInteractiveObjectDoubleDouble() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testInteractiveObjectDoubleDoubleDoubleDouble() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetVector() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetVelocity() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testAddVector() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetX() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetY() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetHeight() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetWidth() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testSetX() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testSetY() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testMove() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testApplyGravity() {
-//		fail("Not yet implemented");
-//	}
 
 	@Test
 	public void testHasCollidedWith() {
 		
 		PCharacter character = new PCharacter(0, 0, null);
-		PCharacter character2 = new PCharacter(0, 0, null);
+		PCharacter character2 = new PCharacter(5, 5, null);
+		assertTrue(character.hasCollidedWith(character2));
+		assertTrue(character2.hasCollidedWith(character));
 		
-		boolean test1 = character.hasCollidedWith(character2);
-		
-		character.setX(character.getWidth());
-		character.setY(character.getHeight());
-		
-		boolean test2 = character.hasCollidedWith(character2);
-		assertTrue(test1 && test2);
+		// Rotate both right
+		character.setX(5);
+		character2.setX(0);
+		assertTrue(character.hasCollidedWith(character2));
+		assertTrue(character2.hasCollidedWith(character));
 	}
 }
