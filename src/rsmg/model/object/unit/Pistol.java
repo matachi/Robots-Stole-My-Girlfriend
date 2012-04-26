@@ -6,13 +6,13 @@ import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
 
-public class LaserPistol implements IWeapon{
+public class Pistol implements IWeapon{
 	private LivingObject wielder;
 	private Collection<Bullet> bulletList;
 	private boolean shot;
 	private int clipSize;
 	
-	public LaserPistol(LivingObject wielder, Collection<Bullet> bulletList) {
+	public Pistol(LivingObject wielder, Collection<Bullet> bulletList) {
 		this.wielder = wielder;
 		this.bulletList = bulletList;
 		this.shot = false;
@@ -48,13 +48,13 @@ public class LaserPistol implements IWeapon{
 		return 300;
 	}
 	
-	public int getClipSize(){
-		return clipSize;
-	}
-	
-	public long getReloadTime(){
-		return 300;
-	}
+//	public int getClipSize(){
+//		return clipSize;
+//	}
+//	
+//	public long getReloadTime(){
+//		return 300;
+//	}
 	
 	@Override
 	public boolean shot() {

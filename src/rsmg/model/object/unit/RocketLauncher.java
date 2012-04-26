@@ -5,7 +5,11 @@ import java.util.Collection;
 import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
-
+/**
+ * Class used to create the "rocket" type bullet
+ * @author zapray
+ *
+ */
 public class RocketLauncher implements IWeapon{
 	private LivingObject wielder;
 	private Collection<Bullet> bulletList;
@@ -61,12 +65,12 @@ public class RocketLauncher implements IWeapon{
 		return false;
 	}
 	
-	@Override
-	public long getReloadTime() {
-		
-		return 1000;
-	}
-	
+//	@Override
+//	public long getReloadTime() {
+//		
+//		return 1000;
+//	}
+//	
 	@Override
 	public String getName() {
 		return "rocketLauncher";

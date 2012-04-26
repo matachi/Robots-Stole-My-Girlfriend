@@ -62,7 +62,7 @@ public class PCharacter extends LivingObject {
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 		this.bulletList = bulletList;	
-		currentWeapon = new LaserPistol(this, bulletList);
+		currentWeapon = new Pistol(this, bulletList);
 		canDash = CharacterProgress.dashUnlocked();
 	}
 	
@@ -73,7 +73,7 @@ public class PCharacter extends LivingObject {
 		}
 		if (obj instanceof Item) {
 			if(obj.getName().equals(ObjectName.LASER_PISTOL))
-				currentWeapon = new LaserPistol(this, bulletList);
+				currentWeapon = new Pistol(this, bulletList);
 			else if(obj.getName().equals(ObjectName.ROCKET_LAUNCHER))
 				currentWeapon = new RocketLauncher(this, bulletList);
 			else if(obj.getName().equals(ObjectName.HEALTH_PACK))
