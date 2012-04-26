@@ -232,9 +232,11 @@ class LevelState extends State {
 		Image healthPack = new Image(folderPath+"healthPack.png", false, filter).getScaledCopy(scale);	
 		Image laserPistol = new Image(folderPath+"laserPistol.png", false, filter).getScaledCopy(scale);
 		Image rocketLauncher = new Image(folderPath+"rocketLauncher.png", false, filter).getScaledCopy(scale);
+		Image upgradePoint = new Image(folderPath+"upgradePoint.png", false, filter).getScaledCopy(scale);
 		items.put(ObjectName.HEALTH_PACK, healthPack);
 		items.put(ObjectName.LASER_PISTOL, laserPistol);
 		items.put(ObjectName.ROCKET_LAUNCHER, rocketLauncher);
+		items.put(ObjectName.UPGRADE_POINT, upgradePoint);
 		
 		/**
 		 * Create a map with all bullet images.

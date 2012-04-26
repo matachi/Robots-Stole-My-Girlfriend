@@ -48,7 +48,7 @@
     <cell item="laserPistol">AirTile</cell>
     <cell item="healthPack">AirTile</cell>
     <cell item="rocketLauncher">AirTile</cell>
-    <cell>AirTile</cell>
+    <cell item="upgradePoint">AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>

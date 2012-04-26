@@ -54,6 +54,11 @@ public class PCharacter extends LivingObject {
 	private boolean isDashing = false;
 	
 	/**
+	 *  upgradePoints the user can spend after each level
+	 */
+	private int upgradePoints=0;
+	
+	/**
 	 * Create a character that the player controls.
 	 * @param x The X coordinate.
 	 * @param y The Y coordinate.
@@ -78,6 +83,8 @@ public class PCharacter extends LivingObject {
 				currentWeapon = new RocketLauncher(this, bulletList);
 			else if(obj.getName().equals(ObjectName.HEALTH_PACK))
 				addHealth();
+			else if(obj.getName().equals(ObjectName.UPGRADE_POINT))
+				upgradePoints++;
 		}
 	}
 	
@@ -193,5 +200,9 @@ public class PCharacter extends LivingObject {
 	 */
 	public boolean isDashing() {
 		return isDashing;
+	}
+	
+	public int getUpgradePoints(){
+		return upgradePoints;
 	}
 }
