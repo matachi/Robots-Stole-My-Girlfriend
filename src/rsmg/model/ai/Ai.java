@@ -1,4 +1,4 @@
-package rsmg.model.Ai;
+package rsmg.model.ai;
 
 import rsmg.model.object.unit.Enemy;
 
