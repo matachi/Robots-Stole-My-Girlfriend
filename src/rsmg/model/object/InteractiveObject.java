@@ -126,33 +126,77 @@ public abstract class InteractiveObject {
 	}
 	
 	/**
-	 * Checks if the two objects have collided with each other.
-	 * @param obj
+	 * Checks if the given Interactive object have collided with this. Dose not check for collision in same plane(to optimize performance)
+	 * @param obj is the object that intersect this one
 	 * @return true if the two InteractiveObjects have collided, otherwise it returns false
 	 */
 	public boolean hasCollidedWith(InteractiveObject obj){
 		if (obj == null) {
 			return false;
 		} else {
-//			if (verticalCollision(obj)) {
-//				return horizontalCollision(obj);
-//			}
-			return (((this.getX() - obj.getX() < (obj.getWidth()) && (this.getX() > obj.getX()) &&
-					((this.getY() - obj.getY()) < obj.getHeight()) && (this.getY() > obj.getY()) ) ||
-					((obj.getX() - this.getX() < this.getWidth()) && (obj.getX() > this.getX()) &&
-						(obj.getY() - this.getY() < this.getHeight()) && (obj.getY() > this.getY()))));
+			return (leftCollision(obj) || rightCollision(obj));
 		}
 	}
 	
-//	private boolean verticalCollision(InteractiveObject obj) {
-//		return (getX() - obj.getX() < obj.getWidth() && getX() > obj.getX()) ||
-//			   (obj.getX() - getX() < getWidth() && obj.getX() > getX());
-//	}
-//	
-//	private boolean horizontalCollision(InteractiveObject obj) {
-//		return (getY() - obj.getY() < obj.getHeight() && getY() < obj.getY()) ||
-//			   (obj.getY() - getY() < getHeight()) && (obj.getY() < getY());
-//	}
+	/**
+	 * Check if the object have collided from the left side
+	 * @param obj is the object that intersect this one
+	 * @return true if the two InteractiveObjects have collided from left side, otherwise it returns false
+	 */
+	private boolean leftCollision(InteractiveObject obj){
+		return leftUpCollision(obj) || leftDownCollision(obj);
+	}
+	
+	/**
+	 * Check if the object have collided from the right side
+	 * @param obj is the object that intersect this one
+	 * @return true if the two InteractiveObjects have collided from right side, otherwise it returns false
+	 */
+	private boolean rightCollision(InteractiveObject obj){
+		return rightUpCollision(obj) || rightDownCollision(obj);
+	}
+	
+	
+	/**
+	 * Checks if the object have collided from left-upper side
+	 * @param obj is the object that intersect this one
+	 * @return true if the two InteractiveObjects have collided from left-upper side, otherwise it returns false
+	 */
+	private boolean leftUpCollision(InteractiveObject obj){
+		return (((this.getX() - obj.getX()) < obj.getWidth()) && (this.getX() > obj.getX()) &&
+				((this.getY() - obj.getY()) < obj.getHeight()) && (this.getY() > obj.getY()));
+	}
+	
+	/**
+	 * Checks if the object have collided from left-bottom side
+	 * @param obj is the object that intersect this one
+	 * @return true if the two InteractiveObjects have collided from left-bottom side, otherwise it returns false
+	 */
+	private boolean leftDownCollision(InteractiveObject obj){
+		return (((this.getX() - obj.getX()) < obj.getWidth()) && (this.getX() > obj.getX()) &&
+				((obj.getY() - this.getY()) < this.getHeight()) && (obj.getY() > this.getY()));
+	}
+	
+	/**
+	 * Checks if the object have collided from right-upper side
+	 * @param obj is the object that intersect this one
+	 * @return true if the two InteractiveObjects have collided from right-upper side, otherwise it returns false
+	 */
+	private boolean rightUpCollision(InteractiveObject obj){
+		return (((obj.getX() - this.getX()) < this.getWidth()) && (obj.getX() > this.getX()) &&
+				((this.getY() - obj.getY()) < obj.getHeight()) && (this.getY() > obj.getY()));
+	}
+	
+	/**
+	 * Checks if the object have collided from right-bottom side
+	 * @param obj is the object that intersect this one
+	 * @return true if the two InteractiveObjects have collided from right-bottom side, otherwise it returns false
+	 */
+	private boolean rightDownCollision(InteractiveObject obj){
+		return ((obj.getX() - this.getX() < this.getWidth()) && (obj.getX() > this.getX()) &&
+				(obj.getY() - this.getY() < this.getHeight()) && (obj.getY() > this.getY()));
+	}
+	
 	/**
 	 * 
 	 * @return true if object did not move horizontally last time
