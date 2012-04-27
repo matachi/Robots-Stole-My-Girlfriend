@@ -1,10 +1,13 @@
-package rsmg.model.object.unit;
+package rsmg.model.weapon;
 
 public interface IWeapon {
 	/**
-	 * method in which this weapon creates a Bullet
+	 * Method in which this weapon creates a bullet
+	 * @param x horizontal coordinate for the LivingObject holding the gun
+	 * @param y vertical coordinate for the LivingOBject holding the gun
+	 * @param facingRight boolean informing where the LivingObject is facing
 	 */
-	public void shoot();
+	public void shoot(double x, double y, boolean facingRight);
 	/**
 	 * returns the time interval of how often this weapon can be shot
 	 * @return the time interval of how often this weapon can be shot

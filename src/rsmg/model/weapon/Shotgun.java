@@ -1,4 +1,4 @@
-package rsmg.model.object.unit;
+package rsmg.model.weapon;
 
 import java.util.Collection;
 import java.util.Random;
@@ -10,7 +10,6 @@ import rsmg.util.Vector2d;
 
 	
 public class Shotgun implements IWeapon{
-	private LivingObject wielder;
 	private Collection<Bullet> bulletList;
 	private boolean shot;
 	private int bulletWidth = 2;
@@ -22,17 +21,16 @@ public class Shotgun implements IWeapon{
 	private static int amountOfBulletsPerShot = 6;
 	private static int spread = 200;
 	
-	public Shotgun(LivingObject wielder, Collection<Bullet> bulletList) {
-		this.wielder = wielder;
+	public Shotgun(Collection<Bullet> bulletList) {
 		this.bulletList = bulletList;
 		shot = false;
 	}
 	
 	@Override
-	public void shoot() {
+	public void shoot(double x, double y, boolean isFacingRight) {
 
 		int xBulletSpeed;
-		if (wielder.isFacingRight()){
+		if (isFacingRight){
 			xBulletSpeed = bulletSpeed;
 			offsetX = 25;
 		}else{
@@ -46,7 +44,7 @@ public class Shotgun implements IWeapon{
 			Vector2d bulletVelocity = new Vector2d();
 			bulletVelocity.setX(xBulletSpeed);
 			bulletVelocity.setY((randomGen.nextDouble()*2-1)*spread);
-			bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, ObjectName.SHOTGUN_BULLET, bulletDamage, bulletVelocity));
+			bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.SHOTGUN_BULLET, bulletDamage, bulletVelocity));
 		}
 		
 		shot = true;

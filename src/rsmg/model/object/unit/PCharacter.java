@@ -8,6 +8,10 @@ import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
+import rsmg.model.weapon.IWeapon;
+import rsmg.model.weapon.Pistol;
+import rsmg.model.weapon.RocketLauncher;
+import rsmg.model.weapon.Shotgun;
 
 /**
  * Class for representing the playable Character
@@ -67,8 +71,8 @@ public class PCharacter extends LivingObject {
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 		this.bulletList = bulletList;	
-		currentWeapon = new Shotgun(this, bulletList);
 		canDash = CharacterProgress.isDashUnlocked();
+		currentWeapon = new Shotgun(bulletList);
 	}
 	
 	@Override
@@ -78,11 +82,11 @@ public class PCharacter extends LivingObject {
 		}
 		if (obj instanceof Item) {
 			if(obj.getName().equals(ObjectName.LASER_PISTOL))
-				currentWeapon = new Pistol(this, bulletList);
+				currentWeapon = new Pistol(bulletList);
 			else if(obj.getName().equals(ObjectName.ROCKET_LAUNCHER))
-				currentWeapon = new RocketLauncher(this, bulletList);
+				currentWeapon = new RocketLauncher(bulletList);
 			else if(obj.getName().equals(ObjectName.SHOTGUN))
-				currentWeapon = new Shotgun(this, bulletList);
+				currentWeapon = new Shotgun(bulletList);
 			else if(obj.getName().equals(ObjectName.HEALTH_PACK))
 				addHealth();
 			else if(obj.getName().equals(ObjectName.UPGRADE_POINT))
@@ -166,7 +170,7 @@ public class PCharacter extends LivingObject {
 	 */
 	public void attack() {
 		if (lastAttacktime + currentWeapon.getCooldown() < System.currentTimeMillis()) {
-			currentWeapon.shoot();
+			currentWeapon.shoot(this.getX(), this.getY(), this.isFacingRight());
 			lastAttacktime = System.currentTimeMillis(); 
 		}
 	}
@@ -203,7 +207,7 @@ public class PCharacter extends LivingObject {
 	public boolean isDashing() {
 		return isDashing;
 	}
-	
+
 	public int getUpgradePoints(){
 		return upgradePoints;
 	}

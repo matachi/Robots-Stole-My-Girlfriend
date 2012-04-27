@@ -1,4 +1,4 @@
-package rsmg.model.object.unit;
+package rsmg.model.weapon;
 
 import java.util.Collection;
 
@@ -7,7 +7,6 @@ import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
 
 public class Pistol implements IWeapon{
-	private LivingObject wielder;
 	private Collection<Bullet> bulletList;
 	private boolean shot;
 
@@ -18,18 +17,17 @@ public class Pistol implements IWeapon{
 	private int offsetX;
 	private int offsetY;
 	
-	public Pistol(LivingObject wielder, Collection<Bullet> bulletList) {
-		this.wielder = wielder;
+	public Pistol(Collection<Bullet> bulletList) {
 		this.bulletList = bulletList;
 		this.shot = false;
 	}
 	
 	@Override
-	public void shoot() {
+	public void shoot(double x, double y, boolean isFacingRight) {
 
 		Vector2d bulletVelocity = new Vector2d();
 		
-		if (wielder.isFacingRight()){
+		if (isFacingRight){
 			bulletVelocity.setX(bulletSpeed);
 			offsetX = 25;
 			offsetY = 5;
@@ -39,7 +37,7 @@ public class Pistol implements IWeapon{
 			offsetY = 5;
 		}
 		
-		bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, ObjectName.LASER_BULLET, bulletDamage, bulletVelocity));
+		bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.LASER_BULLET, bulletDamage, bulletVelocity));
 		
 		shot = true;
 	}

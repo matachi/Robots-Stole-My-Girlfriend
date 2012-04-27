@@ -1,4 +1,4 @@
-package rsmg.model.object.unit;
+package rsmg.model.weapon;
 
 import java.util.Collection;
 
@@ -11,7 +11,6 @@ import rsmg.util.Vector2d;
  *
  */
 public class RocketLauncher implements IWeapon{
-	private LivingObject wielder;
 	private Collection<Bullet> bulletList;
 	private boolean shot;
 	private static int bulletWidth = 14;
@@ -19,30 +18,29 @@ public class RocketLauncher implements IWeapon{
 	private static int bulletDamage = 10;
 	private static int bulletSpeed = 400;
 
-	public RocketLauncher(LivingObject wielder, Collection<Bullet> bulletList) {
-		this.wielder = wielder;
+	public RocketLauncher(Collection<Bullet> bulletList) {
 		this.bulletList = bulletList;
 		shot = false;
 	}
 	
 	@Override
-	public void shoot() {
+	public void shoot(double x, double y, boolean isFacingRight) {
 
 		Vector2d bulletVelocity = new Vector2d();
 		int offsetX;
 		int offsetY;
 		
-		if (wielder.isFacingRight()){
+		if (isFacingRight){
 			bulletVelocity.setX(bulletSpeed);
 			offsetX = 25;
 			offsetY = 0;
-			bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKETR, bulletDamage, bulletVelocity));
+			bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKETR, bulletDamage, bulletVelocity));
 
 		}else{
 			bulletVelocity.setX(-bulletSpeed);
 			offsetX = -5;
 			offsetY = 0;
-			bulletList.add(new Bullet(wielder.getX()+offsetX, wielder.getY()+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKETL, bulletDamage, bulletVelocity));
+			bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKETL, bulletDamage, bulletVelocity));
 
 		}
 		
