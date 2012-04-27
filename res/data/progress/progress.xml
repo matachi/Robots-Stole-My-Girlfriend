@@ -9,5 +9,12 @@
 	<upgradePoints>5</upgradePoints>
 	<unlockedUpgrades>
 		<dash>true</dash>
+		<doubleJump>true</doubleJump>
+		<rapidFire>false</rapidFire>
+		<incRunningSpeed>true</incRunningSpeed>
+		<incShotgunSpread>true</incShotgunSpread>
+		<incRPGKnockback>false</incRPGKnockback>
+		<incRPGAoE>false</incRPGAoE>
+		<decAssaultRifleKnockback>true</decAssaultRifleKnockback>
 	</unlockedUpgrades>
 </progress>

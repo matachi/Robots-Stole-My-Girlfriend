@@ -64,6 +64,13 @@ public class CharacterProgress {
 
 			Element upgrade = rootNode.getChild("unlockedUpgrades");
 			progress.put("dash", booleanToInt(upgrade.getChildText("dash")));
+			progress.put("doubleJump", booleanToInt(upgrade.getChildText("doubleJump")));
+			progress.put("rapidFire", booleanToInt(upgrade.getChildText("rapidFire")));
+			progress.put("incRunningSpeed", booleanToInt(upgrade.getChildText("incRunningSpeed")));
+			progress.put("incShotgunSpread", booleanToInt(upgrade.getChildText("incShotgunSpread")));
+			progress.put("incRPGKnockback", booleanToInt(upgrade.getChildText("incRPGKnockback")));
+			progress.put("incRPGAoE", booleanToInt(upgrade.getChildText("incRPGAoE")));
+			progress.put("decAssaultRifleKnockback", booleanToInt(upgrade.getChildText("decAssaultRifleKnockback")));
 			
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -77,28 +84,58 @@ public class CharacterProgress {
 	/*
 	 * Get methods.
 	 */
-	public static int unlockedLevels() {
+	public static int getUnlockedLevels() {
 		return variableNumber("unlockedLevels");
 	}
 	
-	public static int upgradePoints() {
+	public static int getUpgradePoints() {
 		return variableNumber("upgradePoints");
 	}
 
-	public static boolean rpgUnlocked() {
+	// weapons
+	public static boolean isRPGUnlocked() {
 		return variableIsTrue("rpg");
 	}
 
-	public static boolean shotgunUnlocked() {
+	public static boolean isShotgunUnlocked() {
 		return variableIsTrue("shotgun");
 	}
 
-	public static boolean assaultRifleUnlocked() {
+	public static boolean isAssaultRifleUnlocked() {
 		return variableIsTrue("assaultRifle");
 	}
 	
-	public static boolean dashUnlocked() {
+	// upgrades
+	public static boolean isDashUnlocked() {
 		return variableIsTrue("dash");
+	}
+	
+	public static boolean isDoubleJumpUnlocked() {
+		return variableIsTrue("doubleJump");
+	}
+	
+	public static boolean isRapidFireUnlocked() {
+		return variableIsTrue("rapidFire");
+	}
+	
+	public static boolean isIncRunningSpeedUnlocked() {
+		return variableIsTrue("incRunningSpeed");
+	}
+	
+	public static boolean isIncShotgunSpreadUnlocked() {
+		return variableIsTrue("incShotgunSpread");
+	}
+	
+	public static boolean isIncRPGKnockbackUnlocked() {
+		return variableIsTrue("incRPGKnockback");
+	}
+	
+	public static boolean isIncRPGAoeUnlocked() {
+		return variableIsTrue("incRPGAoE");
+	}
+	
+	public static boolean isDecAssaultRifleKnockbackUnlocked() {
+		return variableIsTrue("decAssaultRifleKnockback");
 	}
 	
 	/*
@@ -112,6 +149,7 @@ public class CharacterProgress {
 		setVariable("upgradePoints", i);
 	}
 	
+	// weapons
 	public static void setRpgUnlocked(boolean unlocked) {
 		setVariable("rpg", unlocked);
 	}
@@ -124,8 +162,37 @@ public class CharacterProgress {
 		setVariable("assaultRifle", unlocked);
 	}
 	
+	// upgrades
 	public static void setDashUnlocked(boolean unlocked) {
 		setVariable("dash", unlocked);
+	}
+	
+	public static void setDoubleJumpUnlocked(boolean unlocked) {
+		setVariable("doubleJump", unlocked);
+	}
+	
+	public static void setRapidFireUnlocked(boolean unlocked) {
+		setVariable("rapidFire", unlocked);
+	}
+	
+	public static void setIncRunningSpeedUnlocked(boolean unlocked) {
+		setVariable("incRunningSpeed", unlocked);
+	}
+	
+	public static void setIncShotgunSpreadUnlocked(boolean unlocked) {
+		setVariable("incShotgunSpread", unlocked);
+	}
+	
+	public static void setIncRPGKnockbackUnlocked(boolean unlocked) {
+		setVariable("incRPGKnockback", unlocked);
+	}
+	
+	public static void setIncRPGAoEUnlocked(boolean unlocked) {
+		setVariable("incRPGAoE", unlocked);
+	}
+	
+	public static void setDecAssaultRifleKnockbackUnlocked(boolean unlocked) {
+		setVariable("decAssaultRifleKnockback", unlocked);
 	}
 	
 	/**
@@ -143,16 +210,25 @@ public class CharacterProgress {
 			Element rootNode = document.getRootElement();
 			
 			// Store the settings in the instance of the config document
-			rootNode.getChild("unlockedLevels").setText(String.valueOf(unlockedLevels()));
-			rootNode.getChild("upgradePoints").setText(String.valueOf(upgradePoints()));
+			rootNode.getChild("unlockedLevels").setText(String.valueOf(getUnlockedLevels()));
+			rootNode.getChild("upgradePoints").setText(String.valueOf(getUpgradePoints()));
 			
+			// weapons
 			Element childNode = rootNode.getChild("unlockedWeapons");
-			childNode.getChild("rpg").setText(Boolean.toString(rpgUnlocked()));
-			childNode.getChild("shotgun").setText(Boolean.toString(shotgunUnlocked()));
-			childNode.getChild("assaultRifle").setText(Boolean.toString(assaultRifleUnlocked()));
+			childNode.getChild("rpg").setText(Boolean.toString(isRPGUnlocked()));
+			childNode.getChild("shotgun").setText(Boolean.toString(isShotgunUnlocked()));
+			childNode.getChild("assaultRifle").setText(Boolean.toString(isAssaultRifleUnlocked()));
 
+			// upgrades
 			childNode = rootNode.getChild("unlockedUpgrades");
-			childNode.getChild("dash").setText(Boolean.toString(dashUnlocked()));
+			childNode.getChild("dash").setText(Boolean.toString(isDashUnlocked()));
+			childNode.getChild("doubleJump").setText(Boolean.toString(isDoubleJumpUnlocked()));
+			childNode.getChild("rapidFire").setText(Boolean.toString(isRapidFireUnlocked()));
+			childNode.getChild("incRunningSpeed").setText(Boolean.toString(isIncRunningSpeedUnlocked()));
+			childNode.getChild("incShotgunSpread").setText(Boolean.toString(isIncShotgunSpreadUnlocked()));
+			childNode.getChild("incRPGKnockback").setText(Boolean.toString(isIncRPGKnockbackUnlocked()));
+			childNode.getChild("incRPGAoE").setText(Boolean.toString(isIncRPGAoeUnlocked()));
+			childNode.getChild("decAssaultRifleKnockback").setText(Boolean.toString(isDecAssaultRifleKnockbackUnlocked()));
         	
 			// Write the document to the progress file on the HDD
     		XMLOutputter outputter = new XMLOutputter();

@@ -8,6 +8,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.BlobbyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -36,6 +38,11 @@ class LevelSelectionState extends State {
 	private Image selectionGlow;
 	private Image completed;
 	private ArrayList<LevelButton> levelButtons;
+	
+	/**
+	 * Font to draw text on the screen.
+	 */
+	private UnicodeFont font;
 	
 	/**
 	 * A couple of variables for the scrolling background image.
@@ -77,6 +84,7 @@ class LevelSelectionState extends State {
 		super(stateID);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
@@ -95,6 +103,12 @@ class LevelSelectionState extends State {
 		title = new Image(folderPath+"title.png");
 		title = title.getScaledCopy(scale);
 		
+		// Load the font which is used to write text to the screen
+		font = new UnicodeFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN, 15));
+		font.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+		font.addAsciiGlyphs();
+		font.loadGlyphs();
+		
 		// Create the selection glow image.
 		selectionGlow = new Image(folderPath+"selectionGlow.png");
 		selectionGlow = selectionGlow.getScaledCopy(scale);
@@ -104,7 +118,7 @@ class LevelSelectionState extends State {
 		completed = completed.getScaledCopy(scale);
 
 		// Set the number of unlocked levels.
-		unlockedLevels = CharacterProgress.unlockedLevels();
+		unlockedLevels = CharacterProgress.getUnlockedLevels();
 
 		// Store the menu buttons in an ArrayList for convenience
 		levelButtons = new ArrayList<LevelButton>();
@@ -126,8 +140,8 @@ class LevelSelectionState extends State {
 			throws SlickException {
 		super.enter(gc, sbg);
 		gc.getInput().clearKeyPressedRecord();
-		unlockedLevels = CharacterProgress.unlockedLevels();
-		for (int i = 0; i < CharacterProgress.unlockedLevels(); i++)
+		unlockedLevels = CharacterProgress.getUnlockedLevels();
+		for (int i = 0; i < CharacterProgress.getUnlockedLevels(); i++)
 			if (!levelButtons.get(i).isUnlocked())
 				levelButtons.get(i).toggleUnlocked();
 	}
@@ -141,6 +155,9 @@ class LevelSelectionState extends State {
 		
 		// Draw the title text.
 		title.draw((gc.getWidth()-title.getWidth())/2, 50*scale + topOffset);
+		
+		// Draw information text.
+		font.drawString(80*scale, 120*scale, "Press the U key to\nshow your upgrades.");
 		
 		// Draw the level selection buttons.
 		for (int i = 0; i < levelButtons.size(); i++) {
@@ -176,10 +193,16 @@ class LevelSelectionState extends State {
 	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if (input.isKeyPressed(Input.KEY_LEFT))
 			navigateLeftInMenu();
+		
 		else if (input.isKeyPressed(Input.KEY_RIGHT))
 			navigateRightInMenu();
+		
 		else if (input.isKeyPressed(Input.KEY_ESCAPE))
 			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
+		
+		else if (input.isKeyPressed(Input.KEY_U))
+			sbg.enterState(Controller.UPGRADES_STATE, null, new FadeInTransition());
+		
 		else if (input.isKeyDown(Input.KEY_ENTER)) {
 			Controller.initLevel(levelButtons.get(selectedButton).getLevelNumber());
 			sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());

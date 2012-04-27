@@ -68,7 +68,7 @@ public class PCharacter extends LivingObject {
 		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 		this.bulletList = bulletList;	
 		currentWeapon = new Shotgun(this, bulletList);
-		canDash = CharacterProgress.dashUnlocked();
+		canDash = CharacterProgress.isDashUnlocked();
 	}
 	
 	@Override
