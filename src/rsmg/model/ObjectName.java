@@ -38,7 +38,8 @@ public enum ObjectName {
 	 */
 	public static final String PISTOL_BULLET = "bullet";
 	public static final String LASER_BULLET = "laserBullet";
-	public static final String ROCKET = "rocket";
+	public static final String ROCKETR = "rocketR";
+	public static final String ROCKETL = "rocketL";
 	public static final String SHOTGUN_BULLET = "shotgunBullet";
 
 	/**

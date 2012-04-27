@@ -145,6 +145,7 @@ public class Level {
 
 			//see if enemy has collided with any bullets and act appropriately
 			List<Bullet> newBullets = new ArrayList<Bullet>();
+			List<Bullet> expiredBullets = new ArrayList<Bullet>();
 			for (Iterator<Bullet> j = bullets.iterator(); j.hasNext(); ) {
 				Bullet bullet = j.next();
 
@@ -155,13 +156,14 @@ public class Level {
 					// this shouldn't be levels responsibility, but I do not
 					// know where to put it otherwise
 
-					if (bullet.getName() == ObjectName.ROCKET){
+					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL){
 						newBullets.add(new Explosion(bullet));
 					}
 					
-					bullets.remove(j);
+					expiredBullets.add(bullet);
 				}
 			}
+			bullets.removeAll(expiredBullets);
 			bullets.addAll(newBullets);
 		}
 	}
@@ -179,17 +181,21 @@ public class Level {
 			
 			if (tileGrid.intersectsWith(bullet)) {
 				
-				if (bullet.getName() == ObjectName.ROCKET)
+				if (bullet.getName() == ObjectName.ROCKETR  || bullet.getName() == ObjectName.ROCKETL)
 					bullets.add(new Explosion(bullet));
 				
-				if (bullet.getName() == ObjectName.EXPLOSION){
-					if(((Explosion)bullet).getAge() > Constants.EXPLOSIONDURATION){
-						bullets.remove(i);
-					}
-				}else{
+				//if the bullet is an explosion, do not remove it unless its past its duration
+				//otherwise, remove the bullet
+				if (!(bullet.getName() == ObjectName.EXPLOSION)){
 					bullets.remove(i);
 				}
 			}
+			if (bullet.getName() == ObjectName.EXPLOSION){
+				if(((Explosion)bullet).getAge() > Constants.EXPLOSIONDURATION){
+					bullets.remove(i);
+				}
+			}
+			
 		}
 	}
 	

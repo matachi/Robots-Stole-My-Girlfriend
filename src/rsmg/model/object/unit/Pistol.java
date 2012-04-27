@@ -15,7 +15,6 @@ public class Pistol implements IWeapon{
 	private static int bulletHeight = 3;
 	private static int bulletDamage = 10;
 	private static int bulletSpeed = 500;
-	private Vector2d bulletVelocity = new Vector2d();
 	private int offsetX;
 	private int offsetY;
 	
@@ -28,7 +27,8 @@ public class Pistol implements IWeapon{
 	@Override
 	public void shoot() {
 
-
+		Vector2d bulletVelocity = new Vector2d();
+		
 		if (wielder.isFacingRight()){
 			bulletVelocity.setX(bulletSpeed);
 			offsetX = 25;

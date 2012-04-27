@@ -289,9 +289,13 @@ class LevelState extends State {
 		 */
 		
 		Image rocketImage = new Image(folderPath+"rocketSheet.png", true, filter);
-		SpriteSheet rocketSheet = new SpriteSheet(rocketImage.getScaledCopy(scale), 15*scale, 14*scale);
-		Animation rocket = new Animation(rocketSheet, 140);
-		bullets.put("rocket", rocket);
+		SpriteSheet rocketSheetR = new SpriteSheet(rocketImage.getScaledCopy(scale), 15*scale, 14*scale);
+		SpriteSheet rocketSheetL = new SpriteSheet(rocketImage.getFlippedCopy(true, false).getScaledCopy(scale), 15*scale, 14*scale);
+		Animation rocketR = new Animation(rocketSheetR, 140);
+		Animation rocketL = new Animation(rocketSheetL, 140);
+		
+		bullets.put("rocketR", rocketR);
+		bullets.put("rocketL", rocketL);
 		
 		/**
 		 * create an animation for explosions
