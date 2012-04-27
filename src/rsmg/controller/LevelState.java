@@ -497,13 +497,13 @@ class LevelState extends State {
 		// left arrow key
 		if (input.isKeyDown(Input.KEY_LEFT)){
 			modelCharacter.moveLeft();
-			cameraX = -(((float)level.getCharacter().getX())*scale-spawnPoint);
+			cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPoint);
 		}
 		
 		// right arrow key
 		if (input.isKeyDown(Input.KEY_RIGHT)){
 			modelCharacter.moveRight();
-			cameraX = -(((float)level.getCharacter().getX())*scale-spawnPoint);
+			cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPoint);
 		}
 
 		// up arrow key
