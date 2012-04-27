@@ -19,6 +19,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.CharacterProgress;
 import rsmg.io.IO;
+import rsmg.model.Constants;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
@@ -104,6 +105,16 @@ class LevelState extends State {
 	 * Store the level number.
 	 */
 	private int levelNumber;
+	
+	/**
+	 * Camera for moving all object except the Character
+	 */
+	private float cameraX = 0;
+	
+	/**
+	 * Position where the Character starts in the x-plane
+	 */
+	private float spawnPoint;
 	
 	/**
 	 * Construct the level.
@@ -295,7 +306,6 @@ class LevelState extends State {
 		Image airTile = new Image(folderPath+"airTile.png", false, filter).getScaledCopy(scale);
 		tiles.put(ObjectName.BOX_TILE, boxTile);
 		tiles.put(ObjectName.AIR_TILE, airTile);
-		
 	}
 	
 	/**
@@ -306,6 +316,7 @@ class LevelState extends State {
 		this.levelNumber = levelNumber;
 		IO io = new IO();
 		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getEnemyList());
+		spawnPoint = (float)(level.getCharacter().getX())*scale;
 	}
 
 	@Override
@@ -348,7 +359,7 @@ class LevelState extends State {
 	 */
 	private void drawBullets() {
 		for (Bullet bullet : level.getBulletList())
-			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale, (float)bullet.getY()*scale);
+			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale);
 	}
 	
 	/**
@@ -356,7 +367,7 @@ class LevelState extends State {
 	 */
 	private void drawEnemies() {
 		for (Enemy enemy : level.getEnemies())
-			enemies.get(enemy.getName()).draw((float)enemy.getX()*scale, (float)enemy.getY()*scale);
+			enemies.get(enemy.getName()).draw((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale);
 	}
 	
 	/**	
@@ -364,7 +375,7 @@ class LevelState extends State {
 	 */
 	private void drawItems() {
 		for(Item item : level.getItemList())
-			items.get(item.getName()).draw((float)item.getX()*scale, (float)item.getY()*scale);
+			items.get(item.getName()).draw((float)item.getX()*scale+cameraX, (float)item.getY()*scale);
 	}
 	
 	/**
@@ -373,14 +384,14 @@ class LevelState extends State {
 	private void drawEnvironment() {
 		for (int y = 0; y < level.getTileGrid().getHeight(); y++)
 			for (int x = 0; x < level.getTileGrid().getWidth(); x++)
-				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*32*scale, y*32*scale);
+				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*32*scale+cameraX, y*32*scale);
 	}
 
 	/**
 	 * Draw the character/protagonist on the screen.
 	 */
 	private void drawCharacter() {
-		character.draw(((float)level.getCharacter().getX()-6)*scale, (float)level.getCharacter().getY()*scale);
+		character.draw(spawnPoint, (float)level.getCharacter().getY()*scale);
 	}
 
 	/**
@@ -484,12 +495,16 @@ class LevelState extends State {
 		PCharacter modelCharacter = level.getCharacter();
 		
 		// left arrow key
-		if (input.isKeyDown(Input.KEY_LEFT))
+		if (input.isKeyDown(Input.KEY_LEFT)){
 			modelCharacter.moveLeft();
+			cameraX = -(((float)level.getCharacter().getX())*scale-spawnPoint);
+		}
 		
 		// right arrow key
-		if (input.isKeyDown(Input.KEY_RIGHT))
+		if (input.isKeyDown(Input.KEY_RIGHT)){
 			modelCharacter.moveRight();
+			cameraX = -(((float)level.getCharacter().getX())*scale-spawnPoint);
+		}
 
 		// up arrow key
 		if (input.isKeyDown(Input.KEY_UP)) {
