@@ -238,7 +238,6 @@ class LevelState extends State {
 		Image characterShotgunJumpingR = new Image(folderPath+"charShotgunJumping.png", false, filter).getScaledCopy(scale);
 		Image characterShotgunJumpingL = characterShotgunJumpingR.getFlippedCopy(true, false);
 		
-		
 		Image charShotgunRunningImage = new Image(folderPath+"charShotgunRunningSheet.png", false, filter);
 		SpriteSheet ShotgunRunningSheet = new SpriteSheet(charShotgunRunningImage.getScaledCopy(scale), 36*scale, 23*scale);
 		Animation characterShotgunRunningR = new Animation(ShotgunRunningSheet, 140);
@@ -402,7 +401,19 @@ class LevelState extends State {
 	 * Draw the character/protagonist on the screen.
 	 */
 	private void drawCharacter() {
-		character.draw(spawnPointX, spawnPointY);
+		//make the character flash white if he is immortal
+		
+		if(level.getCharacter().isImmortal() && (Math.round(Math.random()) == 0)){
+			if(character instanceof Image){
+				((Image)character).drawFlash(spawnPointX, spawnPointY);
+			}else if(character instanceof Animation){
+				Animation characterAnimation = ((Animation)character); 
+				characterAnimation.drawFlash(spawnPointX, spawnPointY, characterAnimation.getWidth(), characterAnimation.getHeight());
+			}
+			
+		}else{
+			character.draw(spawnPointX, spawnPointY);
+		}
 	}
 
 	/**

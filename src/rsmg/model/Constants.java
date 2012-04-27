@@ -25,5 +25,13 @@ public enum Constants{
 	public static final int DASHCOOLDOWN = 3;
 	public static final int EXPLOSIONDMG = 20;
 	public static final int EXPLOSIONAOE = 30;
+	/**
+	 * the amount of time an explosion persists in seconds
+	 */
 	public static final int EXPLOSIONDURATION = 1;
+	/**
+	 * the amount of time the character turns immortal after getting hit by an enemy
+	 * in milliseconds
+	 */
+	public static final int CHARACTER_IMMORTALITY_TIME = 800;
 }

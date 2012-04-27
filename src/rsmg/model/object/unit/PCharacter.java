@@ -21,6 +21,7 @@ import rsmg.model.weapon.Shotgun;
 
 public class PCharacter extends LivingObject {
 	
+	private boolean immortal = false;
 	/**
 	 * If the character is airborne (i.e. in the air).
 	 */
@@ -43,6 +44,11 @@ public class PCharacter extends LivingObject {
 	private long lastAttacktime = 0;
 	
 	/**
+	 * Keeps track of when the character was last attacked.
+	 */
+	private long lastAttackedTime = 0;
+	
+	/**
 	 * If the character can use the dash move.
 	 */
 	private boolean canDash;
@@ -60,7 +66,7 @@ public class PCharacter extends LivingObject {
 	/**
 	 *  upgradePoints the user can spend after each level
 	 */
-	private int upgradePoints=0;
+	private int upgradePoints = 0;
 	
 	/**
 	 * Create a character that the player controls.
@@ -78,7 +84,7 @@ public class PCharacter extends LivingObject {
 	@Override
 	public void collide(InteractiveObject obj) {
 		if (obj instanceof Enemy) {
-			this.damage(((Enemy) obj).getTouchDamage());
+			this.getHit(((Enemy) obj).getTouchDamage());
 		}
 		if (obj instanceof Item) {
 			if(obj.getName().equals(ObjectName.LASER_PISTOL))
@@ -91,6 +97,13 @@ public class PCharacter extends LivingObject {
 				addHealth();
 			else if(obj.getName().equals(ObjectName.UPGRADE_POINT))
 				upgradePoints++;
+		}
+	}
+	public void updateImmortality(){
+		
+		if(lastAttackedTime + Constants.CHARACTER_IMMORTALITY_TIME < System.currentTimeMillis()){
+			immortal = false;
+			lastAttackedTime = 0;
 		}
 	}
 	
@@ -199,6 +212,18 @@ public class PCharacter extends LivingObject {
 			distanceDashed = 0;
 		}
 	}
+	/**
+	 * method called when the character is hit by an enemy
+	 */
+	public void getHit(int dmg) {
+		if(immortal){
+			// TODO get knocked back?
+		}else{
+			this.damage(dmg);
+			immortal = true;
+			lastAttackedTime = System.currentTimeMillis();
+		}
+	}
 
 	/**
 	 * If the character is dashing.
@@ -208,7 +233,20 @@ public class PCharacter extends LivingObject {
 		return isDashing;
 	}
 
-	public int getUpgradePoints(){
+	public int getUpgradePoints() {
 		return upgradePoints;
 	}
+	
+	/**
+	 * returns true if the character should no longer be taking damage
+	 * @return true if the character should no longer be taking damage
+	 */
+	public boolean isImmortal() {
+		return immortal;
+	}
+	
+	public void setMortality(boolean isImmortal){
+		this.immortal = isImmortal;
+	}
+	
 }

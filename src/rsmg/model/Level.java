@@ -111,11 +111,12 @@ public class Level {
 		
 		// update what direction the character is facing towards
 		character.updateFacing();
-		
 		// Check so the character isn't inside a solid tile, and if so, move
 		// him outside it.
 		applyNormalForce(character);
 		character.setVelocityX(0);
+		character.updateImmortality();
+		
 	}
 
 	/**
