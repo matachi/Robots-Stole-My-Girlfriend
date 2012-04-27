@@ -14,6 +14,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.CharacterProgress;
 import rsmg.io.Config;
+import rsmg.io.LevelNumbers;
 
 /**
  * The level selection screen.
@@ -105,19 +106,16 @@ class LevelSelectionState extends State {
 		// Set the number of unlocked levels.
 		unlockedLevels = CharacterProgress.unlockedLevels();
 
-		// Create the menu buttons.
-		// 77.5 is the half width of a button, and is needed to place them centered horizontally on the screen.
-		LevelButton level1 = new LevelButton(folderPath+"level1unlocked.png", folderPath+"level1locked.png", 660-77.5f, 450, unlockedLevels >= 1);
-		LevelButton level2 = new LevelButton(folderPath+"level2unlocked.png", folderPath+"level2locked.png", 860-77.5f, 450, unlockedLevels >= 2);
-		LevelButton level3 = new LevelButton(folderPath+"level3unlocked.png", folderPath+"level3locked.png", 1060-77.5f, 450, unlockedLevels >= 3);
-		LevelButton level4 = new LevelButton(folderPath+"level4unlocked.png", folderPath+"level4locked.png", 1260-77.5f, 450, unlockedLevels >= 4);
-		
 		// Store the menu buttons in an ArrayList for convenience
 		levelButtons = new ArrayList<LevelButton>();
-		levelButtons.add(level1);
-		levelButtons.add(level2);
-		levelButtons.add(level3);
-		levelButtons.add(level4);
+		
+		// Create the menu buttons.
+		// 77.5 is the half width of a button, and is needed to place them
+		// centered horizontally on the screen. (The buttons are only
+		// horizontally aligned if there are 4 buttons.)
+		for (int i : LevelNumbers.getLevelNumbers())
+			if (i > 0 && i < 5)
+				levelButtons.add(new LevelButton(i, folderPath+"level"+i+"unlocked.png", folderPath+"level"+i+"locked.png", 460+i*200-77.5f, 450, unlockedLevels >= i));
 		
 		// Set which button is initially selected
 		selectedButton = 0;
@@ -183,7 +181,7 @@ class LevelSelectionState extends State {
 		else if (input.isKeyPressed(Input.KEY_ESCAPE))
 			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
 		else if (input.isKeyDown(Input.KEY_ENTER)) {
-			Controller.initLevel(selectedButton+1);
+			Controller.initLevel(levelButtons.get(selectedButton).getLevelNumber());
 			sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());
 			if (Config.musicOn()) {
 				Music backgroundMusic = new Music("res/music/WolfRock-NightOfTheMutants.ogg", true);
@@ -216,6 +214,7 @@ class LevelSelectionState extends State {
 	 */
 	private class LevelButton {
 		
+		private int levelNumber;
 		private Image unlockedButton;
 		private Image lockedButton;
 		private float x;
@@ -224,16 +223,26 @@ class LevelSelectionState extends State {
 
 		/**
 		 * Creates a LevelButton.
-		 * @param pathToUnlockedButton File path to the unlocked button image.
-		 * @param pathToLockedButton File path to the locked button image.
-		 * @param x X coordinate.
-		 * @param y Y coordinate what will be scaled.
-		 * @param unlocked If the button is unlocked.
+		 * 
+		 * @param levelNumber
+		 *            The level's number.
+		 * @param pathToUnlockedButton
+		 *            File path to the unlocked button image.
+		 * @param pathToLockedButton
+		 *            File path to the locked button image.
+		 * @param x
+		 *            X coordinate.
+		 * @param y
+		 *            Y coordinate what will be scaled.
+		 * @param unlocked
+		 *            If the button is unlocked.
 		 * @throws SlickException
 		 */
-		public LevelButton(String pathToUnlockedButton, String pathToLockedButton,
-				float x, float y, boolean unlocked) throws SlickException {
+		public LevelButton(int levelNumber, String pathToUnlockedButton,
+				String pathToLockedButton,	float x, float y, boolean unlocked) throws SlickException {
 
+			this.levelNumber = levelNumber;
+			
 			this.unlockedButton = new Image(pathToUnlockedButton);
 			this.unlockedButton = this.unlockedButton.getScaledCopy(scale);
 			
@@ -244,6 +253,10 @@ class LevelSelectionState extends State {
 			this.y = y * scale + topOffset;
 			
 			this.unlocked = unlocked;
+		}
+		
+		private int getLevelNumber() {
+			return levelNumber;
 		}
 		
 		private boolean isUnlocked() {

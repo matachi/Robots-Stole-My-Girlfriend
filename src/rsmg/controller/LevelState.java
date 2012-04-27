@@ -19,7 +19,6 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.CharacterProgress;
 import rsmg.io.IO;
-import rsmg.model.Constants;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
