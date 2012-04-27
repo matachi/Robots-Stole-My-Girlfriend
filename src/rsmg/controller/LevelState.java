@@ -108,12 +108,14 @@ class LevelState extends State {
 	/**
 	 * Camera for moving all object except the Character
 	 */
-	private float cameraX = 0;
+	private float cameraX;
+	private float cameraY;
 	
 	/**
 	 * Position where the Character starts in the x-plane
 	 */
-	private float spawnPoint;
+	private float spawnPointX;
+	private float spawnPointY;
 	
 	/**
 	 * Construct the level.
@@ -317,7 +319,11 @@ class LevelState extends State {
 		this.levelNumber = levelNumber;
 		IO io = new IO();
 		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getEnemyList());
-		spawnPoint = (float)(level.getCharacter().getX())*scale;
+		
+		spawnPointX = (float)(level.getCharacter().getX())*scale;
+		spawnPointY = (float)level.getCharacter().getY()*scale;
+		cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPointX);
+		cameraY = -(((float)level.getCharacter().getY())*scale-spawnPointY);
 	}
 
 	@Override
@@ -360,7 +366,7 @@ class LevelState extends State {
 	 */
 	private void drawBullets() {
 		for (Bullet bullet : level.getBulletList())
-			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale);
+			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
 	}
 	
 	/**
@@ -368,7 +374,7 @@ class LevelState extends State {
 	 */
 	private void drawEnemies() {
 		for (Enemy enemy : level.getEnemies())
-			enemies.get(enemy.getName()).draw((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale);
+			enemies.get(enemy.getName()).draw((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY);
 	}
 	
 	/**	
@@ -376,7 +382,7 @@ class LevelState extends State {
 	 */
 	private void drawItems() {
 		for(Item item : level.getItemList())
-			items.get(item.getName()).draw((float)item.getX()*scale+cameraX, (float)item.getY()*scale);
+			items.get(item.getName()).draw((float)item.getX()*scale+cameraX, (float)item.getY()*scale+cameraY);
 	}
 	
 	/**
@@ -385,14 +391,14 @@ class LevelState extends State {
 	private void drawEnvironment() {
 		for (int y = 0; y < level.getTileGrid().getHeight(); y++)
 			for (int x = 0; x < level.getTileGrid().getWidth(); x++)
-				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*32*scale+cameraX, y*32*scale);
+				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*32*scale+cameraX, y*32*scale+cameraY);
 	}
 
 	/**
 	 * Draw the character/protagonist on the screen.
 	 */
 	private void drawCharacter() {
-		character.draw(spawnPoint, (float)level.getCharacter().getY()*scale);
+		character.draw(spawnPointX, spawnPointY);
 	}
 
 	/**
@@ -441,7 +447,8 @@ class LevelState extends State {
 
 		} else {
 			if (level.getCharacter().isAirborne()) {
-		
+				
+				cameraY = -(((float)level.getCharacter().getY())*scale-spawnPointY);
 				if (level.getCharacter().isFacingRight())
 					character = characterMap.get("jumpRight");
 				else
@@ -498,13 +505,13 @@ class LevelState extends State {
 		// left arrow key
 		if (input.isKeyDown(Input.KEY_LEFT)){
 			modelCharacter.moveLeft();
-			cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPoint);
+			cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPointX);
 		}
 		
 		// right arrow key
 		if (input.isKeyDown(Input.KEY_RIGHT)){
 			modelCharacter.moveRight();
-			cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPoint);
+			cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPointX);
 		}
 
 		// up arrow key
@@ -512,9 +519,11 @@ class LevelState extends State {
 			if (!upKeyIsDown)
 				modelCharacter.jump();
 			upKeyIsDown = true;
-		} else if (upKeyIsReleased())
+			cameraY = -(((float)level.getCharacter().getY())*scale-spawnPointY);
+		} else if (upKeyIsReleased()){
 			modelCharacter.jumpReleased();
-
+			cameraY = -(((float)level.getCharacter().getY())*scale-spawnPointY);
+		}
 		// space bar
 		if (input.isKeyPressed(Input.KEY_SPACE))
 			modelCharacter.attack();
