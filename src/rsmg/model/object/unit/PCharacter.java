@@ -81,6 +81,8 @@ public class PCharacter extends LivingObject {
 				currentWeapon = new Pistol(this, bulletList);
 			else if(obj.getName().equals(ObjectName.ROCKET_LAUNCHER))
 				currentWeapon = new RocketLauncher(this, bulletList);
+			else if(obj.getName().equals(ObjectName.SHOTGUN))
+				currentWeapon = new Shotgun(this, bulletList);
 			else if(obj.getName().equals(ObjectName.HEALTH_PACK))
 				addHealth();
 			else if(obj.getName().equals(ObjectName.UPGRADE_POINT))

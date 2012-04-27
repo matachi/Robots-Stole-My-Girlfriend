@@ -88,8 +88,10 @@ public class XmlConverter {
 							item = new UpgradePoints(x*scale,y*scale);
 						else if(itemValue.equals(ObjectName.LASER_PISTOL))
 							item = new Weapon(x*scale,y*scale, 15, 15, ObjectName.LASER_PISTOL);
+						else if(itemValue.equals(ObjectName.SHOTGUN))
+							item = new Weapon(x*scale,y*scale, 15, 15, ObjectName.SHOTGUN);
 						else
-							item = new Weapon(x*scale,y*scale, 20, 15, ObjectName.ROCKET_LAUNCHER);
+							item = new Weapon(x*scale,y*scale, 33, 15, ObjectName.ROCKET_LAUNCHER);
 						itemList.add(item);
 					}
 					

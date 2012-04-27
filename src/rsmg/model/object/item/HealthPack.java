@@ -12,6 +12,6 @@ public class HealthPack extends Item {
 	 */
 	public HealthPack(double x, double y) {
 		// Make the item start at the bottom(32-15)
-		super(x, y+32-15, 15, 15, ObjectName.HEALTH_PACK);
+		super(x+((32-15)/2), y+32-15, 15, 15, ObjectName.HEALTH_PACK);
 	}
 }

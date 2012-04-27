@@ -83,7 +83,7 @@
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
+    <cell item="shotgun">AirTile</cell>
     <cell>AirTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
