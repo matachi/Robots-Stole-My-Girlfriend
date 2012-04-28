@@ -21,6 +21,15 @@ import org.jdom.output.XMLOutputter;
  */
 public class CharacterProgress {
 
+	public static final int DASH = 0;
+	public static final int DOUBLE_JUMP = 1;
+	public static final int RAPID_FIRE = 2;
+	public static final int INC_RUNNING_SPEED = 3;
+	public static final int INC_SHOTGUN_SPREAD = 4;
+	public static final int INC_RPG_KNOCKBACK = 5;
+	public static final int INC_RPG_AOE = 6;
+	public static final int DEC_ASSAULT_RIFLE_KNOCKBACK = 7;
+	
 	/**
 	 * Path to the configuration file.
 	 */
@@ -106,6 +115,30 @@ public class CharacterProgress {
 	}
 	
 	// upgrades
+	public static boolean isUpgradeUnlocked(int upgrade) {
+		switch (upgrade) {
+		case DASH:
+			return isDashUnlocked();
+		case DOUBLE_JUMP:
+			return isDoubleJumpUnlocked();
+		case RAPID_FIRE:
+			return isRapidFireUnlocked();
+		case INC_RUNNING_SPEED:
+			return isIncRunningSpeedUnlocked();
+		case INC_SHOTGUN_SPREAD:
+			return isIncShotgunSpreadUnlocked();
+		case INC_RPG_KNOCKBACK:
+			return isIncRPGKnockbackUnlocked();
+		case INC_RPG_AOE:
+			return isIncRPGAoEUnlocked();
+		case DEC_ASSAULT_RIFLE_KNOCKBACK:
+			return isDecAssaultRifleKnockbackUnlocked();
+		default:
+			new IllegalArgumentException();
+			return false;
+		}
+	}
+	
 	public static boolean isDashUnlocked() {
 		return variableIsTrue("dash");
 	}
@@ -130,7 +163,7 @@ public class CharacterProgress {
 		return variableIsTrue("incRPGKnockback");
 	}
 	
-	public static boolean isIncRPGAoeUnlocked() {
+	public static boolean isIncRPGAoEUnlocked() {
 		return variableIsTrue("incRPGAoE");
 	}
 	
@@ -163,6 +196,38 @@ public class CharacterProgress {
 	}
 	
 	// upgrades
+	public static void setUpgrade(int upgrade, boolean unlocked) {
+		switch (upgrade) {
+		case DASH:
+			setDashUnlocked(unlocked);
+			break;
+		case DOUBLE_JUMP:
+			setDoubleJumpUnlocked(unlocked);
+			break;
+		case RAPID_FIRE:
+			setRapidFireUnlocked(unlocked);
+			break;
+		case INC_RUNNING_SPEED:
+			setIncRunningSpeedUnlocked(unlocked);
+			break;
+		case INC_SHOTGUN_SPREAD:
+			setIncShotgunSpreadUnlocked(unlocked);
+			break;
+		case INC_RPG_KNOCKBACK:
+			setIncRPGKnockbackUnlocked(unlocked);
+			break;
+		case INC_RPG_AOE:
+			setIncRPGAoEUnlocked(unlocked);
+			break;
+		case DEC_ASSAULT_RIFLE_KNOCKBACK:
+			setDecAssaultRifleKnockbackUnlocked(unlocked);
+			break;
+		default:
+			new IllegalArgumentException();
+			break;
+		}
+	}
+	
 	public static void setDashUnlocked(boolean unlocked) {
 		setVariable("dash", unlocked);
 	}
@@ -227,7 +292,7 @@ public class CharacterProgress {
 			childNode.getChild("incRunningSpeed").setText(Boolean.toString(isIncRunningSpeedUnlocked()));
 			childNode.getChild("incShotgunSpread").setText(Boolean.toString(isIncShotgunSpreadUnlocked()));
 			childNode.getChild("incRPGKnockback").setText(Boolean.toString(isIncRPGKnockbackUnlocked()));
-			childNode.getChild("incRPGAoE").setText(Boolean.toString(isIncRPGAoeUnlocked()));
+			childNode.getChild("incRPGAoE").setText(Boolean.toString(isIncRPGAoEUnlocked()));
 			childNode.getChild("decAssaultRifleKnockback").setText(Boolean.toString(isDecAssaultRifleKnockbackUnlocked()));
         	
 			// Write the document to the progress file on the HDD

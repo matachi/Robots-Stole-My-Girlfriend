@@ -99,14 +99,14 @@ class UpgradesState extends State {
 		
 		// Init upgrade button information
 		upgradeButtons = new UpgradeButton[2][4];
-		upgradeButtons[0][0] = new UpgradeButton("Run Faster", 100, 400, scale);
-		upgradeButtons[0][1] = new UpgradeButton("More RPG\nKnockback", 500, 400, scale);
-		upgradeButtons[0][2] = new UpgradeButton("Shotgun Spread", 1107, 400, scale);
-		upgradeButtons[0][3] = new UpgradeButton("Less Assault Rifle\nKnockback", 1507, 400, scale);
-		upgradeButtons[1][0] = new UpgradeButton("Dash", 100, 700, scale);
-		upgradeButtons[1][1] = new UpgradeButton("Double Jump", 500, 700, scale);
-		upgradeButtons[1][2] = new UpgradeButton("Rapid Fire", 1107, 700, scale);
-		upgradeButtons[1][3] = new UpgradeButton("Bigger RPG\nAoE", 1507, 700, scale);
+		upgradeButtons[0][0] = new UpgradeButton(CharacterProgress.INC_RUNNING_SPEED, "Run Faster", 100, 400, scale);
+		upgradeButtons[0][1] = new UpgradeButton(CharacterProgress.INC_RPG_KNOCKBACK, "More RPG\nKnockback", 500, 400, scale);
+		upgradeButtons[0][2] = new UpgradeButton(CharacterProgress.INC_SHOTGUN_SPREAD, "Shotgun Spread", 1107, 400, scale);
+		upgradeButtons[0][3] = new UpgradeButton(CharacterProgress.DEC_ASSAULT_RIFLE_KNOCKBACK, "Less Assault Rifle\nKnockback", 1507, 400, scale);
+		upgradeButtons[1][0] = new UpgradeButton(CharacterProgress.DASH, "Dash", 100, 700, scale);
+		upgradeButtons[1][1] = new UpgradeButton(CharacterProgress.DOUBLE_JUMP, "Double Jump", 500, 700, scale);
+		upgradeButtons[1][2] = new UpgradeButton(CharacterProgress.RAPID_FIRE, "Rapid Fire", 1107, 700, scale);
+		upgradeButtons[1][3] = new UpgradeButton(CharacterProgress.INC_RPG_AOE, "Bigger RPG\nAoE", 1507, 700, scale);
 		
 		// Check which upgrades are already unlocked
 		if (CharacterProgress.isIncRunningSpeedUnlocked())
@@ -123,7 +123,7 @@ class UpgradesState extends State {
 			upgradeButtons[1][1].toggleUnlocked();
 		if (CharacterProgress.isRapidFireUnlocked())
 			upgradeButtons[1][2].toggleUnlocked();
-		if (CharacterProgress.isIncRPGAoeUnlocked())
+		if (CharacterProgress.isIncRPGAoEUnlocked())
 			upgradeButtons[1][3].toggleUnlocked();
 		
 		// Set which button is initially selected
@@ -259,12 +259,11 @@ class UpgradesState extends State {
 	}
 	
 	private void selectUpgrade() {
-//		if (upgradeButtons[selectedY][selectedX].isUnlocked())
-//		if (selectedX < upgradeButtons[0].length-1) {
-//			upgradeButtons[selectedY][selectedX].toggleSelected();
-//			selectedX++;
-//			upgradeButtons[selectedY][selectedX].toggleSelected();
-//		}
+		if (!upgradeButtons[selectedY][selectedX].isUnlocked()) {
+			CharacterProgress.setUpgrade(upgradeButtons[selectedY][selectedX].getUpgrade(), true);
+			CharacterProgress.saveFile();
+			upgradeButtons[selectedY][selectedX].toggleUnlocked();
+		}
 	}
 	
 	/**
@@ -275,6 +274,7 @@ class UpgradesState extends State {
 	 */
 	private class UpgradeButton {
 		
+		private int upgrade;
 		private String buttonText;
 		private float x;
 		private float y;
@@ -285,6 +285,8 @@ class UpgradesState extends State {
 		/**
 		 * Creates an upgrade button.
 		 * 
+		 * @param upgrade
+		 *            What upgrade it should be linked to.
 		 * @param buttonText
 		 *            Text on the button.
 		 * @param x
@@ -295,9 +297,11 @@ class UpgradesState extends State {
 		 *            How much the button should be scaled.
 		 * @throws SlickException
 		 */
-		public UpgradeButton(String buttonText, int x, int y, float scale)
-				throws SlickException {
-
+		public UpgradeButton(int upgrade, String buttonText, int x, int y,
+				float scale) throws SlickException {
+			
+			this.upgrade = upgrade;
+			
 			this.buttonText = buttonText;
 			
 			this.x = x * scale;
@@ -330,6 +334,10 @@ class UpgradesState extends State {
 		
 		public boolean isAvailable() {
 			return available;
+		}
+		
+		public int getUpgrade() {
+			return upgrade;
 		}
 		
 		public float getX() {
