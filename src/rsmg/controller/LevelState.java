@@ -1,5 +1,6 @@
 package rsmg.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,7 +72,7 @@ class LevelState extends State {
 	 * pistol
 	 */
 	private HashMap<String, Renderable> pistolMap;
-		
+	
 	/**
 	 * rocket launcher
 	 */
@@ -229,7 +230,6 @@ class LevelState extends State {
 		
 		rpgRunningSheet = new SpriteSheet(charRPGRunningImage.getScaledCopy(scale).getFlippedCopy(true, false), 33*scale, 24*scale);
 		Animation characterRPGRunningL = new Animation(rpgRunningSheet, 140);
-		
 
 		rpgMap.put(jumpLKey, characterRPGJumpingL);
 		rpgMap.put(jumpRKey, characterRPGJumpingR);
@@ -310,6 +310,7 @@ class LevelState extends State {
 		Image explosionImage = new Image(folderPath+"explosion.png", false, filter);
 		SpriteSheet explosionSheet = new SpriteSheet(explosionImage.getScaledCopy(scale), 30*scale, 30*scale);
 		Animation explosion = new Animation(explosionSheet,140);
+		
 		bullets.put("explosion", explosion);
 		
 		/**
@@ -386,8 +387,21 @@ class LevelState extends State {
 	 * Draw enemies on the screen.
 	 */
 	private void drawEnemies() {
-		for (Enemy enemy : level.getEnemies())
-			enemies.get(enemy.getName()).draw((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY);
+		for (Enemy enemy : level.getEnemies()){
+			//make the enemy flash if he recently took damage
+			// note: Some ugly code here, it's the result of some design flaws in the slick library
+			Renderable enemyRenderable = enemies.get(enemy.getName());
+			if(enemy.recentlytookDamage()){
+				if(enemyRenderable instanceof Animation){
+					((Animation)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY, (float)enemy.getWidth()*scale, (float)enemy.getHeight()*scale);
+				}else if(enemyRenderable instanceof Image){
+					((Image)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY);
+				}
+				
+			}else{
+				enemyRenderable.draw((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY);
+			}
+		}
 	}
 	
 	/**	
@@ -412,7 +426,7 @@ class LevelState extends State {
 	 */
 	private void drawCharacter() {
 		//make the character flash white if he is immortal
-		
+		//Some ugly code here, it's the result of some design flaws in the slick library
 		if(level.getCharacter().isImmortal() && (Math.round(Math.random()) == 0)){
 			if(character instanceof Image){
 				((Image)character).drawFlash(characterX, characterY);

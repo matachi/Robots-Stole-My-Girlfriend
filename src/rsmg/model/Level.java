@@ -51,7 +51,7 @@ public class Level {
 	 * Stores if the character has won the level.
 	 */
 	private boolean hasWon;
-
+	
 	/**
 	 * Creates a level.
 	 * @param tileGrid The tile grid that the level shall use.
@@ -137,7 +137,7 @@ public class Level {
 			enemy.applyGravity(delta);
 			enemy.move(delta);
 			applyNormalForce(enemy);
-
+			enemy.updateVulnerability();
 			// see if enemy has collided with the character and act appropriately
 			if (enemy.hasCollidedWith(character)) {
 				character.collide(enemy);
@@ -160,8 +160,9 @@ public class Level {
 					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL){
 						newBullets.add(new Explosion(bullet));
 					}
-					
-					expiredBullets.add(bullet);
+					if(bullet.getName() != ObjectName.EXPLOSION){
+						expiredBullets.add(bullet);
+					}
 				}
 			}
 			bullets.removeAll(expiredBullets);

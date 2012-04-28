@@ -28,5 +28,11 @@ public class Explosion extends Bullet {
 	@Override
 	public void update(double delta){
 		age+=delta;
+		
+	}
+	
+	@Override
+	public int getDamage(){
+		return dmg;
 	}
 }

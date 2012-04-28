@@ -23,8 +23,16 @@ public enum Constants{
 	public static final int DASHSPEED = 300;
 	public static final int DASHLENGTH = 60;
 	public static final int DASHCOOLDOWN = 3;
-	public static final int EXPLOSIONDMG = 20;
+	public static final int EXPLOSIONDMG = 1;
 	public static final int EXPLOSIONAOE = 30;
+	/**
+	 * the amount of time an enemy should be flashing after he is hit in milliseconds
+	 */
+	public static final int ENEMY_FLASHDURATION = 100;
+	/**
+	 * the amount of time in between each damage tick of an explosion
+	 */
+	public static final int EXPLOSION_TICK = 20;
 	/**
 	 * the amount of time an explosion persists in seconds
 	 */
