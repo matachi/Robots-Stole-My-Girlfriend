@@ -112,10 +112,18 @@ class LevelState extends State {
 	private float cameraY;
 	
 	/**
-	 * Position where the Character starts in the x-plane
+	 * Position where the Character starts
 	 */
 	private float spawnPointX;
 	private float spawnPointY;
+	
+	private float characterX;
+	private float characterY;
+	
+	/**
+	 * If the camera are supposed to move
+	 */
+	private boolean moveCamera;
 	
 	/**
 	 * Construct the level.
@@ -347,7 +355,9 @@ class LevelState extends State {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-
+		
+		setUpCamera();
+		
 		drawBackground();
 		drawEnvironment();
 		drawCharacter();
@@ -405,14 +415,14 @@ class LevelState extends State {
 		
 		if(level.getCharacter().isImmortal() && (Math.round(Math.random()) == 0)){
 			if(character instanceof Image){
-				((Image)character).drawFlash(spawnPointX, spawnPointY);
+				((Image)character).drawFlash(characterX, characterY);
 			}else if(character instanceof Animation){
 				Animation characterAnimation = ((Animation)character); 
-				characterAnimation.drawFlash(spawnPointX, spawnPointY, characterAnimation.getWidth(), characterAnimation.getHeight());
+				characterAnimation.drawFlash(characterX, characterY, characterAnimation.getWidth(), characterAnimation.getHeight());
 			}
 			
 		}else{
-			character.draw(spawnPointX, spawnPointY);
+			character.draw(characterX, characterY);
 		}
 	}
 
@@ -463,7 +473,6 @@ class LevelState extends State {
 		} else {
 			if (level.getCharacter().isAirborne()) {
 				
-				cameraY = -(((float)level.getCharacter().getY())*scale-spawnPointY);
 				if (level.getCharacter().isFacingRight())
 					character = characterMap.get("jumpRight");
 				else
@@ -520,13 +529,11 @@ class LevelState extends State {
 		// left arrow key
 		if (input.isKeyDown(Input.KEY_LEFT)){
 			modelCharacter.moveLeft();
-			cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPointX);
 		}
 		
 		// right arrow key
 		if (input.isKeyDown(Input.KEY_RIGHT)){
 			modelCharacter.moveRight();
-			cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPointX);
 		}
 
 		// up arrow key
@@ -534,10 +541,8 @@ class LevelState extends State {
 			if (!upKeyIsDown)
 				modelCharacter.jump();
 			upKeyIsDown = true;
-			cameraY = -(((float)level.getCharacter().getY())*scale-spawnPointY);
 		} else if (upKeyIsReleased()){
 			modelCharacter.jumpReleased();
-			cameraY = -(((float)level.getCharacter().getY())*scale-spawnPointY);
 		}
 		// space bar
 		if (input.isKeyPressed(Input.KEY_SPACE))
@@ -562,5 +567,47 @@ class LevelState extends State {
 			return true;
 		}
 		return false;
+	}
+	
+	private void setUpCamera(){
+		if(moveCameraY()){			
+			characterY = 200;//((float)level.getCharacter().getY()-6)*scale;			
+			cameraY = -(((float)level.getCharacter().getY())*scale-200);
+		}
+		else{
+			characterY = ((float)level.getCharacter().getY())*scale;
+			cameraY = 0;
+		}
+		if(moveCameraX()){
+			characterX = 200-6;//((float)level.getCharacter().getY()-6)*scale;
+			cameraX = -(((float)level.getCharacter().getX())*scale-200);
+		}
+		else{
+			characterX = ((float)level.getCharacter().getX()-6)*scale;
+			cameraX = 0;
+		}
+	}
+	
+	/**
+	 * Eighter the camera will move(enviroment, items and enemys) or the character(=false)
+	 */
+	private boolean moveCameraY(){
+		int level_height = level.getTileGrid().getHeight()*32;
+		double posY = level.getCharacter().getY();
+		
+		if(posY < 100 || (level_height-posY) < 100)
+			return false;
+		else 
+			return true;
+	}
+	
+	private boolean moveCameraX(){
+		int level_width = level.getTileGrid().getWidth()*32;
+		double posX = level.getCharacter().getX();
+				
+		if(posX < 100 || (level_width-posX) < 100)
+			return false;
+		else 
+			return true;
 	}
 }
