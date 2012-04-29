@@ -1,5 +1,6 @@
 package rsmg.controller;
 
+import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.CharacterProgress;
 import rsmg.io.IO;
+import rsmg.model.Constants;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
@@ -106,24 +108,16 @@ class LevelState extends State {
 	private int levelNumber;
 	
 	/**
-	 * Camera for moving all object except the Character
+	 * Camera coordinates for placing all object except the Character
 	 */
 	private float cameraX;
 	private float cameraY;
 	
 	/**
-	 * Position where the Character starts
+	 * Camera coordinates for placing the Character
 	 */
-	private float spawnPointX;
-	private float spawnPointY;
-	
 	private float characterX;
 	private float characterY;
-	
-	/**
-	 * If the camera are supposed to move
-	 */
-	private boolean moveCamera;
 	
 	/**
 	 * Construct the level.
@@ -139,7 +133,7 @@ class LevelState extends State {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-
+		
 		scale = (int) ((float)gc.getWidth() / 480);
 		int filter = Image.FILTER_NEAREST;
 		String folderPath = "res/sprites/level/";
@@ -331,8 +325,8 @@ class LevelState extends State {
 		IO io = new IO();
 		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getEnemyList());
 		
-		spawnPointX = (float)(level.getCharacter().getX())*scale;
-		spawnPointY = (float)level.getCharacter().getY()*scale;
+		float spawnPointX = (float)(level.getCharacter().getX())*scale;
+		float spawnPointY = (float)level.getCharacter().getY()*scale;
 		cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPointX);
 		cameraY = -(((float)level.getCharacter().getY())*scale-spawnPointY);
 	}
@@ -582,45 +576,54 @@ class LevelState extends State {
 		return false;
 	}
 	
+	/**
+	 * Sets up the camera by telling that eighter the camera will move(enviroment, items and enemys)(cameraX,cameraY) 
+	 * or the Character(characterX,characterY)
+	 */
 	private void setUpCamera(){
-		if(moveCameraY()){			
-			characterY = 200;//((float)level.getCharacter().getY()-6)*scale;			
-			cameraY = -(((float)level.getCharacter().getY())*scale-200);
-		}
-		else{
+		
+		// Camera in Y-axis
+		int centerY = (int)540/2-(int)level.getCharacter().getHeight()/2;
+		double posY = level.getCharacter().getY();
+		int level_height = level.getTileGrid().getHeight()*32;
+		
+		// If the Character are in the upper part of the screen
+		if(posY < centerY/2){
 			characterY = ((float)level.getCharacter().getY())*scale;
 			cameraY = 0;
 		}
-		if(moveCameraX()){
-			characterX = 200-6;//((float)level.getCharacter().getY()-6)*scale;
-			cameraX = -(((float)level.getCharacter().getX())*scale-200);
+		// If the Character are in the bottom part of the screen
+		else if((level_height-posY-Constants.CHARACTERHEIGHT/2) < centerY/2){
+			double screenSize = 8.5*32;
+			characterY = ((float)level.getCharacter().getY())*scale-((float)(level_height-screenSize)*2);
+			cameraY = (float)(screenSize-level_height)*2;
 		}
+		// Else the Character are in the middle of the screen
 		else{
+			characterY = centerY;
+			cameraY = -(((float)level.getCharacter().getY())*scale-centerY);
+		}
+		
+		// Camera in X-axis
+		int centerX = (int)960/2-(int)level.getCharacter().getWidth()/2;
+		double posX = level.getCharacter().getX();
+		int level_width = level.getTileGrid().getWidth()*32;
+		
+		// If the Character are in the left part of the screen
+		if(posX < centerX/2){
 			characterX = ((float)level.getCharacter().getX()-6)*scale;
 			cameraX = 0;
 		}
-	}
-	
-	/**
-	 * Eighter the camera will move(enviroment, items and enemys) or the character(=false)
-	 */
-	private boolean moveCameraY(){
-		int level_height = level.getTileGrid().getHeight()*32;
-		double posY = level.getCharacter().getY();
-		
-		if(posY < 100 || (level_height-posY) < 100)
-			return false;
-		else 
-			return true;
-	}
-	
-	private boolean moveCameraX(){
-		int level_width = level.getTileGrid().getWidth()*32;
-		double posX = level.getCharacter().getX();
-				
-		if(posX < 100 || (level_width-posX) < 100)
-			return false;
-		else 
-			return true;
+		// If the Character are in the right part of the screen
+		else if((level_width-posX-10) < centerX/2){
+			int screenSize = 15*32;
+			characterX = ((float)level.getCharacter().getX()-6)*scale-((level_width-screenSize)*2);
+			cameraX = (screenSize-level_width)*2;
+		}
+		// Else the Character are in the middle of the screen
+		else{
+			characterX = centerX-6;
+			cameraX = -(((float)level.getCharacter().getX())*scale-centerX);
+		}
 	}
 }

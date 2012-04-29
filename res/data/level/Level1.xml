@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
   <size>
-    <width>32</width>
-    <height>20</height>
+    <width>18</width>
+    <height>10</height>
   </size>
-  <row>
+    <row>
+  <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
@@ -20,25 +21,31 @@
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
   <row>
+  <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+  <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>EndTile</cell>
     <cell>AirTile</cell>
@@ -54,25 +61,11 @@
     <cell>AirTile</cell>
     <cell>AirTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
   <row>
+  <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>AirTile</cell>
@@ -88,25 +81,11 @@
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
   <row>
+  <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
@@ -122,25 +101,11 @@
     <cell>AirTile</cell>
     <cell>AirTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
   <row>
+  <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
@@ -156,25 +121,11 @@
     <cell>AirTile</cell>
     <cell>AirTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
   <row>
+  <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
@@ -190,25 +141,11 @@
     <cell>AirTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
   <row>
+   <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>AirTile</cell>
     <cell>GroundTile</cell>
@@ -224,25 +161,11 @@
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
   <row>
+   <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
@@ -258,431 +181,28 @@
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+   <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-  <row>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-  </row>
-</level>
+ </level>
 
