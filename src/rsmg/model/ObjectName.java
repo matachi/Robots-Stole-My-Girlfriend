@@ -49,5 +49,5 @@ public enum ObjectName {
 	public static final String AIR_TILE = "airTile";
 	public static final String HAZARDOUS_TILE = "airTile";
 	public static final String SPAWN_TILE = "airTile";
-	public static final String END_TILE = "airTile";
+	public static final String END_TILE = "endTile";
 }
