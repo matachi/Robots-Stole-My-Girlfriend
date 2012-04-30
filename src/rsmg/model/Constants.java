@@ -1,7 +1,7 @@
 package rsmg.model;
 /**
  * Singleton class for holding all global variables used throughout the application
- * @author Johan GrÃ¶nvall
+ * @author Johan Grönvall
  *
  */
 public enum Constants{

@@ -30,7 +30,7 @@ import rsmg.model.object.unit.PCharacter;
 
 /**
  * The state where the levels are played out.
- * @author Daniel Jonsson
+ * @author Daniel Jonsson, Johan Grönvall, Johan Rignäs
  *
  */
 class LevelState extends State {
@@ -63,6 +63,7 @@ class LevelState extends State {
 	private String standLeftKey = "standLeft";
 	private String jumpRKey = "jumpRight";
 	private String jumpLKey = "jumpLeft";
+	
 	/**
 	 * The character that the player controls.
 	 */
@@ -117,6 +118,12 @@ class LevelState extends State {
 	 */
 	private float characterX;
 	private float characterY;
+
+	/**
+	 * Character hitbox.
+	 */
+	private Rectangle hitboxRect;
+	private Graphics hitboxGrap;
 	
 	/**
 	 * Construct the level.
@@ -146,6 +153,7 @@ class LevelState extends State {
 		healthBarOverlayRectangle = new Rectangle(23, 23, 147, 17);
 		healthBarOverlayGraphics = new Graphics();
 		healthBarOverlayGraphics.setColor(new Color(0.85f, 0.3f, 0.3f, 0.5f));
+		
 		characterMap = new HashMap<String, Renderable>();
 		pistolMap = new HashMap<String, Renderable>();
 		rpgMap = new HashMap<String, Renderable>();
@@ -327,6 +335,13 @@ class LevelState extends State {
 		tiles.put(ObjectName.BOX_TILE, boxTile);
 		tiles.put(ObjectName.AIR_TILE, airTile);
 		tiles.put(ObjectName.END_TILE, endTile);
+		
+		/**
+		 * Init hitbox graphics.
+		 */
+		hitboxRect = new Rectangle(0, 0, Constants.CHARACTERWIDTH*scale, Constants.CHARACTERHEIGHT*scale);
+		hitboxGrap = new Graphics();
+		hitboxGrap.setColor(new Color(0.0f, 1.0f, 0.0f, 0.5f));
 	}
 	
 	/**
@@ -337,11 +352,6 @@ class LevelState extends State {
 		this.levelNumber = levelNumber;
 		IO io = new IO();
 		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getEnemyList());
-		
-		float spawnPointX = (float)(level.getCharacter().getX())*scale;
-		float spawnPointY = (float)level.getCharacter().getY()*scale;
-		cameraX = -(((float)level.getCharacter().getX()-6)*scale-spawnPointX);
-		cameraY = -(((float)level.getCharacter().getY())*scale-spawnPointY);
 	}
 
 	@Override
@@ -363,7 +373,7 @@ class LevelState extends State {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		
-		setUpCamera();
+		setUpCamera(gc.getWidth(), gc.getHeight());
 		
 		drawBackground();
 		drawEnvironment();
@@ -433,17 +443,22 @@ class LevelState extends State {
 	private void drawCharacter() {
 		//make the character flash white if he is immortal
 		//Some ugly code here, it's the result of some design flaws in the slick library
-		if(level.getCharacter().isImmortal() && (Math.round(Math.random()) == 0)){
-			if(character instanceof Image){
-				((Image)character).drawFlash(characterX, characterY);
-			}else if(character instanceof Animation){
-				Animation characterAnimation = ((Animation)character); 
+		if (level.getCharacter().isImmortal()
+				&& (Math.round(Math.random()) == 0)) {
+			if (character instanceof Image) {
+				((Image) character).drawFlash(characterX, characterY);
+			} else if (character instanceof Animation) {
+				Animation characterAnimation = ((Animation) character);
 				characterAnimation.drawFlash(characterX, characterY, characterAnimation.getWidth(), characterAnimation.getHeight());
 			}
-			
-		}else{
+
+		} else {
 			character.draw(characterX, characterY);
 		}
+		
+		// Draw character hitbox
+		hitboxRect.setLocation(characterX+scale*6, characterY);
+		hitboxGrap.draw(hitboxRect);
 	}
 
 	/**
@@ -549,23 +564,22 @@ class LevelState extends State {
 		PCharacter modelCharacter = level.getCharacter();
 		
 		// left arrow key
-		if (input.isKeyDown(Input.KEY_LEFT)){
+		if (input.isKeyDown(Input.KEY_LEFT))
 			modelCharacter.moveLeft();
-		}
 		
 		// right arrow key
-		if (input.isKeyDown(Input.KEY_RIGHT)){
+		if (input.isKeyDown(Input.KEY_RIGHT))
 			modelCharacter.moveRight();
-		}
 
 		// up arrow key
 		if (input.isKeyDown(Input.KEY_UP)) {
 			if (!upKeyIsDown)
 				modelCharacter.jump();
 			upKeyIsDown = true;
-		} else if (upKeyIsReleased()){
+		} else if (upKeyIsReleased()) {
 			modelCharacter.jumpReleased();
 		}
+		
 		// space bar
 		if (input.isKeyPressed(Input.KEY_SPACE))
 			modelCharacter.attack();
@@ -592,53 +606,52 @@ class LevelState extends State {
 	}
 	
 	/**
-	 * Sets up the camera by telling that eighter the camera will move(enviroment, items and enemys)(cameraX,cameraY) 
+	 * Sets up the camera by telling that either the camera will move(environment, items and enemies)(cameraX,cameraY) 
 	 * or the Character(characterX,characterY)
 	 */
-	private void setUpCamera(){
+	private void setUpCamera(int screenWidth, int screenHeight) {
 		
 		// Camera in Y-axis
-		int centerY = (int)540/2-(int)level.getCharacter().getHeight()/2;
-		double posY = level.getCharacter().getY();
-		int level_height = level.getTileGrid().getHeight()*32;
+		int centerY = screenHeight/2 - (int)level.getCharacter().getHeight()*scale/2;
+		float posY = (float)level.getCharacter().getY()*scale;
+		int levelHeight = level.getTileGrid().getHeight()*Constants.TILESIZE*scale;
 		
-		// If the Character are in the upper part of the screen
-		if(posY < centerY/2){
-			characterY = ((float)level.getCharacter().getY())*scale;
+		// If the Character is in the upper part of the screen
+		if (posY < centerY) {
+			characterY = posY;
 			cameraY = 0;
 		}
-		// If the Character are in the bottom part of the screen
-		else if((level_height-posY-Constants.CHARACTERHEIGHT/2) < centerY/2){
-			double screenSize = 8.5*32;
-			characterY = ((float)level.getCharacter().getY())*scale-((float)(level_height-screenSize)*2);
-			cameraY = (float)(screenSize-level_height)*2;
+		// If the Character is in the bottom part of the screen
+		else if (levelHeight - posY < centerY + (int)level.getCharacter().getHeight()*scale) {
+			cameraY = -(levelHeight - screenHeight);
+			characterY = posY + cameraY;
 		}
-		// Else the Character are in the middle of the screen
-		else{
+		// Else the Character is in the middle of the screen
+		else {
 			characterY = centerY;
-			cameraY = -(((float)level.getCharacter().getY())*scale-centerY);
+			cameraY = -(posY-centerY);
 		}
 		
 		// Camera in X-axis
-		int centerX = (int)960/2-(int)level.getCharacter().getWidth()/2;
-		double posX = level.getCharacter().getX();
-		int level_width = level.getTileGrid().getWidth()*32;
+		int centerX = screenWidth/2 - (int)level.getCharacter().getWidth()*scale/2;
+		int offsetX = -6*scale; // Moves the char img a bit to the left. This makes the hitbox more centered on the img.
+		float posX = (float)level.getCharacter().getX()*scale;
+		int levelWidth = level.getTileGrid().getWidth()*Constants.TILESIZE*scale;
 		
-		// If the Character are in the left part of the screen
-		if(posX < centerX/2){
-			characterX = ((float)level.getCharacter().getX()-6)*scale;
+		// If the Character is in the left part of the screen
+		if (posX < centerX) {
+			characterX = posX + offsetX;
 			cameraX = 0;
 		}
-		// If the Character are in the right part of the screen
-		else if((level_width-posX-10) < centerX/2){
-			int screenSize = 15*32;
-			characterX = ((float)level.getCharacter().getX()-6)*scale-((level_width-screenSize)*2);
-			cameraX = (screenSize-level_width)*2;
+		// If the Character is in the right part of the screen
+		else if (levelWidth - posX < centerX + (int)level.getCharacter().getWidth()*scale) {
+			cameraX = -(levelWidth - screenWidth);
+			characterX = posX + offsetX + cameraX;
 		}
-		// Else the Character are in the middle of the screen
-		else{
-			characterX = centerX-6;
-			cameraX = -(((float)level.getCharacter().getX())*scale-centerX);
+		// Else the Character is in the middle of the screen
+		else {
+			characterX = centerX + offsetX; // Places the character img in the middle horizontally of the screen.
+			cameraX = -(posX-centerX); // Moves everything else on the screen.
 		}
 	}
 }
