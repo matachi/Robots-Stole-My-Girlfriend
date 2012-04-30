@@ -10,11 +10,11 @@
 	<unlockedUpgrades>
 		<dash>true</dash>
 		<doubleJump>true</doubleJump>
-		<rapidFire>false</rapidFire>
+		<rapidFire>true</rapidFire>
 		<incRunningSpeed>true</incRunningSpeed>
 		<incShotgunSpread>true</incShotgunSpread>
-		<incRPGKnockback>false</incRPGKnockback>
-		<incRPGAoE>false</incRPGAoE>
+		<incRPGKnockback>true</incRPGKnockback>
+		<incRPGAoE>true</incRPGAoE>
 		<decAssaultRifleKnockback>true</decAssaultRifleKnockback>
 	</unlockedUpgrades>
 </progress>

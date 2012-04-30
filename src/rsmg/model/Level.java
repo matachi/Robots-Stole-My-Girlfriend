@@ -10,8 +10,11 @@ import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.Explosion;
 import rsmg.model.object.item.Item;
+import rsmg.model.object.unit.BallBot;
+import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
+import rsmg.model.object.unit.RocketBot;
 
 /**
  * Class representing a level. This Class is in charge of storing and updating
@@ -64,6 +67,7 @@ public class Level {
 		this.enemies = enemies;
 		bullets = new ArrayList<Bullet>();
 		spawnChar();
+		spawnEnemies();
 	}
 
 	/**
@@ -78,6 +82,15 @@ public class Level {
 		} catch (Exception NullPointerException) {
 			character = new PCharacter(0, 0, bullets);
 		}
+	}
+	/**
+	 * method created just for testing purposes
+	 */
+	private void spawnEnemies(){
+		enemies.add(new BallBot(100, 100));
+		enemies.add(new BucketBot(150, 150));
+		enemies.add(new RocketBot(50, 50));
+		
 	}
 
 	/**
@@ -133,8 +146,9 @@ public class Level {
 				i.remove();
 				continue;
 			}
-
-			enemy.applyGravity(delta);
+			if(!enemy.isFlyingUnit()){
+				enemy.applyGravity(delta);
+			}
 			enemy.move(delta);
 			applyNormalForce(enemy);
 			enemy.updateVulnerability();

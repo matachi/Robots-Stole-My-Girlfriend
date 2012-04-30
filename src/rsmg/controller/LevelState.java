@@ -254,11 +254,23 @@ class LevelState extends State {
 		shotgunMap.put(standRightKey, characterShotgunStandingR);
 		
 		/**
-		 * Create a map with all enemy images.
+		 * Create a map with all enemy images / Animations.
 		 */
 		enemies = new HashMap<String, Renderable>();
-		Image tankbot = new Image(folderPath+"tankbot.png", false, filter).getScaledCopy(scale);
+		Image tankbot = new Image(folderPath+"tankBot.png", false, filter).getScaledCopy(scale);
+		Image bucketBot = new Image(folderPath+"bucketBot.png", false, filter).getScaledCopy(scale);
+		Image ballBot = new Image(folderPath+"ballBot.png", false, filter).getScaledCopy(scale);
+		Animation rocketBot = new Animation(new SpriteSheet(new Image(
+				folderPath+"rocketBot.png", false, filter).getScaledCopy(scale), 19*scale, 25*scale), 200);
+		
 		enemies.put(ObjectName.TANKBOT, tankbot);
+		enemies.put(ObjectName.BUCKETBOT, bucketBot);
+		enemies.put(ObjectName.BALLBOT, ballBot);
+		enemies.put(ObjectName.ROCKETBOT, rocketBot);
+		
+		
+		
+		
 		
 		/**
 		 * Create a map with all item images.

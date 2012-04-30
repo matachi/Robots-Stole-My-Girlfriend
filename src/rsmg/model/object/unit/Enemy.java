@@ -58,4 +58,9 @@ public abstract class Enemy extends LivingObject{
 	public boolean recentlytookDamage() {
 		return (lastAttackedTime + Constants.ENEMY_FLASHDURATION > System.currentTimeMillis());
 	}
+	/**
+	 * returns true if this enemy is flying
+	 * @return true if t his enemy is flying
+	 */
+	public abstract boolean isFlyingUnit();
 }
