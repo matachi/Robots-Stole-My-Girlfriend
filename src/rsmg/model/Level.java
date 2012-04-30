@@ -56,6 +56,11 @@ public class Level {
 	private boolean hasWon;
 	
 	/**
+	 * Stores if the player has lost the level.
+	 */
+	private boolean hasLost;
+	
+	/**
 	 * Creates a level.
 	 * @param tileGrid The tile grid that the level shall use.
 	 * @param items The items that should be in the level.
@@ -121,6 +126,9 @@ public class Level {
 
 		// Check if the character has reached the end tile.
 		checkVictory();
+		
+		// Check if the player has died, and then mark the level as lost.
+		checkDeath();
 		
 		// update what direction the character is facing towards
 		character.updateFacing();
@@ -247,11 +255,26 @@ public class Level {
 	}
 	
 	/**
+	 * Checks if the character has died, and then mark the level as lost.
+	 */
+	private void checkDeath() {
+		hasLost = character.getHealth() < 1;
+	}
+	
+	/**
 	 * Returns whether or not the level has been completed.
 	 * @return If the level has been completed.
 	 */
 	public boolean hasWon() {
 		return hasWon;
+	}
+	
+	/**
+	 * Returns whether or not the user has lost the level.
+	 * @return If the player has lost the level.
+	 */
+	public boolean hasLost() {
+		return hasLost;
 	}
 
 	/**

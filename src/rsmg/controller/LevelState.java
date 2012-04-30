@@ -1,6 +1,5 @@
 package rsmg.controller;
 
-import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -516,20 +515,22 @@ class LevelState extends State {
 					character = characterMap.get("runLeft");
 		
 			}
-			
-			/**
-			 * Update health bar's overlay size.
-			 */
-			healthBarOverlayRectangle.setWidth(147 * level.getCharacter().getHealth() / level.getCharacter().getMaxHealth());
-			
-			/**
-			 * Check if the player has won the level. If he has, change state to next level.
-			 */
-			if (level.hasWon()) {
-				CharacterProgress.setUnlockedLevels(levelNumber+1);
-				CharacterProgress.saveFile();
-				Controller.initLevel(++levelNumber);
-			}
+		}
+		
+		/**
+		 * Update health bar's overlay size.
+		 */
+		healthBarOverlayRectangle.setWidth(147 * level.getCharacter().getHealth() / level.getCharacter().getMaxHealth());
+		
+		/**
+		 * Check if the player has won the level. If he has, change state to next level.
+		 */
+		if (level.hasWon()) {
+			CharacterProgress.setUnlockedLevels(levelNumber+1);
+			CharacterProgress.saveFile();
+			Controller.initLevel(++levelNumber);
+		} else if (level.hasLost()) {
+			Controller.initLevel(levelNumber);
 		}
 		
 		/**
