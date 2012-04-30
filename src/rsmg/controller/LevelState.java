@@ -3,6 +3,7 @@ package rsmg.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lwjgl.Sys;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -443,8 +444,7 @@ class LevelState extends State {
 	private void drawCharacter() {
 		//make the character flash white if he is immortal
 		//Some ugly code here, it's the result of some design flaws in the slick library
-		if (level.getCharacter().isImmortal()
-				&& (Math.round(Math.random()) == 0)) {
+		if (level.getCharacter().isImmortal() && Sys.getTime() % 400 < 200) {
 			if (character instanceof Image) {
 				((Image) character).drawFlash(characterX, characterY);
 			} else if (character instanceof Animation) {
