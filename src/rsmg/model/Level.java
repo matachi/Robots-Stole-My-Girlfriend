@@ -3,9 +3,13 @@ package rsmg.model;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import rsmg.model.ai.Ai;
+import rsmg.model.ai.EmptyAi;
+import rsmg.model.ai.PatrollingAi;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.Explosion;
@@ -43,7 +47,7 @@ public class Level {
 	/**
 	 * List where references to all living enemies in the level are stored.
 	 */
-	private Collection<Enemy> enemies;
+	private Collection<Ai> enemies;
 	
 	/**
 	 * The grid layout of the level. (I.e. the environment.)
@@ -69,7 +73,12 @@ public class Level {
 	public Level(TileGrid tileGrid, List<Item> items, List<Enemy> enemies) {
 		this.tileGrid = tileGrid;
 		this.items = items;
-		this.enemies = enemies;
+		//temporary solution
+		Collection enemyAis = new HashSet(); 
+		for(Enemy enemy : enemies){
+			enemyAis.add(new EmptyAi(enemy));
+		}
+		this.enemies = enemyAis;
 		bullets = new ArrayList<Bullet>();
 		spawnChar();
 		spawnEnemies();
@@ -92,9 +101,9 @@ public class Level {
 	 * method created just for testing purposes
 	 */
 	private void spawnEnemies(){
-		enemies.add(new BallBot(100, 100));
-		enemies.add(new BucketBot(150, 150));
-		enemies.add(new RocketBot(50, 50));
+		enemies.add(new PatrollingAi(new BallBot(100, 100)));
+		enemies.add(new PatrollingAi(new BucketBot(150, 150)));
+		enemies.add(new PatrollingAi(new RocketBot(50, 50)));
 		
 	}
 
@@ -146,17 +155,20 @@ public class Level {
 	 * @param delta Time sine last update.
 	 */
 	private void updateEnemies(double delta) {
-		for (Iterator<Enemy> i = enemies.iterator(); i.hasNext(); ) {
-
-			Enemy enemy = i.next();
+		for (Iterator<Ai> i = enemies.iterator(); i.hasNext(); ) {
+			Ai ai = i.next();
+			ai.update(delta);
+			Enemy enemy = ai.getEnemy();
 			
 			if (enemy.isDead()) {
 				i.remove();
 				continue;
 			}
+			
 			if(!enemy.isFlyingUnit()){
 				enemy.applyGravity(delta);
 			}
+			
 			enemy.move(delta);
 			applyNormalForce(enemy);
 			enemy.updateVulnerability();
@@ -191,7 +203,7 @@ public class Level {
 			bullets.addAll(newBullets);
 		}
 	}
-	
+
 	/**
 	 * Update all bullets in the level.
 	 * @param delta Time sine last update.
@@ -222,7 +234,7 @@ public class Level {
 			
 		}
 	}
-	
+
 	/**
 	 * Remove item if it is picked-up.
 	 */
@@ -235,7 +247,7 @@ public class Level {
 			}
 		}
 	}
-	
+
 	/**
 	 * Check if the object is flying (i.e. not standing on a solid tile).
 	 * @param obj The InteractiveObject.
@@ -246,21 +258,21 @@ public class Level {
 		return !(tileGrid.tileIntersect(obj.getX(), y) ||
 				tileGrid.tileIntersect(obj.getX() + obj.getWidth() - 0.00001, y));
 	}
-	
+
 	/**
 	 * Checks if the character has reached the end tile.
 	 */
 	private void checkVictory() {
 		hasWon = tileGrid.intersectsWithEndTile(character);
 	}
-	
+
 	/**
 	 * Checks if the character has died, and then mark the level as lost.
 	 */
 	private void checkDeath() {
 		hasLost = character.getHealth() < 1;
 	}
-	
+
 	/**
 	 * Returns whether or not the level has been completed.
 	 * @return If the level has been completed.
@@ -268,7 +280,7 @@ public class Level {
 	public boolean hasWon() {
 		return hasWon;
 	}
-	
+
 	/**
 	 * Returns whether or not the user has lost the level.
 	 * @return If the player has lost the level.
@@ -389,7 +401,12 @@ public class Level {
 	 * @return The list of alive enemies.
 	 */
 	public Collection<Enemy> getEnemies() {
-		return enemies;
+		Collection<Enemy> enemySet = new HashSet<Enemy>();
+		for(Ai ai : enemies ){
+			enemySet.add(ai.getEnemy());
+		}
+		
+		return enemySet;
 	}
 
 	/**
