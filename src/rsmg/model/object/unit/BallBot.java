@@ -5,7 +5,7 @@ import rsmg.model.ObjectName;
 public class BallBot extends Enemy{
 
 	public BallBot(double x, double y) {
-		super(x, y, 40, 40, 100, ObjectName.BALLBOT);
+		super(x, y, 40, 40, 60, ObjectName.BALLBOT);
 	}
 
 	@Override
@@ -17,5 +17,4 @@ public class BallBot extends Enemy{
 	public boolean isFlyingUnit() {
 		return true;
 	}
-	
 }
