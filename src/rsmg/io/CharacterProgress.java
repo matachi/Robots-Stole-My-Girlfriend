@@ -27,7 +27,7 @@ import org.jdom.output.XMLOutputter;
  * 
  */
 public class CharacterProgress {
-
+	
 	private static final String UNLOCKED_LEVELS = "unlockedLevels";
 	
 	private static final String UNLOCKED_WEAPONS = "unlockedWeapons";
