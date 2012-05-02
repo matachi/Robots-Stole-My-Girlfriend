@@ -19,6 +19,7 @@ import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
 import rsmg.model.object.unit.RocketBot;
+import rsmg.model.object.unit.Spikes;
 
 /**
  * Class representing a level. This Class is in charge of storing and updating
@@ -104,6 +105,7 @@ public class Level {
 		enemies.add(new PatrollingAi(new BallBot(100, 100)));
 		enemies.add(new PatrollingAi(new BucketBot(150, 150)));
 		enemies.add(new PatrollingAi(new RocketBot(50, 50)));
+		enemies.add(new EmptyAi(new Spikes(32*5, 32*4)));
 		
 	}
 

@@ -25,6 +25,7 @@ public enum ObjectName {
 	public static final String ROCKETBOT = "rocketbot";
 	public static final String BALLBOT = "ballbot";
 	public static final String BUCKETBOT = "bucketbot";
+	public static final String SPIKES = "spikes";
 	
 
 	/**
