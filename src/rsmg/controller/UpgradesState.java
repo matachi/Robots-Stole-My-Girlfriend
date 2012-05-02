@@ -100,9 +100,9 @@ class UpgradesState extends State {
 		// Init upgrade button information
 		upgradeButtons = new UpgradeButton[2][4];
 		upgradeButtons[0][0] = new UpgradeButton(CharacterProgress.INC_RUNNING_SPEED, "Run Faster", 100, 400, scale);
-		upgradeButtons[0][1] = new UpgradeButton(CharacterProgress.INC_RPG_KNOCKBACK, "More RPG\nKnockback", 500, 400, scale);
+		upgradeButtons[0][1] = new UpgradeButton(CharacterProgress.INC_RUNNING_SPEED, "---", 500, 400, scale);
 		upgradeButtons[0][2] = new UpgradeButton(CharacterProgress.INC_SHOTGUN_SPREAD, "Shotgun Spread", 1107, 400, scale);
-		upgradeButtons[0][3] = new UpgradeButton(CharacterProgress.DEC_ASSAULT_RIFLE_KNOCKBACK, "Less Assault Rifle\nKnockback", 1507, 400, scale);
+		upgradeButtons[0][3] = new UpgradeButton(CharacterProgress.INC_SHOTGUN_SPREAD, "---", 1507, 400, scale);
 		upgradeButtons[1][0] = new UpgradeButton(CharacterProgress.DASH, "Dash", 100, 700, scale);
 		upgradeButtons[1][1] = new UpgradeButton(CharacterProgress.DOUBLE_JUMP, "Double Jump", 500, 700, scale);
 		upgradeButtons[1][2] = new UpgradeButton(CharacterProgress.RAPID_FIRE, "Rapid Fire", 1107, 700, scale);
@@ -111,11 +111,11 @@ class UpgradesState extends State {
 		// Check which upgrades are already unlocked
 		if (CharacterProgress.isIncRunningSpeedUnlocked())
 			upgradeButtons[0][0].toggleUnlocked();
-		if (CharacterProgress.isIncRPGKnockbackUnlocked())
+		if (CharacterProgress.isIncRunningSpeedUnlocked())
 			upgradeButtons[0][1].toggleUnlocked();
 		if (CharacterProgress.isIncShotgunSpreadUnlocked())
 			upgradeButtons[0][2].toggleUnlocked();
-		if (CharacterProgress.isDecAssaultRifleKnockbackUnlocked())
+		if (CharacterProgress.isIncShotgunSpreadUnlocked())
 			upgradeButtons[0][3].toggleUnlocked();
 		if (CharacterProgress.isDashUnlocked())
 			upgradeButtons[1][0].toggleUnlocked();
@@ -274,7 +274,7 @@ class UpgradesState extends State {
 	 */
 	private class UpgradeButton {
 		
-		private int upgrade;
+		private String upgrade;
 		private String buttonText;
 		private float x;
 		private float y;
@@ -297,7 +297,7 @@ class UpgradesState extends State {
 		 *            How much the button should be scaled.
 		 * @throws SlickException
 		 */
-		public UpgradeButton(int upgrade, String buttonText, int x, int y,
+		public UpgradeButton(String upgrade, String buttonText, int x, int y,
 				float scale) throws SlickException {
 			
 			this.upgrade = upgrade;
@@ -336,7 +336,7 @@ class UpgradesState extends State {
 			return available;
 		}
 		
-		public int getUpgrade() {
+		public String getUpgrade() {
 			return upgrade;
 		}
 		

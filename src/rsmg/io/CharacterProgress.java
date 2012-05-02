@@ -1,5 +1,6 @@
 package rsmg.io;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,31 +10,49 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 /**
- * This class reads and writes to the character progress file. The character
- * progress file stores which upgrade points that has been found, which upgrades
- * and levels that have been unlocked and so on.
+ * This class provides getters and setters to read and modify the character
+ * progression.
+ * 
+ * The character progression is stored on the hard drive in the folder
+ * res/data/progress. If the file progress.xml and/or the folder don't exist,
+ * they are created and filled with all necessary XML nodes. The character
+ * progress file stores which upgrade points that have been found, which
+ * upgrades, weapons and levels that have been unlocked.
  * 
  * @author Daniel Jonsson
  * 
  */
 public class CharacterProgress {
 
-	public static final int DASH = 0;
-	public static final int DOUBLE_JUMP = 1;
-	public static final int RAPID_FIRE = 2;
-	public static final int INC_RUNNING_SPEED = 3;
-	public static final int INC_SHOTGUN_SPREAD = 4;
-	public static final int INC_RPG_KNOCKBACK = 5;
-	public static final int INC_RPG_AOE = 6;
-	public static final int DEC_ASSAULT_RIFLE_KNOCKBACK = 7;
+	private static final String UNLOCKED_LEVELS = "unlockedLevels";
+	
+	private static final String UNLOCKED_WEAPONS = "unlockedWeapons";
+	private static final String PISTOL = "pistol";
+	private static final String SHOTGUN = "shotgun";
+	private static final String RPG = "rpg";
+	
+	private static final String UPGRADE_POINTS = "upgradePoints";
+	
+	private static final String UNLOCKED_UPGRADES = "unlockedUpgrades";
+	public static final String DASH = "dash";
+	public static final String DOUBLE_JUMP = "doubleJump";
+	public static final String RAPID_FIRE = "rapidFire";
+	public static final String INC_RUNNING_SPEED = "incRunningSpeed";
+	public static final String INC_SHOTGUN_SPREAD = "incShotgunSpread";
+	public static final String INC_RPG_AOE = "incRPGAoE";
+	
+	private static final int TRUE = 1;
+	private static final int FALSE = 0;
 	
 	/**
 	 * Path to the configuration file.
 	 */
-	private static final String progressFilePath = "res/data/progress/progress.xml";
+	private static final String progressFolderPath = "res/data/progress";
+	private static final String progressFilePath = progressFolderPath+"/progress.xml";
 	
 	/**
 	 * Make this class to a singleton.
@@ -45,41 +64,57 @@ public class CharacterProgress {
 	 */
 	private Map<String, Integer> progress;
 	
-	private static final int TRUE = 1;
-	private static final int FALSE = 0;
-	
 	/**
 	 * Make this class to a singleton. Reads the settings from the character
 	 * progress file and stores the values in this class.
 	 */
 	private CharacterProgress() {
-		SAXBuilder builder = new SAXBuilder();
+		if (!doesProgressFolderExist()) {
+			createProgressFolder();
+			createProgressFile();
+		} else if (!doesProgressFileExist()) {
+			createProgressFile();
+		}
+		progress = new HashMap<String, Integer>();
+		fillProgressMap(this);
+	}
+
+	/**
+	 * Fills the progress map in this singleton class with all relevant XML
+	 * nodes from the hard drive. By doing this we won't need to read from the
+	 * hard drive every time a get method is called.
+	 * 
+	 * @param instance
+	 *            What instance of CharacterProgress that the operations should
+	 *            be done on.
+	 */
+	private static void fillProgressMap(CharacterProgress instance) {
 		try {
+			// Clear the map
+			instance.progress.clear();
+			
 			// The character progress document
-			Document document = builder.build(progressFilePath);
+			Document document = new SAXBuilder().build(progressFilePath);
 			
 			// The root node in the document
 			Element rootNode = document.getRootElement();
 			
 			// Read and store the settings to the class
-			progress = new HashMap<String, Integer>();
-			progress.put("unlockedLevels", numberToInt(rootNode.getChildText("unlockedLevels")));
-			progress.put("upgradePoints", numberToInt(rootNode.getChildText("upgradePoints")));
+			instance.progress.put(UNLOCKED_LEVELS, numberToInt(rootNode.getChildText(UNLOCKED_LEVELS)));
+			instance.progress.put(UPGRADE_POINTS, numberToInt(rootNode.getChildText(UPGRADE_POINTS)));
 
-			Element weapon = rootNode.getChild("unlockedWeapons");
-			progress.put("rpg", booleanToInt(weapon.getChildText("rpg")));
-			progress.put("shotgun", booleanToInt(weapon.getChildText("shotgun")));
-			progress.put("assaultRifle", booleanToInt(weapon.getChildText("assaultRifle")));
+			Element weapon = rootNode.getChild(UNLOCKED_WEAPONS);
+			instance.progress.put(PISTOL, booleanToInt(weapon.getChildText(PISTOL)));
+			instance.progress.put(SHOTGUN, booleanToInt(weapon.getChildText(SHOTGUN)));
+			instance.progress.put(RPG, booleanToInt(weapon.getChildText(RPG)));
 
-			Element upgrade = rootNode.getChild("unlockedUpgrades");
-			progress.put("dash", booleanToInt(upgrade.getChildText("dash")));
-			progress.put("doubleJump", booleanToInt(upgrade.getChildText("doubleJump")));
-			progress.put("rapidFire", booleanToInt(upgrade.getChildText("rapidFire")));
-			progress.put("incRunningSpeed", booleanToInt(upgrade.getChildText("incRunningSpeed")));
-			progress.put("incShotgunSpread", booleanToInt(upgrade.getChildText("incShotgunSpread")));
-			progress.put("incRPGKnockback", booleanToInt(upgrade.getChildText("incRPGKnockback")));
-			progress.put("incRPGAoE", booleanToInt(upgrade.getChildText("incRPGAoE")));
-			progress.put("decAssaultRifleKnockback", booleanToInt(upgrade.getChildText("decAssaultRifleKnockback")));
+			Element upgrade = rootNode.getChild(UNLOCKED_UPGRADES);
+			instance.progress.put(DASH, booleanToInt(upgrade.getChildText(DASH)));
+			instance.progress.put(DOUBLE_JUMP, booleanToInt(upgrade.getChildText(DOUBLE_JUMP)));
+			instance.progress.put(RAPID_FIRE, booleanToInt(upgrade.getChildText(RAPID_FIRE)));
+			instance.progress.put(INC_RUNNING_SPEED, booleanToInt(upgrade.getChildText(INC_RUNNING_SPEED)));
+			instance.progress.put(INC_SHOTGUN_SPREAD, booleanToInt(upgrade.getChildText(INC_SHOTGUN_SPREAD)));
+			instance.progress.put(INC_RPG_AOE, booleanToInt(upgrade.getChildText(INC_RPG_AOE)));
 			
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -89,33 +124,152 @@ public class CharacterProgress {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * This method will reset all character progress.
+	 */
+	public static void resetProgress() {
+		if (doesProgressFileExist()) {
+			deleteProgressFile();
+		}
+		createProgressFile();
+		fillProgressMap(config);
+	}
+	
+	/**
+	 * Check if the progress folder exists.
+	 * 
+	 * @return Returns true if the progress file exists.
+	 */
+	private static boolean doesProgressFolderExist() {
+		File file = new File(progressFolderPath);
+		return file.exists();
+	}
+	
+	/**
+	 * Create the progress folder.
+	 */
+	private static void createProgressFolder() {
+		File file = new File(progressFolderPath);
+		file.mkdir();
+	}
+	
+	/**
+	 * Check if the progress file exists.
+	 * 
+	 * @return Returns true if the progress file exists.
+	 */
+	private static boolean doesProgressFileExist() {
+		File file = new File(progressFilePath);
+		return file.exists();
+	}
+	
+	/**
+	 * Delete the progress file.
+	 */
+	private static void deleteProgressFile() {
+		File file = new File(progressFilePath);
+		file.delete();
+	}
+	
+	/**
+	 * Create a new progress file and fill it with all necessary XML code.
+	 */
+	private static void createProgressFile() {
+		try {
+			/*
+			 * Create the character progress document.
+			 */
+			// unlocked levels
+			Element unlockedLevels = new Element(UNLOCKED_LEVELS).setText("1");
+			
+			// unlocked weapons
+			Element unlockedWeapons = new Element(UNLOCKED_WEAPONS);
+			unlockedWeapons.addContent(new Element(PISTOL).setText("false"));
+			unlockedWeapons.addContent(new Element(RPG).setText("false"));
+			unlockedWeapons.addContent(new Element(SHOTGUN).setText("false"));
+			
+			// upgrade points
+			Element upgradePoints = new Element(UPGRADE_POINTS).setText("0");
+			
+			// upgrades
+			Element unlockedUpgrades = new Element(UNLOCKED_UPGRADES);
+			unlockedUpgrades.addContent(new Element(DASH).setText("false"));
+			unlockedUpgrades.addContent(new Element(DOUBLE_JUMP).setText("false"));
+			unlockedUpgrades.addContent(new Element(RAPID_FIRE).setText("false"));
+			unlockedUpgrades.addContent(new Element(INC_RUNNING_SPEED).setText("false"));
+			unlockedUpgrades.addContent(new Element(INC_SHOTGUN_SPREAD).setText("false"));
+			unlockedUpgrades.addContent(new Element(INC_RPG_AOE).setText("false"));
+			
+			// root
+			Element root = new Element("progress");
+			root.addContent(unlockedLevels);
+			root.addContent(unlockedWeapons);
+			root.addContent(upgradePoints);
+			root.addContent(unlockedUpgrades);
+			
+			// document
+			Document document = new Document(root);
+			
+			/*
+			 * Write the character progress document to the disk.
+			 */
+			XMLOutputter outputter = new XMLOutputter();
+			outputter.setFormat(Format.getPrettyFormat());
+			FileWriter writer = new FileWriter(progressFilePath);
+			outputter.output(document, writer);
+			writer.flush();
+			writer.close();
+			
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
 	/*
 	 * Get methods.
 	 */
+	/**
+	 * Returns the number of unlocked levels.
+	 * @return Number of unlocked levels.
+	 */
 	public static int getUnlockedLevels() {
-		return variableNumber("unlockedLevels");
+		return variableNumber(UNLOCKED_LEVELS);
 	}
 	
+	/**
+	 * Returns the number of available upgrade points.
+	 * 
+	 * @return Number of available upgrade points.
+	 */
 	public static int getUpgradePoints() {
-		return variableNumber("upgradePoints");
+		return variableNumber(UPGRADE_POINTS);
 	}
 
 	// weapons
+	public static boolean isPistolUnlocked() {
+		return variableIsTrue(PISTOL);
+	}
+	
 	public static boolean isRPGUnlocked() {
-		return variableIsTrue("rpg");
+		return variableIsTrue(RPG);
 	}
 
 	public static boolean isShotgunUnlocked() {
-		return variableIsTrue("shotgun");
-	}
-
-	public static boolean isAssaultRifleUnlocked() {
-		return variableIsTrue("assaultRifle");
+		return variableIsTrue(SHOTGUN);
 	}
 	
 	// upgrades
-	public static boolean isUpgradeUnlocked(int upgrade) {
+	/**
+	 * Returns if the chosen upgrade is unlocked. As upgrade parameter, use any
+	 * of the upgrade constants in this class.
+	 * 
+	 * @param upgrade
+	 *            An upgrade constant available from this class.
+	 * @return If the upgrade is unlocked.
+	 */
+	public static boolean isUpgradeUnlocked(String upgrade) {
 		switch (upgrade) {
 		case DASH:
 			return isDashUnlocked();
@@ -127,12 +281,8 @@ public class CharacterProgress {
 			return isIncRunningSpeedUnlocked();
 		case INC_SHOTGUN_SPREAD:
 			return isIncShotgunSpreadUnlocked();
-		case INC_RPG_KNOCKBACK:
-			return isIncRPGKnockbackUnlocked();
 		case INC_RPG_AOE:
 			return isIncRPGAoEUnlocked();
-		case DEC_ASSAULT_RIFLE_KNOCKBACK:
-			return isDecAssaultRifleKnockbackUnlocked();
 		default:
 			new IllegalArgumentException();
 			return false;
@@ -140,63 +290,72 @@ public class CharacterProgress {
 	}
 	
 	public static boolean isDashUnlocked() {
-		return variableIsTrue("dash");
+		return variableIsTrue(DASH);
 	}
 	
 	public static boolean isDoubleJumpUnlocked() {
-		return variableIsTrue("doubleJump");
+		return variableIsTrue(DOUBLE_JUMP);
 	}
 	
 	public static boolean isRapidFireUnlocked() {
-		return variableIsTrue("rapidFire");
+		return variableIsTrue(RAPID_FIRE);
 	}
 	
 	public static boolean isIncRunningSpeedUnlocked() {
-		return variableIsTrue("incRunningSpeed");
+		return variableIsTrue(INC_RUNNING_SPEED);
 	}
 	
 	public static boolean isIncShotgunSpreadUnlocked() {
-		return variableIsTrue("incShotgunSpread");
-	}
-	
-	public static boolean isIncRPGKnockbackUnlocked() {
-		return variableIsTrue("incRPGKnockback");
+		return variableIsTrue(INC_SHOTGUN_SPREAD);
 	}
 	
 	public static boolean isIncRPGAoEUnlocked() {
-		return variableIsTrue("incRPGAoE");
-	}
-	
-	public static boolean isDecAssaultRifleKnockbackUnlocked() {
-		return variableIsTrue("decAssaultRifleKnockback");
+		return variableIsTrue(INC_RPG_AOE);
 	}
 	
 	/*
 	 * Set methods.
 	 */
+	/**
+	 * Set the number of unlocked levels.
+	 * @param i Number of unlocked levels.
+	 */
 	public static void setUnlockedLevels(int i) {
-		setVariable("unlockedLevels", i);
+		setVariable(UNLOCKED_LEVELS, i);
 	}
 	
+	/**
+	 * Set the number of available upgrade points.
+	 * @param i Number of available upgrade points.
+	 */
 	public static void setUpgradePoints(int i) {
-		setVariable("upgradePoints", i);
+		setVariable(UPGRADE_POINTS, i);
 	}
 	
 	// weapons
+	public static void setPistolUnlocked(boolean unlocked) {
+		setVariable(PISTOL, unlocked);
+	}
+	
 	public static void setRpgUnlocked(boolean unlocked) {
-		setVariable("rpg", unlocked);
+		setVariable(RPG, unlocked);
 	}
 	
 	public static void setShotgunUnlocked(boolean unlocked) {
-		setVariable("shotgun", unlocked);
-	}
-	
-	public static void setAssaultRifleUnlocked(boolean unlocked) {
-		setVariable("assaultRifle", unlocked);
+		setVariable(SHOTGUN, unlocked);
 	}
 	
 	// upgrades
-	public static void setUpgrade(int upgrade, boolean unlocked) {
+	/**
+	 * Set if the chosen upgrade should be unlocked or not. As upgrade
+	 * parameter, use any of the upgrade constants in this class.
+	 * 
+	 * @param upgrade
+	 *            An upgrade constant available from this class.
+	 * @param upgrade
+	 *            unlocked If the upgrade should be unlocked.
+	 */
+	public static void setUpgrade(String upgrade, boolean unlocked) {
 		switch (upgrade) {
 		case DASH:
 			setDashUnlocked(unlocked);
@@ -213,14 +372,8 @@ public class CharacterProgress {
 		case INC_SHOTGUN_SPREAD:
 			setIncShotgunSpreadUnlocked(unlocked);
 			break;
-		case INC_RPG_KNOCKBACK:
-			setIncRPGKnockbackUnlocked(unlocked);
-			break;
 		case INC_RPG_AOE:
 			setIncRPGAoEUnlocked(unlocked);
-			break;
-		case DEC_ASSAULT_RIFLE_KNOCKBACK:
-			setDecAssaultRifleKnockbackUnlocked(unlocked);
 			break;
 		default:
 			new IllegalArgumentException();
@@ -229,35 +382,27 @@ public class CharacterProgress {
 	}
 	
 	public static void setDashUnlocked(boolean unlocked) {
-		setVariable("dash", unlocked);
+		setVariable(DASH, unlocked);
 	}
 	
 	public static void setDoubleJumpUnlocked(boolean unlocked) {
-		setVariable("doubleJump", unlocked);
+		setVariable(DOUBLE_JUMP, unlocked);
 	}
 	
 	public static void setRapidFireUnlocked(boolean unlocked) {
-		setVariable("rapidFire", unlocked);
+		setVariable(RAPID_FIRE, unlocked);
 	}
 	
 	public static void setIncRunningSpeedUnlocked(boolean unlocked) {
-		setVariable("incRunningSpeed", unlocked);
+		setVariable(INC_RUNNING_SPEED, unlocked);
 	}
 	
 	public static void setIncShotgunSpreadUnlocked(boolean unlocked) {
-		setVariable("incShotgunSpread", unlocked);
-	}
-	
-	public static void setIncRPGKnockbackUnlocked(boolean unlocked) {
-		setVariable("incRPGKnockback", unlocked);
+		setVariable(INC_SHOTGUN_SPREAD, unlocked);
 	}
 	
 	public static void setIncRPGAoEUnlocked(boolean unlocked) {
-		setVariable("incRPGAoE", unlocked);
-	}
-	
-	public static void setDecAssaultRifleKnockbackUnlocked(boolean unlocked) {
-		setVariable("decAssaultRifleKnockback", unlocked);
+		setVariable(INC_RPG_AOE, unlocked);
 	}
 	
 	/**
@@ -266,34 +411,31 @@ public class CharacterProgress {
 	 * session, and lost when closing the game.
 	 */
 	public static void saveFile() {
-		SAXBuilder builder = new SAXBuilder();
         try {
         	// Instance of the config document
-        	Document document = builder.build(progressFilePath);
+        	Document document = new SAXBuilder().build(progressFilePath);
 
 			// The root node in the config document
 			Element rootNode = document.getRootElement();
 			
 			// Store the settings in the instance of the config document
-			rootNode.getChild("unlockedLevels").setText(String.valueOf(getUnlockedLevels()));
-			rootNode.getChild("upgradePoints").setText(String.valueOf(getUpgradePoints()));
+			rootNode.getChild(UNLOCKED_LEVELS).setText(String.valueOf(getUnlockedLevels()));
+			rootNode.getChild(UPGRADE_POINTS).setText(String.valueOf(getUpgradePoints()));
 			
 			// weapons
-			Element childNode = rootNode.getChild("unlockedWeapons");
-			childNode.getChild("rpg").setText(Boolean.toString(isRPGUnlocked()));
-			childNode.getChild("shotgun").setText(Boolean.toString(isShotgunUnlocked()));
-			childNode.getChild("assaultRifle").setText(Boolean.toString(isAssaultRifleUnlocked()));
+			Element childNode = rootNode.getChild(UNLOCKED_WEAPONS);
+			childNode.getChild(PISTOL).setText(Boolean.toString(isPistolUnlocked()));
+			childNode.getChild(RPG).setText(Boolean.toString(isRPGUnlocked()));
+			childNode.getChild(SHOTGUN).setText(Boolean.toString(isShotgunUnlocked()));
 
 			// upgrades
-			childNode = rootNode.getChild("unlockedUpgrades");
-			childNode.getChild("dash").setText(Boolean.toString(isDashUnlocked()));
-			childNode.getChild("doubleJump").setText(Boolean.toString(isDoubleJumpUnlocked()));
-			childNode.getChild("rapidFire").setText(Boolean.toString(isRapidFireUnlocked()));
-			childNode.getChild("incRunningSpeed").setText(Boolean.toString(isIncRunningSpeedUnlocked()));
-			childNode.getChild("incShotgunSpread").setText(Boolean.toString(isIncShotgunSpreadUnlocked()));
-			childNode.getChild("incRPGKnockback").setText(Boolean.toString(isIncRPGKnockbackUnlocked()));
-			childNode.getChild("incRPGAoE").setText(Boolean.toString(isIncRPGAoEUnlocked()));
-			childNode.getChild("decAssaultRifleKnockback").setText(Boolean.toString(isDecAssaultRifleKnockbackUnlocked()));
+			childNode = rootNode.getChild(UNLOCKED_UPGRADES);
+			childNode.getChild(DASH).setText(Boolean.toString(isDashUnlocked()));
+			childNode.getChild(DOUBLE_JUMP).setText(Boolean.toString(isDoubleJumpUnlocked()));
+			childNode.getChild(RAPID_FIRE).setText(Boolean.toString(isRapidFireUnlocked()));
+			childNode.getChild(INC_RUNNING_SPEED).setText(Boolean.toString(isIncRunningSpeedUnlocked()));
+			childNode.getChild(INC_SHOTGUN_SPREAD).setText(Boolean.toString(isIncShotgunSpreadUnlocked()));
+			childNode.getChild(INC_RPG_AOE).setText(Boolean.toString(isIncRPGAoEUnlocked()));
         	
 			// Write the document to the progress file on the HDD
     		XMLOutputter outputter = new XMLOutputter();
@@ -313,7 +455,9 @@ public class CharacterProgress {
 	
 	/**
 	 * Convert a boolean string to an int.
-	 * @param bol Boolean value as a string.
+	 * 
+	 * @param bol
+	 *            Boolean value as a string.
 	 * @return 1 if true. 0 if false.
 	 */
 	private static int booleanToInt(String bol) {
@@ -322,7 +466,9 @@ public class CharacterProgress {
 
 	/**
 	 * Convert a boolean value to an int.
-	 * @param bol Boolean variable.
+	 * 
+	 * @param bol
+	 *            Boolean variable.
 	 * @return 1 if true. 0 if false.
 	 */
 	private static int booleanToInt(boolean bol) {
@@ -331,7 +477,9 @@ public class CharacterProgress {
 	
 	/**
 	 * Convert a string number to an int.
-	 * @param num Number as a string.
+	 * 
+	 * @param num
+	 *            Number as a string.
 	 * @return The number as an int.
 	 */
 	private static int numberToInt(String num) {
@@ -340,7 +488,9 @@ public class CharacterProgress {
 	
 	/**
 	 * Returns if the variable stored in the progression map is true.
-	 * @param variable The variable's name.
+	 * 
+	 * @param variable
+	 *            The variable's name.
 	 * @return If the variable is true.
 	 */
 	private static boolean variableIsTrue(String variable) {
@@ -349,7 +499,9 @@ public class CharacterProgress {
 
 	/**
 	 * Returns the variable's number.
-	 * @param variable The key's name.
+	 * 
+	 * @param variable
+	 *            The key's name.
 	 * @return The key's value.
 	 */
 	private static int variableNumber(String variable) {
@@ -358,8 +510,11 @@ public class CharacterProgress {
 	
 	/**
 	 * Store a number in the progression map.
-	 * @param variable The variable name in the map.
-	 * @param value The value.
+	 * 
+	 * @param variable
+	 *            The variable name in the map.
+	 * @param value
+	 *            The value.
 	 */
 	private static void setVariable(String variable, int value) {
 		config.progress.put(variable, value);
@@ -367,8 +522,11 @@ public class CharacterProgress {
 	
 	/**
 	 * Store a boolean value in the progression map.
-	 * @param variable The key in the map.
-	 * @param bol A boolean value.
+	 * 
+	 * @param variable
+	 *            The key in the map.
+	 * @param bol
+	 *            A boolean value.
 	 */
 	private static void setVariable(String variable, boolean bol) {
 		config.progress.put(variable, booleanToInt(bol));

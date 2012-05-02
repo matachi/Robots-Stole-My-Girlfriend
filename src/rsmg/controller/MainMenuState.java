@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
+import rsmg.io.CharacterProgress;
 import rsmg.io.Config;
 
 /**
@@ -157,17 +158,35 @@ class MainMenuState extends State {
 	private void changeState(GameContainer gc, StateBasedGame sbg) {
 		switch (selectedButton) {
 		case 0:
-			sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
+			continuePreviousGame(sbg);
 			break;
 		case 1:
+			createNewGame(sbg);
 			break;
 		case 2:
-			sbg.enterState(Controller.OPTIONS_STATE, null, new FadeInTransition());
+			openOptionsView(sbg);
 			break;
 		case 3:
-			gc.exit();
+			closeGame(gc);
 			break;
 		}
+	}
+	
+	private void continuePreviousGame(StateBasedGame sbg) {
+		sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
+	}
+	
+	private void createNewGame(StateBasedGame sbg) {
+		CharacterProgress.resetProgress();
+		sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
+	}
+	
+	private void openOptionsView(StateBasedGame sbg) {
+		sbg.enterState(Controller.OPTIONS_STATE, null, new FadeInTransition());
+	}
+	
+	private void closeGame(GameContainer gc) {
+		gc.exit();
 	}
 	
 	/**

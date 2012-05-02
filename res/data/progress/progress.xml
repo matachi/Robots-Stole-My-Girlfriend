@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <progress>
-	<unlockedLevels>2</unlockedLevels>
-	<unlockedWeapons>
-		<rpg>true</rpg>
-		<shotgun>false</shotgun>
-		<assaultRifle>false</assaultRifle>
-	</unlockedWeapons>
-	<upgradePoints>5</upgradePoints>
-	<unlockedUpgrades>
-		<dash>true</dash>
-		<doubleJump>true</doubleJump>
-		<rapidFire>true</rapidFire>
-		<incRunningSpeed>true</incRunningSpeed>
-		<incShotgunSpread>true</incShotgunSpread>
-		<incRPGKnockback>true</incRPGKnockback>
-		<incRPGAoE>true</incRPGAoE>
-		<decAssaultRifleKnockback>true</decAssaultRifleKnockback>
-	</unlockedUpgrades>
+  <unlockedLevels>1</unlockedLevels>
+  <unlockedWeapons>
+    <pistol>false</pistol>
+    <rpg>false</rpg>
+    <shotgun>false</shotgun>
+  </unlockedWeapons>
+  <upgradePoints>0</upgradePoints>
+  <unlockedUpgrades>
+    <dash>false</dash>
+    <doubleJump>false</doubleJump>
+    <rapidFire>false</rapidFire>
+    <incRunningSpeed>false</incRunningSpeed>
+    <incShotgunSpread>false</incShotgunSpread>
+    <incRPGAoE>false</incRPGAoE>
+  </unlockedUpgrades>
 </progress>
+
