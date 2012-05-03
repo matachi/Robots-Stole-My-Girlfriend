@@ -46,6 +46,7 @@ public enum ObjectName {
 	public static final String ROCKETR = "rocketR";
 	public static final String ROCKETL = "rocketL";
 	public static final String SHOTGUN_BULLET = "shotgunBullet";
+	public static final String STONE = "stone";
 
 	/**
 	 * The tiles' names.

@@ -175,8 +175,12 @@ class LevelState extends State {
 		bullets = new HashMap<String, Renderable>();
 		Image laserBullet = new Image(folderPath+"laserBullet.png", false, filter).getScaledCopy(scale);
 		bullets.put(ObjectName.LASER_BULLET, laserBullet);
+		
 		Image shotgunBullet = new Image(folderPath+"shotgunBullet.png", false, filter).getScaledCopy(scale);
 		bullets.put(ObjectName.SHOTGUN_BULLET, shotgunBullet);
+		
+		Image stone = new Image(folderPath+"stone.png", false, filter).getScaledCopy(scale);
+		bullets.put(ObjectName.STONE, stone);
 		
 		/**
 		 * create an animation for the rocket
@@ -282,9 +286,17 @@ class LevelState extends State {
 	 */
 	private void drawEnemies() {
 		for (Enemy enemy : level.getEnemies()){
+			
+			
+			//different facing Animations are not yet supported. 
+			Renderable enemyRenderable;
+			if(enemy.isFacingRight() && (enemies.get(enemy.getName()) instanceof Image)){
+				enemyRenderable = ((Image)enemies.get(enemy.getName())).getFlippedCopy(true, false);
+			} else {
+				enemyRenderable = enemies.get(enemy.getName());
+			}
+			
 			//make the enemy flash if he recently took damage
-			// note: Some ugly code here, it's the result of some design flaws in the slick library
-			Renderable enemyRenderable = enemies.get(enemy.getName());
 			if(enemy.recentlytookDamage()){
 				if(enemyRenderable instanceof Animation){
 					((Animation)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY, (float)enemy.getWidth()*scale, (float)enemy.getHeight()*scale);

@@ -4,11 +4,14 @@ import java.util.List;
 
 import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
+import rsmg.model.object.bullet.CurveBullet;
 import rsmg.util.Vector2d;
 
 public class BucketBot extends Enemy implements AttackingEnemy{
 	private List<Bullet> bulletList;
-
+	private static int XBULLETSPEED = 50;
+	private static int YBULLETSPEED = -200; 
+			
 	public BucketBot(double x, double y, List<Bullet> bulletList) {
 		super(x, y, 22, 30, 20, ObjectName.BUCKETBOT);
 		this.bulletList = bulletList;
@@ -26,9 +29,17 @@ public class BucketBot extends Enemy implements AttackingEnemy{
 	}
 
 	@Override
-	public void shoot(List<Bullet> bulletList) {
-		//TODO change these numbers
-		bulletList.add(new Bullet(getX(), getY(), 10, 10, ObjectName.PISTOL_BULLET, 20, new Vector2d(0, 0)));
+	public void shoot() {
+		int bulletSpeed;
+		
+		if (isFacingRight()){
+			bulletSpeed = XBULLETSPEED;
+		} else {
+			bulletSpeed = -XBULLETSPEED;
+		}
+		
+		bulletList.add(new CurveBullet(getX(), getY(), 10, 10, ObjectName.STONE, 20, new Vector2d(bulletSpeed, YBULLETSPEED)));
+
 	}
 	
 

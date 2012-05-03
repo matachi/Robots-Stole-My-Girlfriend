@@ -2,14 +2,17 @@ package rsmg.model.ai;
 
 import java.util.List;
 
+import org.lwjgl.Sys;
+
 import rsmg.model.object.bullet.Bullet;
+import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.Enemy;
 
 public class BucketBotAi implements Ai{
 	
-	private Enemy enemy;
+	private BucketBot enemy;
 	
-	public BucketBotAi(Enemy enemy, List<Bullet> bulletList) {
+	public BucketBotAi(BucketBot enemy) {
 		this.enemy = enemy;
 	}
 
@@ -20,6 +23,11 @@ public class BucketBotAi implements Ai{
 		} else { // if playerX >= enemy.getX()
 			enemy.setFacing(true);
 		}
+		
+		if (Sys.getTime() % 800 == 0){
+			enemy.shoot();
+		}
+		
 	}
 
 	@Override

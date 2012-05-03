@@ -97,6 +97,9 @@ public class PCharacter extends LivingObject {
 		if (obj instanceof Enemy) {
 			this.getHit(((Enemy) obj).getTouchDamage());
 		}
+		if (obj instanceof Bullet) {
+			this.getHit(((Bullet)obj).getDamage());
+		}
 		if (obj instanceof Item) {
 			if(obj.getName().equals(ObjectName.LASER_PISTOL)){
 				this.changeWeapon(obj.getName());

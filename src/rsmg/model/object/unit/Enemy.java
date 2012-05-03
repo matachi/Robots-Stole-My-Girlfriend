@@ -22,6 +22,8 @@ public abstract class Enemy extends LivingObject{
 	 */
 	public Enemy(double x, double y, double width, double height, int health, String name) {
 		super(x, y, width, height, health, name);
+		//make the enemy face left to fit the images
+		setFacing(false);
 	}
 	@Override
 	public void collide(InteractiveObject obj) {

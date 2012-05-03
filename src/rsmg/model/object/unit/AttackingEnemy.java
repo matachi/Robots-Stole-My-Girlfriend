@@ -3,5 +3,5 @@ import java.util.List;
 import rsmg.model.object.bullet.Bullet;
 
 public interface AttackingEnemy {
-	public void shoot(List<Bullet> bulletList);
+	public void shoot();
 }

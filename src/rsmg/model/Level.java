@@ -11,6 +11,7 @@ import rsmg.model.ai.Ai;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.Explosion;
+import rsmg.model.object.bullet.UpdateableProjectile;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
@@ -32,7 +33,7 @@ public class Level {
 	/**
 	 * List where friendly bullets from guns are stored.
 	 */
-	private List<Bullet> alliedBullets;
+	private List<Bullet> alliedBulletsList;
 	
 	/**
 	 * List where enemy bullets are stored
@@ -75,7 +76,7 @@ public class Level {
 		this.items = items;
 		this.enemies = aiList;
 		enemyBulletList = EnemyBullets;
-		alliedBullets = new ArrayList<Bullet>();
+		alliedBulletsList = new ArrayList<Bullet>();
 		spawnChar();
 	}
 
@@ -87,9 +88,9 @@ public class Level {
 	private void spawnChar() {
 		try {
 			Point spawnPoint = tileGrid.getSpawnPoint();
-			character = new PCharacter(spawnPoint.getX(), spawnPoint.getY(), alliedBullets);
+			character = new PCharacter(spawnPoint.getX(), spawnPoint.getY(), alliedBulletsList);
 		} catch (Exception NullPointerException) {
-			character = new PCharacter(0, 0, alliedBullets);
+			character = new PCharacter(0, 0, alliedBulletsList);
 		}
 	}
 
@@ -99,18 +100,29 @@ public class Level {
 	 */
 	public void update(double delta) {
 		updateCharacter(delta);
- 		updateBullets(delta);
+ 		updateBullets(delta, alliedBulletsList);
+ 		updateBullets(delta, enemyBulletList);
  		updateEnemies(delta);
  		// Checks if the items are picked-up
 		updateItems();
+		//outSideMapCheck();
 	}
-	
+	/**
+	 * Method which removes all objects that are outside the map in the current list
+	 * @param object
+	 */
+	private void outSideMapCheck(List<InteractiveObject> objectList) {
+		//TODO
+	}
+
 	/**
 	 * Move the character, apply gravity, check for collisions etc.
 	 * @param delta Time sine last update.
 	 */
 	private void updateCharacter(double delta) {
 		
+		
+		enemyBulletCollision();
 		// Update whether the character is in the air or standing on the ground.
 		character.setAirborne(isAirbourne(character));
 		// Apply gravity to the character so he will fall down if he is in the air.
@@ -133,6 +145,20 @@ public class Level {
 		character.setVelocityX(0);
 		character.updateImmortality();
 		
+	}
+
+	private void enemyBulletCollision() {
+		List<Bullet> expiredBullets = new ArrayList<Bullet>(); 
+		for (Iterator<Bullet> j = enemyBulletList.iterator(); j.hasNext(); ) {
+			Bullet bullet = j.next();
+
+			if (character.hasCollidedWith(bullet)) {
+				character.collide(bullet);
+				bullet.collide(character);
+				expiredBullets.add(bullet);
+			}
+		}
+		enemyBulletList.removeAll(expiredBullets);
 	}
 
 	/**
@@ -169,7 +195,7 @@ public class Level {
 			//see if enemy has collided with any bullets and act appropriately
 			List<Bullet> newBullets = new ArrayList<Bullet>();
 			List<Bullet> expiredBullets = new ArrayList<Bullet>();
-			for (Iterator<Bullet> j = alliedBullets.iterator(); j.hasNext(); ) {
+			for (Iterator<Bullet> j = alliedBulletsList.iterator(); j.hasNext(); ) {
 				Bullet bullet = j.next();
 
 				if (enemy.hasCollidedWith(bullet)) {
@@ -187,8 +213,8 @@ public class Level {
 					}
 				}
 			}
-			alliedBullets.removeAll(expiredBullets);
-			alliedBullets.addAll(newBullets);
+			alliedBulletsList.removeAll(expiredBullets);
+			alliedBulletsList.addAll(newBullets);
 		}
 	}
 
@@ -196,27 +222,26 @@ public class Level {
 	 * Update all bullets in the level.
 	 * @param delta Time sine last update.
 	 */
-	private void updateBullets(double delta) {
-		for (int i = 0; i < alliedBullets.size(); i++) {
-			Bullet bullet = alliedBullets.get(i);
-			
+	private void updateBullets(double delta, List<Bullet> bulletList) {
+		for (int i = 0; i < bulletList.size(); i++) {
+			Bullet bullet = bulletList.get(i);
 			bullet.move(delta);
 			bullet.update(delta);
 			
 			if (tileGrid.intersectsWith(bullet)) {
 				
 				if (bullet.getName() == ObjectName.ROCKETR  || bullet.getName() == ObjectName.ROCKETL)
-					alliedBullets.add(new Explosion(bullet));
+					bulletList.add(new Explosion(bullet));
 				
 				//if the bullet is an explosion, do not remove it unless its past its duration
 				//otherwise, remove the bullet
 				if (!(bullet.getName() == ObjectName.EXPLOSION)){
-					alliedBullets.remove(i);
+					bulletList.remove(i);
 				}
 			}
 			if (bullet.getName() == ObjectName.EXPLOSION){
 				if(((Explosion)bullet).getAge() > Constants.EXPLOSIONDURATION){
-					alliedBullets.remove(i);
+					bulletList.remove(i);
 				}
 			}
 			
@@ -381,7 +406,7 @@ public class Level {
 	 * @return The list of bullets.
 	 */
 	public Collection<Bullet> getAlliedBulletList() {
-		return alliedBullets;
+		return alliedBulletsList;
 	}
 	/**
 	 * returns the list of enemy bullets
