@@ -1,9 +1,7 @@
 package rsmg.model.object.unit;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import rsmg.io.CharacterProgress;
@@ -36,15 +34,15 @@ public class PCharacter extends LivingObject {
 	 */
 	private IWeapon currentWeapon;
 	
-	/**
-	 * Reference to the level's bullet list.
-	 */
-	private Collection<Bullet> bulletList;
+//	/**
+//	 * Reference to the level's bullet list.
+//	 */
+//	private Collection<Bullet> bulletList;
 	
 	/**
 	 * List of refrences to the characters weapons
 	 */
-	private Map<String ,IWeapon> weapons;
+	private Map<String, IWeapon> weapons;
 	
 	/**
 	 * Keeps track of when the character last attacked. Used to have a cooldown
@@ -85,10 +83,10 @@ public class PCharacter extends LivingObject {
 	 */
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
-		this.bulletList = bulletList;	
+//		this.bulletList = bulletList;
 		canDash = CharacterProgress.isDashUnlocked();
-		weapons = new HashMap<String ,IWeapon>();
-		weapons.put(ObjectName.PISTOL ,new Pistol(bulletList));
+		weapons = new HashMap<String, IWeapon>();
+		weapons.put(ObjectName.PISTOL, new Pistol(bulletList));
 		weapons.put(ObjectName.SHOTGUN, new Shotgun(bulletList));
 		weapons.put(ObjectName.ROCKET_LAUNCHER, new RocketLauncher(bulletList));
 		currentWeapon = weapons.get(ObjectName.PISTOL);

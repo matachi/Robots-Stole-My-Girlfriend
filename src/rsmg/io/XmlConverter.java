@@ -21,7 +21,6 @@ import rsmg.model.object.item.UpgradePoints;
 import rsmg.model.object.item.Weapon;
 import rsmg.model.object.unit.BallBot;
 import rsmg.model.object.unit.BucketBot;
-import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.RocketBot;
 import rsmg.model.object.unit.Spikes;
 import rsmg.model.object.unit.Tankbot;

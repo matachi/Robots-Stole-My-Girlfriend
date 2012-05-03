@@ -5,7 +5,6 @@ import java.util.List;
 
 import rsmg.model.ai.Ai;
 import rsmg.model.object.item.Item;
-import rsmg.model.object.unit.Enemy;
 import rsmg.model.tile.Tile;
 
 /**

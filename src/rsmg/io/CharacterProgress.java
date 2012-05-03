@@ -13,8 +13,6 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-import rsmg.model.ObjectName;
-
 /**
  * This class provides getters and setters to read and modify the character
  * progression.

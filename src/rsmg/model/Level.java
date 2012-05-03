@@ -8,18 +8,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import rsmg.model.ai.Ai;
-import rsmg.model.ai.EmptyAi;
-import rsmg.model.ai.PatrollingAi;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.Explosion;
 import rsmg.model.object.item.Item;
-import rsmg.model.object.unit.BallBot;
-import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
-import rsmg.model.object.unit.RocketBot;
-import rsmg.model.object.unit.Spikes;
 
 /**
  * Class representing a level. This Class is in charge of storing and updating
