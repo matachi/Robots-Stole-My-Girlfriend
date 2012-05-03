@@ -75,7 +75,7 @@ public class Level {
 		this.tileGrid = tileGrid;
 		this.items = items;
 		//temporary solution
-		Collection enemyAis = new HashSet(); 
+		Collection<Ai> enemyAis = new HashSet<Ai>(); 
 		for(Enemy enemy : enemies){
 			enemyAis.add(new EmptyAi(enemy));
 		}
