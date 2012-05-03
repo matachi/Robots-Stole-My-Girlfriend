@@ -56,38 +56,25 @@ class LevelState extends State {
 	private Map<String, Renderable> bullets;
 	private Map<String, Renderable> items;
 	private Map<String, Renderable> enemies;
-	private Map<String, Renderable> characterMap;
-	
-	private String runRightKey = "runRight";
-	private String runLeftKey = "runLeft";
-	private String standRightKey = "standRight";
-	private String standLeftKey = "standLeft";
-	private String jumpRKey = "jumpRight";
-	private String jumpLKey = "jumpLeft";
 	
 	/**
-	 * The character that the player controls.
+	 * A class representing the character on the screen.
+	 * This inner class handles which character image that should be drawn on a given time.
 	 */
-	private Renderable character;
-
-	/**
-	 * pistol
-	 */
-	private HashMap<String, Renderable> pistolMap;
+	private CharacterImage character;
 	
 	/**
-	 * rocket launcher
+	 * Some constants to use the maps in CharacterImage more efficiently.
 	 */
+	private static final String runRKey = "runRight";
+	private static final String runLKey = "runLeft";
+	private static final String standRKey = "standRight";
+	private static final String standLKey = "standLeft";
+	private static final String jumpRKey = "jumpRight";
+	private static final String jumpLKey = "jumpLeft";
+	private static final String dashRKey = "dashRight";
+	private static final String dashLKey = "dashLeft";
 	
-	private Map<String, Renderable> rpgMap;
-	private Map<String, Renderable> shotgunMap;
-	
-	/**
-	 * dash
-	 */
-	private Image characterDashingR;
-	private Image characterDashingL;
-
 	/**
 	 * Reference to the level model.
 	 */
@@ -155,111 +142,10 @@ class LevelState extends State {
 		healthBarOverlayGraphics = new Graphics();
 		healthBarOverlayGraphics.setColor(new Color(0.85f, 0.3f, 0.3f, 0.5f));
 		
-		characterMap = new HashMap<String, Renderable>();
-		pistolMap = new HashMap<String, Renderable>();
-		rpgMap = new HashMap<String, Renderable>();
-		shotgunMap = new HashMap<String, Renderable>();
-		
 		/**
-		 * Make an animation for when the character is running to the right.
+		 * Create the character image.
 		 */
-		Image characterImage = new Image(folderPath+"charPistolRunningSheet.png", false, filter);
-		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
-		Animation characterPistolRunningR = new Animation(characterSheet, 140);
-		
-		/**
-		 * Make an animation for when the character is running to the left.
-		 */
-		characterImage = characterImage.getFlippedCopy(true, false);
-		characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), 32*scale, 23*scale);
-		Animation characterPistolRunningL = new Animation(characterSheet, 140);
-		
-		/**
-		 * Make an image for when the character is standing still facing the right.
-		 */
-		Image characterPistolStandingR = new Image(folderPath+"charPistolStanding.png", false, filter).getScaledCopy(scale);
-		
-		/**
-		 * Make an image for when the character is standing still facing to the left.
-		 */
-		Image characterPistolStandingL = characterPistolStandingR.getFlippedCopy(true, false);
-		
-		/**
-		 * Make an image for when the character is standing still facing the right.
-		 */
-		Image characterPistolJumpingR = new Image(folderPath+"charPistolJumping.png", false, filter).getScaledCopy(scale);
-		
-		/**
-		 * Make an image for when the character is standing still facing to the left.
-		 */
-		Image characterPistolJumpingL = characterPistolJumpingR.getFlippedCopy(true, false);
-		
-		/**
-		 * Add all the images and animation for the pistol in a hashmap
-		 */
-		pistolMap.put(jumpLKey, characterPistolJumpingL);
-		pistolMap.put(jumpRKey, characterPistolJumpingR);
-		pistolMap.put(standLeftKey, characterPistolStandingL);
-		pistolMap.put(standRightKey, characterPistolStandingR);
-		pistolMap.put(runLeftKey, characterPistolRunningL);
-		pistolMap.put(runRightKey, characterPistolRunningR);
-		character = pistolMap.get(jumpRKey);
-
-		
-		/**
-		 * Make an image for when the character is dashing to the right
-		 */
-		characterDashingR = new Image(folderPath+"charDashing.png", false, filter).getScaledCopy(scale);
-		
-		/**
-		 * Make an image for when the character is dashing to the right
-		 */
-		characterDashingL = characterDashingR.getFlippedCopy(true, false);
-		
-		/**
-		 * Makes images for when the character is holding a rocket launcher
-		 */
-		Image characterRPGStandingR = new Image(folderPath+"charRPGStanding.png", false, filter).getScaledCopy(scale);
-		Image characterRPGStandingL = characterRPGStandingR.getFlippedCopy(true, false);
-		Image characterRPGJumpingR = new Image(folderPath+"charRPGJumping.png", false, filter).getScaledCopy(scale);
-		Image characterRPGJumpingL = characterRPGJumpingR.getFlippedCopy(true, false);
-		
-		
-		Image charRPGRunningImage = new Image(folderPath+"charRPGRunningSheet.png", false, filter);
-		SpriteSheet rpgRunningSheet = new SpriteSheet(charRPGRunningImage.getScaledCopy(scale), 33*scale, 24*scale);
-		Animation characterRPGRunningR = new Animation(rpgRunningSheet, 140);
-		
-		rpgRunningSheet = new SpriteSheet(charRPGRunningImage.getScaledCopy(scale).getFlippedCopy(true, false), 33*scale, 24*scale);
-		Animation characterRPGRunningL = new Animation(rpgRunningSheet, 140);
-
-		rpgMap.put(jumpLKey, characterRPGJumpingL);
-		rpgMap.put(jumpRKey, characterRPGJumpingR);
-		rpgMap.put(standLeftKey, characterRPGStandingL);
-		rpgMap.put(standRightKey, characterRPGStandingR);
-		rpgMap.put(runLeftKey, characterRPGRunningL);
-		rpgMap.put(runRightKey, characterRPGRunningR);
-		
-		/**
-		 * Makes images for when the character is holding a shotgun
-		 */
-		Image characterShotgunStandingR = new Image(folderPath+"charShotgunStanding.png", false, filter).getScaledCopy(scale);
-		Image characterShotgunStandingL = characterShotgunStandingR.getFlippedCopy(true, false);
-		Image characterShotgunJumpingR = new Image(folderPath+"charShotgunJumping.png", false, filter).getScaledCopy(scale);
-		Image characterShotgunJumpingL = characterShotgunJumpingR.getFlippedCopy(true, false);
-		
-		Image charShotgunRunningImage = new Image(folderPath+"charShotgunRunningSheet.png", false, filter);
-		SpriteSheet ShotgunRunningSheet = new SpriteSheet(charShotgunRunningImage.getScaledCopy(scale), 36*scale, 23*scale);
-		Animation characterShotgunRunningR = new Animation(ShotgunRunningSheet, 140);
-		
-		ShotgunRunningSheet = new SpriteSheet(charShotgunRunningImage.getScaledCopy(scale).getFlippedCopy(true, false), 36*scale, 23*scale);
-		Animation characterShotgunRunningL = new Animation(ShotgunRunningSheet, 140);
-		
-		shotgunMap.put(jumpLKey, characterShotgunJumpingL);
-		shotgunMap.put(jumpRKey, characterShotgunJumpingR);
-		shotgunMap.put(runRightKey, characterShotgunRunningR);
-		shotgunMap.put(runLeftKey, characterShotgunRunningL);
-		shotgunMap.put(standLeftKey, characterShotgunStandingL);
-		shotgunMap.put(standRightKey, characterShotgunStandingR);
+		character = new CharacterImage(folderPath, scale, filter);
 		
 		/**
 		 * Create a map with all enemy images / Animations.
@@ -277,8 +163,6 @@ class LevelState extends State {
 		enemies.put(ObjectName.BALLBOT, ballBot);
 		enemies.put(ObjectName.ROCKETBOT, rocketBot);
 		enemies.put(ObjectName.SPIKES, spikes);
-		
-		
 		
 		
 		
@@ -444,22 +328,10 @@ class LevelState extends State {
 	 * Draw the character/protagonist on the screen.
 	 */
 	private void drawCharacter() {
-		//make the character flash white if he is immortal
-		//Some ugly code here, it's the result of some design flaws in the slick library
-		if (level.getCharacter().isImmortal() && Sys.getTime() % 400 < 200) {
-			if (character instanceof Image) {
-				((Image) character).drawFlash(characterX, characterY);
-			} else if (character instanceof Animation) {
-				Animation characterAnimation = ((Animation) character);
-				characterAnimation.drawFlash(characterX, characterY, characterAnimation.getWidth(), characterAnimation.getHeight());
-			}
-
-		} else {
-			character.draw(characterX, characterY);
-		}
+		character.draw();
 		
 		// Draw character hitbox
-		hitboxRect.setLocation(characterX+scale*6, characterY);
+		hitboxRect.setLocation(characterX, characterY);
 		hitboxGrap.draw(hitboxRect);
 	}
 
@@ -488,51 +360,9 @@ class LevelState extends State {
 		level.update((double)delta / 1000);
 		
 		/**
-		 * Fix so the right character sprite is shown on the next render()
+		 * Update the character image.
 		 */
-		String weaponName = level.getCharacter().getWeapon().getName();
-		if (weaponName.equals(ObjectName.PISTOL)) {
-			characterMap = pistolMap;
-		}else if(weaponName.equals(ObjectName.ROCKET_LAUNCHER)) {
-			characterMap = rpgMap;
-		}else if(weaponName.equals(ObjectName.SHOTGUN)) {
-			characterMap = shotgunMap;
-		}
-		
-		if(level.getCharacter().isDashing()) {
-			if(level.getCharacter().isFacingRight()) {
-				character = characterDashingR;
-			} else {
-				character = characterDashingL;
-			}		
-
-
-		} else {
-			if (level.getCharacter().isAirborne()) {
-				
-				if (level.getCharacter().isFacingRight())
-					character = characterMap.get("jumpRight");
-				else
-					character = characterMap.get("jumpLeft");
-		
-			} else if (level.getCharacter().isStandingStill()) {
-		
-				if (level.getCharacter().isFacingRight())
-					character = characterMap.get("standRight");
-
-				else
-					character = characterMap.get("standLeft");
-
-			} else { // is running
-		
-				if (level.getCharacter().isFacingRight())
-					character = characterMap.get("runRight");
-
-				else
-					character = characterMap.get("runLeft");
-		
-			}
-		}
+		character.update();
 		
 		/**
 		 * Update health bar's overlay size.
@@ -636,24 +466,203 @@ class LevelState extends State {
 		
 		// Camera in X-axis
 		int centerX = screenWidth/2 - (int)level.getCharacter().getWidth()*scale/2;
-		int offsetX = -6*scale; // Moves the char img a bit to the left. This makes the hitbox more centered on the img.
 		float posX = (float)level.getCharacter().getX()*scale;
 		int levelWidth = level.getTileGrid().getWidth()*Constants.TILESIZE*scale;
 		
 		// If the Character is in the left part of the screen
 		if (posX < centerX) {
-			characterX = posX + offsetX;
+			characterX = posX;
 			cameraX = 0;
 		}
 		// If the Character is in the right part of the screen
 		else if (levelWidth - posX < centerX + (int)level.getCharacter().getWidth()*scale) {
 			cameraX = -(levelWidth - screenWidth);
-			characterX = posX + offsetX + cameraX;
+			characterX = posX + cameraX;
 		}
 		// Else the Character is in the middle of the screen
 		else {
-			characterX = centerX + offsetX; // Places the character img in the middle horizontally of the screen.
+			characterX = centerX; // Places the character img in the middle horizontally of the screen.
 			cameraX = -(posX-centerX); // Moves everything else on the screen.
+		}
+	}
+	
+	/**
+	 * Create a sprite map for the character.
+	 * 
+	 * @param standingImage
+	 *            Path to the image where he is standing still.
+	 * @param jumpingImage
+	 *            Path to the image where he is jumping.
+	 * @param runningSheet
+	 *            Path to the sprite sheet where he is running.
+	 * @param dashLeft
+	 *            Reference to the image where he is dashing left.
+	 * @param dashRight
+	 *            Reference to the image where he is dashing right.
+	 * @param scale
+	 *            How much all images should be scaled.
+	 * @param filter
+	 *            Filter for the scaling.
+	 * @return A sprite map for the CharacterImage.
+	 * @throws SlickException
+	 */
+	private Map<String, Renderable> makeCharSpriteMap(String standingImage,
+			String jumpingImage, String runningSheet, Image dashLeft,
+			Image dashRight, int scale, int filter) throws SlickException {
+		
+		Map<String, Renderable> spriteMap = new HashMap<String, Renderable>();
+		
+		// Make the running animations.
+		Image characterImage = new Image(runningSheet, false, filter);
+		int width = characterImage.getWidth()/3;
+		int height = characterImage.getHeight();
+		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), width*scale, height*scale);
+		Animation runningR = new Animation(characterSheet, 140);
+		characterImage = characterImage.getFlippedCopy(true, false);
+		characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), width*scale, height*scale);
+		Animation runningL = new Animation(characterSheet, 140);
+		
+		// Make the standing still images.
+		Image standingR = new Image(standingImage, false, filter).getScaledCopy(scale);	
+		Image standingL = standingR.getFlippedCopy(true, false);
+		
+		// Make the jumping images.
+		Image jumpingR = new Image(jumpingImage, false, filter).getScaledCopy(scale);
+		Image jumpingL = jumpingR.getFlippedCopy(true, false);
+		
+		// Put all images in the sprite map.
+		spriteMap.put(jumpLKey, jumpingL);
+		spriteMap.put(jumpRKey, jumpingR);
+		spriteMap.put(standLKey, standingL);
+		spriteMap.put(standRKey, standingR);
+		spriteMap.put(runLKey, runningL);
+		spriteMap.put(runRKey, runningR);
+		spriteMap.put(dashLKey, dashRight);
+		spriteMap.put(dashRKey, dashLeft);
+		return spriteMap;
+	}
+	
+	/**
+	 * A class containing all necessary data and methods to draw the character.
+	 * 
+	 * @author Daniel Jonsson
+	 * 
+	 */
+	private class CharacterImage {
+		
+		private Map<String, Renderable> charMap;
+		private Map<String, Renderable> pistolMap;
+		private Map<String, Renderable> rpgMap;
+		private Map<String, Renderable> shotgunMap;
+		private Map<String, Integer> charXOffsets;
+		private String key;
+		
+		/**
+		 * Init all images and stuff.
+		 * 
+		 * @param folderPath
+		 *            Path to where the images can be found.
+		 * @param scale
+		 *            How much all images should be scaled.
+		 * @param filter
+		 *            What filter the scaling should use.
+		 * @throws SlickException
+		 */
+		public CharacterImage(String folderPath, int scale, int filter) throws SlickException {
+
+			// Make the dashing images.
+			Image dashingR = new Image(folderPath+"charDashing.png", false, filter).getScaledCopy(scale);
+			Image dashingL = dashingR.getFlippedCopy(true, false);
+			
+			// Make all sprite maps.
+			pistolMap = makeCharSpriteMap(folderPath+"charPistolStanding.png", folderPath+"charPistolJumping.png", folderPath+"charPistolRunningSheet.png", dashingR, dashingL, scale, filter);
+			rpgMap = makeCharSpriteMap(folderPath+"charRPGStanding.png", folderPath+"charRPGJumping.png", folderPath+"charRPGRunningSheet.png", dashingR, dashingL, scale, filter);
+			shotgunMap = makeCharSpriteMap(folderPath+"charShotgunStanding.png", folderPath+"charShotgunJumping.png", folderPath+"charShotgunRunningSheet.png", dashingR, dashingL, scale, filter);
+			charMap = pistolMap;
+			key = standRKey;
+			
+			// Put all character image offsets in two maps
+			charXOffsets = new HashMap<String, Integer>();
+			charXOffsets.put(jumpLKey, -12*scale);
+			charXOffsets.put(jumpRKey, -6*scale);
+			charXOffsets.put(runLKey, -12*scale);
+			charXOffsets.put(runRKey, -2*scale);
+			charXOffsets.put(standLKey, -12*scale);
+			charXOffsets.put(standRKey, -6*scale);
+			charXOffsets.put(dashLKey, -6*scale);
+			charXOffsets.put(dashRKey, -36*scale);
+		}
+		
+		/**
+		 * Draw the character on the screen.
+		 */
+		public void draw() {
+			
+			Renderable charImg = charMap.get(key);
+			int offset = charXOffsets.get(key);
+			
+			// Make the character flash white if he is immortal.
+			if (level.getCharacter().isImmortal() && Sys.getTime() % 400 < 200) {
+				if (charImg instanceof Image) {
+					((Image) charImg).drawFlash(characterX, characterY);
+				} else if (charImg instanceof Animation) {
+					Animation characterAnimation = ((Animation) charImg);
+					characterAnimation.drawFlash(characterX, characterY, characterAnimation.getWidth(), characterAnimation.getHeight());
+				}
+
+			} else {
+				charImg.draw(characterX+offset, characterY);
+			}
+		}
+		
+		/**
+		 * Update which map of the character that should be drawn on next draw() call.
+		 */
+		public void update() {
+
+			// Update which map should be used.
+			String weaponName = level.getCharacter().getWeapon().getName();
+			switch (weaponName) {
+				case ObjectName.PISTOL : 
+					charMap = pistolMap;
+					break;
+				case ObjectName.ROCKET_LAUNCHER:
+					charMap = rpgMap;
+					break;
+				case ObjectName.SHOTGUN:
+					charMap = shotgunMap;
+					break;
+			}
+			
+			// Update which key should be used.
+			if(level.getCharacter().isDashing()) { // Char is dashing
+				
+				if(level.getCharacter().isFacingRight())
+					key = dashRKey;
+				else
+					key = dashLKey;	
+
+			} else if (level.getCharacter().isAirborne()) { // Char is jumping
+					
+				if (level.getCharacter().isFacingRight())
+					key = jumpRKey;
+				else
+					key = jumpLKey;
+			
+			} else if (level.getCharacter().isStandingStill()) { // Char is standing still
+		
+				if (level.getCharacter().isFacingRight())
+					key = standRKey;
+				else
+					key = standLKey;
+
+			} else { // Char is running
+		
+				if (level.getCharacter().isFacingRight())
+					key = runRKey;
+				else
+					key = runLKey;
+			}
 		}
 	}
 }
