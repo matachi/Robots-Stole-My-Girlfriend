@@ -11,7 +11,6 @@ import rsmg.model.ai.Ai;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.Explosion;
-import rsmg.model.object.bullet.UpdateableProjectile;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
@@ -117,7 +116,7 @@ public class Level {
 
 	/**
 	 * Move the character, apply gravity, check for collisions etc.
-	 * @param delta Time sine last update.
+	 * @param delta Time since last update.
 	 */
 	private void updateCharacter(double delta) {
 		
