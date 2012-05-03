@@ -152,8 +152,23 @@ public class PCharacter extends LivingObject {
 		return currentWeapon;
 	}
 	
+//	public void changeWeapon(String weaponName) {
+//		if (CharacterProgress.isUpgradeUnlocked(weaponName)){
+//			currentWeapon = weapons.get(weaponName);
+//		}
+//	}
+	
 	public void changeWeapon(String weaponName) {
-		if (CharacterProgress.isUpgradeUnlocked(weaponName)){
+		if (ObjectName.ROCKET_LAUNCHER.equals(weaponName) &&
+				CharacterProgress.isRPGUnlocked()) {
+			currentWeapon = weapons.get(weaponName);
+			
+		} else if (ObjectName.PISTOL.equals(weaponName) &&
+				CharacterProgress.isPistolUnlocked()) {
+			currentWeapon = weapons.get(weaponName);
+			
+		} else if (ObjectName.SHOTGUN.equals(weaponName) &&
+				CharacterProgress.isShotgunUnlocked()) {
 			currentWeapon = weapons.get(weaponName);
 		}
 	}
