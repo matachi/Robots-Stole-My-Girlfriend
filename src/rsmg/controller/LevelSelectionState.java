@@ -1,6 +1,8 @@
 package rsmg.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -37,7 +39,9 @@ class LevelSelectionState extends State {
 	private Image title;
 	private Image selectionGlow;
 	private Image completed;
-	private ArrayList<LevelButton> levelButtons;
+	private Image unlockedButton;
+	private Image lockedButton;
+	private List<LevelButton> levelButtons;
 	
 	/**
 	 * Font to draw text on the screen.
@@ -70,6 +74,10 @@ class LevelSelectionState extends State {
 	 * Keeps track of which of the buttons that is currently selected.
 	 */
 	private int selectedButton;
+	
+	private static final int maxTilesOnRow = 6;
+	
+	private int numberOfRows;
 	
 	/**
 	 * Create the level selection state.
@@ -110,29 +118,58 @@ class LevelSelectionState extends State {
 		font.loadGlyphs();
 		
 		// Create the selection glow image.
-		selectionGlow = new Image(folderPath+"selectionGlow.png");
-		selectionGlow = selectionGlow.getScaledCopy(scale);
+		selectionGlow = new Image(folderPath+"selectionGlow.png").getScaledCopy(scale);
 		
 		// Create the completed level mark image.
-		completed = new Image(folderPath+"completed.png");
-		completed = completed.getScaledCopy(scale);
+		completed = new Image(folderPath+"completed.png").getScaledCopy(scale/2);
+		
+		// Create the unlocked button image.
+		unlockedButton = new Image(folderPath+"levelUnlocked.png").getScaledCopy(scale);
+		
+		// Create the locked button image.
+		lockedButton = new Image(folderPath+"levelLocked.png").getScaledCopy(scale);
 
 		// Set the number of unlocked levels.
 		unlockedLevels = CharacterProgress.getUnlockedLevels();
 
-		// Store the menu buttons in an ArrayList for convenience
+		
+		// Store the menu buttons in an ArrayList for convenience.
 		levelButtons = new ArrayList<LevelButton>();
 		
-		// Create the menu buttons.
-		// 77.5 is the half width of a button, and is needed to place them
-		// centered horizontally on the screen. (The buttons are only
-		// horizontally aligned if there are 4 buttons.)
-		for (int i : LevelNumbers.getLevelNumbers())
-			if (i > 0 && i < 5)
-				levelButtons.add(new LevelButton(i, folderPath+"level"+i+"unlocked.png", folderPath+"level"+i+"locked.png", 460+i*200-77.5f, 450, unlockedLevels >= i));
+		// Fill the list levelButtons with the level buttons.
+		fillLevelButtonsList();
 		
 		// Set which button is initially selected
 		selectedButton = 0;
+	}
+	
+	private void fillLevelButtonsList() throws SlickException {
+		// Get all available level numbers and sort them.
+		List<Integer> levelNumbers = (ArrayList<Integer>)LevelNumbers.getLevelNumbers();
+		Collections.sort(levelNumbers);
+		
+		numberOfRows = levelNumbers.size() / maxTilesOnRow + 1; // Total number of rows.
+		
+		// Go through all rows and construct the tiles.
+		for (int y = 0; y < numberOfRows; y++) {
+
+			// Number of tiles on this row.
+			int tilesOnRow = (y < numberOfRows-1) ? maxTilesOnRow : levelNumbers.size() % maxTilesOnRow;
+			
+			// Go through all tiles on this row.
+			for (int x = 0; x < tilesOnRow; x++) {
+
+				// The button's number in the list.
+				int buttonNr = y * maxTilesOnRow + x;
+				
+				// Get the button's level number from the levelNumbers list.
+				// This is the number that should be shown on the button.
+				int levelNumber = levelNumbers.get(buttonNr);
+				
+				// Make a LevelButton with the level number.
+				levelButtons.add(new LevelButton(levelNumber, 460+x*200-77.5f, 450 + 300 * y, unlockedLevels > buttonNr));
+			}
+		}
 	}
 	
 	@Override
@@ -140,10 +177,13 @@ class LevelSelectionState extends State {
 			throws SlickException {
 		super.enter(gc, sbg);
 		gc.getInput().clearKeyPressedRecord();
+		
+		// Update number of unlocked levels.
 		unlockedLevels = CharacterProgress.getUnlockedLevels();
-		for (int i = 0; i < CharacterProgress.getUnlockedLevels(); i++)
-			if (!levelButtons.get(i).isUnlocked())
-				levelButtons.get(i).toggleUnlocked();
+		
+		int numberOfLevels = LevelNumbers.getLevelNumbers().size();
+		for (int i = 0; i < numberOfLevels; i++)
+			levelButtons.get(i).setUnlocked(i < unlockedLevels);
 	}
 
 	@Override
@@ -156,16 +196,23 @@ class LevelSelectionState extends State {
 		// Draw the title text.
 		title.draw((gc.getWidth()-title.getWidth())/2, 50*scale + topOffset);
 		
-		// Draw information text.
+		// Draw information text about the upgrades.
 		font.drawString(80*scale, 120*scale, "Press the U key to\nshow your upgrades.");
 		
 		// Draw the level selection buttons.
 		for (int i = 0; i < levelButtons.size(); i++) {
-			LevelButton levelButton = levelButtons.get(i);
-			levelButton.getImage().draw(levelButton.getX(), levelButton.getY());
-			// Mark the levels that has been completed with.
+			LevelButton button = levelButtons.get(i);
+
+			if (button.isUnlocked())
+				unlockedButton.draw(button.getX(), button.getY());
+			else
+				lockedButton.draw(button.getX(), button.getY());
+			
+			font.drawString(button.getX()+60*scale, button.getY()+50*scale, "" + button.getLevelNumber());
+			
+			// Mark the levels that have been completed.
 			if (i < unlockedLevels-1)
-				completed.draw(levelButton.getX(), levelButton.getY()+200*scale);
+				completed.draw(button.getX()+40*scale, button.getY()+170*scale);
 		}
 
 		// Draw the glow on the selected level.
@@ -193,9 +240,15 @@ class LevelSelectionState extends State {
 	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if (input.isKeyPressed(Input.KEY_LEFT))
 			navigateLeftInMenu();
-		
+
 		else if (input.isKeyPressed(Input.KEY_RIGHT))
 			navigateRightInMenu();
+		
+		else if (input.isKeyPressed(Input.KEY_UP))
+			navigateUpInMenu();
+		
+		else if (input.isKeyPressed(Input.KEY_DOWN))
+			navigateDownInMenu();
 		
 		else if (input.isKeyPressed(Input.KEY_ESCAPE))
 			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
@@ -214,21 +267,24 @@ class LevelSelectionState extends State {
 	}
 	
 	private void navigateLeftInMenu() {
-		if (selectedButton > 0)
+		if (selectedButton % maxTilesOnRow > 0)
 			selectedButton--;
 	}
 	
 	private void navigateRightInMenu() {
-		if (selectedButton < unlockedLevels-1)
+		if (selectedButton % maxTilesOnRow < maxTilesOnRow-1 && selectedButton < levelButtons.size()-1 && levelButtons.get(selectedButton+1).isUnlocked())
 			selectedButton++;
 	}
 	
-//	private void changeState(GameContainer gc, StateBasedGame sbg, int select) {
-//		if (select == 1)
-//			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
-//		else
-//			sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());
-//	}
+	private void navigateUpInMenu() {
+		if (selectedButton / maxTilesOnRow > 0)
+			selectedButton -= maxTilesOnRow;
+	}
+	
+	private void navigateDownInMenu() {
+		if (selectedButton + maxTilesOnRow < levelButtons.size() && levelButtons.get(selectedButton + maxTilesOnRow).isUnlocked())
+			selectedButton += maxTilesOnRow;
+	}
 	
 	/**
 	 * A class containing data about a level button.
@@ -238,8 +294,6 @@ class LevelSelectionState extends State {
 	private class LevelButton {
 		
 		private int levelNumber;
-		private Image unlockedButton;
-		private Image lockedButton;
 		private float x;
 		private float y;
 		private boolean unlocked;
@@ -249,10 +303,6 @@ class LevelSelectionState extends State {
 		 * 
 		 * @param levelNumber
 		 *            The level's number.
-		 * @param pathToUnlockedButton
-		 *            File path to the unlocked button image.
-		 * @param pathToLockedButton
-		 *            File path to the locked button image.
 		 * @param x
 		 *            X coordinate.
 		 * @param y
@@ -261,16 +311,9 @@ class LevelSelectionState extends State {
 		 *            If the button is unlocked.
 		 * @throws SlickException
 		 */
-		public LevelButton(int levelNumber, String pathToUnlockedButton,
-				String pathToLockedButton,	float x, float y, boolean unlocked) throws SlickException {
+		public LevelButton(int levelNumber, float x, float y, boolean unlocked) throws SlickException {
 
 			this.levelNumber = levelNumber;
-			
-			this.unlockedButton = new Image(pathToUnlockedButton);
-			this.unlockedButton = this.unlockedButton.getScaledCopy(scale);
-			
-			this.lockedButton = new Image(pathToLockedButton);
-			this.lockedButton = this.lockedButton.getScaledCopy(scale);
 			
 			this.x = x * scale;
 			this.y = y * scale + topOffset;
@@ -286,15 +329,8 @@ class LevelSelectionState extends State {
 			return unlocked;
 		}
 		
-		private void toggleUnlocked() {
-			unlocked = !unlocked;
-		}
-		
-		public Image getImage() {
-			if (unlocked)
-				return unlockedButton;
-			else
-				return lockedButton;
+		private void setUnlocked(boolean unlocked) {
+			this.unlocked = unlocked;
 		}
 		
 		public float getX() {
