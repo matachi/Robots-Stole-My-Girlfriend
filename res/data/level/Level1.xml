@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
   <size>
-    <width>18</width>
-    <height>10</height>
+    <width>32</width>
+    <height>20</height>
   </size>
   <row>
     <cell>GroundTile</cell>
@@ -23,6 +23,20 @@
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
   <row>
     <cell>GroundTile</cell>
@@ -43,121 +57,593 @@
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
   </row>
   <row>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-    <cell>EndTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
     <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
     <cell>SpawnTile</cell>
     <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
     <cell enemy="ballbot">AirTile</cell>
-    <cell item="laserPistol">AirTile</cell>
-    <cell item="healthPack">AirTile</cell>
-    <cell item="rocketLauncher">AirTile</cell>
-    <cell item="upgradePoint">AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
     <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>EndTile</cell>
+    <cell>GroundTile</cell>
+  </row>
+  <row>
+    <cell>GroundTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell enemy="bucketbot">AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell enemy="tankbot">AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell enemy="rocketbot">AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell enemy="spikes">AirTile</cell>
+    <cell enemy="spikes">AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>AirTile</cell>
+    <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
   </row>
   <row>
     <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
     <cell>AirTile</cell>
+    <cell item="upgradePoint">AirTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell item="laserPistol">AirTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell>GroundTile</cell>
+    <cell item="rocketLauncher">AirTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell item="shotgun">AirTile</cell>
-    <cell>AirTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-  </row>
-  <row>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-  </row>
-  <row>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-  </row>
-  <row>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-  </row>
-  <row>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell enemy="rocketbot">AirTile</cell>
-    <cell enemy="bucketbot">AirTile</cell>
-    <cell enemy="tankbot">AirTile</cell>
-    <cell enemy="spikes">AirTile</cell>
-    <cell enemy="spikes">AirTile</cell>
-    <cell enemy="spikes">AirTile</cell>
-    <cell>AirTile</cell>
+    <cell item="healthPack">AirTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
@@ -179,12 +665,6 @@
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-    <cell>GroundTile</cell>
-  </row>
-  <row>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
@@ -205,3 +685,4 @@
     <cell>GroundTile</cell>
   </row>
 </level>
+
