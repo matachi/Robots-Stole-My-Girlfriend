@@ -64,18 +64,6 @@ class LevelState extends State {
 	private CharacterImage character;
 	
 	/**
-	 * Some constants to use the maps in CharacterImage more efficiently.
-	 */
-	private static final String runRKey = "runRight";
-	private static final String runLKey = "runLeft";
-	private static final String standRKey = "standRight";
-	private static final String standLKey = "standLeft";
-	private static final String jumpRKey = "jumpRight";
-	private static final String jumpLKey = "jumpLeft";
-	private static final String dashRKey = "dashRight";
-	private static final String dashLKey = "dashLeft";
-	
-	/**
 	 * Reference to the level model.
 	 */
 	private Level level;
@@ -487,68 +475,25 @@ class LevelState extends State {
 	}
 	
 	/**
-	 * Create a sprite map for the character.
-	 * 
-	 * @param standingImage
-	 *            Path to the image where he is standing still.
-	 * @param jumpingImage
-	 *            Path to the image where he is jumping.
-	 * @param runningSheet
-	 *            Path to the sprite sheet where he is running.
-	 * @param dashLeft
-	 *            Reference to the image where he is dashing left.
-	 * @param dashRight
-	 *            Reference to the image where he is dashing right.
-	 * @param scale
-	 *            How much all images should be scaled.
-	 * @param filter
-	 *            Filter for the scaling.
-	 * @return A sprite map for the CharacterImage.
-	 * @throws SlickException
-	 */
-	private Map<String, Renderable> makeCharSpriteMap(String standingImage,
-			String jumpingImage, String runningSheet, Image dashLeft,
-			Image dashRight, int scale, int filter) throws SlickException {
-		
-		Map<String, Renderable> spriteMap = new HashMap<String, Renderable>();
-		
-		// Make the running animations.
-		Image characterImage = new Image(runningSheet, false, filter);
-		int width = characterImage.getWidth()/3;
-		int height = characterImage.getHeight();
-		SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), width*scale, height*scale);
-		Animation runningR = new Animation(characterSheet, 140);
-		characterImage = characterImage.getFlippedCopy(true, false);
-		characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), width*scale, height*scale);
-		Animation runningL = new Animation(characterSheet, 140);
-		
-		// Make the standing still images.
-		Image standingR = new Image(standingImage, false, filter).getScaledCopy(scale);	
-		Image standingL = standingR.getFlippedCopy(true, false);
-		
-		// Make the jumping images.
-		Image jumpingR = new Image(jumpingImage, false, filter).getScaledCopy(scale);
-		Image jumpingL = jumpingR.getFlippedCopy(true, false);
-		
-		// Put all images in the sprite map.
-		spriteMap.put(jumpLKey, jumpingL);
-		spriteMap.put(jumpRKey, jumpingR);
-		spriteMap.put(standLKey, standingL);
-		spriteMap.put(standRKey, standingR);
-		spriteMap.put(runLKey, runningL);
-		spriteMap.put(runRKey, runningR);
-		spriteMap.put(dashLKey, dashRight);
-		spriteMap.put(dashRKey, dashLeft);
-		return spriteMap;
-	}
-	
-	/**
 	 * A class containing all necessary data and methods to draw the character.
 	 * 
 	 * @author Daniel Jonsson
 	 * 
 	 */
 	private class CharacterImage {
+		
+		/**
+		 * Some constants to use the maps more efficiently.
+		 */
+		private static final String runRKey = "runRight";
+		private static final String runLKey = "runLeft";
+		private static final String standRKey = "standRight";
+		private static final String standLKey = "standLeft";
+		private static final String jumpRKey = "jumpRight";
+		private static final String jumpLKey = "jumpLeft";
+		private static final String dashRKey = "dashRight";
+		private static final String dashLKey = "dashLeft";
+		
 		
 		private Map<String, Renderable> charMap;
 		private Map<String, Renderable> pistolMap;
@@ -591,6 +536,62 @@ class LevelState extends State {
 			charXOffsets.put(standRKey, -6*scale);
 			charXOffsets.put(dashLKey, -6*scale);
 			charXOffsets.put(dashRKey, -36*scale);
+		}
+		
+		/**
+		 * Create a sprite map for the character.
+		 * 
+		 * @param standingImage
+		 *            Path to the image where he is standing still.
+		 * @param jumpingImage
+		 *            Path to the image where he is jumping.
+		 * @param runningSheet
+		 *            Path to the sprite sheet where he is running.
+		 * @param dashLeft
+		 *            Reference to the image where he is dashing left.
+		 * @param dashRight
+		 *            Reference to the image where he is dashing right.
+		 * @param scale
+		 *            How much all images should be scaled.
+		 * @param filter
+		 *            Filter for the scaling.
+		 * @return A sprite map for the CharacterImage.
+		 * @throws SlickException
+		 */
+		private Map<String, Renderable> makeCharSpriteMap(String standingImage,
+				String jumpingImage, String runningSheet, Image dashLeft,
+				Image dashRight, int scale, int filter) throws SlickException {
+			
+			Map<String, Renderable> spriteMap = new HashMap<String, Renderable>();
+			
+			// Make the running animations.
+			Image characterImage = new Image(runningSheet, false, filter);
+			int width = characterImage.getWidth()/3;
+			int height = characterImage.getHeight();
+			SpriteSheet characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), width*scale, height*scale);
+			Animation runningR = new Animation(characterSheet, 140);
+			characterImage = characterImage.getFlippedCopy(true, false);
+			characterSheet = new SpriteSheet(characterImage.getScaledCopy(scale), width*scale, height*scale);
+			Animation runningL = new Animation(characterSheet, 140);
+			
+			// Make the standing still images.
+			Image standingR = new Image(standingImage, false, filter).getScaledCopy(scale);	
+			Image standingL = standingR.getFlippedCopy(true, false);
+			
+			// Make the jumping images.
+			Image jumpingR = new Image(jumpingImage, false, filter).getScaledCopy(scale);
+			Image jumpingL = jumpingR.getFlippedCopy(true, false);
+			
+			// Put all images in the sprite map.
+			spriteMap.put(jumpLKey, jumpingL);
+			spriteMap.put(jumpRKey, jumpingR);
+			spriteMap.put(standLKey, standingL);
+			spriteMap.put(standRKey, standingR);
+			spriteMap.put(runLKey, runningL);
+			spriteMap.put(runRKey, runningR);
+			spriteMap.put(dashLKey, dashRight);
+			spriteMap.put(dashRKey, dashLeft);
+			return spriteMap;
 		}
 		
 		/**
