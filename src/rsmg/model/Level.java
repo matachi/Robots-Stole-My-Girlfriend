@@ -71,18 +71,12 @@ public class Level {
 	 * @param items The items that should be in the level.
 	 * @param enemies The enemies in the level.
 	 */
-	public Level(TileGrid tileGrid, List<Item> items, List<Enemy> enemies) {
+	public Level(TileGrid tileGrid, List<Item> items, List<Ai> aiList) {
 		this.tileGrid = tileGrid;
 		this.items = items;
-		//temporary solution
-		Collection<Ai> enemyAis = new HashSet<Ai>(); 
-		for(Enemy enemy : enemies){
-			enemyAis.add(new EmptyAi(enemy));
-		}
-		this.enemies = enemyAis;
+		this.enemies = aiList;
 		bullets = new ArrayList<Bullet>();
 		spawnChar();
-		spawnEnemies();
 	}
 
 	/**
@@ -97,16 +91,6 @@ public class Level {
 		} catch (Exception NullPointerException) {
 			character = new PCharacter(0, 0, bullets);
 		}
-	}
-	/**
-	 * method created just for testing purposes
-	 */
-	private void spawnEnemies(){
-		enemies.add(new PatrollingAi(new BallBot(100, 100)));
-		enemies.add(new PatrollingAi(new BucketBot(150, 150)));
-		enemies.add(new PatrollingAi(new RocketBot(50, 50)));
-		enemies.add(new EmptyAi(new Spikes(32*5, 32*4)));
-		
 	}
 
 	/**
