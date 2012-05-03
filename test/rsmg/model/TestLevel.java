@@ -53,7 +53,7 @@ public class TestLevel {
 		List<Enemy> enemies = new LinkedList<Enemy>();
 		enemies.add(new Tankbot(10,10));
 		
-		level = new Level(tileGrid, items, enemies);
+		//level = new Level(tileGrid, items, enemies);
 	}
 
 	@After

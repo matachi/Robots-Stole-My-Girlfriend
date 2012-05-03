@@ -226,7 +226,7 @@ class LevelState extends State {
 	public void initLevel(int levelNumber) {
 		this.levelNumber = levelNumber;
 		IO io = new IO();
-		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getEnemyList());
+		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getAiList());
 	}
 
 	@Override

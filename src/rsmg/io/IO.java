@@ -3,6 +3,7 @@ package rsmg.io;
 import java.io.File;
 import java.util.List;
 
+import rsmg.model.ai.Ai;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.tile.Tile;
@@ -14,7 +15,7 @@ public class IO {
 
 	// Is set when the map is loaded
 	private List<Item> itemList;
-	private List<Enemy> enemyList;
+	private List<Ai> aiList;
 	
 	/**
 	 * Get the level as a Tile matrix
@@ -28,7 +29,7 @@ public class IO {
 		XmlConverter converter = new XmlConverter();
 		Tile[][] grid = converter.xmlToTiles(file);
 		itemList = converter.getItemList();
-		enemyList = converter.getEnemyList();
+		aiList = converter.getAiList();
 		return grid;
 	}
 	
@@ -36,7 +37,7 @@ public class IO {
 		return itemList;
 	}
 	
-	public List<Enemy> getEnemyList(){
-		return enemyList;
+	public List<Ai> getAiList(){
+		return aiList;
 	}
 }

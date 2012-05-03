@@ -12,11 +12,18 @@ import org.jdom.input.SAXBuilder;
 
 import rsmg.model.Constants;
 import rsmg.model.ObjectName;
+import rsmg.model.ai.Ai;
+import rsmg.model.ai.EmptyAi;
+import rsmg.model.ai.PatrollingAi;
 import rsmg.model.object.item.HealthPack;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.item.UpgradePoints;
 import rsmg.model.object.item.Weapon;
+import rsmg.model.object.unit.BallBot;
+import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.Enemy;
+import rsmg.model.object.unit.RocketBot;
+import rsmg.model.object.unit.Spikes;
 import rsmg.model.object.unit.Tankbot;
 import rsmg.model.tile.AirTile;
 import rsmg.model.tile.EndTile;
@@ -30,7 +37,7 @@ import rsmg.model.tile.Tile;
 public class XmlConverter {
 
 	private List<Item> itemList = new ArrayList<Item>();
-	private List<Enemy> enemyList = new ArrayList<Enemy>();
+	private List<Ai> aiList = new ArrayList<Ai>();
 	/**
 	 * Converts the XML file to Tile matrix by setting appropriate Tiles in the
 	 * matrix according to the XML file
@@ -95,17 +102,21 @@ public class XmlConverter {
 						itemList.add(item);
 					}
 					
-					// Retrieve Enemies(ONLY TANKBOT IMPLEMENTED)
+					// Retrieve Enemies and assign AI to them
 					String enemyValue = cell.getAttributeValue("enemy");
 					if(enemyValue != null){
-						Enemy enemy;
-						if(enemyValue.equals("ballbot"))
-							enemy = new Tankbot(x*scale,y*scale);
-						else if(enemyValue.equals(ObjectName.TANKBOT))
-							enemy = new Tankbot(x*scale,y*scale);
+						Ai ai;
+						if(enemyValue.equals(ObjectName.TANKBOT))
+							ai = new PatrollingAi(new Tankbot(x*scale, y*scale));
+						else if(enemyValue.equals(ObjectName.ROCKETBOT))
+							ai = new PatrollingAi(new RocketBot(x*scale, y*scale));
+						else if(enemyValue.equals(ObjectName.BALLBOT))
+							ai = new PatrollingAi(new BallBot(x*scale, y*scale));
+						else if(enemyValue.equals(ObjectName.BUCKETBOT))
+							ai = new PatrollingAi(new BucketBot(x*scale, y*scale));
 						else
-							enemy = new Tankbot(x*scale,y*scale);
-						enemyList.add(enemy);
+							ai = new EmptyAi(new Spikes(x*scale, y*scale));
+						aiList.add(ai);
 					}
 				}
 			}
@@ -123,7 +134,7 @@ public class XmlConverter {
 		return itemList;
 	}
 	
-	public List<Enemy> getEnemyList(){
-		return enemyList;
+	public List<Ai> getAiList(){
+		return aiList;
 	}
 }

@@ -151,12 +151,12 @@
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
-    <cell>AirTile</cell>
+    <cell enemy="rocketbot">AirTile</cell>
+    <cell enemy="bucketbot">AirTile</cell>
+    <cell enemy="tankbot">AirTile</cell>
+    <cell enemy="spikes">AirTile</cell>
+    <cell enemy="spikes">AirTile</cell>
+    <cell enemy="spikes">AirTile</cell>
     <cell>AirTile</cell>
     <cell>GroundTile</cell>
     <cell>GroundTile</cell>
