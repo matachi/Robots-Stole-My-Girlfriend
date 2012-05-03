@@ -14,7 +14,7 @@ public class EmptyAi implements Ai{
 	}
 	
 	@Override
-	public void update(double delta) {
+	public void update(double delta, double playerX, double playerY) {
 		//nothing
 	}
 

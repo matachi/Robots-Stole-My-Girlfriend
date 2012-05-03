@@ -14,7 +14,8 @@ import rsmg.model.Constants;
 import rsmg.model.ObjectName;
 import rsmg.model.ai.Ai;
 import rsmg.model.ai.EmptyAi;
-import rsmg.model.ai.PatrollingAi;
+import rsmg.model.ai.TankBotAi;
+import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.HealthPack;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.item.UpgradePoints;
@@ -37,6 +38,7 @@ public class XmlConverter {
 
 	private List<Item> itemList = new ArrayList<Item>();
 	private List<Ai> aiList = new ArrayList<Ai>();
+	private List<Bullet> enemyBulletList = new ArrayList<Bullet>();
 	/**
 	 * Converts the XML file to Tile matrix by setting appropriate Tiles in the
 	 * matrix according to the XML file
@@ -106,13 +108,17 @@ public class XmlConverter {
 					if(enemyValue != null){
 						Ai ai;
 						if(enemyValue.equals(ObjectName.TANKBOT))
-							ai = new PatrollingAi(new Tankbot(x*scale, y*scale));
+							ai = new TankBotAi(new Tankbot(x*scale, y*scale));
+						
 						else if(enemyValue.equals(ObjectName.ROCKETBOT))
-							ai = new PatrollingAi(new RocketBot(x*scale, y*scale));
+							ai = new TankBotAi(new RocketBot(x*scale, y*scale));
+						
 						else if(enemyValue.equals(ObjectName.BALLBOT))
-							ai = new PatrollingAi(new BallBot(x*scale, y*scale));
+							ai = new TankBotAi(new BallBot(x*scale, y*scale));
+						
 						else if(enemyValue.equals(ObjectName.BUCKETBOT))
-							ai = new PatrollingAi(new BucketBot(x*scale, y*scale));
+							ai = new TankBotAi(new BucketBot(x*scale, y*scale, enemyBulletList));
+						
 						else
 							ai = new EmptyAi(new Spikes(x*scale, y*scale));
 						aiList.add(ai);
@@ -135,5 +141,9 @@ public class XmlConverter {
 	
 	public List<Ai> getAiList(){
 		return aiList;
+	}
+
+	public List<Bullet> getEnemyBulletList() {
+		return enemyBulletList;
 	}
 }

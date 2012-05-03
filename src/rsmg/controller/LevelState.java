@@ -226,7 +226,7 @@ class LevelState extends State {
 	public void initLevel(int levelNumber) {
 		this.levelNumber = levelNumber;
 		IO io = new IO();
-		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getAiList());
+		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getAiList(), io.getEnemyBulletList());
 	}
 
 	@Override
@@ -270,7 +270,10 @@ class LevelState extends State {
 	 * Draw bullets on the screen.
 	 */
 	private void drawBullets() {
-		for (Bullet bullet : level.getBulletList())
+		for (Bullet bullet : level.getAlliedBulletList())
+			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
+		
+		for (Bullet bullet : level.getEnemyBulletList())
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
 	}
 	

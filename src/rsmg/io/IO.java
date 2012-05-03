@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import rsmg.model.ai.Ai;
+import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
 import rsmg.model.tile.Tile;
 
@@ -15,6 +16,7 @@ public class IO {
 	// Is set when the map is loaded
 	private List<Item> itemList;
 	private List<Ai> aiList;
+	private List<Bullet> enemyBulletList;
 	
 	/**
 	 * Get the level as a Tile matrix
@@ -29,6 +31,7 @@ public class IO {
 		Tile[][] grid = converter.xmlToTiles(file);
 		itemList = converter.getItemList();
 		aiList = converter.getAiList();
+		enemyBulletList = converter.getEnemyBulletList();
 		return grid;
 	}
 	
@@ -38,5 +41,9 @@ public class IO {
 	
 	public List<Ai> getAiList(){
 		return aiList;
+	}
+
+	public List<Bullet> getEnemyBulletList() {
+		return enemyBulletList;
 	}
 }

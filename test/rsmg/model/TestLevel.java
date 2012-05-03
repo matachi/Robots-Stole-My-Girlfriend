@@ -83,7 +83,7 @@ public class TestLevel {
 	
 	@Test
 	public void testGetBulletList(){
-		assertTrue(level.getBulletList().size() == 0);
+		assertTrue(level.getAlliedBulletList().size() == 0);
 	}
 	
 	@Test

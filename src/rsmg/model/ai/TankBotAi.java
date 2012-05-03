@@ -8,7 +8,7 @@ import rsmg.util.Vector2d;
  * @author Johan Grönvall
  * 
  */
-public class PatrollingAi implements Ai {
+public class TankBotAi implements Ai {
 	private Enemy enemy;
 	private Vector2d velocityR;
 	private Vector2d veloctiyL;
@@ -24,25 +24,10 @@ public class PatrollingAi implements Ai {
 	private double originalXPos;
 	
 	/**
-	 * creates an IdleAi
-	 * @param enemy the enemy this ai is controlling
-	 * @param idleSpeed the speed the enemy should be patrolling at
-	 * @param walkingDistance how far the enemy will idle around
-	 */
-	public PatrollingAi(Enemy enemy, Vector2d idleSpeed, double walkingDistance) {
-		this.enemy = enemy;
-		this.velocityR = idleSpeed;
-		this.veloctiyL = idleSpeed.getNegatedCopy();
-		this.walkingDistance = walkingDistance;
-		originalXPos = enemy.getX();
-		enemy.setVelocity(velocityR);
-	}
-	
-	/**
 	 * creates an IdleAi with default values
 	 * @param enemy
 	 */
-	public PatrollingAi(Enemy enemy) {
+	public TankBotAi(Enemy enemy) {
 		this.enemy = enemy;
 		this.velocityR = new Vector2d(100, 0);
 		this.veloctiyL = velocityR.getNegatedCopy();
@@ -52,7 +37,7 @@ public class PatrollingAi implements Ai {
 	}
 
 	@Override
-	public void update(double delta) {
+	public void update(double delta, double PlayerX, double PlayerY) {
 		//TODO make this stuff work
 		
 		if (enemy.getX() > originalXPos + walkingDistance || isStuckR()) {

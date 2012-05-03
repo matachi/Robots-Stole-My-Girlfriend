@@ -64,6 +64,14 @@ public abstract class LivingObject extends InteractiveObject{
 	public boolean isFacingRight(){
 		return facingRight;
 	}
+	/**
+	 * makes the object face to the right if the boolean is true
+	 * and to the left if it is false
+	 * @param isFacingRight
+	 */
+	public void setFacing(boolean isFacingRight){
+		facingRight = isFacingRight;
+	}
 	
 	/**
 	 * @return if the LivingObject is dead

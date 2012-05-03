@@ -1,5 +1,7 @@
 package rsmg.model.object.unit;
 
+import java.util.List;
+
 import rsmg.model.Constants;
 import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
@@ -27,7 +29,7 @@ public abstract class Enemy extends LivingObject{
 		// the enemy isn't invulnerable to explosions
 		
 		if (obj instanceof Bullet) {
-			if(obj.getName()==ObjectName.EXPLOSION && !vulnerableToExplosions) {
+			if(obj.getName() == ObjectName.EXPLOSION && !vulnerableToExplosions) {
 				//do nothing
 			}else {
 				lastAttackedTime = System.currentTimeMillis();
@@ -63,4 +65,5 @@ public abstract class Enemy extends LivingObject{
 	 * @return true if t his enemy is flying
 	 */
 	public abstract boolean isFlyingUnit();
+	
 }

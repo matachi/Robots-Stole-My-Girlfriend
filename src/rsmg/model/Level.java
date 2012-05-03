@@ -30,9 +30,14 @@ public class Level {
 	private PCharacter character;
 	
 	/**
-	 * List where bullets from guns are stored.
+	 * List where friendly bullets from guns are stored.
 	 */
-	private List<Bullet> bullets;
+	private List<Bullet> alliedBullets;
+	
+	/**
+	 * List where enemy bullets are stored
+	 */
+	private List<Bullet> enemyBulletList;
 	
 	/**
 	 *  List where all the items are stored
@@ -65,11 +70,12 @@ public class Level {
 	 * @param items The items that should be in the level.
 	 * @param enemies The enemies in the level.
 	 */
-	public Level(TileGrid tileGrid, List<Item> items, List<Ai> aiList) {
+	public Level(TileGrid tileGrid, List<Item> items, List<Ai> aiList, List<Bullet> EnemyBullets) {
 		this.tileGrid = tileGrid;
 		this.items = items;
 		this.enemies = aiList;
-		bullets = new ArrayList<Bullet>();
+		enemyBulletList = EnemyBullets;
+		alliedBullets = new ArrayList<Bullet>();
 		spawnChar();
 	}
 
@@ -81,9 +87,9 @@ public class Level {
 	private void spawnChar() {
 		try {
 			Point spawnPoint = tileGrid.getSpawnPoint();
-			character = new PCharacter(spawnPoint.getX(), spawnPoint.getY(), bullets);
+			character = new PCharacter(spawnPoint.getX(), spawnPoint.getY(), alliedBullets);
 		} catch (Exception NullPointerException) {
-			character = new PCharacter(0, 0, bullets);
+			character = new PCharacter(0, 0, alliedBullets);
 		}
 	}
 
@@ -136,8 +142,10 @@ public class Level {
 	 */
 	private void updateEnemies(double delta) {
 		for (Iterator<Ai> i = enemies.iterator(); i.hasNext(); ) {
+			//update the ai
 			Ai ai = i.next();
-			ai.update(delta);
+			ai.update(delta, character.getX(), character.getY());
+			
 			Enemy enemy = ai.getEnemy();
 			
 			if (enemy.isDead()) {
@@ -161,7 +169,7 @@ public class Level {
 			//see if enemy has collided with any bullets and act appropriately
 			List<Bullet> newBullets = new ArrayList<Bullet>();
 			List<Bullet> expiredBullets = new ArrayList<Bullet>();
-			for (Iterator<Bullet> j = bullets.iterator(); j.hasNext(); ) {
+			for (Iterator<Bullet> j = alliedBullets.iterator(); j.hasNext(); ) {
 				Bullet bullet = j.next();
 
 				if (enemy.hasCollidedWith(bullet)) {
@@ -179,8 +187,8 @@ public class Level {
 					}
 				}
 			}
-			bullets.removeAll(expiredBullets);
-			bullets.addAll(newBullets);
+			alliedBullets.removeAll(expiredBullets);
+			alliedBullets.addAll(newBullets);
 		}
 	}
 
@@ -189,8 +197,8 @@ public class Level {
 	 * @param delta Time sine last update.
 	 */
 	private void updateBullets(double delta) {
-		for (int i = 0; i < bullets.size(); i++) {
-			Bullet bullet = bullets.get(i);
+		for (int i = 0; i < alliedBullets.size(); i++) {
+			Bullet bullet = alliedBullets.get(i);
 			
 			bullet.move(delta);
 			bullet.update(delta);
@@ -198,17 +206,17 @@ public class Level {
 			if (tileGrid.intersectsWith(bullet)) {
 				
 				if (bullet.getName() == ObjectName.ROCKETR  || bullet.getName() == ObjectName.ROCKETL)
-					bullets.add(new Explosion(bullet));
+					alliedBullets.add(new Explosion(bullet));
 				
 				//if the bullet is an explosion, do not remove it unless its past its duration
 				//otherwise, remove the bullet
 				if (!(bullet.getName() == ObjectName.EXPLOSION)){
-					bullets.remove(i);
+					alliedBullets.remove(i);
 				}
 			}
 			if (bullet.getName() == ObjectName.EXPLOSION){
 				if(((Explosion)bullet).getAge() > Constants.EXPLOSIONDURATION){
-					bullets.remove(i);
+					alliedBullets.remove(i);
 				}
 			}
 			
@@ -369,11 +377,18 @@ public class Level {
 	}
 	
 	/**
-	 * Returns the list of bullets.
+	 * Returns the list of allied bullets.
 	 * @return The list of bullets.
 	 */
-	public Collection<Bullet> getBulletList() {
-		return bullets;
+	public Collection<Bullet> getAlliedBulletList() {
+		return alliedBullets;
+	}
+	/**
+	 * returns the list of enemy bullets
+	 * @return the list of enemy bullets
+	 */
+	public Collection<Bullet> getEnemyBulletList() {
+		return enemyBulletList;
 	}
 
 	/**
