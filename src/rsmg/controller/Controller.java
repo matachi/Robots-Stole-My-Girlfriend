@@ -24,7 +24,7 @@ class Controller extends StateBasedGame {
 	
 	static final int UPGRADES_STATE = 5;
 	
-	private static LevelState levelState;
+	private static LevelState levelState = new LevelState(LEVEL_STATE);
 	
 	/**
 	 * 
@@ -38,7 +38,6 @@ class Controller extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		levelState = new LevelState(LEVEL_STATE);
 		this.addState(new MainMenuState(MAINMENU_STATE));
 		this.addState(levelState);
 		this.addState(new LevelSelectionState(LEVEL_SELECTION_STATE));

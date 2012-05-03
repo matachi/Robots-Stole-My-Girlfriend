@@ -88,7 +88,7 @@ public class TestTileGrid {
         int yIntersect = notYIntersect+1;
         character.setY(yIntersect);
         double rightIntersect = charX + Constants.CHARACTERWIDTH - Constants.TILESIZE - 0.00001;
-        assertTrue(grid.rightSideIntersection(character) == rightIntersect);
+        assertTrue((int)grid.rightSideIntersection(character) == (int)rightIntersect);
 	}
 	
 	@Test
@@ -101,7 +101,7 @@ public class TestTileGrid {
 		int intersectLength = 12;
         int yIntersect = notYIntersect+intersectLength;
         character.setY(yIntersect);
-        assertTrue(grid.bottomSideIntersection(character) == intersectLength-1-0.00001);
+        assertTrue((int)(grid.bottomSideIntersection(character)) == (int)(intersectLength-1-0.00001));
 	}
 	
 	// No top atm
