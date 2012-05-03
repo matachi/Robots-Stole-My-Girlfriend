@@ -1,6 +1,10 @@
 package rsmg.model.object.unit;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import rsmg.io.CharacterProgress;
 import rsmg.model.Constants;
@@ -36,6 +40,11 @@ public class PCharacter extends LivingObject {
 	 * Reference to the level's bullet list.
 	 */
 	private Collection<Bullet> bulletList;
+	
+	/**
+	 * List of refrences to the characters weapons
+	 */
+	private Map<String ,IWeapon> weapons;
 	
 	/**
 	 * Keeps track of when the character last attacked. Used to have a cooldown
@@ -78,7 +87,11 @@ public class PCharacter extends LivingObject {
 		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 		this.bulletList = bulletList;	
 		canDash = CharacterProgress.isDashUnlocked();
-		currentWeapon = new Shotgun(bulletList);
+		weapons = new HashMap<String ,IWeapon>();
+		weapons.put(ObjectName.PISTOL ,new Pistol(bulletList));
+		weapons.put(ObjectName.SHOTGUN, new Shotgun(bulletList));
+		weapons.put(ObjectName.ROCKET_LAUNCHER, new RocketLauncher(bulletList));
+		currentWeapon = weapons.get(ObjectName.PISTOL);
 	}
 	
 	@Override
@@ -87,14 +100,22 @@ public class PCharacter extends LivingObject {
 			this.getHit(((Enemy) obj).getTouchDamage());
 		}
 		if (obj instanceof Item) {
-			if(obj.getName().equals(ObjectName.LASER_PISTOL))
-				currentWeapon = new Pistol(bulletList);
-			else if(obj.getName().equals(ObjectName.ROCKET_LAUNCHER))
-				currentWeapon = new RocketLauncher(bulletList);
-			else if(obj.getName().equals(ObjectName.SHOTGUN))
-				currentWeapon = new Shotgun(bulletList);
+			if(obj.getName().equals(ObjectName.LASER_PISTOL)){
+				this.changeWeapon(obj.getName());
+				CharacterProgress.setPistolUnlocked(true);
+			}
+			else if(obj.getName().equals(ObjectName.ROCKET_LAUNCHER)){
+				this.changeWeapon(obj.getName());
+				CharacterProgress.setRpgUnlocked(true);
+			}
+			else if(obj.getName().equals(ObjectName.SHOTGUN)){
+				this.changeWeapon(obj.getName());
+				CharacterProgress.setShotgunUnlocked(true);
+			}
+			
 			else if(obj.getName().equals(ObjectName.HEALTH_PACK))
 				addHealth();
+			
 			else if(obj.getName().equals(ObjectName.UPGRADE_POINT))
 				upgradePoints++;
 		}
@@ -129,6 +150,12 @@ public class PCharacter extends LivingObject {
 	 */
 	public IWeapon getWeapon() {
 		return currentWeapon;
+	}
+	
+	public void changeWeapon(String weaponName) {
+		if (CharacterProgress.isUpgradeUnlocked(weaponName)){
+			currentWeapon = weapons.get(weaponName);
+		}
 	}
 
 	/**

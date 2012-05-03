@@ -411,6 +411,18 @@ class LevelState extends State {
 		// escape key
 		if (input.isKeyPressed(Input.KEY_ESCAPE))
 			sbg.enterState(Controller.PAUSE_MENU_STATE, null, new FadeInTransition());
+		
+		// digit key 1
+		if (input.isKeyPressed(Input.KEY_1)) 
+			modelCharacter.changeWeapon(ObjectName.PISTOL);
+		
+		// digit key 2
+		if (input.isKeyPressed(Input.KEY_2)) 
+			modelCharacter.changeWeapon(ObjectName.SHOTGUN);
+		
+		// digit key 3
+		if (input.isKeyPressed(Input.KEY_3))
+			modelCharacter.changeWeapon(ObjectName.ROCKET_LAUNCHER);
 	}
 
 	/**

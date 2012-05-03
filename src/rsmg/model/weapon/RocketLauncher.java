@@ -70,6 +70,6 @@ public class RocketLauncher implements IWeapon{
 //	
 	@Override
 	public String getName() {
-		return "rocketLauncher";
+		return ObjectName.ROCKET_LAUNCHER;
 	}
 }

@@ -13,6 +13,8 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import rsmg.model.ObjectName;
+
 /**
  * This class provides getters and setters to read and modify the character
  * progression.
@@ -31,9 +33,9 @@ public class CharacterProgress {
 	private static final String UNLOCKED_LEVELS = "unlockedLevels";
 	
 	private static final String UNLOCKED_WEAPONS = "unlockedWeapons";
-	private static final String PISTOL = "pistol";
-	private static final String SHOTGUN = "shotgun";
-	private static final String RPG = "rpg";
+	private static final String PISTOL = ObjectName.PISTOL;
+	private static final String SHOTGUN = ObjectName.SHOTGUN;
+	private static final String RPG = ObjectName.ROCKET_LAUNCHER;
 	
 	private static final String UPGRADE_POINTS = "upgradePoints";
 	
@@ -283,6 +285,12 @@ public class CharacterProgress {
 			return isIncShotgunSpreadUnlocked();
 		case INC_RPG_AOE:
 			return isIncRPGAoEUnlocked();
+		case SHOTGUN:
+			return isShotgunUnlocked();
+		case RPG:
+			return isRPGUnlocked();
+		case PISTOL:
+			return isPistolUnlocked();
 		default:
 			new IllegalArgumentException();
 			return false;

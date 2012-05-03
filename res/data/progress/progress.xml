@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <progress>
-  <unlockedLevels>1</unlockedLevels>
+  <unlockedLevels>2</unlockedLevels>
   <unlockedWeapons>
-    <pistol>false</pistol>
-    <rpg>false</rpg>
-    <shotgun>false</shotgun>
+    <pistol>true</pistol>
+    <rpg>true</rpg>
+    <shotgun>true</shotgun>
   </unlockedWeapons>
   <upgradePoints>0</upgradePoints>
   <unlockedUpgrades>
@@ -16,4 +16,3 @@
     <incRPGAoE>false</incRPGAoE>
   </unlockedUpgrades>
 </progress>
-
