@@ -1,6 +1,5 @@
 package rsmg.model.object.bullet;
 
-import rsmg.model.Constants;
 import rsmg.util.Vector2d;
 
 /**

@@ -1,10 +1,7 @@
 package rsmg.model.ai;
 
-import java.util.List;
-
 import org.lwjgl.Sys;
 
-import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.Enemy;
 

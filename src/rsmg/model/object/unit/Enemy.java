@@ -1,7 +1,5 @@
 package rsmg.model.object.unit;
 
-import java.util.List;
-
 import rsmg.model.Constants;
 import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
