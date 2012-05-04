@@ -51,7 +51,7 @@ public class TestLevel {
 		items.add(new HealthPack(10,10));
 		
 		List<Enemy> enemies = new LinkedList<Enemy>();
-		enemies.add(new Tankbot(10,10));
+		enemies.add(new Tankbot(10,10, null));
 		
 		//level = new Level(tileGrid, items, enemies);
 	}

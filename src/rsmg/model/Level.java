@@ -169,7 +169,6 @@ public class Level {
 		for (Iterator<Ai> i = enemies.iterator(); i.hasNext(); ) {
 			//update the ai
 			Ai ai = i.next();
-			ai.update(delta, character.getX(), character.getY());
 			
 			Enemy enemy = ai.getEnemy();
 			
@@ -182,8 +181,11 @@ public class Level {
 				enemy.applyGravity(delta);
 			}
 			
-			enemy.move(delta);
 			applyNormalForce(enemy);
+			
+			ai.update(delta, character.getX(), character.getY());
+			enemy.move(delta);
+
 			enemy.updateVulnerability();
 			// see if enemy has collided with the character and act appropriately
 			if (enemy.hasCollidedWith(character)) {

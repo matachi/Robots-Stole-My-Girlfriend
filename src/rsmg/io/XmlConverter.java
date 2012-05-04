@@ -15,6 +15,7 @@ import rsmg.model.ObjectName;
 import rsmg.model.ai.Ai;
 import rsmg.model.ai.BucketBotAi;
 import rsmg.model.ai.EmptyAi;
+import rsmg.model.ai.RocketBotAi;
 import rsmg.model.ai.TankBotAi;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.HealthPack;
@@ -109,13 +110,13 @@ public class XmlConverter {
 					if(enemyValue != null){
 						Ai ai;
 						if(enemyValue.equals(ObjectName.TANKBOT))
-							ai = new TankBotAi(new Tankbot(x*scale, y*scale));
+							ai = new TankBotAi(new Tankbot(x*scale, y*scale, enemyBulletList));
 						
 						else if(enemyValue.equals(ObjectName.ROCKETBOT))
-							ai = new TankBotAi(new RocketBot(x*scale, y*scale));
+							ai = new RocketBotAi(new RocketBot(x*scale, y*scale));
 						
 						else if(enemyValue.equals(ObjectName.BALLBOT))
-							ai = new TankBotAi(new BallBot(x*scale, y*scale));
+							ai = new RocketBotAi(new BallBot(x*scale, y*scale));
 						
 						else if(enemyValue.equals(ObjectName.BUCKETBOT))
 							ai = new BucketBotAi(new BucketBot(x*scale, y*scale, enemyBulletList));
