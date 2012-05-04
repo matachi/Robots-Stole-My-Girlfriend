@@ -1,18 +1,21 @@
 package rsmg.io;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.jdom.Document;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
+
 /**
- * Counts the number of Levels available in the Level data folder and returns a
- * collection with their numbers.
+ * This class provides methods for reading information about the available levels.
  * 
  * @author Daniel Jonsson
  * 
  */
-public final class LevelNumbers {
-	;
+public final class Levels {
 	
 	/**
 	 * Path to the level folder.
@@ -39,5 +42,21 @@ public final class LevelNumbers {
 			}
 		}
 		return numberCollection;
+	}
+	
+	/**
+	 * Get a level as an jDom XML document.
+	 * 
+	 * @param levelNumber
+	 *            The level's number.
+	 * @return The level as an jDom XML document.
+	 */
+	public static Document getLevel(int levelNumber) {
+		try {
+			return new SAXBuilder().build("res/data/level/Level" + levelNumber + ".xml");
+		} catch (JDOMException | IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

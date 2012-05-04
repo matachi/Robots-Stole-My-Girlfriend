@@ -22,12 +22,11 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.CharacterProgress;
-import rsmg.io.IO;
-import rsmg.io.LevelNumbers;
+import rsmg.io.Levels;
+import rsmg.levelfactory.LevelFactory;
 import rsmg.model.Constants;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
-import rsmg.model.TileGrid;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
@@ -238,8 +237,7 @@ class LevelState extends State {
 	 */
 	public void initLevel(int levelNumber) {
 		this.levelNumber = levelNumber;
-		IO io = new IO();
-		level = new Level(new TileGrid(io.getLevel(levelNumber)), io.getItemList(), io.getAiList(), io.getEnemyBulletList());
+		level = LevelFactory.getLevel(levelNumber);
 	}
 
 	@Override
@@ -387,7 +385,7 @@ class LevelState extends State {
 		 * level selection state.
 		 */
 		if (level.hasWon()) {
-			List<Integer> levelNumbers = (ArrayList<Integer>)LevelNumbers.getLevelNumbers();
+			List<Integer> levelNumbers = (ArrayList<Integer>)Levels.getLevelNumbers();
 			Collections.sort(levelNumbers);
 			CharacterProgress.setUnlockedLevels(levelNumbers.indexOf(levelNumber)+2);
 			CharacterProgress.saveFile();

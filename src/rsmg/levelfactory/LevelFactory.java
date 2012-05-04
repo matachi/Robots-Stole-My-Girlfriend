@@ -1,17 +1,16 @@
-package rsmg.io;
+package rsmg.levelfactory;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
+import rsmg.io.Levels;
 import rsmg.model.Constants;
+import rsmg.model.Level;
 import rsmg.model.ObjectName;
+import rsmg.model.TileGrid;
 import rsmg.model.ai.Ai;
 import rsmg.model.ai.BallBotAi;
 import rsmg.model.ai.BucketBotAi;
@@ -37,11 +36,8 @@ import rsmg.model.tile.Tile;
 /**
  * Converts to/from XML to/from Tile[][]
  */
-public class XmlConverter {
+public final class LevelFactory {
 
-	private List<Item> itemList = new ArrayList<Item>();
-	private List<Ai> aiList = new ArrayList<Ai>();
-	private List<Bullet> enemyBulletList = new ArrayList<Bullet>();
 	/**
 	 * Converts the XML file to Tile matrix by setting appropriate Tiles in the
 	 * matrix according to the XML file
@@ -50,12 +46,15 @@ public class XmlConverter {
 	 *            The XML file that are going to be converted to Tiles
 	 * @return A Tile matrix. If error: null
 	 */
-	public Tile[][] xmlToTiles(File xmlFile) {
-		SAXBuilder builder = new SAXBuilder();
-		Tile[][] grid;
-		try {
+	public static Level getLevel(int levelNumber) {
 
-			Document document = (Document) builder.build(xmlFile);
+		Tile[][] grid;
+		List<Item> itemList = new ArrayList<Item>();
+		List<Ai> aiList = new ArrayList<Ai>();
+		List<Bullet> enemyBulletList = new ArrayList<Bullet>();
+		
+
+			Document document = Levels.getLevel(levelNumber);
 			Element rootNode = document.getRootElement();
 
 			Element sizeElem = rootNode.getChild("size");
@@ -128,25 +127,6 @@ public class XmlConverter {
 					}
 				}
 			}
-			return grid;
-		} catch (IOException io) {
-			System.out.println(io.getMessage());
-		} catch (JDOMException jdomex) {
-			System.out.println(jdomex.getMessage());
-		}
-		System.out.println("error!!");
-		return null;
-	}
-			
-	public List<Item> getItemList(){
-		return itemList;
-	}
-	
-	public List<Ai> getAiList(){
-		return aiList;
-	}
-
-	public List<Bullet> getEnemyBulletList() {
-		return enemyBulletList;
+		return new Level(new TileGrid(grid), itemList, aiList, enemyBulletList);
 	}
 }

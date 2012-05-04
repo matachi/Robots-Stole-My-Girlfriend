@@ -18,7 +18,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.CharacterProgress;
 import rsmg.io.Config;
-import rsmg.io.LevelNumbers;
+import rsmg.io.Levels;
 
 /**
  * The level selection screen.
@@ -145,7 +145,7 @@ class LevelSelectionState extends State {
 	
 	private void fillLevelButtonsList() throws SlickException {
 		// Get all available level numbers and sort them.
-		List<Integer> levelNumbers = (ArrayList<Integer>)LevelNumbers.getLevelNumbers();
+		List<Integer> levelNumbers = (ArrayList<Integer>)Levels.getLevelNumbers();
 		Collections.sort(levelNumbers);
 		
 		numberOfRows = levelNumbers.size() / maxTilesOnRow + 1; // Total number of rows.
@@ -181,7 +181,7 @@ class LevelSelectionState extends State {
 		// Update number of unlocked levels.
 		unlockedLevels = CharacterProgress.getUnlockedLevels();
 		
-		int numberOfLevels = LevelNumbers.getLevelNumbers().size();
+		int numberOfLevels = Levels.getLevelNumbers().size();
 		for (int i = 0; i < numberOfLevels; i++)
 			levelButtons.get(i).setUnlocked(i < unlockedLevels);
 	}
