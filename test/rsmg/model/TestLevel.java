@@ -18,7 +18,6 @@ import rsmg.model.ai.TankBotAi;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.HealthPack;
 import rsmg.model.object.item.Item;
-import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.Tankbot;
 import rsmg.model.tile.AirTile;
 import rsmg.model.tile.EndTile;
