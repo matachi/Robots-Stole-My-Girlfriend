@@ -1,6 +1,9 @@
 package rsmg.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.lwjgl.Sys;
@@ -20,6 +23,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.CharacterProgress;
 import rsmg.io.IO;
+import rsmg.io.LevelNumbers;
 import rsmg.model.Constants;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
@@ -373,12 +377,21 @@ class LevelState extends State {
 		healthBarOverlayRectangle.setWidth(147 * level.getCharacter().getHealth() / level.getCharacter().getMaxHealth());
 		
 		/**
-		 * Check if the player has won the level. If he has, change state to next level.
+		 * Check if the player has won the level. If he has, init the next level
+		 * into this state. But if he has won the last level, change state to
+		 * level selection state.
 		 */
 		if (level.hasWon()) {
-			CharacterProgress.setUnlockedLevels(levelNumber+1);
+			List<Integer> levelNumbers = (ArrayList<Integer>)LevelNumbers.getLevelNumbers();
+			Collections.sort(levelNumbers);
+			CharacterProgress.setUnlockedLevels(levelNumbers.indexOf(levelNumber)+2);
 			CharacterProgress.saveFile();
-			Controller.initLevel(++levelNumber);
+			try {
+				int nextLevel = levelNumbers.get(levelNumbers.indexOf(levelNumber)+1);
+				Controller.initLevel(nextLevel);
+			} catch (IndexOutOfBoundsException e) {
+				sbg.enterState(Controller.LEVEL_SELECTION_STATE);
+			}
 		} else if (level.hasLost()) {
 			Controller.initLevel(levelNumber);
 		}
