@@ -42,7 +42,7 @@ public abstract class LivingObject extends InteractiveObject{
 	 * Give the LivingObject more health
 	 */
 	public void addHealth(){
-		health += 10;
+		health += maxHealth*0.6;
 		if(health > maxHealth)
 			health = maxHealth;
 	}

@@ -20,8 +20,10 @@ import rsmg.model.ai.TankBotAi;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.HealthPack;
 import rsmg.model.object.item.Item;
+import rsmg.model.object.item.Pistol;
+import rsmg.model.object.item.RocketLauncher;
+import rsmg.model.object.item.Shotgun;
 import rsmg.model.object.item.UpgradePoints;
-import rsmg.model.object.item.Weapon;
 import rsmg.model.object.unit.BallBot;
 import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.RocketBot;
@@ -118,13 +120,13 @@ public final class LevelFactory {
 							item = new UpgradePoints(x*scale,y*scale);
 							break;
 						case ObjectName.LASER_PISTOL :
-							item = new Weapon(x*scale,y*scale, 15, 15, ObjectName.LASER_PISTOL);
+							item = new Pistol(x*scale,y*scale, 15, 15);
 							break;
 						case ObjectName.SHOTGUN :
-							item = new Weapon(x*scale,y*scale, 15, 15, ObjectName.SHOTGUN);
+							item = new Shotgun(x*scale,y*scale, 15, 15);
 							break;
 						default :
-							item = new Weapon(x*scale,y*scale, 33, 15, ObjectName.ROCKET_LAUNCHER);
+							item = new RocketLauncher(x*scale,y*scale, 28, 15);
 							break;
 					}
 					itemList.add(item);
