@@ -392,7 +392,7 @@ public class Level {
 
 	private void moveDown(InteractiveObject obj) {
 		double i = tileGrid.topSideIntersection(obj);
-		obj.setY(Math.floor(obj.getY() + i));
+		obj.setY(Math.ceil(obj.getY() + i));
 	}
 
 	private void moveLeft(InteractiveObject obj) {
