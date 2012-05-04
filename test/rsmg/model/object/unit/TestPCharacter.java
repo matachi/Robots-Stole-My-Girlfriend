@@ -1,5 +1,6 @@
 package rsmg.model.object.unit;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
@@ -11,6 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import rsmg.model.object.bullet.Bullet;
+import rsmg.model.object.item.HealthPack;
+import rsmg.model.object.item.Item;
 
 
 /**
@@ -70,5 +73,14 @@ public class TestPCharacter {
 		character2.setX(0);
 		assertTrue(character.hasCollidedWith(character2));
 		assertTrue(character2.hasCollidedWith(character));
+		
+		// Test with items
+		Item item = new HealthPack(0,0);
+		character.setX(0);
+		assertTrue(character.hasCollidedWith(item));
+		item.setY(character.getHeight());
+		assertFalse(character.hasCollidedWith(item));
+		item.setY(character.getHeight()-1);
+		assertTrue(character.hasCollidedWith(item));
 	}
 }

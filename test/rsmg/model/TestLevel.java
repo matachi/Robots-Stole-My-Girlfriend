@@ -13,6 +13,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import rsmg.model.ai.Ai;
+import rsmg.model.ai.TankBotAi;
+import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.HealthPack;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
@@ -50,10 +53,10 @@ public class TestLevel {
 		List<Item> items = new LinkedList<Item>();
 		items.add(new HealthPack(10,10));
 		
-		List<Enemy> enemies = new LinkedList<Enemy>();
-		enemies.add(new Tankbot(10,10, null));
+		List<Ai> enemies = new LinkedList<Ai>();
+		enemies.add(new TankBotAi(new Tankbot(10,10, new LinkedList<Bullet>())));
 		
-		//level = new Level(tileGrid, items, enemies);
+		level = new Level(tileGrid, items, enemies, new LinkedList<Bullet>());
 	}
 
 	@After
