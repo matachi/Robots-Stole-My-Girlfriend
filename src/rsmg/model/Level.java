@@ -47,7 +47,7 @@ public class Level {
 	/**
 	 * List where references to all living enemies in the level are stored.
 	 */
-	private Collection<Ai> enemies;
+	private List<Ai> enemies;
 	
 	/**
 	 * The grid layout of the level. (I.e. the environment.)
@@ -160,20 +160,79 @@ public class Level {
 		enemyBulletList.removeAll(expiredBullets);
 	}
 
+//	/**
+//	 * Update the enemies. Moves them, checks for collisions, checks if any
+//	 * enemy has died etc.
+//	 * @param delta Time sine last update.
+//	 */
+//	private void updateEnemies(double delta) {
+//		for (Iterator<Ai> i = enemies.iterator(); i.hasNext(); ) {
+//			//update the ai
+//			Ai ai = i.next();
+//			
+//			Enemy enemy = ai.getEnemy();
+//			
+//			if (enemy.isDead()) {
+//				i.remove();
+//				continue;
+//			}
+//			
+//			if(!enemy.isFlyingUnit()){
+//				enemy.applyGravity(delta);
+//			}
+//			
+//			applyNormalForce(enemy);
+//			
+//			ai.update(delta, character.getX(), character.getY());
+//			enemy.move(delta);
+//
+//			enemy.updateVulnerability();
+//			// see if enemy has collided with the character and act appropriately
+//			if (enemy.hasCollidedWith(character)) {
+//				character.collide(enemy);
+//				enemy.collide(character);
+//			}
+//
+//			//see if enemy has collided with any bullets and act appropriately
+//			List<Bullet> newBullets = new ArrayList<Bullet>();
+//			List<Bullet> expiredBullets = new ArrayList<Bullet>();
+//			for (Iterator<Bullet> j = alliedBulletsList.iterator(); j.hasNext(); ) {
+//				Bullet bullet = j.next();
+//
+//				if (enemy.hasCollidedWith(bullet)) {
+//					enemy.collide(bullet);
+//					bullet.collide(enemy);
+//
+//					// this shouldn't be levels responsibility, but I do not
+//					// know where to put it otherwise
+//
+//					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL){
+//						newBullets.add(new Explosion(bullet));
+//					}
+//					if(bullet.getName() != ObjectName.EXPLOSION){
+//						expiredBullets.add(bullet);
+//					}
+//				}
+//			}
+//			alliedBulletsList.removeAll(expiredBullets);
+//			alliedBulletsList.addAll(newBullets);
+//		}
+//	}
+	
 	/**
 	 * Update the enemies. Moves them, checks for collisions, checks if any
 	 * enemy has died etc.
 	 * @param delta Time sine last update.
 	 */
 	private void updateEnemies(double delta) {
-		for (Iterator<Ai> i = enemies.iterator(); i.hasNext(); ) {
+		for (int i = 0; i < enemies.size(); i++) {
 			//update the ai
-			Ai ai = i.next();
+			Ai ai = enemies.get(i);
 			
 			Enemy enemy = ai.getEnemy();
 			
 			if (enemy.isDead()) {
-				i.remove();
+				enemies.remove(i);
 				continue;
 			}
 			
@@ -218,6 +277,7 @@ public class Level {
 			alliedBulletsList.addAll(newBullets);
 		}
 	}
+
 
 	/**
 	 * Update all bullets in the level.

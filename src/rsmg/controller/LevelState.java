@@ -149,7 +149,9 @@ class LevelState extends State {
 		Animation rocketBot = new Animation(new SpriteSheet(new Image(
 				folderPath+"rocketBot.png", false, filter).getScaledCopy(scale), 19*scale, 25*scale), 200);
 		Image spikes = new Image(folderPath+"spikes.png", false, filter).getScaledCopy(scale);
+		Image miniBallBot = new Image(folderPath+"miniBallBot.png", false, filter).getScaledCopy(scale);
 		
+		enemies.put(ObjectName.MINIBALLBOT, miniBallBot);
 		enemies.put(ObjectName.TANKBOT, tankbot);
 		enemies.put(ObjectName.BUCKETBOT, bucketBot);
 		enemies.put(ObjectName.BALLBOT, ballBot);
@@ -185,6 +187,9 @@ class LevelState extends State {
 		
 		Image stone = new Image(folderPath+"stone.png", false, filter).getScaledCopy(scale);
 		bullets.put(ObjectName.STONE, stone);
+		
+		Image pistolBullet = new Image(folderPath+"pistolBullet.png", false, filter).getScaledCopy(scale);
+		bullets.put(ObjectName.PISTOL_BULLET, pistolBullet);
 		
 		/**
 		 * create an animation for the rocket

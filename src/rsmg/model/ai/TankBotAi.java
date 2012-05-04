@@ -27,9 +27,9 @@ public class TankBotAi implements Ai {
 	}
 
 	@Override
-	public void update(double delta, double PlayerX, double PlayerY) {
+	public void update(double delta, double playerX, double playerY) {
 		
-		double xDiff = PlayerX - enemy.getX();
+		double xDiff = playerX - enemy.getX();
 		
 		if(xDiff > 0 && xDiff < AGGRORANGE) {
 			aggresive = true;

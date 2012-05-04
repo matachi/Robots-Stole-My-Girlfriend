@@ -13,6 +13,6 @@ public interface Ai {
 	 * @param PlayerX the PCharacters x position
 	 * @param PlayerY the PCharacters y position
 	 */
-	public void update(double delta, double PlayerX, double PlayerY);
+	public void update(double delta, double playerX, double playerY);
 	public Enemy getEnemy();
 }

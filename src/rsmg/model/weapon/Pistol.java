@@ -12,7 +12,7 @@ public class Pistol implements IWeapon{
 
 	private static int bulletWidth = 5;
 	private static int bulletHeight = 3;
-	private static int bulletDamage = 10;
+	private static int bulletDamage = 5;
 	private static int bulletSpeed = 500;
 	private int offsetX;
 	private int offsetY;
@@ -37,7 +37,7 @@ public class Pistol implements IWeapon{
 			offsetY = 5;
 		}
 		
-		bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.LASER_BULLET, bulletDamage, bulletVelocity));
+		bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.PISTOL_BULLET, bulletDamage, bulletVelocity));
 		
 		shot = true;
 	}

@@ -16,7 +16,7 @@ public class RocketBotAi implements Ai{
 		/**
 		 * makes the enemy chase the character
 		 */
-		if(charInAggroRange(playerX, playerY)){
+		if(AggroRange.charInAggroRange(playerX, playerY,  enemy, AGGRORANGE)){
 			double angle = Math.atan((enemy.getY()-playerY)/(enemy.getX()-playerX));
 			int modifier = 1;
 			if(enemy.getX() > playerX){
@@ -28,14 +28,6 @@ public class RocketBotAi implements Ai{
 			enemy.setVelocityX(0);
 			enemy.setVelocityY(0);
 		}
-	}
-
-	private boolean charInAggroRange(double playerX, double playerY) {
-		double xDifference = playerX - enemy.getX();
-		double yDifference = playerY - enemy.getY();
-		
-		return (((xDifference > 0 && xDifference < AGGRORANGE) || (xDifference < 0 && xDifference*(-1) < AGGRORANGE)) &&
-				((yDifference > 0 && yDifference < AGGRORANGE) || (yDifference < 0 && yDifference*(-1) < AGGRORANGE)));
 	}
 
 	@Override

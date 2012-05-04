@@ -15,7 +15,7 @@ public class RocketLauncher implements IWeapon{
 	private boolean shot;
 	private static int bulletWidth = 14;
 	private static int bulletHeight = 14;
-	private static int bulletDamage = 10;
+	private static int bulletDamage = 3;
 	private static int bulletSpeed = 400;
 
 	public RocketLauncher(Collection<Bullet> bulletList) {

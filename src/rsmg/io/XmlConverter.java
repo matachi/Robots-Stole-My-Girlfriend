@@ -13,6 +13,7 @@ import org.jdom.input.SAXBuilder;
 import rsmg.model.Constants;
 import rsmg.model.ObjectName;
 import rsmg.model.ai.Ai;
+import rsmg.model.ai.BallBotAi;
 import rsmg.model.ai.BucketBotAi;
 import rsmg.model.ai.EmptyAi;
 import rsmg.model.ai.RocketBotAi;
@@ -116,7 +117,7 @@ public class XmlConverter {
 							ai = new RocketBotAi(new RocketBot(x*scale, y*scale));
 						
 						else if(enemyValue.equals(ObjectName.BALLBOT))
-							ai = new RocketBotAi(new BallBot(x*scale, y*scale));
+							ai = new BallBotAi(new BallBot(x*scale, y*scale, aiList));
 						
 						else if(enemyValue.equals(ObjectName.BUCKETBOT))
 							ai = new BucketBotAi(new BucketBot(x*scale, y*scale, enemyBulletList));
