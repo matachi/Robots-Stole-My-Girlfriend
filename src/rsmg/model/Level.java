@@ -104,14 +104,33 @@ public class Level {
  		updateEnemies(delta);
  		// Checks if the items are picked-up
 		updateItems();
-		//outSideMapCheck();
+		outsideLevelCheck();
+		
 	}
 	/**
-	 * Method which removes all objects that are outside the map in the current list
+	 * Method which removes all objects that are outside the map in the objectLists
 	 * @param object
 	 */
-	private void outSideMapCheck(List<InteractiveObject> objectList) {
-		//TODO
+	private void outsideLevelCheck() {
+		for(int i = 0; i < alliedBulletsList.size(); i++) {
+			if(isOutsideLevel(alliedBulletsList.get(i))){
+				alliedBulletsList.remove(i);
+			}
+		}
+		for(int i = 0; i < enemyBulletList.size(); i++) {
+			if(isOutsideLevel(enemyBulletList.get(i))){
+				enemyBulletList.remove(i);
+			}
+		}
+		for(int i = 0; i < enemies.size(); i++) {
+			if(isOutsideLevel(enemies.get(i).getEnemy())){
+				enemies.remove(i);
+			}
+		}
+	}
+	
+	private boolean isOutsideLevel(InteractiveObject obj){
+		return (obj.getX() < 0) || (obj.getY() < 0); 
 	}
 
 	/**
@@ -159,65 +178,6 @@ public class Level {
 		}
 		enemyBulletList.removeAll(expiredBullets);
 	}
-
-//	/**
-//	 * Update the enemies. Moves them, checks for collisions, checks if any
-//	 * enemy has died etc.
-//	 * @param delta Time sine last update.
-//	 */
-//	private void updateEnemies(double delta) {
-//		for (Iterator<Ai> i = enemies.iterator(); i.hasNext(); ) {
-//			//update the ai
-//			Ai ai = i.next();
-//			
-//			Enemy enemy = ai.getEnemy();
-//			
-//			if (enemy.isDead()) {
-//				i.remove();
-//				continue;
-//			}
-//			
-//			if(!enemy.isFlyingUnit()){
-//				enemy.applyGravity(delta);
-//			}
-//			
-//			applyNormalForce(enemy);
-//			
-//			ai.update(delta, character.getX(), character.getY());
-//			enemy.move(delta);
-//
-//			enemy.updateVulnerability();
-//			// see if enemy has collided with the character and act appropriately
-//			if (enemy.hasCollidedWith(character)) {
-//				character.collide(enemy);
-//				enemy.collide(character);
-//			}
-//
-//			//see if enemy has collided with any bullets and act appropriately
-//			List<Bullet> newBullets = new ArrayList<Bullet>();
-//			List<Bullet> expiredBullets = new ArrayList<Bullet>();
-//			for (Iterator<Bullet> j = alliedBulletsList.iterator(); j.hasNext(); ) {
-//				Bullet bullet = j.next();
-//
-//				if (enemy.hasCollidedWith(bullet)) {
-//					enemy.collide(bullet);
-//					bullet.collide(enemy);
-//
-//					// this shouldn't be levels responsibility, but I do not
-//					// know where to put it otherwise
-//
-//					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL){
-//						newBullets.add(new Explosion(bullet));
-//					}
-//					if(bullet.getName() != ObjectName.EXPLOSION){
-//						expiredBullets.add(bullet);
-//					}
-//				}
-//			}
-//			alliedBulletsList.removeAll(expiredBullets);
-//			alliedBulletsList.addAll(newBullets);
-//		}
-//	}
 	
 	/**
 	 * Update the enemies. Moves them, checks for collisions, checks if any
@@ -240,11 +200,10 @@ public class Level {
 				enemy.applyGravity(delta);
 			}
 			
-			applyNormalForce(enemy);
-			
 			ai.update(delta, character.getX(), character.getY());
 			enemy.move(delta);
-
+			applyNormalForce(enemy);
+			
 			enemy.updateVulnerability();
 			// see if enemy has collided with the character and act appropriately
 			if (enemy.hasCollidedWith(character)) {

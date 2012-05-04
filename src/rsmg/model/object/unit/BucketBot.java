@@ -10,7 +10,7 @@ import rsmg.util.Vector2d;
 public class BucketBot extends Enemy implements AttackingEnemy{
 	private List<Bullet> bulletList;
 	private static int XBULLETSPEED = 50;
-	private static int YBULLETSPEED = -200; 
+	private static int YBULLETSPEED = -100; 
 			
 	public BucketBot(double x, double y, List<Bullet> bulletList) {
 		super(x, y, 22, 30, 20, ObjectName.BUCKETBOT);
