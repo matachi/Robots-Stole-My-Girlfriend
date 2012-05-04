@@ -142,7 +142,7 @@ public final class LevelFactory {
 							ai = new RocketBotAi(new RocketBot(x*scale, y*scale));
 							break;
 						case ObjectName.BALLBOT :
-							ai = new BallBotAi(new BallBot(x*scale, y*scale, aiList));
+							ai = new BallBotAi(new BallBot(x*scale, y*scale), aiList);
 							break;
 						case ObjectName.BUCKETBOT :
 							ai = new BucketBotAi(new BucketBot(x*scale, y*scale, enemyBulletList));

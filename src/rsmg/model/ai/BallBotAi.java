@@ -1,21 +1,30 @@
 package rsmg.model.ai;
 
+import java.util.List;
 import java.util.Random;
 
 import rsmg.model.object.unit.BallBot;
 import rsmg.model.object.unit.Enemy;
+import rsmg.model.object.unit.MiniBallBot;
 import rsmg.util.Vector2d;
 
-public class BallBotAi implements Ai{
+public class BallBotAi implements Ai {
 	private BallBot enemy;
+	private List<Ai> enemyAiList;
 	private static int TRAVELSPEED = 20;
 	private static double ANGLES_PER_SECOND = 1;
 	private static int AGGRORANGE = 300;
 	private double angle;
 	private double cooldown;
 	
-	public BallBotAi(BallBot enemy) {
+	/**
+	 * Create a BallBot AI.
+	 * @param enemy Reference to the enemy it should control.
+	 * @param enemyAiList The list of enemies that are harmful to the character.
+	 */
+	public BallBotAi(BallBot enemy, List<Ai> enemyAiList) {
 		this.enemy = enemy;
+		this.enemyAiList = enemyAiList;
 		enemy.setVelocity(new Vector2d(TRAVELSPEED, TRAVELSPEED));
 		angle = (Math.PI/4);
 	}
@@ -28,7 +37,7 @@ public class BallBotAi implements Ai{
 		enemy.setVelocityY(Math.sin(angle)*TRAVELSPEED);
 		
 		if (shouldShoot(delta) && AggroRange.charInAggroRange(playerX, playerY, enemy, AGGRORANGE)) {
-			enemy.spawnEnemy();
+			spawnEnemy();
 		}
 	}
 
@@ -41,6 +50,10 @@ public class BallBotAi implements Ai{
 			return new Random().nextFloat() > 0.7f;
 		}
 		return false;
+	}
+	
+	private void spawnEnemy() {
+		enemyAiList.add(new RocketBotAi(new MiniBallBot(enemy.getX(), enemy.getY())));
 	}
 
 	@Override

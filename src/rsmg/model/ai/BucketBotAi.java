@@ -35,5 +35,4 @@ public class BucketBotAi implements Ai{
 	public Enemy getEnemy() {
 		return enemy;
 	}
-
 }
