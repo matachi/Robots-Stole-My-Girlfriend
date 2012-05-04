@@ -6,7 +6,11 @@ import rsmg.model.Constants;
 import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
-
+/**
+ * Class representing hostile LivingObjects
+ * @author zapray
+ *
+ */
 public abstract class Enemy extends LivingObject{
 	
 	private long lastAttackedTime;

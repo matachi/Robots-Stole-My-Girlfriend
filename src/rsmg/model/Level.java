@@ -424,7 +424,6 @@ public class Level {
 		for(Ai ai : enemies ){
 			enemySet.add(ai.getEnemy());
 		}
-		
 		return enemySet;
 	}
 
