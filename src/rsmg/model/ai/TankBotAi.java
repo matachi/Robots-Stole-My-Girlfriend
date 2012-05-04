@@ -1,6 +1,6 @@
 package rsmg.model.ai;
 
-import org.lwjgl.Sys;
+import java.util.Random;
 
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.Tankbot;
@@ -12,6 +12,7 @@ import rsmg.model.object.unit.Tankbot;
 public class TankBotAi implements Ai {
 	private Tankbot enemy;
 	private static int AGGRORANGE = 200;
+	private double cooldown;
 	
 	/**
 	 * boolean whether the enemy should be attacking or not
@@ -43,7 +44,7 @@ public class TankBotAi implements Ai {
 			aggresive = false;
 		}
 		
-		if(shouldAttack()) {
+		if (aggresive && shouldAttack(delta)) {
 			enemy.shoot();
 		}
 	}
@@ -52,8 +53,15 @@ public class TankBotAi implements Ai {
 		enemy.setVelocityX(0);
 	}
 	
-	private boolean shouldAttack() {
-		return Sys.getTime() % 1200 == 0 && aggresive;
+	private boolean shouldAttack(double delta) {
+		cooldown += delta;
+		// Every 0.8 second it gets the chance to shoot.
+		if (cooldown > 0.8) {
+			cooldown = 0;
+			// Only 30 % probability that it actually will shoot.
+			return new Random().nextFloat() > 0.7f;
+		}
+		return false;
 	}
 	
 

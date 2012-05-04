@@ -1,6 +1,6 @@
 package rsmg.model.ai;
 
-import org.lwjgl.Sys;
+import java.util.Random;
 
 import rsmg.model.object.unit.BallBot;
 import rsmg.model.object.unit.Enemy;
@@ -12,6 +12,7 @@ public class BallBotAi implements Ai{
 	private static double ANGLES_PER_SECOND = 1;
 	private static int AGGRORANGE = 300;
 	private double angle;
+	private double cooldown;
 	
 	public BallBotAi(BallBot enemy) {
 		this.enemy = enemy;
@@ -26,13 +27,20 @@ public class BallBotAi implements Ai{
 		enemy.setVelocityX(Math.cos(angle)*TRAVELSPEED);
 		enemy.setVelocityY(Math.sin(angle)*TRAVELSPEED);
 		
-		if (shouldShoot() && AggroRange.charInAggroRange(playerX, playerY, enemy, AGGRORANGE)) {
+		if (shouldShoot(delta) && AggroRange.charInAggroRange(playerX, playerY, enemy, AGGRORANGE)) {
 			enemy.spawnEnemy();
 		}
 	}
 
-	private boolean shouldShoot() {
-		return Sys.getTime() % 2000 == 0;
+	private boolean shouldShoot(double delta) {
+		cooldown += delta;
+		// Every 0.8 second it gets the chance to shoot.
+		if (cooldown > 0.8) {
+			cooldown = 0;
+			// Only 30 % probability that it actually will shoot.
+			return new Random().nextFloat() > 0.7f;
+		}
+		return false;
 	}
 
 	@Override

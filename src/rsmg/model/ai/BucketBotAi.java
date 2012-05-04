@@ -1,13 +1,12 @@
 package rsmg.model.ai;
 
-import org.lwjgl.Sys;
-
 import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.Enemy;
 
 public class BucketBotAi implements Ai{
 	
 	private BucketBot enemy;
+	private double cooldown;
 	
 	public BucketBotAi(BucketBot enemy) {
 		this.enemy = enemy;
@@ -21,10 +20,15 @@ public class BucketBotAi implements Ai{
 			enemy.setFacing(true);
 		}
 		
-		if (Sys.getTime() % 800 == 0){
+		
+		cooldown += delta;
+		
+		// Every 0.8 second it gets the chance to shoot.
+		if (cooldown > 0.8) {
+			cooldown = 0;
+			// Only 30 % probability that it actually will shoot.
 			enemy.shoot();
 		}
-		
 	}
 
 	@Override
