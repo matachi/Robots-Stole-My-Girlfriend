@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <progress>
-  <unlockedLevels>5</unlockedLevels>
+  <unlockedLevels>2</unlockedLevels>
   <unlockedWeapons>
     <pistol>true</pistol>
     <rpg>true</rpg>
     <shotgun>true</shotgun>
   </unlockedWeapons>
-  <upgradePoints>0</upgradePoints>
+  <upgradePoints>-6</upgradePoints>
   <unlockedUpgrades>
-    <dash>false</dash>
-    <doubleJump>false</doubleJump>
-    <rapidFire>false</rapidFire>
-    <incRunningSpeed>false</incRunningSpeed>
-    <incShotgunSpread>false</incShotgunSpread>
-    <incRPGAoE>false</incRPGAoE>
+    <dash>true</dash>
+    <doubleJump>true</doubleJump>
+    <rapidFire>true</rapidFire>
+    <incRunningSpeed>true</incRunningSpeed>
+    <incShotgunSpread>true</incShotgunSpread>
+    <incRPGAoE>true</incRPGAoE>
   </unlockedUpgrades>
 </progress>
