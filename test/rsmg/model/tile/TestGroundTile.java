@@ -7,7 +7,7 @@ public class TestGroundTile {
 
 	@Test
 	public void testSolid() {
-		GroundTile tile = new GroundTile();
+		GroundTile tile = new GroundTile("boxtile1");
 		assertTrue(tile.isSolid() == true);
 	}
 }

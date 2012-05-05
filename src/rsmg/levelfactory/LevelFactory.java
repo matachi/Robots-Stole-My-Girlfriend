@@ -93,7 +93,16 @@ public final class LevelFactory {
 						tile = new AirTile();
 						break;
 					case "GroundTile" :
-						tile = new GroundTile();
+						tile = new GroundTile(ObjectName.BOX_TILE1);
+						break;
+					case "GroundTile2" :
+						tile = new GroundTile(ObjectName.BOX_TILE2);
+						break;
+					case "GroundTile3" :
+						tile = new GroundTile(ObjectName.BOX_TILE3);
+						break;
+					case "GroundTile4" :
+						tile = new GroundTile(ObjectName.BOX_TILE4);
 						break;
 					case "SpawnTile" :
 						tile = new SpawnTile();

@@ -9,8 +9,8 @@ public class GroundTile extends Tile {
 	/**
 	 * Constructor of GroundTile. Sets the solid value
 	 */
-	public GroundTile() {
-		super(ObjectName.BOX_TILE);
+	public GroundTile(String groundType) {
+		super(groundType);
 		solid = true;
 	}
 

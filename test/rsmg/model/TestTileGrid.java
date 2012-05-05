@@ -23,14 +23,14 @@ public class TestTileGrid {
 	public void before() {
 		Tile[][] tile = {{new AirTile(),new AirTile()},
 						 {new SpawnTile(), new  EndTile()},
-						 {new GroundTile(), new GroundTile()}};
+						 {new GroundTile("boxtile1"), new GroundTile("boxtile1")}};
 		grid = new TileGrid(tile);
 	}
 	
 	@Test
 	public void testSet() {
 		assertFalse(grid.getFromCoord(1, 0).isSolid());
-		grid.set(1, 0, new GroundTile());
+		grid.set(1, 0, new GroundTile("boxtile1"));
 		assertTrue(grid.getFromCoord(1, 0).isSolid());
 	}
 	

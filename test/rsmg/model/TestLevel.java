@@ -46,7 +46,7 @@ public class TestLevel {
 	public void before() {
 		Tile[][] tiles = {{new AirTile(),new AirTile()},
 				 {new SpawnTile(), new  EndTile()},
-				 {new GroundTile(), new GroundTile()}};
+				 {new GroundTile("boxTile1"), new GroundTile("boxTile1")}};
 		tileGrid = new TileGrid(tiles);
 		
 		List<Item> items = new LinkedList<Item>();

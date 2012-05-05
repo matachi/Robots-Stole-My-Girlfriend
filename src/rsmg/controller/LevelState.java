@@ -216,10 +216,16 @@ class LevelState extends State {
 		 * Create a map with all tile images.
 		 */
 		tiles = new HashMap<String, Renderable>();
-		Image boxTile = new Image(folderPath+"tiles/boxTile1.png", false, filter).getScaledCopy(scale);
+		Image boxTile1 = new Image(folderPath+"tiles/boxTile1.png", false, filter).getScaledCopy(scale);
+		Image boxTile2 = new Image(folderPath+"tiles/boxTile2.png", false, filter).getScaledCopy(scale);
+		Image boxTile3 = new Image(folderPath+"tiles/boxTile3.png", false, filter).getScaledCopy(scale);
+		Image boxTile4 = new Image(folderPath+"tiles/boxTile4.png", false, filter).getScaledCopy(scale);
 		Image airTile = new Image(folderPath+"tiles/airTile.png", false, filter).getScaledCopy(scale);
 		Image endTile = new Image(folderPath+"tiles/endTile.png", false, filter).getScaledCopy(scale);
-		tiles.put(ObjectName.BOX_TILE, boxTile);
+		tiles.put(ObjectName.BOX_TILE1, boxTile1);
+		tiles.put(ObjectName.BOX_TILE2, boxTile2);
+		tiles.put(ObjectName.BOX_TILE3, boxTile3);
+		tiles.put(ObjectName.BOX_TILE4, boxTile4);
 		tiles.put(ObjectName.AIR_TILE, airTile);
 		tiles.put(ObjectName.END_TILE, endTile);
 		

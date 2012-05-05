@@ -52,7 +52,10 @@ public enum ObjectName {
 	/**
 	 * The tiles' names.
 	 */
-	public static final String BOX_TILE = "boxTile";
+	public static final String BOX_TILE1 = "boxTile1";
+	public static final String BOX_TILE2 = "boxTile2";
+	public static final String BOX_TILE3 = "boxTile3";
+	public static final String BOX_TILE4 = "boxTile4";
 	public static final String AIR_TILE = "airTile";
 	public static final String HAZARDOUS_TILE = "airTile";
 	public static final String SPAWN_TILE = "airTile";
