@@ -75,6 +75,10 @@ public class PCharacter extends LivingObject {
 	 *  upgradePoints the user can spend after each level
 	 */
 	private int upgradePoints = 0;
+	/**
+	 * how many times the character can jump while in the air
+	 */
+	private int doubleJumps = 1;
 	
 	/**
 	 * Create a character that the player controls.
@@ -122,6 +126,7 @@ public class PCharacter extends LivingObject {
 				upgradePoints++;
 		}
 	}
+	
 	public void updateImmortality(){
 		
 		if(lastAttackedTime + Variables.CHARACTER_IMMORTALITY_TIME < System.currentTimeMillis()){
@@ -181,6 +186,9 @@ public class PCharacter extends LivingObject {
 	 */
 	public void setAirborne(boolean airborne) {
 		this.airborne = airborne;
+		if(!airborne) {
+			doubleJumps = 1;
+		}
 	}
 
 	/**
@@ -196,8 +204,13 @@ public class PCharacter extends LivingObject {
 	 */
 	public void jump() {
 		// Only jump if the character is standing on the ground.
-		if (!airborne)
+		if (!airborne){
 			this.addVelocity(0, -Variables.JUMPSTRENGTH);
+			
+		} else if (doubleJumpAvailable()){
+			this.setVelocityY(-Variables.JUMPSTRENGTH);
+			doubleJumps -= 1;
+		}
 	}
 
 	/**
@@ -205,6 +218,14 @@ public class PCharacter extends LivingObject {
 	 */
 	public void moveLeft() {
 		this.setVelocityX(-Variables.getCharSpeed());
+	}
+	/**
+	 * returns true if the character has double jumps to use
+	 * @return
+	 */
+	public boolean doubleJumpAvailable() {
+		return doubleJumps > 0 && CharacterProgress.isDoubleJumpUnlocked();
+		
 	}
 
 	/**

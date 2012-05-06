@@ -30,6 +30,7 @@ public class RocketLauncher implements IWeapon{
 		int offsetX;
 		int offsetY;
 		
+		
 		if (isFacingRight){
 			bulletVelocity.setX(bulletSpeed);
 			offsetX = 25;
