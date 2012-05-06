@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Random;
 
 import rsmg.model.ObjectName;
+import rsmg.model.Variables;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
 
@@ -19,7 +20,7 @@ public class Shotgun implements IWeapon{
 	private int offsetX;
 	private int offsetY = 5;
 	private static int amountOfBulletsPerShot = 6;
-	private static int spread = 200;
+	//private static int spread = 200;
 	
 	public Shotgun(Collection<Bullet> bulletList) {
 		this.bulletList = bulletList;
@@ -43,7 +44,7 @@ public class Shotgun implements IWeapon{
 		for(int i = 0; i < amountOfBulletsPerShot; i++){
 			Vector2d bulletVelocity = new Vector2d();
 			bulletVelocity.setX(xBulletSpeed);
-			bulletVelocity.setY((randomGen.nextDouble()*2-1)*spread);
+			bulletVelocity.setY((randomGen.nextDouble()*2-1)*Variables.getShotgunSpread());
 			bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.SHOTGUN_BULLET, bulletDamage, bulletVelocity));
 		}
 		
@@ -63,6 +64,7 @@ public class Shotgun implements IWeapon{
 		}
 		return false;
 	}
+	
 	@Override
 	public String getName() {
 		return "shotgun";

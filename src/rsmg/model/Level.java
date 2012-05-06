@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import rsmg.io.CharacterProgress;
 import rsmg.model.ai.Ai;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
@@ -74,9 +75,24 @@ public class Level {
 		this.tileGrid = tileGrid;
 		this.items = items;
 		this.enemies = aiList;
+		loadUpgrades();
 		enemyBulletList = EnemyBullets;
 		alliedBulletsList = new ArrayList<Bullet>();
 		spawnChar();
+	}
+	
+	/**
+	 * method which checks what upgrades are available and supplies the character with them
+	 */
+	private void loadUpgrades() {
+		if(CharacterProgress.isIncRPGAoEUnlocked())
+			Variables.upgradeExplosionAOE();
+		
+		if(CharacterProgress.isIncRunningSpeedUnlocked())
+			Variables.upgradeSpeed();
+		
+		if(CharacterProgress.isIncShotgunSpreadUnlocked())
+			Variables.upgradeShotgunSpead();
 	}
 
 	/**
@@ -227,7 +243,7 @@ public class Level {
 					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL){
 						newBullets.add(new Explosion(bullet));
 					}
-					if(bullet.getName() != ObjectName.EXPLOSION){
+					if(!(bullet instanceof Explosion)){
 						expiredBullets.add(bullet);
 					}
 				}
@@ -255,12 +271,12 @@ public class Level {
 				
 				//if the bullet is an explosion, do not remove it unless its past its duration
 				//otherwise, remove the bullet
-				if (!(bullet.getName() == ObjectName.EXPLOSION)){
+				if (!(bullet instanceof Explosion)){
 					bulletList.remove(i);
 				}
 			}
-			if (bullet.getName() == ObjectName.EXPLOSION){
-				if(((Explosion)bullet).getAge() > Constants.EXPLOSIONDURATION){
+			if (bullet instanceof Explosion){
+				if(((Explosion)bullet).getAge() > Variables.EXPLOSIONDURATION){
 					bulletList.remove(i);
 				}
 			}
@@ -366,23 +382,23 @@ public class Level {
 	private boolean cameFromAbove(InteractiveObject obj) {
 		return obj.getPY() + obj.getHeight() - 0.00001 <= tileGrid
 				.getTilePosFromRealPos(obj.getY() + obj.getHeight())
-				* Constants.TILESIZE;
+				* Variables.TILESIZE;
 	}
 
 	private boolean cameFromBelow(InteractiveObject obj) {
 		return obj.getPY() >= (tileGrid.getTilePosFromRealPos(obj.getY()) + 1)
-				* Constants.TILESIZE;
+				* Variables.TILESIZE;
 	}
 
 	private boolean cameFromLeft(InteractiveObject obj) {
 		return obj.getPX() + obj.getWidth() - 0.00001 <= tileGrid
 				.getTilePosFromRealPos(obj.getX() + obj.getWidth())
-				* Constants.TILESIZE;
+				* Variables.TILESIZE;
 	}
 
 	private boolean cameFromRight(InteractiveObject obj) {
 		return obj.getPX() >= (tileGrid.getTilePosFromRealPos(obj.getX()) + 1)
-				* Constants.TILESIZE;
+				* Variables.TILESIZE;
 	}
 
 	private void moveUp(InteractiveObject obj) {

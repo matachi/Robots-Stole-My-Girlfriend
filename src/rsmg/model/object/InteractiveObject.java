@@ -1,6 +1,6 @@
 package rsmg.model.object;
 
-import rsmg.model.Constants;
+import rsmg.model.Variables;
 import rsmg.util.Vector2d;
 
 /**
@@ -122,7 +122,7 @@ public abstract class InteractiveObject {
 	 * @param delta
 	 */
 	public void applyGravity(double delta) {
-		addVelocity(0, Constants.GRAVITYSTRENGTH*delta);
+		addVelocity(0, Variables.GRAVITYSTRENGTH*delta);
 	}
 	
 	/**

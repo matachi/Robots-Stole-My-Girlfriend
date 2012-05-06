@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rsmg.io.CharacterProgress;
-import rsmg.model.Constants;
+import rsmg.model.Variables;
 import rsmg.model.ObjectName;
+import rsmg.model.upgradableVariables;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
@@ -82,7 +83,7 @@ public class PCharacter extends LivingObject {
 	 * @param bulletList Reference to the level's bullet list where the character's bullets should be stored.
 	 */
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
-		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
+		super(x, y, Variables.CHARACTERWIDTH, Variables.CHARACTERHEIGHT, Variables.CHARACTERHEALTH, ObjectName.CHARACTER);
 //		this.bulletList = bulletList;
 		canDash = CharacterProgress.isDashUnlocked();
 		weapons = new HashMap<String, IWeapon>();
@@ -123,7 +124,7 @@ public class PCharacter extends LivingObject {
 	}
 	public void updateImmortality(){
 		
-		if(lastAttackedTime + Constants.CHARACTER_IMMORTALITY_TIME < System.currentTimeMillis()){
+		if(lastAttackedTime + Variables.CHARACTER_IMMORTALITY_TIME < System.currentTimeMillis()){
 			immortal = false;
 			lastAttackedTime = 0;
 		}
@@ -196,29 +197,29 @@ public class PCharacter extends LivingObject {
 	public void jump() {
 		// Only jump if the character is standing on the ground.
 		if (!airborne)
-			this.addVelocity(0, -Constants.JUMPSTRENGTH);
+			this.addVelocity(0, -Variables.JUMPSTRENGTH);
 	}
 
 	/**
 	 * Changes the character's velocity, moving him westwards in next loop.
 	 */
 	public void moveLeft() {
-		this.setVelocityX(-Constants.CHARACTERSPEED);
+		this.setVelocityX(-Variables.getCharSpeed());
 	}
 
 	/**
 	 * Changes the character's velocity, moving him eastwards in next loop.
 	 */
 	public void moveRight() {
-		this.setVelocityX(Constants.CHARACTERSPEED);
+		this.setVelocityX(Variables.getCharSpeed());
 	}
 
 	/**
 	 * Called when the user releases the jump key.
 	 */
 	public void jumpReleased() {
-		if (getVelocityY() < Constants.RELEASED_JUMP_VELOCITY)
-			setVelocityY(Constants.RELEASED_JUMP_VELOCITY);
+		if (getVelocityY() < Variables.RELEASED_JUMP_VELOCITY)
+			setVelocityY(Variables.RELEASED_JUMP_VELOCITY);
 	}
 
 	/**
@@ -243,14 +244,14 @@ public class PCharacter extends LivingObject {
 	 * Make the character perform the "dash" move.
 	 */
 	private void dash(double delta) {
-		distanceDashed += Constants.DASHSPEED * delta;
+		distanceDashed += Variables.DASHSPEED * delta;
 
 		if (this.isFacingRight())
-			this.setVelocityX(Constants.DASHSPEED);
+			this.setVelocityX(Variables.DASHSPEED);
 		else
-			this.setVelocityX(-Constants.DASHSPEED);
+			this.setVelocityX(-Variables.DASHSPEED);
 		
-		if (distanceDashed > Constants.DASHLENGTH) {
+		if (distanceDashed > Variables.DASHLENGTH) {
 			isDashing = false;
 			distanceDashed = 0;
 		}

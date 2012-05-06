@@ -21,7 +21,6 @@ public enum ObjectName {
 	 * The enemies' names.
 	 */
 	public static final String TANKBOT = "tankbot";
-	public static final String EXPLOSION = "explosion";
 	public static final String ROCKETBOT = "rocketbot";
 	public static final String BALLBOT = "ballbot";
 	public static final String BUCKETBOT = "bucketbot";
@@ -29,7 +28,6 @@ public enum ObjectName {
 	public static final String MINIBALLBOT = "miniBallBot";
 	public static final String BOSSBOT = "bossBot";
 	
-
 	/**
 	 * The items' names.
 	 */
@@ -40,9 +38,12 @@ public enum ObjectName {
 	public static final String SHOTGUN = "shotgun";
 	public static final String PISTOL = "pistol";
 	
+	
 	/**
 	 * The bullets' names.
 	 */
+	public static final String EXPLOSION = "explosion";
+	public static final String BIG_EXPLOSION = "bigExplosion";
 	public static final String PISTOL_BULLET = "bullet";
 	public static final String LASER_BULLET = "laserBullet";
 	public static final String ROCKETR = "rocketR";

@@ -45,7 +45,7 @@ public class TileGrid {
 	 * @return The Tile on the game coordinate.
 	 */
 	public Tile getTile(double x, double y) {
-		return grid[(int)y/Constants.TILESIZE][(int)x/Constants.TILESIZE];
+		return grid[(int)y/Variables.TILESIZE][(int)x/Variables.TILESIZE];
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class TileGrid {
 		for(int x = 0; x < getWidth(); x++) {
 			for(int y = 0; y < getHeight(); y++) {
 				if (grid[y][x] instanceof SpawnTile) {
-					return new Point(x*Constants.TILESIZE, y*Constants.TILESIZE);
+					return new Point(x*Variables.TILESIZE, y*Variables.TILESIZE);
 				}
 			}
 		}
@@ -100,7 +100,7 @@ public class TileGrid {
 	 * @return The position in the matrix.
 	 */
 	public int getTilePosFromRealPos(double realPos) {
-		return (int)(realPos / Constants.TILESIZE);
+		return (int)(realPos / Variables.TILESIZE);
 	}
 	
 	/**
@@ -140,7 +140,7 @@ public class TileGrid {
 		
 		for (int y = topY; y <= bottomY; y++) {
 			if (grid[y][leftX].isSolid())
-				return (leftX + 1) * Constants.TILESIZE - object.getX();
+				return (leftX + 1) * Variables.TILESIZE - object.getX();
 		}
 		return 0;
 	}
@@ -158,7 +158,7 @@ public class TileGrid {
 		
 		for (int y = topY; y <= bottomY; y++) {
 			if (grid[y][rightX].isSolid())
-				return object.getX() + object.getWidth() - rightX * Constants.TILESIZE - 0.00001;
+				return object.getX() + object.getWidth() - rightX * Variables.TILESIZE - 0.00001;
 		}
 		return 0;
 	}
@@ -176,7 +176,7 @@ public class TileGrid {
 		
 		for (int x = leftX; x <= rightX; x++) {
 			if (grid[bottomY][x].isSolid())
-				return object.getY() + object.getHeight() - bottomY * Constants.TILESIZE - 0.00001;
+				return object.getY() + object.getHeight() - bottomY * Variables.TILESIZE - 0.00001;
 		}
 		return 0;
 	}
@@ -194,7 +194,7 @@ public class TileGrid {
 		
 		for (int x = leftX; x <= rightX; x++) {
 			if (grid[topY][x].isSolid())
-				return topY * Constants.TILESIZE - object.getY();
+				return topY * Variables.TILESIZE - object.getY();
 		}
 		return 0;
 	}

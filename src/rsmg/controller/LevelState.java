@@ -24,7 +24,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import rsmg.io.CharacterProgress;
 import rsmg.io.Levels;
 import rsmg.levelfactory.LevelFactory;
-import rsmg.model.Constants;
+import rsmg.model.Variables;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
@@ -200,17 +200,21 @@ class LevelState extends State {
 		Animation rocketR = new Animation(rocketSheetR, 140);
 		Animation rocketL = new Animation(rocketSheetL, 140);
 		
-		bullets.put("rocketR", rocketR);
-		bullets.put("rocketL", rocketL);
+		bullets.put(ObjectName.ROCKETR, rocketR);
+		bullets.put(ObjectName.ROCKETL, rocketL);
 		
 		/**
 		 * create an animation for explosions
 		 */
-		Image explosionImage = new Image(folderPath+"explosion.png", false, filter);
-		SpriteSheet explosionSheet = new SpriteSheet(explosionImage.getScaledCopy(scale), 30*scale, 30*scale);
-		Animation explosion = new Animation(explosionSheet,140);
+		Image explosionImage = new Image(folderPath+"explosion.png", false, filter).getScaledCopy(scale);
+		SpriteSheet bigExplosionSheet = new SpriteSheet(explosionImage.getScaledCopy((float)1.5), 45*scale, 45*scale);
+		SpriteSheet explosionSheet = new SpriteSheet(explosionImage, 30*scale, 30*scale);
 		
-		bullets.put("explosion", explosion);
+		Animation explosion = new Animation(explosionSheet,140);
+		Animation bigExplosion = new Animation(bigExplosionSheet, 140);
+		
+		bullets.put(ObjectName.BIG_EXPLOSION, bigExplosion);
+		bullets.put(ObjectName.EXPLOSION, explosion);
 		
 		/**
 		 * Create a map with all tile images.
@@ -232,7 +236,7 @@ class LevelState extends State {
 		/**
 		 * Init hitbox graphics.
 		 */
-		hitboxRect = new Rectangle(0, 0, Constants.CHARACTERWIDTH*scale, Constants.CHARACTERHEIGHT*scale);
+		hitboxRect = new Rectangle(0, 0, Variables.CHARACTERWIDTH*scale, Variables.CHARACTERHEIGHT*scale);
 		hitboxGrap = new Graphics();
 		hitboxGrap.setColor(new Color(0.0f, 1.0f, 0.0f, 0.5f));
 	}
@@ -287,11 +291,13 @@ class LevelState extends State {
 	 * Draw bullets on the screen.
 	 */
 	private void drawBullets() {
-		for (Bullet bullet : level.getAlliedBulletList())
+		for (Bullet bullet : level.getAlliedBulletList()){
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
+		}
 		
 		for (Bullet bullet : level.getEnemyBulletList())
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
+		
 	}
 	
 	/**
@@ -483,7 +489,7 @@ class LevelState extends State {
 		// Camera in Y-axis
 		int centerY = screenHeight/2 - (int)level.getCharacter().getHeight()*scale/2;
 		float posY = (float)level.getCharacter().getY()*scale;
-		int levelHeight = level.getTileGrid().getHeight()*Constants.TILESIZE*scale;
+		int levelHeight = level.getTileGrid().getHeight()*Variables.TILESIZE*scale;
 		
 		// If the Character is in the upper part of the screen
 		if (posY < centerY) {
@@ -504,7 +510,7 @@ class LevelState extends State {
 		// Camera in X-axis
 		int centerX = screenWidth/2 - (int)level.getCharacter().getWidth()*scale/2;
 		float posX = (float)level.getCharacter().getX()*scale;
-		int levelWidth = level.getTileGrid().getWidth()*Constants.TILESIZE*scale;
+		int levelWidth = level.getTileGrid().getWidth()*Variables.TILESIZE*scale;
 		
 		// If the Character is in the left part of the screen
 		if (posX < centerX) {

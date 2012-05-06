@@ -1,10 +1,10 @@
 package rsmg.model.tile;
 
-import rsmg.model.Constants;
+import rsmg.model.Variables;
 
 public abstract class Tile {
 
-	private final int size = Constants.TILESIZE;
+	private final int size = Variables.TILESIZE;
 	
 	private String name;
 

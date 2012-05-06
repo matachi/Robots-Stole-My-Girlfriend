@@ -7,7 +7,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 
 import rsmg.io.Levels;
-import rsmg.model.Constants;
+import rsmg.model.Variables;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
@@ -116,7 +116,7 @@ public final class LevelFactory {
 				}
 				grid[y][x] = tile;
 				
-				int scale = Constants.TILESIZE; // Used to place items and enemies on appropriate positions.
+				int scale = Variables.TILESIZE; // Used to place items and enemies on appropriate positions.
 				// Retrieve eventual item
 				String itemValue = cell.getAttributeValue("item");
 				if (itemValue != null) {

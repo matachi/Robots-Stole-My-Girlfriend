@@ -1,6 +1,6 @@
 package rsmg.model.object.unit;
 
-import rsmg.model.Constants;
+import rsmg.model.Variables;
 import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
@@ -46,7 +46,7 @@ public abstract class Enemy extends LivingObject{
 	public abstract int getTouchDamage();
 	
 	public void updateVulnerability() {
-		if(lastAttackedTime + Constants.EXPLOSION_TICK < System.currentTimeMillis()){
+		if(lastAttackedTime + Variables.EXPLOSION_TICK < System.currentTimeMillis()){
 			vulnerableToExplosions = true;
 		}
 	}
@@ -62,7 +62,7 @@ public abstract class Enemy extends LivingObject{
 	 * @return
 	 */
 	public boolean recentlytookDamage() {
-		return (lastAttackedTime + Constants.ENEMY_FLASHDURATION > System.currentTimeMillis());
+		return (lastAttackedTime + Variables.ENEMY_FLASHDURATION > System.currentTimeMillis());
 	}
 	/**
 	 * returns true if this enemy is flying

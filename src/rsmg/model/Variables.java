@@ -4,18 +4,23 @@ package rsmg.model;
  * @author Johan Grönvall
  *
  */
-public enum Constants{
+public enum Variables{
 	;
 	public static final int CHARACTERWIDTH = 20;
 	public static final int CHARACTERHEIGHT = 23;
 	public static final int CHARACTERHEALTH = 100;
 	public static final int JUMPSTRENGTH = 265;
-	public static final int CHARACTERSPEED = 100;
+	
+	/**
+	 * The Characters runningSpeed, this variable is private to make it mutable within this class
+	 */
+	private static int charSpeed = 100;
+	private static final int UPGRADEDCHARSPEED = 130;
 	
 	/**
 	 * The velocity that the character gets after a jump when the player
 	 * releases the jump key. The velocity won't be changed if the character
-	 * alreadt has a lower speed upwards or is falling downwards.
+	 * already has a lower speed upwards or is falling downwards.
 	 */
 	public static final int RELEASED_JUMP_VELOCITY = -60;
 	public static final int TILESIZE = 32;
@@ -24,7 +29,15 @@ public enum Constants{
 	public static final int DASHLENGTH = 60;
 	public static final int DASHCOOLDOWN = 400;
 	public static final int EXPLOSIONDMG = 1;
-	public static final int EXPLOSIONAOE = 30;
+	
+	/**
+	 * the hitbox for explosions fired from the RPG, this variable is private to make it mutable within the class
+	 */
+	private static int explosionAOE = 30;
+	private static final int UPGRADEDEXPLOSIONAOE = 45;
+	
+	private static int shotgunSpread = 200;
+	private static final int UPGRADEDSHOTGUNSPREAD = 300;
 	/**
 	 * the amount of time an enemy should be flashing after he is hit in milliseconds
 	 */
@@ -42,4 +55,29 @@ public enum Constants{
 	 * in milliseconds
 	 */
 	public static final int CHARACTER_IMMORTALITY_TIME = 800;
+	
+
+	
+	public static void upgradeSpeed() {
+		charSpeed = UPGRADEDCHARSPEED;
+	}
+	
+	public static void upgradeExplosionAOE() {
+		explosionAOE = UPGRADEDEXPLOSIONAOE;
+	}
+	public static void upgradeShotgunSpead() {
+		shotgunSpread = UPGRADEDSHOTGUNSPREAD; 
+	}
+	
+	public static int getCharSpeed() {
+		return charSpeed;
+	}
+	
+	public static int getExplosionAOE() {
+		return explosionAOE;
+	}
+	
+	public static int getShotgunSpread() {
+		return shotgunSpread;
+	}
 }

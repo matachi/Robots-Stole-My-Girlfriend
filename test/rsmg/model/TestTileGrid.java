@@ -47,8 +47,8 @@ public class TestTileGrid {
 	@Test
 	public void testGetSpawnPoint() throws Exception {
 		Point p = grid.getSpawnPoint();
-		Point point = new Point((int)p.getX()/Constants.TILESIZE,
-								(int)p.getY()/Constants.TILESIZE);
+		Point point = new Point((int)p.getX()/Variables.TILESIZE,
+								(int)p.getY()/Variables.TILESIZE);
 		assertTrue(point.getX() == 0);
 		assertTrue(point.getY() == 1);
 	}
@@ -68,33 +68,33 @@ public class TestTileGrid {
 	@Test
 	public void testLeftSideIntersection() {
 		int charX = 50;
-		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT-1;
+		int notYIntersect = Variables.TILESIZE*2-Variables.CHARACTERHEIGHT-1;
 		PCharacter character = new PCharacter(charX, notYIntersect, null);
         assertTrue(grid.leftSideIntersection(character) == 0);
         
         int yIntersect = notYIntersect+1;
         character.setY(yIntersect);
-        int leftIntersect = Constants.TILESIZE*2-charX;
+        int leftIntersect = Variables.TILESIZE*2-charX;
         assertTrue(grid.leftSideIntersection(character) == leftIntersect);
 	}
 	
 	@Test
 	public void testRightSideIntersection() {
 		int charX = 35;
-		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT-1;
+		int notYIntersect = Variables.TILESIZE*2-Variables.CHARACTERHEIGHT-1;
 		PCharacter character = new PCharacter(charX, notYIntersect, null);
 		assertTrue(grid.rightSideIntersection(character) == 0);
         
         int yIntersect = notYIntersect+1;
         character.setY(yIntersect);
-        double rightIntersect = charX + Constants.CHARACTERWIDTH - Constants.TILESIZE - 0.00001;
+        double rightIntersect = charX + Variables.CHARACTERWIDTH - Variables.TILESIZE - 0.00001;
         assertTrue((int)grid.rightSideIntersection(character) == (int)rightIntersect);
 	}
 	
 	@Test
 	public void testBottomSideIntersection() {
 		int charX = 35;
-		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT-1;
+		int notYIntersect = Variables.TILESIZE*2-Variables.CHARACTERHEIGHT-1;
 		PCharacter character = new PCharacter(charX, notYIntersect, null);
 		assertTrue(grid.bottomSideIntersection(character) == 0);
         
