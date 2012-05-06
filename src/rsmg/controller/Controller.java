@@ -24,6 +24,8 @@ class Controller extends StateBasedGame {
 	
 	static final int UPGRADES_STATE = 5;
 	
+	static final int CREDITS_STATE = 6;
+	
 	private static LevelState levelState = new LevelState(LEVEL_STATE);
 	
 	/**
@@ -44,8 +46,7 @@ class Controller extends StateBasedGame {
 		this.addState(new OptionsState(OPTIONS_STATE));
 		this.addState(new PauseMenuState(PAUSE_MENU_STATE));
 		this.addState(new UpgradesState(UPGRADES_STATE));
-//		this.getState(MAINMENU_STATE).init(container, this);
-//		this.getState(LEVEL1_STATE).init(container, this);
+		this.addState(new CreditsState(CREDITS_STATE));
 	}
 	
 

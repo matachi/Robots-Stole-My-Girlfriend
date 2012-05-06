@@ -405,7 +405,7 @@ class LevelState extends State {
 				int nextLevel = levelNumbers.get(levelNumbers.indexOf(levelNumber)+1);
 				Controller.initLevel(nextLevel);
 			} catch (IndexOutOfBoundsException e) {
-				sbg.enterState(Controller.LEVEL_SELECTION_STATE);
+				sbg.enterState(Controller.CREDITS_STATE);
 			}
 		} else if (level.hasLost()) {
 			Controller.initLevel(levelNumber);
