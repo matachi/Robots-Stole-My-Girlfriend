@@ -1,5 +1,7 @@
 package rsmg.model.object.unit.weapon;
 
+import rsmg.util.Vector2d;
+
 public interface IWeapon {
 	/**
 	 * Method in which this weapon creates a bullet
@@ -20,16 +22,9 @@ public interface IWeapon {
 	 * @return If the weapon has been fired.
 	 */
 	public boolean shot();
-///**
-// * likely not going to be implemented
-// * @return
-// */
-//public int getClipSize();
-///**
-// * 
-// * @return
-// */
-//public long getReloadTime();
+
+	public Vector2d getKnockback(boolean isFacingRight);
+	
 	/**
 	 * retrns the name of this gun
 	 * @return name of the gun as a String
