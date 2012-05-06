@@ -431,7 +431,7 @@ class LevelState extends State {
 			modelCharacter.moveLeft();
 		
 		// right arrow key
-		if (input.isKeyDown(Input.KEY_RIGHT))
+		else if (input.isKeyDown(Input.KEY_RIGHT))
 			modelCharacter.moveRight();
 
 		// up arrow key

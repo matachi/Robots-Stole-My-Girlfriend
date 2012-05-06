@@ -229,7 +229,8 @@ public class PCharacter extends LivingObject {
 	 * Changes the character's velocity, moving him westwards in next loop.
 	 */
 	public void moveLeft() {
-		this.setVelocityX(-Variables.getCharSpeed());
+		if (this.getVelocityX()*(-1) < Variables.getCharSpeed() || this.isFacingRight())
+			this.setVelocityX(-Variables.getCharSpeed());
 	}
 	/**
 	 * returns true if the character has double jumps to use
@@ -244,7 +245,8 @@ public class PCharacter extends LivingObject {
 	 * Changes the character's velocity, moving him eastwards in next loop.
 	 */
 	public void moveRight() {
-		this.setVelocityX(Variables.getCharSpeed());
+		if (this.getVelocityX() < Variables.getCharSpeed() || !this.isFacingRight())
+			this.setVelocityX(Variables.getCharSpeed());
 	}
 
 	/**
@@ -319,6 +321,26 @@ public class PCharacter extends LivingObject {
 		return upgradePoints;
 	}
 	
+	public void applyFriction(double delta) {
+		double friction;
+		if(airborne){
+			friction = 200;
+		} else {
+			friction = 500;
+		}
+		
+		if (isFacingRight()) {
+			this.setVelocityX(this.getVelocityX()-delta*friction);
+			if(getVelocityX() < 0) {
+				setVelocityX(0);
+			}
+		}else {
+			this.setVelocityX(this.getVelocityX()+delta*friction);
+			if(getVelocityX() > 0) {
+				setVelocityX(0);
+			}
+		}
+	}
 	/**
 	 * returns true if the character should no longer be taking damage
 	 * @return true if the character should no longer be taking damage
