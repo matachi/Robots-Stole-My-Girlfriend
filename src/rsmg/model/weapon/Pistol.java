@@ -43,7 +43,10 @@ public class Pistol implements IWeapon{
 	}
 
 	@Override
-	public long getCooldown() {
+	public long getCooldown(boolean rapidFire) {
+		if(rapidFire) {
+			return 250;
+		}
 		return 300;
 	}
 	

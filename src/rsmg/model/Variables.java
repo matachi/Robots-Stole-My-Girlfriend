@@ -38,6 +38,7 @@ public enum Variables{
 	
 	private static int shotgunSpread = 200;
 	private static final int UPGRADEDSHOTGUNSPREAD = 300;
+	
 	/**
 	 * the amount of time an enemy should be flashing after he is hit in milliseconds
 	 */
@@ -80,4 +81,5 @@ public enum Variables{
 	public static int getShotgunSpread() {
 		return shotgunSpread;
 	}
+	
 }

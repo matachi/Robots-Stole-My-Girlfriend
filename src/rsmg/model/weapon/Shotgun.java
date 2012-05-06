@@ -52,7 +52,10 @@ public class Shotgun implements IWeapon{
 	}
 
 	@Override
-	public long getCooldown() {
+	public long getCooldown(boolean rapidFire) {
+		if(rapidFire) {
+			return 450;
+		}
 		return 500;
 	}
 	

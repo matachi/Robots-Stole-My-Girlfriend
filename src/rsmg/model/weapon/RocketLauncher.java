@@ -49,7 +49,10 @@ public class RocketLauncher implements IWeapon{
 	}
 
 	@Override
-	public long getCooldown() {
+	public long getCooldown(boolean rapidFire) {
+		if(rapidFire) {
+			return 700;
+		}
 		return 800;
 	}
 	

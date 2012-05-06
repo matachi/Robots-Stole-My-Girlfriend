@@ -226,7 +226,7 @@ public class PCharacter extends LivingObject {
 	 * Make the character attack (i.e. shoot with his gun.
 	 */
 	public void attack() {
-		if (lastAttacktime + currentWeapon.getCooldown() < System.currentTimeMillis()) {
+		if (lastAttacktime + currentWeapon.getCooldown(CharacterProgress.isRapidFireUnlocked()) < System.currentTimeMillis()) {
 			currentWeapon.shoot(this.getX(), this.getY(), this.isFacingRight());
 			lastAttacktime = System.currentTimeMillis(); 
 		}
