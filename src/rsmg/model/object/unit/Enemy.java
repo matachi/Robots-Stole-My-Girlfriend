@@ -4,6 +4,7 @@ import rsmg.model.Variables;
 import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
+import rsmg.model.object.bullet.Explosion;
 /**
  * Class representing hostile LivingObjects
  * @author zapray
@@ -33,13 +34,19 @@ public abstract class Enemy extends LivingObject{
 		// the enemy isn't invulnerable to explosions
 		
 		if (obj instanceof Bullet) {
-			if(obj.getName() == ObjectName.EXPLOSION && !vulnerableToExplosions) {
+			if(((Bullet)obj) instanceof Explosion && !vulnerableToExplosions) {
 				//do nothing
 			}else {
 				lastAttackedTime = System.currentTimeMillis();
 				vulnerableToExplosions = false;
 				this.damage(((Bullet)obj).getDamage());
-				
+			}
+		}
+		if (obj instanceof PCharacter) {
+			if(((PCharacter) obj).isDashing() && vulnerableToExplosions){
+				this.damage(Variables.DASHDAMAGE);
+				lastAttackedTime = System.currentTimeMillis();
+				vulnerableToExplosions = false;
 			}
 		}
 	}

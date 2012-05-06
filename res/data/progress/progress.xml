@@ -6,9 +6,9 @@
     <rpg>true</rpg>
     <shotgun>false</shotgun>
   </unlockedWeapons>
-  <upgradePoints>-2</upgradePoints>
+  <upgradePoints>-3</upgradePoints>
   <unlockedUpgrades>
-    <dash>false</dash>
+    <dash>true</dash>
     <doubleJump>true</doubleJump>
     <rapidFire>false</rapidFire>
     <incRunningSpeed>true</incRunningSpeed>

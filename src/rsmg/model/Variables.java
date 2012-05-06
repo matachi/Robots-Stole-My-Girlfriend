@@ -26,8 +26,9 @@ public enum Variables{
 	public static final int TILESIZE = 32;
 	public static final int GRAVITYSTRENGTH = 400;
 	public static final int DASHSPEED = 300;
-	public static final int DASHLENGTH = 60;
-	public static final int DASHCOOLDOWN = 400;
+	public static final int DASHLENGTH = 100;
+	public static final int DASHCOOLDOWN = 600;
+	public static final int DASHDAMAGE = 1;
 	public static final int EXPLOSIONDMG = 1;
 	
 	/**

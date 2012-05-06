@@ -57,6 +57,11 @@ public class PCharacter extends LivingObject {
 	private long lastAttackedTime = 0;
 	
 	/**
+	 * Keeps track of when the character last Dashed
+	 */
+	private long lastDashed = 0;
+	
+	/**
 	 * If the character can use the dash move.
 	 */
 	private boolean canDash;
@@ -70,6 +75,8 @@ public class PCharacter extends LivingObject {
 	 * If the character is dashing.
 	 */
 	private boolean isDashing = false;
+	
+	
 	
 	/**
 	 *  upgradePoints the user can spend after each level
@@ -100,9 +107,14 @@ public class PCharacter extends LivingObject {
 	@Override
 	public void collide(InteractiveObject obj) {
 		if (obj instanceof Enemy) {
-			this.getHit(((Enemy) obj).getTouchDamage());
+			if(!isDashing()){
+				this.getHit(((Enemy) obj).getTouchDamage());
+			}
 		}
 		if (obj instanceof Bullet) {
+			if(isDashing){
+				isDashing = false;
+			}
 			this.getHit(((Bullet)obj).getDamage());
 		}
 		if (obj instanceof Item) {
@@ -146,7 +158,7 @@ public class PCharacter extends LivingObject {
 	@Override
 	public void move(double delta) {
 		if (isDashing)
-			dash(delta);
+			performDash(delta);
 		
 		super.move(delta);
 	}
@@ -257,26 +269,31 @@ public class PCharacter extends LivingObject {
 	 * Dash with the character.
 	 */
 	public void dash() {
-		if (canDash)
+		if (canDash && !(recentlyDashed()))
 			isDashing = true;
 	}
 
 	/**
 	 * Make the character perform the "dash" move.
 	 */
-	private void dash(double delta) {
+	private void performDash(double delta) {
 		distanceDashed += Variables.DASHSPEED * delta;
-
 		if (this.isFacingRight())
 			this.setVelocityX(Variables.DASHSPEED);
 		else
 			this.setVelocityX(-Variables.DASHSPEED);
-		
+	
 		if (distanceDashed > Variables.DASHLENGTH) {
 			isDashing = false;
 			distanceDashed = 0;
 		}
+		lastDashed = System.currentTimeMillis();
 	}
+	
+	private boolean recentlyDashed() {
+		return lastDashed + Variables.DASHCOOLDOWN > System.currentTimeMillis();
+	}
+
 	/**
 	 * method called when the character is hit by an enemy
 	 */
