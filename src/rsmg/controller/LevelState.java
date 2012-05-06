@@ -24,13 +24,13 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import rsmg.io.CharacterProgress;
 import rsmg.io.Levels;
 import rsmg.levelfactory.LevelFactory;
-import rsmg.model.Variables;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
+import rsmg.model.variables.Variables;
 
 /**
  * The state where the levels are played out.

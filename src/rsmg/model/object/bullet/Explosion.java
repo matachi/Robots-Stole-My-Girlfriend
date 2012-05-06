@@ -1,9 +1,9 @@
 package rsmg.model.object.bullet;
 
 import rsmg.io.CharacterProgress;
-import rsmg.model.Variables;
 import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
+import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
 
 public class Explosion extends Bullet {

@@ -7,7 +7,6 @@ import org.jdom.Document;
 import org.jdom.Element;
 
 import rsmg.io.Levels;
-import rsmg.model.Variables;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
@@ -34,6 +33,7 @@ import rsmg.model.tile.EndTile;
 import rsmg.model.tile.GroundTile;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
+import rsmg.model.variables.Variables;
 
 /**
  * This class is responsible for creating the levels. It asks the class Levels i

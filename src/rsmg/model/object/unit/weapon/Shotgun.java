@@ -1,4 +1,4 @@
-package rsmg.model.weapon;
+package rsmg.model.object.unit.weapon;
 
 import java.util.Collection;
 import java.util.Random;
@@ -8,8 +8,6 @@ import rsmg.model.object.bullet.Bullet;
 import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
 
-
-	
 public class Shotgun implements IWeapon{
 	private Collection<Bullet> bulletList;
 	private boolean shot;
@@ -20,7 +18,6 @@ public class Shotgun implements IWeapon{
 	private int offsetX;
 	private int offsetY = 5;
 	private static int amountOfBulletsPerShot = 6;
-	private static int shotgunKnockback = 50;
 	//private static int spread = 200;
 	
 	public Shotgun(Collection<Bullet> bulletList) {
@@ -67,14 +64,6 @@ public class Shotgun implements IWeapon{
 			return true;
 		}
 		return false;
-	}
-	@Override
-	public Vector2d getKnockback(boolean isFacingRight) {
-		int knockback = shotgunKnockback;
-		if(isFacingRight) {
-			knockback*=-1;
-		}
-		return new Vector2d(knockback, 0);
 	}
 	
 	@Override

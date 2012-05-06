@@ -6,6 +6,7 @@ import rsmg.model.object.InteractiveObject;
 import rsmg.model.tile.EndTile;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
+import rsmg.model.variables.Variables;
 
 /**
  * Contains information about the Tile[][]

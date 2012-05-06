@@ -15,6 +15,7 @@ import rsmg.model.object.bullet.Explosion;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
+import rsmg.model.variables.Variables;
 
 /**
  * Class representing a level. This Class is in charge of storing and updating
