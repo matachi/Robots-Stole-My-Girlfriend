@@ -27,6 +27,7 @@ public enum ObjectName {
 	public static final String BUCKETBOT = "bucketbot";
 	public static final String SPIKES = "spikes";
 	public static final String MINIBALLBOT = "miniBallBot";
+	public static final String BOSSBOT = "bossBot";
 	
 
 	/**
@@ -48,6 +49,7 @@ public enum ObjectName {
 	public static final String ROCKETL = "rocketL";
 	public static final String SHOTGUN_BULLET = "shotgunBullet";
 	public static final String STONE = "stone";
+	public static final String LASERBOLT = "laserbolt";
 
 	/**
 	 * The tiles' names.
