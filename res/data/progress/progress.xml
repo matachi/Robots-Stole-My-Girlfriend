@@ -4,7 +4,7 @@
   <unlockedWeapons>
     <pistol>true</pistol>
     <rpg>true</rpg>
-    <shotgun>false</shotgun>
+    <shotgun>true</shotgun>
   </unlockedWeapons>
   <upgradePoints>-3</upgradePoints>
   <unlockedUpgrades>

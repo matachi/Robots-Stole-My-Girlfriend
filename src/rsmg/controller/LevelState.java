@@ -104,6 +104,9 @@ class LevelState extends State {
 	private Rectangle hitboxRect;
 	private Graphics hitboxGrap;
 	
+	private boolean rightKeyDown = false;
+	private boolean leftKeyDown = false;
+	
 	/**
 	 * Construct the level.
 	 * @param stateID The ID to the state.
@@ -427,13 +430,20 @@ class LevelState extends State {
 		PCharacter modelCharacter = level.getCharacter();
 		
 		// left arrow key
-		if (input.isKeyDown(Input.KEY_LEFT))
+		if (input.isKeyDown(Input.KEY_LEFT)) {
+			rightKeyDown = true;
 			modelCharacter.moveLeft();
+			modelCharacter.setFacing(false);
+		
+		}
 		
 		// right arrow key
-		else if (input.isKeyDown(Input.KEY_RIGHT))
+		if (input.isKeyDown(Input.KEY_RIGHT)) {
+			rightKeyDown = true;
 			modelCharacter.moveRight();
-
+			modelCharacter.setFacing(true);
+		}
+		
 		// up arrow key
 		if (input.isKeyDown(Input.KEY_UP)) {
 			if (!upKeyIsDown)
@@ -705,20 +715,23 @@ class LevelState extends State {
 				else
 					key = jumpLKey;
 			
-			} else if (level.getCharacter().isStandingStill()) { // Char is standing still
-		
-				if (level.getCharacter().isFacingRight())
-					key = standRKey;
-				else
-					key = standLKey;
-
-			} else { // Char is running
+			} else if (rightKeyDown || leftKeyDown){ // Char is running
 		
 				if (level.getCharacter().isFacingRight())
 					key = runRKey;
 				else
 					key = runLKey;
+				
+			} else if (level.getCharacter().noDirection()) { // Char is standing still
+					
+					if (level.getCharacter().isFacingRight())
+						key = standRKey;
+					else
+						key = standLKey;
 			}
+			
+			rightKeyDown = false;
+			leftKeyDown = false;
 		}
 	}
 }

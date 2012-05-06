@@ -13,10 +13,11 @@ import rsmg.util.Vector2d;
 public class RocketLauncher implements IWeapon{
 	private Collection<Bullet> bulletList;
 	private boolean shot;
-	private static int bulletWidth = 14;
-	private static int bulletHeight = 14;
-	private static int bulletDamage = 3;
-	private static int bulletSpeed = 400;
+	private static final int bulletWidth = 14;
+	private static final int bulletHeight = 14;
+	private static final int bulletDamage = 3;
+	private static final int bulletSpeed = 400;
+	private static final int rpgKnockback = 200;
 
 	public RocketLauncher(Collection<Bullet> bulletList) {
 		this.bulletList = bulletList;
@@ -65,13 +66,15 @@ public class RocketLauncher implements IWeapon{
 		}
 		return false;
 	}
+	@Override
+	public Vector2d getKnockback(boolean isFacingRight) {
+		int knockback = rpgKnockback;
+		if(isFacingRight) {
+			knockback*=-1;
+		}
+		return new Vector2d(knockback, 0);
+	}
 	
-//	@Override
-//	public long getReloadTime() {
-//		
-//		return 1000;
-//	}
-//	
 	@Override
 	public String getName() {
 		return ObjectName.ROCKET_LAUNCHER;

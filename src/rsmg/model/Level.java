@@ -155,7 +155,9 @@ public class Level {
 	 */
 	private void updateCharacter(double delta) {
 		
-		
+		character.accelerate(delta);
+		character.setDirections(false);
+
 		enemyBulletCollision();
 		// Update whether the character is in the air or standing on the ground.
 		character.setAirborne(isAirbourne(character));
@@ -172,13 +174,17 @@ public class Level {
 		checkDeath();
 		
 		// update what direction the character is facing towards
-		character.updateFacing();
+		//character.updateFacing();
+
+		
 		// Check so the character isn't inside a solid tile, and if so, move
 		// him outside it.
 		applyNormalForce(character);
 		//character.setVelocityX(0);
 		character.applyFriction(delta);
 		character.updateImmortality();
+
+
 		
 	}
 

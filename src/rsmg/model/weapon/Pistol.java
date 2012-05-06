@@ -60,6 +60,11 @@ public class Pistol implements IWeapon{
 	}
 	
 	@Override
+	public Vector2d getKnockback(boolean isFacingRight) {
+		return new Vector2d(0,0);
+	}
+	
+	@Override
 	public String getName() {
 		return ObjectName.PISTOL;
 	}

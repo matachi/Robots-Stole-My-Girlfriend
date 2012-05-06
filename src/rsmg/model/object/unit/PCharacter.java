@@ -86,6 +86,14 @@ public class PCharacter extends LivingObject {
 	 * how many times the character can jump while in the air
 	 */
 	private int doubleJumps = 1;
+	/**
+	 * boolean value describing if the character is trying to run East or not
+	 */
+	private boolean directionEast = false;
+	/**
+	 * boolean value describing if the character is trying to run west or not
+	 */
+	private boolean directionWest = false;
 	
 	/**
 	 * Create a character that the player controls.
@@ -139,11 +147,22 @@ public class PCharacter extends LivingObject {
 		}
 	}
 	
-	public void updateImmortality(){
+	public void updateImmortality() {
 		
 		if(lastAttackedTime + Variables.CHARACTER_IMMORTALITY_TIME < System.currentTimeMillis()){
 			immortal = false;
 			lastAttackedTime = 0;
+		}
+	}
+	/**
+	 * Method which accelerates up the character in his current direction
+	 * @param delta
+	 */
+	public void accelerate(double delta) {
+		if (directionEast) {
+			this.addVelocity(Variables.CHARACTER_ACCELERATION*delta, 0);
+		}else if(directionWest) {
+			this.addVelocity(-Variables.CHARACTER_ACCELERATION*delta, 0);
 		}
 	}
 	
@@ -229,8 +248,10 @@ public class PCharacter extends LivingObject {
 	 * Changes the character's velocity, moving him westwards in next loop.
 	 */
 	public void moveLeft() {
-		if (this.getVelocityX()*(-1) < Variables.getCharSpeed() || this.isFacingRight())
-			this.setVelocityX(-Variables.getCharSpeed());
+		if ((this.getVelocityX()*(-1) < Variables.getCharSpeed() || this.isFacingRight()))
+			directionWest = true;
+			
+			//this.setVelocityX(-Variables.getCharSpeed());
 	}
 	/**
 	 * returns true if the character has double jumps to use
@@ -245,8 +266,10 @@ public class PCharacter extends LivingObject {
 	 * Changes the character's velocity, moving him eastwards in next loop.
 	 */
 	public void moveRight() {
-		if (this.getVelocityX() < Variables.getCharSpeed() || !this.isFacingRight())
-			this.setVelocityX(Variables.getCharSpeed());
+		if ((this.getVelocityX() < Variables.getCharSpeed() || !this.isFacingRight()))
+			directionEast = true;
+			
+			//this.setVelocityX(Variables.getCharSpeed());
 	}
 
 	/**
@@ -263,6 +286,7 @@ public class PCharacter extends LivingObject {
 	public void attack() {
 		if (lastAttacktime + currentWeapon.getCooldown(CharacterProgress.isRapidFireUnlocked()) < System.currentTimeMillis()) {
 			currentWeapon.shoot(this.getX(), this.getY(), this.isFacingRight());
+			this.addVelocity(currentWeapon.getKnockback(isFacingRight()));
 			lastAttacktime = System.currentTimeMillis(); 
 		}
 	}
@@ -320,21 +344,38 @@ public class PCharacter extends LivingObject {
 	public int getUpgradePoints() {
 		return upgradePoints;
 	}
-	
+	@Override
+	public void updateFacing(){
+		if (directionWest){
+			setFacing(false);
+		}else if (directionEast){
+			setFacing(true);
+		}
+	}
+	@Override
+	public void setFacing(boolean isFacingRight){
+		if(!isDashing) {
+			super.setFacing(isFacingRight);
+		}
+	}
+	/**
+	 * applies friction to the character, consistently retarding his  
+	 * @param delta
+	 */
 	public void applyFriction(double delta) {
 		double friction;
 		if(airborne){
-			friction = 200;
+			friction = Variables.AIR_FRICTION;
 		} else {
-			friction = 500;
+			friction = Variables.GROUND_FRICTION;
 		}
 		
-		if (isFacingRight()) {
+		if (isMovingRight()) {
 			this.setVelocityX(this.getVelocityX()-delta*friction);
 			if(getVelocityX() < 0) {
 				setVelocityX(0);
 			}
-		}else {
+		}else { //if Moving Left
 			this.setVelocityX(this.getVelocityX()+delta*friction);
 			if(getVelocityX() > 0) {
 				setVelocityX(0);
@@ -351,6 +392,18 @@ public class PCharacter extends LivingObject {
 	
 	public void setMortality(boolean isImmortal){
 		this.immortal = isImmortal;
+	}
+
+	public void setDirections(boolean newDirection) {
+		directionEast = newDirection;
+		directionWest = newDirection;
+	}
+	/**
+	 * returns true if the character isn't trying to go anywhere
+	 * @return true if the character isn't trying to go anywhere
+	 */
+	public boolean noDirection() {
+		return !(directionEast && directionWest);
 	}
 	
 }
