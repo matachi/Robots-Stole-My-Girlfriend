@@ -9,13 +9,13 @@ public enum Variables{
 	public static final int CHARACTERWIDTH = 20;
 	public static final int CHARACTERHEIGHT = 23;
 	public static final int CHARACTERHEALTH = 100;
-	public static final int JUMPSTRENGTH = 265;
-	
+	public static final int JUMPSTRENGTH = 230;
+	public static final int DOUBLEJUMPSTRENGTH = 200;
 	/**
 	 * The Characters runningSpeed, this variable is private to make it mutable within this class
 	 */
-	private static int charSpeed = 100;
-	private static final int UPGRADEDCHARSPEED = 130;
+	private static int charSpeed = 70;
+	private static final int UPGRADEDCHARSPEED = 100;
 	
 	/**
 	 * The velocity that the character gets after a jump when the player
@@ -24,7 +24,7 @@ public enum Variables{
 	 */
 	public static final int RELEASED_JUMP_VELOCITY = -60;
 	public static final int TILESIZE = 32;
-	public static final int GRAVITYSTRENGTH = 320;
+	public static final int GRAVITYSTRENGTH = 400;
 	public static final int DASHSPEED = 300;
 	public static final int DASHLENGTH = 60;
 	public static final int DASHCOOLDOWN = 400;

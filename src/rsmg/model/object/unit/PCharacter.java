@@ -208,7 +208,7 @@ public class PCharacter extends LivingObject {
 			this.addVelocity(0, -Variables.JUMPSTRENGTH);
 			
 		} else if (doubleJumpAvailable()){
-			this.setVelocityY(-Variables.JUMPSTRENGTH);
+			this.setVelocityY(-Variables.DOUBLEJUMPSTRENGTH);
 			doubleJumps -= 1;
 		}
 	}
