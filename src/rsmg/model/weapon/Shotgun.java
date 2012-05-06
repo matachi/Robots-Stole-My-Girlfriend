@@ -70,6 +70,6 @@ public class Shotgun implements IWeapon{
 	
 	@Override
 	public String getName() {
-		return "shotgun";
+		return ObjectName.SHOTGUN;
 	}
 }

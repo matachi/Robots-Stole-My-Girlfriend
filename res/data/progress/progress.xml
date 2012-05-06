@@ -2,7 +2,7 @@
 <progress>
   <unlockedLevels>2</unlockedLevels>
   <unlockedWeapons>
-    <pistol>false</pistol>
+    <pistol>true</pistol>
     <rpg>true</rpg>
     <shotgun>false</shotgun>
   </unlockedWeapons>

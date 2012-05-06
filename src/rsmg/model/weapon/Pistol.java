@@ -61,6 +61,6 @@ public class Pistol implements IWeapon{
 	
 	@Override
 	public String getName() {
-		return "pistol";
+		return ObjectName.PISTOL;
 	}
 }

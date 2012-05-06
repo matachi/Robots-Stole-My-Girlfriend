@@ -249,7 +249,10 @@ public class CharacterProgress {
 
 	// weapons
 	public static boolean isPistolUnlocked() {
-		return variableIsTrue(PISTOL);
+		//return variableIsTrue(PISTOL);
+		return true;
+		//(since you start out with the pistol, this should always return true)
+		
 	}
 	
 	public static boolean isRPGUnlocked() {
