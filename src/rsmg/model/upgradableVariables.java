@@ -10,7 +10,7 @@ public enum upgradableVariables {
 	
 	public static int charSpeed = 100;
 	
-	public void upgradeSpeed() {
+	public static void upgradeSpeed() {
 		charSpeed = UPGRADEDCHARSPEED;
 	}
 }
