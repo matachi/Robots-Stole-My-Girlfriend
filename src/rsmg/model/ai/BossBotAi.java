@@ -7,11 +7,12 @@ import rsmg.util.Vector2d;
 public class BossBotAi implements Ai{
 	private BossBotHead enemy;
 	double cooldown;
-	private double angle = 0;
-	private static double angleIncr = Math.PI;
-	private static int bulletSpeed = 200;
+	private double angle = Math.PI/2.7;
+	private static final double angleIncr = Math.PI*2;
+	private static final int bulletSpeed = 200;
 	private Vector2d bulletVector = new Vector2d();
-	
+	private static final double offset = 0.1;
+			
 	public BossBotAi(BossBotHead enemy) {
 		this.enemy = enemy;
 	}
@@ -23,12 +24,14 @@ public class BossBotAi implements Ai{
 			bulletVector = new Vector2d();
 		} else {
 			if (shouldAttack(delta)) {
-				double tempAngle = Math.tan((playerY - enemy.getY())/(enemy.getX() - playerX));
-					if (tempAngle > angle) {
-						angle+=angleIncr*delta;
-					} else {
-						angle-=angleIncr*delta;
-					}
+				
+				double tempAngle = Math.atan((playerY - enemy.getY())/(enemy.getX() - playerX));
+				
+				if (tempAngle > angle+offset) {
+					angle+=angleIncr*delta;
+				} else {
+					angle-=angleIncr*delta;
+				}
 				bulletVector.setX(-bulletSpeed*Math.cos(angle));
 				bulletVector.setY(bulletSpeed*Math.sin(angle));
 				enemy.shoot(bulletVector, angle);
@@ -42,8 +45,8 @@ public class BossBotAi implements Ai{
 	
 	private boolean shouldAttack(double delta) {
 		cooldown += delta;
-		// Every 0.2 second it gets the chance to shoot.
-		if (cooldown > 0.15) {
+		// Every 0.25 second it gets the chance to shoot.
+		if (cooldown > 0.19) {
 			cooldown = 0;
 			return true;
 		}

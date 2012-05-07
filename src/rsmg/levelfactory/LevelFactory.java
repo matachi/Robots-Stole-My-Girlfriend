@@ -144,7 +144,7 @@ public final class LevelFactory {
 				}
 				// is level 6, spawn the boss
 				if(levelNumber == 6){
-					aiList.add(new BossBotAi(new BossBotHead(400, 18*Variables.TILESIZE-124, enemyBulletList)));
+					aiList.add(new BossBotAi(new BossBotHead(500, 19*Variables.TILESIZE-248, enemyBulletList)));
 				}
 				
 				// Retrieve Enemies and assign AI to them
