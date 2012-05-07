@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Random;
 
 import rsmg.model.ObjectName;
+import rsmg.model.Variables;
 import rsmg.model.object.bullet.Bullet;
-import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
 
 

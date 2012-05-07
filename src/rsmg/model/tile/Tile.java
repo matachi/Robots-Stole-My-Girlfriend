@@ -1,6 +1,6 @@
 package rsmg.model.tile;
 
-import rsmg.model.variables.Variables;
+import rsmg.model.Variables;
 
 public abstract class Tile {
 

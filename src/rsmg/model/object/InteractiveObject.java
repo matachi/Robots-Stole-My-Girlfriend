@@ -1,6 +1,6 @@
 package rsmg.model.object;
 
-import rsmg.model.variables.Variables;
+import rsmg.model.Variables;
 import rsmg.util.Vector2d;
 
 /**

@@ -5,11 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rsmg.io.CharacterProgress;
+import rsmg.model.Variables;
 import rsmg.model.ObjectName;
+import rsmg.model.upgradableVariables;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
-import rsmg.model.variables.Variables;
 import rsmg.model.weapon.IWeapon;
 import rsmg.model.weapon.Pistol;
 import rsmg.model.weapon.RocketLauncher;

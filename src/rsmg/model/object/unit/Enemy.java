@@ -1,9 +1,10 @@
 package rsmg.model.object.unit;
 
+import rsmg.model.Variables;
+import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.Explosion;
-import rsmg.model.variables.Variables;
 /**
  * Class representing hostile LivingObjects
  * @author zapray

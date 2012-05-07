@@ -1,4 +1,4 @@
-package rsmg.model.variables;
+package rsmg.model;
 /**
  * Singleton class for holding all global variables used throughout the application
  * @author Johan Grönvall
