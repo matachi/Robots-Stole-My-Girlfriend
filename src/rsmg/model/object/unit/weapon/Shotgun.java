@@ -58,8 +58,8 @@ public class Shotgun implements IWeapon{
 	}
 
 	@Override
-	public long getCooldown(boolean rapidFire) {
-		if(rapidFire) {
+	public long getCooldown() {
+		if(CharacterProgress.isRapidFireUnlocked()) {
 			return 450;
 		}
 		return 500;

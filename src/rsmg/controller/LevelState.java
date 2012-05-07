@@ -54,6 +54,13 @@ class LevelState extends State {
 	private Graphics healthBarOverlayGraphics;
 	
 	/**
+	 * The gun cooldown bar images.
+	 */
+	private Image weaponCooldownBar;
+	private Rectangle weaponCooldownBarOverlayRectangle;
+	private Graphics weaponCooldownBarOverlayGraphics;
+	
+	/**
 	 * Maps containing images.
 	 */
 	private Map<String, Renderable> tiles;
@@ -136,6 +143,11 @@ class LevelState extends State {
 		healthBarOverlayRectangle = new Rectangle(23, 23, 147, 17);
 		healthBarOverlayGraphics = new Graphics();
 		healthBarOverlayGraphics.setColor(new Color(0.85f, 0.3f, 0.3f, 0.5f));
+		
+		weaponCooldownBar = new Image(folderPath+"cooldownBar.png", false, filter);
+		weaponCooldownBarOverlayRectangle = new Rectangle(23, 53, 147, 17);
+		weaponCooldownBarOverlayGraphics = new Graphics();
+		weaponCooldownBarOverlayGraphics.setColor(new Color(0.85f, 0.85f, 0.85f, 0.5f));
 		
 		/**
 		 * Create the character image.
@@ -282,6 +294,7 @@ class LevelState extends State {
 		drawEnemies();
 		drawItems();
 		drawHealthBar();
+		drawWeaponCooldownBar();
 	}
 
 	/**
@@ -368,6 +381,14 @@ class LevelState extends State {
 		healthBar.draw(20, 20);
 		healthBarOverlayGraphics.fill(healthBarOverlayRectangle);
 	}
+
+	/**
+	 * Draw the cooldown bar for the weapon.
+	 */
+	private void drawWeaponCooldownBar() {
+		weaponCooldownBar.draw(20, 50);
+		weaponCooldownBarOverlayGraphics.fill(weaponCooldownBarOverlayRectangle);
+	}
 	
 	
 	/**
@@ -399,6 +420,11 @@ class LevelState extends State {
 		 * Update health bar's overlay size.
 		 */
 		healthBarOverlayRectangle.setWidth(147 * level.getCharacter().getHealth() / level.getCharacter().getMaxHealth());
+		
+		/**
+		 * Update weapon cooldown bar's overlay size.
+		 */
+		weaponCooldownBarOverlayRectangle.setWidth(147 * level.getCharacter().getWeaponLoadedPercentage());
 		
 		/**
 		 * Check if the player has won the level. If he has, init the next level

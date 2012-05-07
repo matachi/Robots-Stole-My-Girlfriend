@@ -192,12 +192,6 @@ public class PCharacter extends LivingObject {
 		return currentWeapon;
 	}
 	
-//	public void changeWeapon(String weaponName) {
-//		if (CharacterProgress.isUpgradeUnlocked(weaponName)){
-//			currentWeapon = weapons.get(weaponName);
-//		}
-//	}
-	
 	public void changeWeapon(String weaponName) {
 		if (ObjectName.ROCKET_LAUNCHER.equals(weaponName) &&
 				CharacterProgress.isRPGUnlocked()) {
@@ -286,7 +280,7 @@ public class PCharacter extends LivingObject {
 	 * Make the character attack (i.e. shoot with his gun.
 	 */
 	public void attack() {
-		if (lastAttacktime + currentWeapon.getCooldown(CharacterProgress.isRapidFireUnlocked()) < System.currentTimeMillis()) {
+		if (lastAttacktime + currentWeapon.getCooldown() < System.currentTimeMillis()) {
 			currentWeapon.shoot(this.getX(), this.getY(), this.isFacingRight());
 			this.addVelocity(currentWeapon.getKnockback(isFacingRight()));
 			lastAttacktime = System.currentTimeMillis(); 
@@ -410,5 +404,17 @@ public class PCharacter extends LivingObject {
 	
 	public double getDistanceDashed(){
 		return distanceDashed;
+	}
+	
+	/**
+	 * Returns how much the weapon has loaded.
+	 * @return 0.0 if it's just fired. Then it loads up to 1.0.
+	 */
+	public float getWeaponLoadedPercentage() {
+		float loaded = (System.currentTimeMillis() - lastAttacktime) / (float)currentWeapon.getCooldown();
+		if (loaded > 1)
+			return 1;
+		else
+			return loaded;
 	}
 }

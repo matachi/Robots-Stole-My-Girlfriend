@@ -2,6 +2,7 @@ package rsmg.model.object.unit.weapon;
 
 import java.util.Collection;
 
+import rsmg.io.CharacterProgress;
 import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
@@ -51,8 +52,8 @@ public class RocketLauncher implements IWeapon{
 	}
 
 	@Override
-	public long getCooldown(boolean rapidFire) {
-		if(rapidFire) {
+	public long getCooldown() {
+		if(CharacterProgress.isRapidFireUnlocked()) {
 			return 700;
 		}
 		return 800;

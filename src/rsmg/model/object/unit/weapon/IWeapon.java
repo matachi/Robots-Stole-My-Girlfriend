@@ -13,9 +13,8 @@ public interface IWeapon {
 	/**
 	 * returns the time interval of how often this weapon can be shot
 	 * @return the time interval of how often this weapon can be shot
-	 * @boolean rapidFireActivated if the character has unlocked rapidFireOrNot
 	 */
-	public long getCooldown(boolean rapidFireActivated);
+	public long getCooldown();
 	
 	/**
 	 * Returns true if the weapon has been fired and then resets it back to false.
