@@ -9,8 +9,6 @@ import rsmg.model.object.bullet.Bullet;
 import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
 
-
-	
 public class Shotgun implements IWeapon{
 	private Collection<Bullet> bulletList;
 	private boolean shot;

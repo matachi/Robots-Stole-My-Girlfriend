@@ -244,11 +244,18 @@ public class PCharacter extends LivingObject {
 	 * Changes the character's velocity, moving him westwards in next loop.
 	 */
 	public void moveLeft() {
-		if ((this.getVelocityX()*(-1) < maxRunningSpeed || this.isFacingRight()))
+		if (this.getVelocityX()*(-1) < maxRunningSpeed || this.isFacingRight())
 			directionWest = true;
-			
-			//this.setVelocityX(-Variables.getCharSpeed());
 	}
+
+	/**
+	 * Changes the character's velocity, moving him eastwards in next loop.
+	 */
+	public void moveRight() {
+		if (this.getVelocityX() < maxRunningSpeed || !this.isFacingRight())
+			directionEast = true;
+	}
+	
 	/**
 	 * returns true if the character has double jumps to use
 	 * @return
@@ -256,16 +263,6 @@ public class PCharacter extends LivingObject {
 	public boolean doubleJumpAvailable() {
 		return doubleJumps > 0 && CharacterProgress.isDoubleJumpUnlocked();
 		
-	}
-
-	/**
-	 * Changes the character's velocity, moving him eastwards in next loop.
-	 */
-	public void moveRight() {
-		if ((this.getVelocityX() < maxRunningSpeed || !this.isFacingRight()))
-			directionEast = true;
-			
-			//this.setVelocityX(Variables.getCharSpeed());
 	}
 
 	/**
