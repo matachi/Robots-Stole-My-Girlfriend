@@ -405,4 +405,7 @@ public class PCharacter extends LivingObject {
 		return !(directionEast && directionWest);
 	}
 	
+	public double getDistanceDashed(){
+		return distanceDashed;
+	}
 }

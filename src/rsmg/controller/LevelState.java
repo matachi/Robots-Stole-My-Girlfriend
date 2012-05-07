@@ -30,6 +30,7 @@ import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
+import rsmg.model.object.unit.weapon.IWeapon;
 import rsmg.model.variables.Variables;
 
 /**
@@ -379,6 +380,11 @@ class LevelState extends State {
 		handleKeyboardEvents(gc.getInput(), sbg);
 		
 		/**
+		 * Play sounds: gun shots, dash.... 
+		 */
+		playSounds();
+		
+		/**
 		 * Update the model and give it the time that has passed since last
 		 * update as seconds.
 		 */
@@ -413,12 +419,6 @@ class LevelState extends State {
 		} else if (level.hasLost()) {
 			Controller.initLevel(levelNumber);
 		}
-		
-		/**
-		 * Play a sound if the character has fired his weapon.
-		 */
-		if (level.getCharacter().getWeapon().shot())
-			new Sound("res/sounds/shot.wav").play();
 	}
 	
 	/**
@@ -733,5 +733,31 @@ class LevelState extends State {
 			rightKeyDown = false;
 			leftKeyDown = false;
 		}
+	}
+	
+	/**
+	 * Plays sounds in the game
+	 * @throws SlickException
+	 */
+	private void playSounds() throws SlickException {
+		PCharacter character = level.getCharacter();
+		
+		/**
+		 * Play sound if the character is dashing
+		 */
+		if(character.isDashing() && character.getDistanceDashed() == 0)
+			new Sound("res/sounds/dash.wav").play();
+		
+		/**
+		 * Play a sound if the character has fired his weapon.
+		 */
+		IWeapon weapon = character.getWeapon();
+		boolean isShooting = weapon.shot();
+		if (isShooting && weapon.getName().equals(ObjectName.PISTOL))
+			new Sound("res/sounds/pistol.wav").play();
+		else if(isShooting && weapon.getName().equals(ObjectName.SHOTGUN))
+			new Sound("res/sounds/shotgun.wav").play();
+		else if(isShooting && weapon.getName().equals(ObjectName.ROCKET_LAUNCHER))
+			new Sound("res/sounds/rocketLauncher.wav").play();
 	}
 }
