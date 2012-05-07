@@ -7,12 +7,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import rsmg.io.CharacterProgress;
 import rsmg.model.ai.Ai;
 import rsmg.model.object.InteractiveObject;
-import rsmg.model.object.bullet.BigExplosion;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.Explosion;
+import rsmg.model.object.bullet.ExplosionFactory;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
@@ -234,9 +233,9 @@ public class Level {
 					// this shouldn't be levels responsibility, but I do not
 					// know where to put it otherwise
 
-					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL){
-						newBullets.add(new Explosion(bullet));
-					}
+					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL)
+						newBullets.add(ExplosionFactory.getExplosion(bullet));
+					
 					if(!(bullet instanceof Explosion)){
 						expiredBullets.add(bullet);
 					}
@@ -255,17 +254,13 @@ public class Level {
 	private void updateBullets(double delta, List<Bullet> bulletList) {
 		for (int i = 0; i < bulletList.size(); i++) {
 			Bullet bullet = bulletList.get(i);
-			bullet.move(delta);
 			bullet.update(delta);
+			bullet.move(delta);
 			
 			if (tileGrid.intersectsWith(bullet)) {
 				
-				if (bullet.getName() == ObjectName.ROCKETR  || bullet.getName() == ObjectName.ROCKETL) {
-					if (CharacterProgress.isIncRPGAoEUnlocked())
-						bulletList.add(new BigExplosion(bullet));
-					else
-						bulletList.add(new Explosion(bullet));
-				}
+				if (bullet.getName() == ObjectName.ROCKETR  || bullet.getName() == ObjectName.ROCKETL)
+					bulletList.add(ExplosionFactory.getExplosion(bullet));
 				
 				//if the bullet is an explosion, do not remove it unless its past its duration
 				//otherwise, remove the bullet

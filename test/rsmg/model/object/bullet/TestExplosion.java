@@ -26,7 +26,7 @@ public class TestExplosion {
 
 	@Before
 	public void before() {
-		explosion = new Explosion(10, 10);
+		explosion = new SmallExplosion(10, 10);
 	}
 
 	@After

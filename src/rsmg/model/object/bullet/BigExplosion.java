@@ -5,7 +5,7 @@ import rsmg.model.object.InteractiveObject;
 import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
 
-public class BigExplosion extends Bullet {
+class BigExplosion extends Bullet implements Explosion {
 	private double age;
 	
 	public BigExplosion(double x, double y) {
@@ -13,7 +13,7 @@ public class BigExplosion extends Bullet {
 		age = 0;
 	}
 	/**
-	 * create an explosion at the approriate location
+	 * Create an explosion at the appropriate location.
 	 * @param detonator object which creates the explosion
 	 */
 	public BigExplosion(InteractiveObject detonator){
