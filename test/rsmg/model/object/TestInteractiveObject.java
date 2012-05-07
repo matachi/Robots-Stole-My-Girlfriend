@@ -8,10 +8,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import rsmg.model.Variables;
 import rsmg.model.object.item.HealthPack;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.PCharacter;
-import rsmg.model.variables.Variables;
 
 /**
  * Tests the InteractiveObject class

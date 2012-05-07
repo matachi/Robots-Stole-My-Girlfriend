@@ -14,7 +14,6 @@ import rsmg.model.tile.EndTile;
 import rsmg.model.tile.GroundTile;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
-import rsmg.model.variables.Variables;
 
 public class TestTileGrid {
 
