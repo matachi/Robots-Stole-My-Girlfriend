@@ -54,9 +54,9 @@ public class RocketLauncher implements Weapon {
 	@Override
 	public long getCooldown() {
 		if(CharacterProgress.isRapidFireUnlocked()) {
-			return 700;
+			return 2000;
 		}
-		return 800;
+		return 1800;
 	}
 	
 	@Override
