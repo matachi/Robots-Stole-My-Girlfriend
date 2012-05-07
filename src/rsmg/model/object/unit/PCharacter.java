@@ -9,11 +9,11 @@ import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
-import rsmg.model.object.unit.weapon.IWeapon;
-import rsmg.model.object.unit.weapon.Pistol;
-import rsmg.model.object.unit.weapon.RocketLauncher;
-import rsmg.model.object.unit.weapon.Shotgun;
 import rsmg.model.variables.Variables;
+import rsmg.model.weapon.IWeapon;
+import rsmg.model.weapon.Pistol;
+import rsmg.model.weapon.RocketLauncher;
+import rsmg.model.weapon.Shotgun;
 
 /**
  * Class for representing the playable Character

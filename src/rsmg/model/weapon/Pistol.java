@@ -1,4 +1,4 @@
-package rsmg.model.object.unit.weapon;
+package rsmg.model.weapon;
 
 import java.util.Collection;
 
@@ -57,6 +57,11 @@ public class Pistol implements IWeapon{
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public Vector2d getKnockback(boolean isFacingRight) {
+		return new Vector2d(0,0);
 	}
 	
 	@Override
