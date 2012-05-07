@@ -1,7 +1,5 @@
 package rsmg.model.ai;
 
-import java.util.Random;
-
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.Tankbot;
 /**
@@ -58,8 +56,7 @@ public class TankBotAi implements Ai {
 		// Every 0.8 second it gets the chance to shoot.
 		if (cooldown > 0.8) {
 			cooldown = 0;
-			// Only 30 % probability that it actually will shoot.
-			return new Random().nextFloat() > 0.7f;
+			return true;
 		}
 		return false;
 	}

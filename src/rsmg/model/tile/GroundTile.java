@@ -1,6 +1,5 @@
 package rsmg.model.tile;
 
-import rsmg.model.ObjectName;
 
 public class GroundTile extends Tile {
 

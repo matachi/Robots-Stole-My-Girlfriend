@@ -287,8 +287,7 @@ public class CharacterProgress {
 		case INC_RPG_AOE:
 			return isIncRPGAoEUnlocked();
 		default:
-			new IllegalArgumentException();
-			return false;
+			throw new IllegalArgumentException();
 		}
 	}
 	
@@ -379,8 +378,7 @@ public class CharacterProgress {
 			setIncRPGAoEUnlocked(unlocked);
 			break;
 		default:
-			new IllegalArgumentException();
-			break;
+			throw new IllegalArgumentException();
 		}
 	}
 	
