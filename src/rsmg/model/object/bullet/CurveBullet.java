@@ -13,7 +13,6 @@ public class CurveBullet extends Bullet {
 			String name, int dmg, Vector2d velocity) {
 		super(x, y, width, height, name, dmg, velocity);
 		
-		this.dmg = dmg;
 		this.setVelocity(velocity);
 	}
 

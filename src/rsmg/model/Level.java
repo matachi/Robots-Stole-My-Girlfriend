@@ -10,6 +10,7 @@ import java.util.List;
 import rsmg.io.CharacterProgress;
 import rsmg.model.ai.Ai;
 import rsmg.model.object.InteractiveObject;
+import rsmg.model.object.bullet.BigExplosion;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.Explosion;
 import rsmg.model.object.item.Item;
@@ -76,24 +77,9 @@ public class Level {
 		this.tileGrid = tileGrid;
 		this.items = items;
 		this.enemies = aiList;
-		loadUpgrades();
 		enemyBulletList = EnemyBullets;
 		alliedBulletsList = new ArrayList<Bullet>();
 		spawnChar();
-	}
-	
-	/**
-	 * method which checks what upgrades are available and supplies the character with them
-	 */
-	private void loadUpgrades() {
-		if(CharacterProgress.isIncRPGAoEUnlocked())
-			Variables.upgradeExplosionAOE();
-		
-		if(CharacterProgress.isIncRunningSpeedUnlocked())
-			Variables.upgradeSpeed();
-		
-		if(CharacterProgress.isIncShotgunSpreadUnlocked())
-			Variables.upgradeShotgunSpead();
 	}
 
 	/**
@@ -274,8 +260,12 @@ public class Level {
 			
 			if (tileGrid.intersectsWith(bullet)) {
 				
-				if (bullet.getName() == ObjectName.ROCKETR  || bullet.getName() == ObjectName.ROCKETL)
-					bulletList.add(new Explosion(bullet));
+				if (bullet.getName() == ObjectName.ROCKETR  || bullet.getName() == ObjectName.ROCKETL) {
+					if (CharacterProgress.isIncRPGAoEUnlocked())
+						bulletList.add(new BigExplosion(bullet));
+					else
+						bulletList.add(new Explosion(bullet));
+				}
 				
 				//if the bullet is an explosion, do not remove it unless its past its duration
 				//otherwise, remove the bullet

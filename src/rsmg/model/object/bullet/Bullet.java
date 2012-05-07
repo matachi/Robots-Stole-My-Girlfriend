@@ -3,18 +3,19 @@ package rsmg.model.object.bullet;
 import rsmg.model.object.InteractiveObject;
 import rsmg.util.Vector2d;
 	
-	/**
- * 
- * @param x horizontal coordinate for where the bullet spawns
- * @param y vertical coordinate for where the bullet spawns
- * @param width width of the bullet
- * @param height height of the bullet
- * @param bulletType integer value representing what kind of bullet this is (used for graphics)
- * @param name Name of the bullet.
- */
 public class Bullet extends InteractiveObject {
-	int dmg;
 	
+	private int dmg;
+	
+//	/**
+//	 * 
+//	 * @param x horizontal coordinate for where the bullet spawns
+//	 * @param y vertical coordinate for where the bullet spawns
+//	 * @param width width of the bullet
+//	 * @param height height of the bullet
+//	 * @param bulletType integer value representing what kind of bullet this is (used for graphics)
+//	 * @param name Name of the bullet.
+//	 */
 	public Bullet(double x, double y, double width, double height,
 			String name, int dmg, Vector2d velocity) {
 		

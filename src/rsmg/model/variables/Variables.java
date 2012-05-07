@@ -4,9 +4,9 @@ package rsmg.model.variables;
  * @author Johan Grönvall
  *
  */
-public enum Variables{
-	
+public enum Variables{	
 	;
+	
 	public static final int CHARACTERWIDTH = 20;
 	public static final int CHARACTERHEIGHT = 23;
 	public static final int CHARACTERHEALTH = 100;
@@ -19,11 +19,17 @@ public enum Variables{
 	 * how fast the character accelerates
 	 */
 	public static final int CHARACTER_ACCELERATION = 1100;
+	
 	/**
-	 * The Characters runningSpeed, this variable is private to make it mutable within this class
+	 * The character's running speed limit.
 	 */
-	private static int charSpeed = 100;
-	private static final int UPGRADEDCHARSPEED = 120;
+	public static final int CHAR_SPEED = 100;
+	
+	/**
+	 * The character's running speed limit after he has upgraded his running
+	 * speed.
+	 */
+	public static final int CHAR_SPEED_UPG = 150;
 	
 	/**
 	 * The velocity that the character gets after a jump when the player
@@ -40,13 +46,17 @@ public enum Variables{
 	public static final int EXPLOSIONDMG = 1;
 	
 	/**
-	 * the hitbox for explosions fired from the RPG, this variable is private to make it mutable within the class
+	 * The hitbox for explosions fired from an regular RPG.
 	 */
-	private static int explosionAOE = 30;
-	private static final int UPGRADEDEXPLOSIONAOE = 45;
+	public static final int EXPLOSION_AOE = 30;
+
+	/**
+	 * The hitbox for explosions fired from an upgraded RPG.
+	 */
+	public static final int EXPLOSION_AOE_UPG = 45;
 	
-	private static int shotgunSpread = 200;
-	private static final int UPGRADEDSHOTGUNSPREAD = 300;
+	public static final int SHOTGUN_SPREAD = 200;
+	public static final int SHOTGUN_SPREAD_UPG = 300;
 	
 	/**
 	 * the amount of time an enemy should be flashing after he is hit in milliseconds
@@ -65,30 +75,4 @@ public enum Variables{
 	 * in milliseconds
 	 */
 	public static final int CHARACTER_IMMORTALITY_TIME = 800;
-	
-
-	
-	public static void upgradeSpeed() {
-		charSpeed = UPGRADEDCHARSPEED;
-	}
-	
-	public static void upgradeExplosionAOE() {
-		explosionAOE = UPGRADEDEXPLOSIONAOE;
-	}
-	public static void upgradeShotgunSpead() {
-		shotgunSpread = UPGRADEDSHOTGUNSPREAD; 
-	}
-	
-	public static int getCharSpeed() {
-		return charSpeed;
-	}
-	
-	public static int getExplosionAOE() {
-		return explosionAOE;
-	}
-	
-	public static int getShotgunSpread() {
-		return shotgunSpread;
-	}
-	
 }

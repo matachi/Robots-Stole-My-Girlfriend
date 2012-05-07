@@ -24,6 +24,7 @@ import rsmg.model.variables.Variables;
 public class PCharacter extends LivingObject {
 	
 	private boolean immortal = false;
+	
 	/**
 	 * If the character is airborne (i.e. in the air).
 	 */
@@ -34,13 +35,8 @@ public class PCharacter extends LivingObject {
 	 */
 	private IWeapon currentWeapon;
 	
-//	/**
-//	 * Reference to the level's bullet list.
-//	 */
-//	private Collection<Bullet> bulletList;
-	
 	/**
-	 * List of refrences to the characters weapons
+	 * List of references to the character's weapons.
 	 */
 	private Map<String, IWeapon> weapons;
 	
@@ -75,7 +71,10 @@ public class PCharacter extends LivingObject {
 	 */
 	private boolean isDashing = false;
 	
-	
+	/**
+	 * The character's speed limit.
+	 */
+	private final int maxRunningSpeed;
 	
 	/**
 	 *  upgradePoints the user can spend after each level
@@ -102,13 +101,17 @@ public class PCharacter extends LivingObject {
 	 */
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		super(x, y, Variables.CHARACTERWIDTH, Variables.CHARACTERHEIGHT, Variables.CHARACTERHEALTH, ObjectName.CHARACTER);
-//		this.bulletList = bulletList;
 		canDash = CharacterProgress.isDashUnlocked();
 		weapons = new HashMap<String, IWeapon>();
 		weapons.put(ObjectName.PISTOL, new Pistol(bulletList));
 		weapons.put(ObjectName.SHOTGUN, new Shotgun(bulletList));
 		weapons.put(ObjectName.ROCKET_LAUNCHER, new RocketLauncher(bulletList));
 		currentWeapon = weapons.get(ObjectName.PISTOL);
+		
+		if (CharacterProgress.isIncRunningSpeedUnlocked())
+			maxRunningSpeed = Variables.CHAR_SPEED_UPG;
+		else
+			maxRunningSpeed = Variables.CHAR_SPEED;
 	}
 	
 	@Override
@@ -247,7 +250,7 @@ public class PCharacter extends LivingObject {
 	 * Changes the character's velocity, moving him westwards in next loop.
 	 */
 	public void moveLeft() {
-		if ((this.getVelocityX()*(-1) < Variables.getCharSpeed() || this.isFacingRight()))
+		if ((this.getVelocityX()*(-1) < maxRunningSpeed || this.isFacingRight()))
 			directionWest = true;
 			
 			//this.setVelocityX(-Variables.getCharSpeed());
@@ -265,7 +268,7 @@ public class PCharacter extends LivingObject {
 	 * Changes the character's velocity, moving him eastwards in next loop.
 	 */
 	public void moveRight() {
-		if ((this.getVelocityX() < Variables.getCharSpeed() || !this.isFacingRight()))
+		if ((this.getVelocityX() < maxRunningSpeed || !this.isFacingRight()))
 			directionEast = true;
 			
 			//this.setVelocityX(Variables.getCharSpeed());
