@@ -30,7 +30,7 @@ import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
-import rsmg.model.object.unit.weapon.IWeapon;
+import rsmg.model.object.unit.weapon.Weapon;
 import rsmg.model.variables.Variables;
 
 /**
@@ -460,7 +460,7 @@ class LevelState extends State {
 		/**
 		 * Play a sound if the character has fired his weapon.
 		 */
-		IWeapon weapon = character.getWeapon();
+		Weapon weapon = character.getWeapon();
 		boolean isShooting = weapon.shot();
 		if (isShooting && weapon.getName().equals(ObjectName.PISTOL))
 			new Sound("res/sounds/pistol.wav").play();

@@ -9,10 +9,10 @@ import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
-import rsmg.model.object.unit.weapon.IWeapon;
 import rsmg.model.object.unit.weapon.Pistol;
 import rsmg.model.object.unit.weapon.RocketLauncher;
 import rsmg.model.object.unit.weapon.Shotgun;
+import rsmg.model.object.unit.weapon.Weapon;
 import rsmg.model.variables.Variables;
 
 /**
@@ -33,12 +33,12 @@ public class PCharacter extends LivingObject {
 	/**
 	 * The weapon that the character is currently equipped with.
 	 */
-	private IWeapon currentWeapon;
+	private Weapon currentWeapon;
 	
 	/**
 	 * List of references to the character's weapons.
 	 */
-	private Map<String, IWeapon> weapons;
+	private Map<String, Weapon> weapons;
 	
 	/**
 	 * Keeps track of when the character last attacked. Used to have a cooldown
@@ -102,7 +102,7 @@ public class PCharacter extends LivingObject {
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		super(x, y, Variables.CHARACTERWIDTH, Variables.CHARACTERHEIGHT, Variables.CHARACTERHEALTH, ObjectName.CHARACTER);
 		canDash = CharacterProgress.isDashUnlocked();
-		weapons = new HashMap<String, IWeapon>();
+		weapons = new HashMap<String, Weapon>();
 		weapons.put(ObjectName.PISTOL, new Pistol(bulletList));
 		weapons.put(ObjectName.SHOTGUN, new Shotgun(bulletList));
 		weapons.put(ObjectName.ROCKET_LAUNCHER, new RocketLauncher(bulletList));
@@ -188,7 +188,7 @@ public class PCharacter extends LivingObject {
 	 * Returns a reference to the weapon that the character is currently wielding.
 	 * @return A reference to the weapon that the character is currently wielding.
 	 */
-	public IWeapon getWeapon() {
+	public Weapon getWeapon() {
 		return currentWeapon;
 	}
 	

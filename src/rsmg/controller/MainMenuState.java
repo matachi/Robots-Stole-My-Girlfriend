@@ -63,11 +63,11 @@ class MainMenuState extends State {
 		String folderPath = "res/sprites/mainMenu/";
 		
 		// Create the bg image and scale it to fit the window's width
-		background = new Image("res/sprites/mainMenu/bg.jpg");
+		background = new Image(folderPath+"bg.jpg");
 		background = background.getScaledCopy(scale);
 		
 		// Create the title image with the same scale as the background image
-		title = new Image("res/sprites/mainMenu/title.png");
+		title = new Image(folderPath+"title.png");
 		title = title.getScaledCopy(scale);
 
 		// Create the menu buttons

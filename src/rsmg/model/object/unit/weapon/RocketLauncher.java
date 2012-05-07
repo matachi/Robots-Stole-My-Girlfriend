@@ -11,7 +11,7 @@ import rsmg.util.Vector2d;
  * @author zapray
  *
  */
-public class RocketLauncher implements IWeapon{
+public class RocketLauncher implements Weapon {
 	private Collection<Bullet> bulletList;
 	private boolean shot;
 	private static final int bulletWidth = 14;

@@ -2,7 +2,7 @@ package rsmg.model.object.unit.weapon;
 
 import rsmg.util.Vector2d;
 
-public interface IWeapon {
+public interface Weapon {
 	/**
 	 * Method in which this weapon creates a bullet
 	 * @param x horizontal coordinate for the LivingObject holding the gun
