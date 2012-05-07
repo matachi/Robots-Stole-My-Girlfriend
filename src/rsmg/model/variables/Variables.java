@@ -75,4 +75,10 @@ public enum Variables{
 	 * in milliseconds
 	 */
 	public static final int CHARACTER_IMMORTALITY_TIME = 800;
+	
+	/**
+	 * How many seconds the character will be lying dead until the level is
+	 * restarted.
+	 */
+	public static final int DEATH_TIME = 5;
 }

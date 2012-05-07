@@ -67,16 +67,22 @@ public class Level {
 	private boolean hasLost;
 	
 	/**
+	 * Counts the time the character has been dead.
+	 */
+	private double deathCounter = 0;
+	
+	/**
 	 * Creates a level.
 	 * @param tileGrid The tile grid that the level shall use.
 	 * @param items The items that should be in the level.
-	 * @param enemies The enemies in the level.
+	 * @param aiList The enemies in the level.
+	 * @param enemyBullets List containing the enemies' bullets.
 	 */
-	public Level(TileGrid tileGrid, List<Item> items, List<Ai> aiList, List<Bullet> EnemyBullets) {
+	public Level(TileGrid tileGrid, List<Item> items, List<Ai> aiList, List<Bullet> enemyBullets) {
 		this.tileGrid = tileGrid;
 		this.items = items;
 		this.enemies = aiList;
-		enemyBulletList = EnemyBullets;
+		enemyBulletList = enemyBullets;
 		alliedBulletsList = new ArrayList<Bullet>();
 		spawnChar();
 	}
@@ -157,7 +163,7 @@ public class Level {
 		checkVictory();
 		
 		// Check if the player has died, and then mark the level as lost.
-		checkDeath();
+		checkDeath(delta);
 		
 		// update what direction the character is facing towards
 		//character.updateFacing();
@@ -310,9 +316,14 @@ public class Level {
 
 	/**
 	 * Checks if the character has died, and then mark the level as lost.
+	 * @param delta Time elapsed.
 	 */
-	private void checkDeath() {
-		hasLost = character.getHealth() < 1;
+	private void checkDeath(double delta) {
+		if (character.isDead()) {
+			deathCounter += delta;
+			if (deathCounter > Variables.DEATH_TIME)
+				hasLost = true;
+		}
 	}
 
 	/**

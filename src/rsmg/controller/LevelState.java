@@ -308,39 +308,36 @@ class LevelState extends State {
 	 * Draw bullets on the screen.
 	 */
 	private void drawBullets() {
-		for (Bullet bullet : level.getAlliedBulletList()){
+		for (Bullet bullet : level.getAlliedBulletList())
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
-		}
 		
 		for (Bullet bullet : level.getEnemyBulletList())
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
-		
 	}
 	
 	/**
 	 * Draw enemies on the screen.
 	 */
 	private void drawEnemies() {
-		for (Enemy enemy : level.getEnemies()){
-			
+		for (Enemy enemy : level.getEnemies()) {
 			
 			//different facing Animations are not yet supported. 
 			Renderable enemyRenderable;
-			if(enemy.isFacingRight() && (enemies.get(enemy.getName()) instanceof Image)){
+			if (enemy.isFacingRight() && (enemies.get(enemy.getName()) instanceof Image)) {
 				enemyRenderable = ((Image)enemies.get(enemy.getName())).getFlippedCopy(true, false);
 			} else {
 				enemyRenderable = enemies.get(enemy.getName());
 			}
 			
 			//make the enemy flash if he recently took damage
-			if(enemy.recentlytookDamage()){
-				if(enemyRenderable instanceof Animation){
+			if (enemy.recentlytookDamage()) {
+				if (enemyRenderable instanceof Animation) {
 					((Animation)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY, (float)enemy.getWidth()*scale, (float)enemy.getHeight()*scale);
-				}else if(enemyRenderable instanceof Image){
+				} else if(enemyRenderable instanceof Image) {
 					((Image)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY);
 				}
 				
-			}else{
+			} else {
 				enemyRenderable.draw((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY);
 			}
 		}
@@ -360,7 +357,7 @@ class LevelState extends State {
 	private void drawEnvironment() {
 		for (int y = 0; y < level.getTileGrid().getHeight(); y++)
 			for (int x = 0; x < level.getTileGrid().getWidth(); x++)
-				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*32*scale+cameraX, y*32*scale+cameraY);
+				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*Variables.TILESIZE*scale+cameraX, y*Variables.TILESIZE*scale+cameraY);
 	}
 
 	/**
@@ -610,6 +607,7 @@ class LevelState extends State {
 		private static final String jumpLKey = "jumpLeft";
 		private static final String dashRKey = "dashRight";
 		private static final String dashLKey = "dashLeft";
+		private static final String deadKey = "dead";
 		
 		
 		private Map<String, Renderable> charMap;
@@ -636,10 +634,13 @@ class LevelState extends State {
 			Image dashingR = new Image(folderPath+"charDashing.png", false, filter).getScaledCopy(scale);
 			Image dashingL = dashingR.getFlippedCopy(true, false);
 			
+			// Death image.
+			Image dead = new Image(folderPath+"charDead.png", false, filter).getScaledCopy(scale);
+			
 			// Make all sprite maps.
-			pistolMap = makeCharSpriteMap(folderPath+"charPistolStanding.png", folderPath+"charPistolJumping.png", folderPath+"charPistolRunningSheet.png", dashingR, dashingL, scale, filter);
-			rpgMap = makeCharSpriteMap(folderPath+"charRPGStanding.png", folderPath+"charRPGJumping.png", folderPath+"charRPGRunningSheet.png", dashingR, dashingL, scale, filter);
-			shotgunMap = makeCharSpriteMap(folderPath+"charShotgunStanding.png", folderPath+"charShotgunJumping.png", folderPath+"charShotgunRunningSheet.png", dashingR, dashingL, scale, filter);
+			pistolMap = makeCharSpriteMap(folderPath+"charPistolStanding.png", folderPath+"charPistolJumping.png", folderPath+"charPistolRunningSheet.png", dashingR, dashingL, dead, scale, filter);
+			rpgMap = makeCharSpriteMap(folderPath+"charRPGStanding.png", folderPath+"charRPGJumping.png", folderPath+"charRPGRunningSheet.png", dashingR, dashingL, dead, scale, filter);
+			shotgunMap = makeCharSpriteMap(folderPath+"charShotgunStanding.png", folderPath+"charShotgunJumping.png", folderPath+"charShotgunRunningSheet.png", dashingR, dashingL, dead, scale, filter);
 			charMap = pistolMap;
 			key = standRKey;
 			
@@ -653,6 +654,7 @@ class LevelState extends State {
 			charXOffsets.put(standRKey, -6*scale);
 			charXOffsets.put(dashLKey, -6*scale);
 			charXOffsets.put(dashRKey, -36*scale);
+			charXOffsets.put(deadKey, -12*scale);
 		}
 		
 		/**
@@ -668,6 +670,8 @@ class LevelState extends State {
 		 *            Reference to the image where he is dashing left.
 		 * @param dashRight
 		 *            Reference to the image where he is dashing right.
+		 * @param dead
+		 *            Reference to the image where he is dead.
 		 * @param scale
 		 *            How much all images should be scaled.
 		 * @param filter
@@ -677,7 +681,8 @@ class LevelState extends State {
 		 */
 		private Map<String, Renderable> makeCharSpriteMap(String standingImage,
 				String jumpingImage, String runningSheet, Image dashLeft,
-				Image dashRight, int scale, int filter) throws SlickException {
+				Image dashRight, Image dead, int scale, int filter)
+				throws SlickException {
 			
 			Map<String, Renderable> spriteMap = new HashMap<String, Renderable>();
 			
@@ -708,6 +713,7 @@ class LevelState extends State {
 			spriteMap.put(runRKey, runningR);
 			spriteMap.put(dashLKey, dashRight);
 			spriteMap.put(dashRKey, dashLeft);
+			spriteMap.put(deadKey, dead);
 			return spriteMap;
 		}
 		
@@ -753,7 +759,11 @@ class LevelState extends State {
 			}
 			
 			// Update which key should be used.
-			if(level.getCharacter().isDashing()) { // Char is dashing
+			if(level.getCharacter().isDead()) { // Char is dead
+				
+				key = deadKey;
+
+			} else if(level.getCharacter().isDashing()) { // Char is dashing
 				
 				if(level.getCharacter().isFacingRight())
 					key = dashRKey;
