@@ -44,7 +44,7 @@ public class Bullet extends InteractiveObject {
 	/**
 	 * method consistently making it possible for bullets to accelerate / update
 	 */
-	public void update(double delta){
+	public void update(double delta) {
 		//nothing at this point
 	}
 }

@@ -27,6 +27,7 @@ import rsmg.levelfactory.LevelFactory;
 import rsmg.model.Level;
 import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
+import rsmg.model.object.bullet.RotatableBullet;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
@@ -165,6 +166,7 @@ class LevelState extends State {
 				folderPath+"rocketBot.png", false, filter).getScaledCopy(scale), 19*scale, 25*scale), 200);
 		Image spikes = new Image(folderPath+"spikes.png", false, filter).getScaledCopy(scale);
 		Image miniBallBot = new Image(folderPath+"miniBallBot.png", false, filter).getScaledCopy(scale);
+		Image bossBot = new Image(folderPath+"bossBot.png", false, filter).getScaledCopy(scale);
 		
 		enemies.put(ObjectName.MINIBALLBOT, miniBallBot);
 		enemies.put(ObjectName.TANKBOT, tankbot);
@@ -172,7 +174,7 @@ class LevelState extends State {
 		enemies.put(ObjectName.BALLBOT, ballBot);
 		enemies.put(ObjectName.ROCKETBOT, rocketBot);
 		enemies.put(ObjectName.SPIKES, spikes);
-		
+		enemies.put(ObjectName.BOSSBOT, bossBot);
 		
 		
 		/**
@@ -205,6 +207,9 @@ class LevelState extends State {
 		
 		Image pistolBullet = new Image(folderPath+"pistolBullet.png", false, filter).getScaledCopy(scale);
 		bullets.put(ObjectName.PISTOL_BULLET, pistolBullet);
+		
+		Image laserBolt = new Image(folderPath+"laserBolt.png", false, filter).getScaledCopy(scale);
+		bullets.put(ObjectName.LASERBOLT, laserBolt);
 		
 		/**
 		 * create an animation for the rocket
@@ -308,11 +313,17 @@ class LevelState extends State {
 	 * Draw bullets on the screen.
 	 */
 	private void drawBullets() {
-		for (Bullet bullet : level.getAlliedBulletList())
-			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
 		
-		for (Bullet bullet : level.getEnemyBulletList())
+		for (Bullet bullet : level.getAlliedBulletList()) {
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
+		}
+		for (Bullet bullet : level.getEnemyBulletList()) {
+			if(bullet.getName().equals(ObjectName.LASERBOLT)){
+				((Image)bullets.get(bullet.getName())).setRotation(-((float) (((RotatableBullet)bullet).getRotation()*180/Math.PI)));
+			}
+			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
+
+		}
 	}
 	
 	/**
@@ -322,23 +333,31 @@ class LevelState extends State {
 		for (Enemy enemy : level.getEnemies()) {
 			
 			//different facing Animations are not yet supported. 
+
+			int offsetX = 0;
+			int offsetY = 0;
+			if (enemy.getName().equals(ObjectName.BOSSBOT)) {
+				offsetX = -88;
+			}
+			//different facing Animations are not yet supported. 
 			Renderable enemyRenderable;
-			if (enemy.isFacingRight() && (enemies.get(enemy.getName()) instanceof Image)) {
+			if(enemy.isFacingRight() && (enemies.get(enemy.getName()) instanceof Image)) {
 				enemyRenderable = ((Image)enemies.get(enemy.getName())).getFlippedCopy(true, false);
 			} else {
 				enemyRenderable = enemies.get(enemy.getName());
 			}
 			
 			//make the enemy flash if he recently took damage
-			if (enemy.recentlytookDamage()) {
-				if (enemyRenderable instanceof Animation) {
-					((Animation)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY, (float)enemy.getWidth()*scale, (float)enemy.getHeight()*scale);
-				} else if(enemyRenderable instanceof Image) {
-					((Image)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY);
+
+			if(enemy.recentlytookDamage()) {
+				if(enemyRenderable instanceof Animation) {
+					((Animation)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX+offsetX, (float)enemy.getY()*scale+cameraY+offsetY, (float)enemy.getWidth()*scale, (float)enemy.getHeight()*scale);
+				}else if(enemyRenderable instanceof Image) {
+					((Image)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX+offsetX, (float)enemy.getY()*scale+cameraY+offsetY);
 				}
 				
-			} else {
-				enemyRenderable.draw((float)enemy.getX()*scale+cameraX, (float)enemy.getY()*scale+cameraY);
+			}else{
+					enemyRenderable.draw((float)enemy.getX()*scale+cameraX+offsetX, (float)enemy.getY()*scale+cameraY+offsetY);	
 			}
 		}
 	}
@@ -487,7 +506,7 @@ class LevelState extends State {
 		}
 		
 		// right arrow key
-		if (input.isKeyDown(Input.KEY_RIGHT)) {
+		else if (input.isKeyDown(Input.KEY_RIGHT)) {
 			rightKeyDown = true;
 			modelCharacter.moveRight();
 			modelCharacter.setFacing(true);
@@ -731,7 +750,7 @@ class LevelState extends State {
 					((Image) charImg).drawFlash(characterX, characterY);
 				} else if (charImg instanceof Animation) {
 					Animation characterAnimation = ((Animation) charImg);
-					characterAnimation.drawFlash(characterX, characterY, characterAnimation.getWidth(), characterAnimation.getHeight());
+					characterAnimation.drawFlash(characterX+offset, characterY, characterAnimation.getWidth(), characterAnimation.getHeight());
 				}
 
 			} else {
@@ -792,6 +811,7 @@ class LevelState extends State {
 						key = standLKey;
 			}
 			
+			//resets the keyDown variables back to false
 			rightKeyDown = false;
 			leftKeyDown = false;
 		}

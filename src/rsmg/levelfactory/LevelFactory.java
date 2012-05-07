@@ -12,6 +12,7 @@ import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
 import rsmg.model.ai.Ai;
 import rsmg.model.ai.BallBotAi;
+import rsmg.model.ai.BossBotAi;
 import rsmg.model.ai.BucketBotAi;
 import rsmg.model.ai.EmptyAi;
 import rsmg.model.ai.RocketBotAi;
@@ -24,6 +25,7 @@ import rsmg.model.object.item.RocketLauncher;
 import rsmg.model.object.item.Shotgun;
 import rsmg.model.object.item.UpgradePoints;
 import rsmg.model.object.unit.BallBot;
+import rsmg.model.object.unit.BossBotHead;
 import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.RocketBot;
 import rsmg.model.object.unit.Spikes;
@@ -139,6 +141,10 @@ public final class LevelFactory {
 							break;
 					}
 					itemList.add(item);
+				}
+				// is level 6, spawn the boss
+				if(levelNumber == 6){
+					aiList.add(new BossBotAi(new BossBotHead(400, 18*Variables.TILESIZE-124, enemyBulletList)));
 				}
 				
 				// Retrieve Enemies and assign AI to them

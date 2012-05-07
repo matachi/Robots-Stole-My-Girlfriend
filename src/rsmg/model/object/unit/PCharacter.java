@@ -317,9 +317,7 @@ public class PCharacter extends LivingObject {
 	 * method called when the character is hit by an enemy
 	 */
 	public void getHit(int dmg) {
-		if(immortal){
-			// TODO get knocked back?
-		}else{
+		if(!immortal) {
 			this.damage(dmg);
 			immortal = true;
 			lastAttackedTime = System.currentTimeMillis();

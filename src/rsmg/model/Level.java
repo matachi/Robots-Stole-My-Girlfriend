@@ -172,7 +172,7 @@ public class Level {
 		// Check so the character isn't inside a solid tile, and if so, move
 		// him outside it.
 		applyNormalForce(character);
-		//character.setVelocityX(0);
+		
 		character.applyFriction(delta);
 		character.updateImmortality();
 
