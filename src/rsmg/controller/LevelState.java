@@ -446,8 +446,11 @@ class LevelState extends State {
 		if (level.hasWon()) {
 			List<Integer> levelNumbers = (ArrayList<Integer>)Levels.getLevelNumbers();
 			Collections.sort(levelNumbers);
-			CharacterProgress.setUnlockedLevels(levelNumbers.indexOf(levelNumber)+2);
-			CharacterProgress.saveFile();
+			int nextLevelID = levelNumbers.indexOf(levelNumber)+2;
+			if (nextLevelID > CharacterProgress.getUnlockedLevels()) {
+				CharacterProgress.setUnlockedLevels(nextLevelID);
+				CharacterProgress.saveFile();
+			}
 			try {
 				int nextLevel = levelNumbers.get(levelNumbers.indexOf(levelNumber)+1);
 				Controller.initLevel(nextLevel);
