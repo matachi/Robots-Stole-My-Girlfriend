@@ -315,11 +315,11 @@ public class PCharacter extends LivingObject {
 	}
 	
 	public void moveRightReleased() {
-		runningLeft = false;
+		runningRight = false;
 	}
 	
 	public void moveLeftReleased() {
-		runningRight = false;
+		runningLeft = false;
 	}
 
 	/**
