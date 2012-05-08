@@ -51,7 +51,8 @@ public enum ObjectName {
 	public static final String SHOTGUN_BULLET = "shotgunBullet";
 	public static final String STONE = "stone";
 	public static final String LASERBOLT = "laserbolt";
-
+	public static final String LASERFIRE = "laserFire";
+	public static final String LASERBLAST = "laserBlast";
 	/**
 	 * The tiles' names.
 	 */

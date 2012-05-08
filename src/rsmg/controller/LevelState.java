@@ -237,6 +237,9 @@ class LevelState extends State {
 		Image laserBolt = new Image(folderPath+"laserBolt.png", false, filter).getScaledCopy(scale);
 		bullets.put(ObjectName.LASERBOLT, laserBolt);
 		
+		Image laserBlast = new Image(folderPath+"laserBlast.png", false, filter).getScaledCopy(scale);
+		bullets.put(ObjectName.LASERBLAST, laserBlast);
+		
 		/**
 		 * create an animation for the rocket
 		 */
@@ -252,9 +255,11 @@ class LevelState extends State {
 		/**
 		 * create an animation for laserfire effect
 		 */
-		Image laserFireImage = new Image(folderPath+"laserFire.png", false, filter).getScaledCopy(scale);
-		SpriteSheet laserFireSheet = new SpriteSheet(laserFireImage, 10*scale, 14*scale);
+		Image laserFireImage = new Image(folderPath+"laserFire.png", false, filter).getScaledCopy(scale*2);
+		SpriteSheet laserFireSheet = new SpriteSheet(laserFireImage, 10*2*scale, 14*2*scale);
 		Animation laserFire = new Animation(laserFireSheet, 200);
+		bullets.put(ObjectName.LASERFIRE, laserFire);
+		
 		
 		/**
 		 * create an animation for explosions
@@ -346,16 +351,18 @@ class LevelState extends State {
 	 */
 	private void drawBullets() {
 		
-		for (Bullet bullet : level.getAlliedBulletList()) {
-			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
-		}
 		for (Bullet bullet : level.getEnemyBulletList()) {
-			if(bullet.getName().equals(ObjectName.LASERBOLT)){
+			if(bullet instanceof RotatableBullet){
 				((Image)bullets.get(bullet.getName())).setRotation(-((float) (((RotatableBullet)bullet).getRotation()*180/Math.PI)));
 			}
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
 
 		}
+		
+		for (Bullet bullet : level.getAlliedBulletList()) {
+			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
+		}
+
 	}
 	
 	/**
@@ -369,7 +376,7 @@ class LevelState extends State {
 			int offsetX = 0;
 			int offsetY = 0;
 			if (enemy.getName().equals(ObjectName.BOSSBOT)) {
-				offsetX = -88;
+				offsetX = -194;
 			}
 			//different facing Animations are not yet supported. 
 			Renderable enemyRenderable;
@@ -437,8 +444,8 @@ class LevelState extends State {
 		character.draw();
 		
 		// Draw character hitbox
-		hitboxRect.setLocation(characterX, characterY);
-		hitboxGrap.draw(hitboxRect);
+//		hitboxRect.setLocation(characterX, characterY);
+//		hitboxGrap.draw(hitboxRect);
 	}
 
 	/**

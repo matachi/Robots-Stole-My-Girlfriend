@@ -12,6 +12,7 @@ import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.Explosion;
 import rsmg.model.object.bullet.ExplosionFactory;
+import rsmg.model.object.bullet.LaserFire;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
@@ -223,6 +224,7 @@ public class Level {
 					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL)
 						newBullets.add(ExplosionFactory.getExplosion(bullet));
 					
+					
 					if(!(bullet instanceof Explosion)){
 						expiredBullets.add(bullet);
 					}
@@ -248,6 +250,10 @@ public class Level {
 				
 				if (bullet.getName() == ObjectName.ROCKETR  || bullet.getName() == ObjectName.ROCKETL)
 					bulletList.add(ExplosionFactory.getExplosion(bullet));
+				
+				if (bullet.getName().equals(ObjectName.LASERBOLT)) {
+					alliedBulletsList.add(new LaserFire(bullet));
+				}
 				
 				//if the bullet is an explosion, do not remove it unless its past its duration
 				//otherwise, remove the bullet
