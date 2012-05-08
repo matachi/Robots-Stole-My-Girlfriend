@@ -243,6 +243,10 @@ class UpgradesState extends State {
 			selectUpgrade();
 		else if (input.isKeyPressed(Input.KEY_ESCAPE))
 			sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new BlobbyTransition());
+		else if (input.isKeyPressed(Input.KEY_0)) {
+			CharacterProgress.setUpgradePoints(CharacterProgress.getUpgradePoints()+1);
+			CharacterProgress.saveFile();
+		}
 	}
 	
 	private void navigateUpInGrid() {
@@ -284,7 +288,7 @@ class UpgradesState extends State {
 	}
 	
 	private void selectUpgrade() {
-		if (!upgradeButtons.get(selected).isUnlocked()) {
+		if (!upgradeButtons.get(selected).isUnlocked() && CharacterProgress.getUpgradePoints() > 0) {
 			CharacterProgress.setUpgrade(upgradeButtons.get(selected).getUpgrade(), true);
 			CharacterProgress.setUpgradePoints(CharacterProgress.getUpgradePoints()-1);
 			CharacterProgress.saveFile();
