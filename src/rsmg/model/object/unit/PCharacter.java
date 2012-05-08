@@ -272,13 +272,15 @@ public class PCharacter extends LivingObject {
 	 * Adds a velocity upwards to the character, sending him up in the air.
 	 */
 	public void jump() {
-		// Only jump if the character is standing on the ground.
-		if (!airborne){
-			this.addVelocity(0, -Variables.JUMPSTRENGTH);
-			
-		} else if (doubleJumpAvailable()){
-			this.setVelocityY(-Variables.DOUBLEJUMPSTRENGTH);
-			doubleJumps -= 1;
+		if (!isDead()) {
+			// Only jump if the character is standing on the ground.
+			if (!airborne){
+				this.addVelocity(0, -Variables.JUMPSTRENGTH);
+				
+			} else if (doubleJumpAvailable()){
+				this.setVelocityY(-Variables.DOUBLEJUMPSTRENGTH);
+				doubleJumps -= 1;
+			}
 		}
 	}
 
@@ -286,22 +288,26 @@ public class PCharacter extends LivingObject {
 	 * Changes the character's velocity, moving him westwards in next loop.
 	 */
 	public void moveLeft() {
-		if (this.getVelocityX()*(-1) < maxRunningSpeed || this.isFacingRight())
-			directionWest = true;
-		
-		setFacing(false);
-		runningLeft = true;
+		if (!isDead()) {
+			if (this.getVelocityX()*(-1) < maxRunningSpeed || this.isFacingRight()) {
+				directionWest = true;
+			}
+			setFacing(false);
+			runningLeft = true;
+		}
 	}
 
 	/**
 	 * Changes the character's velocity, moving him eastwards in next loop.
 	 */
 	public void moveRight() {
-		if (this.getVelocityX() < maxRunningSpeed || !this.isFacingRight())
-			directionEast = true;
-		
-		runningRight = true;
-		setFacing(true);
+		if (!isDead()) {
+			if (this.getVelocityX() < maxRunningSpeed || !this.isFacingRight()) {
+				directionEast = true;
+			}
+			runningRight = true;
+			setFacing(true);
+		}
 	}
 	
 	
@@ -345,7 +351,7 @@ public class PCharacter extends LivingObject {
 	 * Dash with the character.
 	 */
 	public void dash() {
-		if (canDash && !(recentlyDashed()))
+		if (canDash && !(recentlyDashed()) && !isDead())
 			isDashing = true;
 	}
 
