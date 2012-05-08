@@ -156,6 +156,19 @@ public class PCharacter extends LivingObject {
 			lastAttackedTime = 0;
 		}
 	}
+	
+	/**
+	 * returns true if the character should no longer be taking damage
+	 * @return true if the character should no longer be taking damage
+	 */
+	public boolean isImmortal() {
+		return immortal;
+	}
+	
+	public void setMortality(boolean isImmortal){
+		this.immortal = isImmortal;
+	}
+	
 	/**
 	 * Method which accelerates up the character in his current direction
 	 * @param delta
@@ -246,6 +259,7 @@ public class PCharacter extends LivingObject {
 	public void moveLeft() {
 		if (this.getVelocityX()*(-1) < maxRunningSpeed || this.isFacingRight())
 			directionWest = true;
+		setFacing(false);
 	}
 
 	/**
@@ -254,6 +268,11 @@ public class PCharacter extends LivingObject {
 	public void moveRight() {
 		if (this.getVelocityX() < maxRunningSpeed || !this.isFacingRight())
 			directionEast = true;
+		setFacing(true);
+	}
+	
+	public boolean isRunning() {
+		return directionEast || directionWest;
 	}
 	
 	/**
@@ -372,17 +391,6 @@ public class PCharacter extends LivingObject {
 				setVelocityX(0);
 			}
 		}
-	}
-	/**
-	 * returns true if the character should no longer be taking damage
-	 * @return true if the character should no longer be taking damage
-	 */
-	public boolean isImmortal() {
-		return immortal;
-	}
-	
-	public void setMortality(boolean isImmortal){
-		this.immortal = isImmortal;
 	}
 
 	public void setDirections(boolean newDirection) {

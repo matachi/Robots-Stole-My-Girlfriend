@@ -113,9 +113,6 @@ class LevelState extends State {
 	private Rectangle hitboxRect;
 	private Graphics hitboxGrap;
 	
-	private boolean rightKeyDown = false;
-	private boolean leftKeyDown = false;
-	
 	/**
 	 * Construct the level.
 	 * @param stateID The ID to the state.
@@ -498,17 +495,13 @@ class LevelState extends State {
 		
 		// left arrow key
 		if (input.isKeyDown(Input.KEY_LEFT)) {
-			rightKeyDown = true;
 			modelCharacter.moveLeft();
-			modelCharacter.setFacing(false);
 		
 		}
 		
 		// right arrow key
 		else if (input.isKeyDown(Input.KEY_RIGHT)) {
-			rightKeyDown = true;
 			modelCharacter.moveRight();
-			modelCharacter.setFacing(true);
 		}
 		
 		// up arrow key
@@ -746,7 +739,7 @@ class LevelState extends State {
 			// Make the character flash white if he is immortal.
 			if (level.getCharacter().isImmortal() && Sys.getTime() % 400 < 200) {
 				if (charImg instanceof Image) {
-					((Image) charImg).drawFlash(characterX, characterY);
+					((Image) charImg).drawFlash(characterX+offset, characterY);
 				} else if (charImg instanceof Animation) {
 					Animation characterAnimation = ((Animation) charImg);
 					characterAnimation.drawFlash(characterX+offset, characterY, characterAnimation.getWidth(), characterAnimation.getHeight());
@@ -777,11 +770,11 @@ class LevelState extends State {
 			}
 			
 			// Update which key should be used.
-			if(level.getCharacter().isDead()) { // Char is dead
+			if (level.getCharacter().isDead()) { // Char is dead
 				
 				key = deadKey;
 
-			} else if(level.getCharacter().isDashing()) { // Char is dashing
+			} else if (level.getCharacter().isDashing()) { // Char is dashing
 				
 				if(level.getCharacter().isFacingRight())
 					key = dashRKey;
@@ -795,7 +788,7 @@ class LevelState extends State {
 				else
 					key = jumpLKey;
 			
-			} else if (rightKeyDown || leftKeyDown){ // Char is running
+			} else if (level.getCharacter().isRunning()){ // Char is running
 		
 				if (level.getCharacter().isFacingRight())
 					key = runRKey;
@@ -809,10 +802,6 @@ class LevelState extends State {
 					else
 						key = standLKey;
 			}
-			
-			//resets the keyDown variables back to false
-			rightKeyDown = false;
-			leftKeyDown = false;
 		}
 	}
 }
