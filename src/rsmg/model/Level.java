@@ -189,6 +189,10 @@ public class Level {
 			Enemy enemy = ai.getEnemy();
 			
 			if (enemy.isDead()) {
+				// Set the level as won if the enemy killed was a boss
+				if (enemies.get(i).getEnemy().getName() == ObjectName.BOSSBOT) {
+					hasWon = true;
+				}
 				enemies.remove(i);
 				continue;
 			}

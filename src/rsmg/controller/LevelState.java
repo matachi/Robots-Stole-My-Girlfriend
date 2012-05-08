@@ -525,7 +525,7 @@ class LevelState extends State {
 			}
 			
 			// If this was the last level
-			if (levelNumbers.get(levelNumbers.indexOf(levelNumber)) + 1 == levelNumbers.size()) {
+			if (levelNumbers.indexOf(levelNumber) + 1 == levelNumbers.size()) {
 				sbg.enterState(Controller.CREDITS_STATE);
 			} else if (level.getCharacter().getUpgradePoints() > 0) { // If the player has collected upgrade points
 				sbg.enterState(Controller.UPGRADES_STATE);
