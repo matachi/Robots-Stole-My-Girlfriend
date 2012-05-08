@@ -35,6 +35,27 @@ public class TestTileGrid {
 		assertTrue(grid.getFromCoord(1, 0).isSolid());
 	}
 	
+	
+	@Test
+	public void testGetTile() {
+		assertTrue(!grid.getTile(0, 0).isSolid());
+		assertTrue(!grid.getTile(1*Variables.TILESIZE, 0).isSolid());
+		assertTrue(!grid.getTile(0, 1*Variables.TILESIZE).isSolid());
+		assertTrue(!grid.getTile(1*Variables.TILESIZE, 1*Variables.TILESIZE).isSolid());
+		assertTrue(grid.getTile(0, 2*Variables.TILESIZE).isSolid());
+		assertTrue(grid.getTile(1*Variables.TILESIZE, 2*Variables.TILESIZE).isSolid());
+	}
+	
+	@Test
+	public void testGetFromCoord() {
+		assertTrue(!grid.getFromCoord(0, 0).isSolid());
+		assertTrue(!grid.getFromCoord(1, 0).isSolid());
+		assertTrue(!grid.getFromCoord(0, 1).isSolid());
+		assertTrue(!grid.getFromCoord(1, 1).isSolid());
+		assertTrue(grid.getFromCoord(0, 2).isSolid());
+		assertTrue(grid.getFromCoord(1, 2).isSolid());
+	}
+	
 	@Test
 	public void testGetWith() {
 		assertTrue(grid.getWidth() == 2);
@@ -55,14 +76,13 @@ public class TestTileGrid {
 	}
 	
 	@Test
-	public void testTilePosFromRealPos() {
+	public void testGetTilePosFromRealPos() {
 		assertTrue(grid.getTilePosFromRealPos(50) == 1);
 	}
 	
 	@Test
 	public void testIntersectsWith() {
 		PCharacter character = new PCharacter(50, 64, null);
-		
 		assertTrue(grid.intersectsWith(character));
 	}
 	
@@ -105,9 +125,28 @@ public class TestTileGrid {
         assertTrue((int)(grid.bottomSideIntersection(character)) == (int)(intersectLength-1-0.00001));
 	}
 	
-	// No top atm
-	//@Test
-	public void testTopSideIntersection() {
-
-	}	
+	// No top atm. SKIP?
+	@Test
+	public void testTopSideIntersection() {	}
+	
+	@Test
+	public void testTileIntersect(){
+		assertTrue(!grid.tileIntersect(0,0));
+		assertTrue(grid.tileIntersect(0,2*Variables.TILESIZE+10));
+		assertTrue(grid.tileIntersect(Variables.TILESIZE+10,2*Variables.TILESIZE+10));
+	}
+	
+	@Test
+	public void testIntersectsWithEndTile(){
+		PCharacter c = new PCharacter(0, 0, null);
+		assertFalse(grid.intersectsWithEndTile(c));
+		
+		c.setX(Variables.TILESIZE+15);
+		c.setY(Variables.TILESIZE+15);
+		assertTrue(grid.intersectsWithEndTile(c));
+	}
+	
+	// REMOVE METHOD?
+	@Test
+	public void testShowGrid(){	}
 }
