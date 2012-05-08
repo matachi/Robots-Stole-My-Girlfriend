@@ -142,10 +142,6 @@ public final class LevelFactory {
 					}
 					itemList.add(item);
 				}
-				// is level 6, spawn the boss
-				if(levelNumber == 6){
-					aiList.add(new BossBotAi(new BossBotHead(500, 19*Variables.TILESIZE-248, enemyBulletList)));
-				}
 				
 				// Retrieve Enemies and assign AI to them
 				String enemyValue = cell.getAttributeValue("enemy");
@@ -163,6 +159,9 @@ public final class LevelFactory {
 							break;
 						case ObjectName.BUCKETBOT :
 							ai = new BucketBotAi(new BucketBot(x*scale, y*scale, enemyBulletList));
+							break;
+						case ObjectName.BOSSBOT :
+							ai = new BossBotAi(new BossBotHead(x*scale, y*scale, enemyBulletList));
 							break;
 						default :
 							ai = new EmptyAi(new Spikes(x*scale, y*scale));

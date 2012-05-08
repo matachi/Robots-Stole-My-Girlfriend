@@ -22,20 +22,18 @@ public class BossBotAi implements Ai{
 		if (characterIsBehindBoss(playerX)){
 			angle = Math.PI/2.7;
 			bulletVector = new Vector2d();
-		} else {
-			if (shouldAttack(delta)) {
+		} else if (shouldAttack(delta)) {
 				
-				double tempAngle = Math.atan((playerY - enemy.getY())/(enemy.getX() - playerX));
-				
-				if (tempAngle > angle+offset) {
-					angle+=angleIncr*delta;
-				} else {
-					angle-=angleIncr*delta;
-				}
-				bulletVector.setX(-bulletSpeed*Math.cos(angle));
-				bulletVector.setY(bulletSpeed*Math.sin(angle));
-				enemy.shoot(bulletVector, angle);
+			double tempAngle = Math.atan((playerY - enemy.getY())/(enemy.getX() - playerX));
+			
+			if (tempAngle > angle+offset) {
+				angle+=angleIncr*delta;
+			} else {
+				angle-=angleIncr*delta;
 			}
+			bulletVector.setX(-bulletSpeed*Math.cos(angle));
+			bulletVector.setY(bulletSpeed*Math.sin(angle));
+			enemy.shoot(bulletVector, angle);
 		}
 	}
 	
@@ -45,7 +43,7 @@ public class BossBotAi implements Ai{
 	
 	private boolean shouldAttack(double delta) {
 		cooldown += delta;
-		// Every 0.25 second it gets the chance to shoot.
+		// Every 0.19 second it gets the chance to shoot.
 		if (cooldown > 0.19) {
 			cooldown = 0;
 			return true;
