@@ -302,7 +302,9 @@ public class Level {
 	 * Checks if the character has reached the end tile.
 	 */
 	private void checkVictory() {
-		hasWon = tileGrid.intersectsWithEndTile(character);
+		if (tileGrid.intersectsWithEndTile(character)) {
+			hasWon = true;
+		}
 	}
 
 	/**
@@ -331,6 +333,13 @@ public class Level {
 	 */
 	public boolean hasLost() {
 		return hasLost;
+	}
+	
+	/**
+	 * Mark the level as completed.
+	 */
+	public void completeLevel() {
+		hasWon = true;
 	}
 
 	/**

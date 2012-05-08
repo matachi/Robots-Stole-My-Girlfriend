@@ -20,6 +20,7 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import rsmg.io.CharacterProgress;
 import rsmg.io.Levels;
@@ -506,7 +507,7 @@ class LevelState extends State {
 		 * level selection state.
 		 */
 		if (level.hasWon()) {
-			
+
 			// List of the level numbers
 			List<Integer> levelNumbers = (ArrayList<Integer>)Levels.getLevelNumbers();
 			Collections.sort(levelNumbers);
@@ -526,11 +527,11 @@ class LevelState extends State {
 			
 			// If this was the last level
 			if (levelNumbers.indexOf(levelNumber) + 1 == levelNumbers.size()) {
-				sbg.enterState(Controller.CREDITS_STATE);
+				sbg.enterState(Controller.CREDITS_STATE, new FadeOutTransition(), new FadeInTransition());
 			} else if (level.getCharacter().getUpgradePoints() > 0) { // If the player has collected upgrade points
-				sbg.enterState(Controller.UPGRADES_STATE);
+				sbg.enterState(Controller.UPGRADES_STATE, new FadeOutTransition(), new FadeInTransition());
 			} else { // If the player hasn't collected any upgrade points
-				sbg.enterState(Controller.LEVEL_SELECTION_STATE);
+				sbg.enterState(Controller.LEVEL_SELECTION_STATE, new FadeOutTransition(), new FadeInTransition());
 			}
 			
 		} else if (level.hasLost()) {
@@ -623,6 +624,10 @@ class LevelState extends State {
 		// digit key 3
 		if (input.isKeyPressed(Input.KEY_3))
 			modelCharacter.changeWeapon(ObjectName.ROCKET_LAUNCHER);
+		
+		// digit key 0. Cheat to instantaneously complete the level.
+		if (input.isKeyPressed(Input.KEY_0))
+			level.completeLevel();
 		
 	}
 
