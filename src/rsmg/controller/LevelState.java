@@ -506,19 +506,33 @@ class LevelState extends State {
 		 * level selection state.
 		 */
 		if (level.hasWon()) {
+			
+			// List of the level numbers
 			List<Integer> levelNumbers = (ArrayList<Integer>)Levels.getLevelNumbers();
 			Collections.sort(levelNumbers);
+			
+			// Check if number of unlocked of levels should be updated
 			int unlockedLevels = levelNumbers.indexOf(levelNumber)+2;
 			if (unlockedLevels > CharacterProgress.getUnlockedLevels()) {
 				CharacterProgress.setUnlockedLevels(unlockedLevels);
 				CharacterProgress.saveFile();
 			}
-			try {
-				int nextLevel = levelNumbers.get(levelNumbers.indexOf(levelNumber)+1);
-				Controller.initLevel(nextLevel);
-			} catch (IndexOutOfBoundsException e) {
-				sbg.enterState(Controller.CREDITS_STATE);
+			
+			// Update available upgrade points
+			if (level.getCharacter().getUpgradePoints() > 0) {
+				CharacterProgress.setUpgradePoints(CharacterProgress.getUpgradePoints()+level.getCharacter().getUpgradePoints());
+				CharacterProgress.saveFile();
 			}
+			
+			// If this was the last level
+			if (levelNumbers.get(levelNumbers.indexOf(levelNumber)) + 1 == levelNumbers.size()) {
+				sbg.enterState(Controller.CREDITS_STATE);
+			} else if (level.getCharacter().getUpgradePoints() > 0) { // If the player has collected upgrade points
+				sbg.enterState(Controller.UPGRADES_STATE);
+			} else { // If the player hasn't collected any upgrade points
+				sbg.enterState(Controller.LEVEL_SELECTION_STATE);
+			}
+			
 		} else if (level.hasLost()) {
 			Controller.initLevel(levelNumber);
 		}
