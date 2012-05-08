@@ -114,6 +114,28 @@ public class PCharacter extends LivingObject {
 			maxRunningSpeed = Variables.CHAR_SPEED;
 	}
 	
+	/**
+	 * Update the character. This should be called every frame.
+	 * 
+	 * @param delta Time since last frame.
+	 * @param airborne If the character is in the air/airborne.
+	 */
+	public void update(double delta, boolean airborne) {
+		
+		accelerate(delta);
+		setDirections(false);
+		// Update whether the character is in the air or standing on the ground.
+		setAirborne(airborne);
+		// Apply gravity to the character so he will fall down if he is in the air.
+		applyGravity(delta);
+		
+		// Move the character.
+		move(delta);
+		
+		applyFriction(delta);
+		updateImmortality();
+	}
+	
 	@Override
 	public void collide(InteractiveObject obj) {
 		if (obj instanceof Enemy) {

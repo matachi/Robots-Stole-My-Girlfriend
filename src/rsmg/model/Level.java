@@ -107,10 +107,11 @@ public class Level {
 	 */
 	public void update(double delta) {
 		updateCharacter(delta);
+ 		updateEnemies(delta);
  		updateBullets(delta, alliedBulletsList);
  		updateBullets(delta, enemyBulletList);
- 		updateEnemies(delta);
- 		// Checks if the items are picked-up
+		enemyBulletCollision();
+ 		// Checks if any items are picked-up
 		updateItems();
 		outsideLevelCheck();
 		
@@ -147,17 +148,7 @@ public class Level {
 	 */
 	private void updateCharacter(double delta) {
 		
-		character.accelerate(delta);
-		character.setDirections(false);
-
-		enemyBulletCollision();
-		// Update whether the character is in the air or standing on the ground.
-		character.setAirborne(isAirbourne(character));
-		// Apply gravity to the character so he will fall down if he is in the air.
-		character.applyGravity(delta);
-		
-		// Move the character.
-		character.move(delta);
+		character.update(delta, isAirborne(character));
 
 		// Check if the character has reached the end tile.
 		checkVictory();
@@ -165,19 +156,9 @@ public class Level {
 		// Check if the player has died, and then mark the level as lost.
 		checkDeath(delta);
 		
-		// update what direction the character is facing towards
-		//character.updateFacing();
-
-		
 		// Check so the character isn't inside a solid tile, and if so, move
 		// him outside it.
 		applyNormalForce(character);
-		
-		character.applyFriction(delta);
-		character.updateImmortality();
-
-
-		
 	}
 
 	private void enemyBulletCollision() {
@@ -301,7 +282,7 @@ public class Level {
 	 * @param obj The InteractiveObject.
 	 * @return true If there is no solid tile underneath specified object.
 	 */
-	private boolean isAirbourne(InteractiveObject obj) {
+	private boolean isAirborne(InteractiveObject obj) {
 		double y = obj.getY() + obj.getHeight() + 0.00001;
 		return !(tileGrid.tileIntersect(obj.getX(), y) ||
 				tileGrid.tileIntersect(obj.getX() + obj.getWidth() - 0.00001, y));
