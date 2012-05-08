@@ -695,11 +695,11 @@ class LevelState extends State {
 			
 			// Put all character image offsets in two maps
 			charXOffsets = new HashMap<String, Integer>();
-			charXOffsets.put(jumpLKey, -12*scale);
+			charXOffsets.put(jumpLKey, -8*scale);
 			charXOffsets.put(jumpRKey, -6*scale);
-			charXOffsets.put(runLKey, -12*scale);
-			charXOffsets.put(runRKey, -2*scale);
-			charXOffsets.put(standLKey, -12*scale);
+			charXOffsets.put(runLKey, -8*scale);
+			charXOffsets.put(runRKey, -6*scale);
+			charXOffsets.put(standLKey, -8*scale);
 			charXOffsets.put(standRKey, -6*scale);
 			charXOffsets.put(dashLKey, -6*scale);
 			charXOffsets.put(dashRKey, -36*scale);
@@ -799,10 +799,10 @@ class LevelState extends State {
 				case ObjectName.PISTOL : 
 					charMap = pistolMap;
 					break;
-				case ObjectName.ROCKET_LAUNCHER:
+				case ObjectName.ROCKET_LAUNCHER :
 					charMap = rpgMap;
 					break;
-				case ObjectName.SHOTGUN:
+				case ObjectName.SHOTGUN :
 					charMap = shotgunMap;
 					break;
 			}
@@ -826,19 +826,20 @@ class LevelState extends State {
 				else
 					key = jumpLKey;
 			
-			} else if (level.getCharacter().isRunning()){ // Char is running
+			} else if (level.getCharacter().isStandingStill()) { // Char is standing still
+				
+				if (level.getCharacter().isFacingRight())
+					key = standRKey;
+				else
+					key = standLKey;
+				
+			} else { // Char is running
 		
 				if (level.getCharacter().isFacingRight())
 					key = runRKey;
 				else
 					key = runLKey;
 				
-			} else if (level.getCharacter().noDirection()) { // Char is standing still
-					
-					if (level.getCharacter().isFacingRight())
-						key = standRKey;
-					else
-						key = standLKey;
 			}
 		}
 	}
