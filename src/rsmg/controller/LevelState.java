@@ -108,6 +108,16 @@ class LevelState extends State {
 	private float characterY;
 
 	/**
+	 * Number of tiles that are visible on the screen's width.
+	 */
+	private int numberOfTilesVisibleX;
+
+	/**
+	 * Number of tiles that are visible on the screen's height.
+	 */
+	private int numberOfTilesVisibleY;
+
+	/**
 	 * Character hitbox.
 	 */
 	private Rectangle hitboxRect;
@@ -131,6 +141,12 @@ class LevelState extends State {
 		scale = (int) ((float)gc.getWidth() / 480);
 		int filter = Image.FILTER_NEAREST;
 		String folderPath = "res/sprites/level/";
+
+		// Store the maximum number of tiles that can possibly fit on the width
+		// and height of the screen. This is used to reduce the number of tiles
+		// that are drawn to only the visible ones.
+		numberOfTilesVisibleX = gc.getWidth() / Variables.TILESIZE / scale + 2;
+		numberOfTilesVisibleY = gc.getHeight() / Variables.TILESIZE / scale + 2;
 		
 		/**
 		 * The background image in the level.
@@ -370,8 +386,27 @@ class LevelState extends State {
 	 * Draw the environment which consists of the tiles.
 	 */
 	private void drawEnvironment() {
-		for (int y = 0; y < level.getTileGrid().getHeight(); y++)
-			for (int x = 0; x < level.getTileGrid().getWidth(); x++)
+		
+		// These are the tiles that are visible farthest to the left and to the
+		// top of the screen.
+		int tileVisibleLeft = level.getTileGrid().getTilePosFromRealPos(-cameraX/scale);
+		int tileVisibleTop = level.getTileGrid().getTilePosFromRealPos(-cameraY/scale);
+		
+		// The tiles that are visible farthest to the right and to the bottom of
+		// the screen.
+		int tileVisibleRight = tileVisibleLeft + numberOfTilesVisibleX;
+		int tileVisibleBottom = tileVisibleTop + numberOfTilesVisibleY;
+		
+		// Check so the tiles calculated to the right and to the bottom exist in
+		// the tile grid. If not, set them to the tile grid's maximum values.
+		tileVisibleRight = (tileVisibleRight > level.getTileGrid().getWidth()) ? level.getTileGrid().getWidth() : tileVisibleRight;
+		tileVisibleBottom = (tileVisibleBottom > level.getTileGrid().getHeight()) ? level.getTileGrid().getHeight() : tileVisibleBottom;
+		
+		// Now only draw the tiles that are visible on the screen. This greatly
+		// improves the performance compared to drawing all tiles in the whole
+		// tile grid.
+		for (int y = tileVisibleTop; y < tileVisibleBottom; y++)
+			for (int x = tileVisibleLeft; x < tileVisibleRight; x++)
 				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*Variables.TILESIZE*scale+cameraX, y*Variables.TILESIZE*scale+cameraY);
 	}
 
