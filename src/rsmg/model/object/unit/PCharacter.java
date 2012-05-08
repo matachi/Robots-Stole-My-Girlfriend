@@ -80,18 +80,25 @@ public class PCharacter extends LivingObject {
 	 *  upgradePoints the user can spend after each level
 	 */
 	private int upgradePoints = 0;
+	
 	/**
 	 * how many times the character can jump while in the air
 	 */
 	private int doubleJumps = 1;
+	
 	/**
 	 * boolean value describing if the character is trying to run East or not
 	 */
 	private boolean directionEast = false;
+	
 	/**
 	 * boolean value describing if the character is trying to run west or not
 	 */
 	private boolean directionWest = false;
+	
+	private boolean runningRight = false;
+	private boolean runningLeft = false;
+	
 	
 	/**
 	 * Create a character that the player controls.
@@ -281,7 +288,9 @@ public class PCharacter extends LivingObject {
 	public void moveLeft() {
 		if (this.getVelocityX()*(-1) < maxRunningSpeed || this.isFacingRight())
 			directionWest = true;
+		
 		setFacing(false);
+		runningLeft = true;
 	}
 
 	/**
@@ -290,12 +299,11 @@ public class PCharacter extends LivingObject {
 	public void moveRight() {
 		if (this.getVelocityX() < maxRunningSpeed || !this.isFacingRight())
 			directionEast = true;
+		
+		runningRight = true;
 		setFacing(true);
 	}
 	
-	public boolean isRunning() {
-		return directionEast || directionWest;
-	}
 	
 	/**
 	 * returns true if the character has double jumps to use
@@ -305,9 +313,17 @@ public class PCharacter extends LivingObject {
 		return doubleJumps > 0 && CharacterProgress.isDoubleJumpUnlocked();
 		
 	}
+	
+	public void moveRightReleased() {
+		runningLeft = false;
+	}
+	
+	public void moveLeftReleased() {
+		runningRight = false;
+	}
 
 	/**
-	 * Called when the user releases the jump key.
+	 * Called when the character no longer tries to go higher when he is jumping.
 	 */
 	public void jumpReleased() {
 		if (getVelocityY() < Variables.RELEASED_JUMP_VELOCITY)
@@ -419,12 +435,9 @@ public class PCharacter extends LivingObject {
 		directionEast = newDirection;
 		directionWest = newDirection;
 	}
-	/**
-	 * returns true if the character isn't trying to go anywhere
-	 * @return true if the character isn't trying to go anywhere
-	 */
-	public boolean noDirection() {
-		return !(directionEast && directionWest);
+	
+	public boolean isRunning() {
+		return runningRight || runningLeft;
 	}
 	
 	public double getDistanceDashed(){

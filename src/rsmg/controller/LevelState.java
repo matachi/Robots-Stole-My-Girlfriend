@@ -84,7 +84,17 @@ class LevelState extends State {
 	 * Track if the up key is down or not.
 	 */
 	private boolean upKeyIsDown;
-
+	
+	/**
+	 * Track if the right key is down or not
+	 */
+	private boolean rightKeyIsDown;
+	
+	/**
+	 * Track if the left key is down or not
+	 */
+	private boolean leftKeyIsDown;
+	
 	/**
 	 * Store how much everything should be scaled in the view.
 	 */
@@ -122,6 +132,9 @@ class LevelState extends State {
 	 */
 	private Rectangle hitboxRect;
 	private Graphics hitboxGrap;
+
+
+	
 	
 	/**
 	 * Construct the level.
@@ -235,6 +248,13 @@ class LevelState extends State {
 		
 		bullets.put(ObjectName.ROCKETR, rocketR);
 		bullets.put(ObjectName.ROCKETL, rocketL);
+		
+		/**
+		 * create an animation for laserfire effect
+		 */
+		Image laserFireImage = new Image(folderPath+"laserFire.png", false, filter).getScaledCopy(scale);
+		SpriteSheet laserFireSheet = new SpriteSheet(laserFireImage, 10*scale, 14*scale);
+		Animation laserFire = new Animation(laserFireSheet, 200);
 		
 		/**
 		 * create an animation for explosions
@@ -534,13 +554,20 @@ class LevelState extends State {
 		// left arrow key
 		if (input.isKeyDown(Input.KEY_LEFT)) {
 			modelCharacter.moveLeft();
-		
+			leftKeyIsDown = true;
+		} else if(LeftIsReleased()) {
+			modelCharacter.moveLeftReleased();
 		}
 		
 		// right arrow key
-		else if (input.isKeyDown(Input.KEY_RIGHT)) {
+		if (input.isKeyDown(Input.KEY_RIGHT)) {
 			modelCharacter.moveRight();
+			rightKeyIsDown = true;
+			
+		} else if(rightIsReleased()) {
+			modelCharacter.moveRightReleased();
 		}
+		
 		
 		// up arrow key
 		if (input.isKeyDown(Input.KEY_UP)) {
@@ -551,6 +578,7 @@ class LevelState extends State {
 			modelCharacter.jumpReleased();
 		}
 		
+
 		// space bar
 		if (input.isKeyPressed(Input.KEY_SPACE))
 			modelCharacter.attack();
@@ -574,6 +602,7 @@ class LevelState extends State {
 		// digit key 3
 		if (input.isKeyPressed(Input.KEY_3))
 			modelCharacter.changeWeapon(ObjectName.ROCKET_LAUNCHER);
+		
 	}
 
 	/**
@@ -583,6 +612,30 @@ class LevelState extends State {
 	private boolean upKeyIsReleased() {
 		if (upKeyIsDown) {
 			upKeyIsDown = false;
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns if the up key has been released since last loop.
+	 * @return If the up key has been released.
+	 */
+	private boolean rightIsReleased() {
+		if (rightKeyIsDown) {
+			rightKeyIsDown = false;
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns if the up key has been released since last loop.
+	 * @return If the up key has been released.
+	 */
+	private boolean LeftIsReleased() {
+		if (leftKeyIsDown) {
+			leftKeyIsDown = false;
 			return true;
 		}
 		return false;
@@ -826,20 +879,19 @@ class LevelState extends State {
 				else
 					key = jumpLKey;
 			
-			} else if (level.getCharacter().isStandingStill()) { // Char is standing still
+			} else if (level.getCharacter().isRunning()) { // Char is standing still
 				
-				if (level.getCharacter().isFacingRight())
-					key = standRKey;
-				else
-					key = standLKey;
-				
-			} else { // Char is running
-		
 				if (level.getCharacter().isFacingRight())
 					key = runRKey;
 				else
 					key = runLKey;
 				
+			} else { // Char is standing still
+		
+				if (level.getCharacter().isFacingRight())
+					key = standRKey;
+				else
+					key = standLKey;
 			}
 		}
 	}
