@@ -25,10 +25,10 @@ public class BossBotHead extends Enemy implements IBoss {
 	private static int OFFSETX2 = -18;
 
 	
-	private static int DMG = 70;
+	private static int DMG = 60;
 	
 	public BossBotHead(double x, double y, List<Bullet> bulletList) {
-		super(x, y, 48, 42, 1000, ObjectName.BOSSBOT);
+		super(x, y, 48, 42, 400, ObjectName.BOSSBOT);
 		this.bulletList = bulletList;
 	}
 

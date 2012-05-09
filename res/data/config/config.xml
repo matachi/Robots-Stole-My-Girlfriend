@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<fullScreen>false</fullScreen>
-	<music>true</music>
+	<music>false</music>
 	<soundEffects>false</soundEffects>
 </config>

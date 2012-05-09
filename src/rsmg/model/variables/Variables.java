@@ -65,7 +65,7 @@ public enum Variables{
 	/**
 	 * the amount of time in between each damage tick of an explosion
 	 */
-	public static final int EXPLOSION_TICK = 20;
+	public static final int EXPLOSION_TICK = 40;
 	/**
 	 * the amount of time an explosion persists in seconds
 	 */

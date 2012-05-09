@@ -14,11 +14,11 @@ public class Shotgun implements Weapon {
 	private boolean shot;
 	private int bulletWidth = 2;
 	private int bulletHeight = 2;
-	private int bulletDamage = 2;
+	private int bulletDamage = 3;
 	private int bulletSpeed = 600;
 	private int offsetX;
 	private int offsetY = 5;
-	private static int amountOfBulletsPerShot = 6;
+	private static int amountOfBulletsPerShot = 9;
 	private static int shotgunKnockback = 50;
 	private final int spread;
 	
@@ -58,9 +58,9 @@ public class Shotgun implements Weapon {
 	@Override
 	public long getCooldown() {
 		if(CharacterProgress.isRapidFireUnlocked()) {
-			return 450;
+			return 550;
 		}
-		return 500;
+		return 600;
 	}
 	
 	@Override
