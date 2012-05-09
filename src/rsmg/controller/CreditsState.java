@@ -36,6 +36,9 @@ class CreditsState extends State {
 		super(stateID);
 	}
 
+	/**
+	 * Initialise the credit text
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -49,17 +52,20 @@ class CreditsState extends State {
 		// Credits text
 		credits = "Robots Stole My Girlfriend";
 		
-		credits += "\n\n\nStory writer: Johan Gr√∂nvall";
-		credits += "\n\nProgramming: Daniel Jonsson\n             Johan Gr√∂nvall\n             Johan Rign√§s";
-		credits += "\n\nArt design: Daniel Jonsson\n            Johan Gr√∂nvall\n            Johan Rign√§s";
+		credits += "\n\n\nStory writer: Johan Grˆnvall";
+		credits += "\n\nProgramming: Daniel Jonsson\n             Johan Grˆnvall\n             Johan Rign‰s";
+		credits += "\n\nArt design: Daniel Jonsson\n            Johan Grˆnvall\n            Johan Rign‰s";
 
-		credits += "\n\n\n\nIn memory to Johannes Ul√©n and Victor R√•dmark.";
+		credits += "\n\n\n\nIn memory to Johannes Ul√©n and Victor RÂdmark.";
 		
 		// Position for the text
 		xPosition = gc.getWidth() / 10;
 		yPosition = gc.getHeight();
 	}
 
+	/**
+	 * Draw out the credit-text to the screen and listen for when to stop and go to level-selection screen.
+	 */
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		font.drawString(xPosition, yPosition, credits);
@@ -67,6 +73,9 @@ class CreditsState extends State {
 			sbg.enterState(Controller.LEVEL_SELECTION_STATE);
 	}
 
+	/**
+	 * Make the credit-text move upwards
+	 */
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {

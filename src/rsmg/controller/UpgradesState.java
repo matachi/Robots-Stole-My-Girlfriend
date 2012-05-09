@@ -179,14 +179,24 @@ class UpgradesState extends State {
 		drawUpgradeButtons();
 	}
 	
+	/**
+	 * Draws the background to the screen
+	 */
 	private void drawBackground() {
 		background.draw(0, topOffset);
 	}
 	
+	/**
+	 * Draws the title to the screen
+	 * @param windowWidth width of the window/screen
+	 */
 	private void drawTitle(int windowWidth) {
 		title.draw((windowWidth - title.getWidth()) / 2, 80*scale+topOffset);
 	}
 	
+	/**
+	 * Draw the text to the screen
+	 */
 	private void drawTexts() {
 		// titles for the upgrade categories
 		font.drawString(300*scale, 300*scale, "Movement Upgrades");
@@ -196,6 +206,9 @@ class UpgradesState extends State {
 		font.drawString(100*scale, 100*scale, "Upgrade Points: " + CharacterProgress.getUpgradePoints());
 	}
 	
+	/**
+	 * Draws the upgrade buttons
+	 */
 	private void drawUpgradeButtons() {
 		for (UpgradeButton button : upgradeButtons) {
 			if (button.isAvailable()) {
@@ -230,6 +243,13 @@ class UpgradesState extends State {
 //		menuButtons.get(selectedButton).toggleSelected();
 	}
 
+	/**
+	 * Handle inputs from the user to navigate in the upgrade menu
+	 * @param input
+	 * @param gc
+	 * @param sbg
+	 * @throws SlickException
+	 */
 	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if (input.isKeyPressed(Input.KEY_UP))
 			navigateUpInGrid();
@@ -249,6 +269,9 @@ class UpgradesState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate up in the menu.
+	 */
 	private void navigateUpInGrid() {
 		if (selected > 1) {
 			upgradeButtons.get(selected).toggleSelected();
@@ -260,6 +283,9 @@ class UpgradesState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate down in the menu.
+	 */
 	private void navigateDownInGrid() {
 		if (selected < 2) {
 			upgradeButtons.get(selected).toggleSelected();
@@ -271,6 +297,9 @@ class UpgradesState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate left in the menu.
+	 */
 	private void navigateLeftInGrid() {
 		if (selected == 1 || selected == 3 || selected == 5 || (selected == 4 && upgradeButtons.get(3).isAvailable())) {
 			upgradeButtons.get(selected).toggleSelected();
@@ -279,6 +308,9 @@ class UpgradesState extends State {
 		}
 	}
 
+	/**
+	 * Navigate right in the menu.
+	 */
 	private void navigateRightInGrid() {
 		if (selected == 0 || selected == 2 || selected == 4 || (selected == 3 && upgradeButtons.get(4).isAvailable()) ) {
 			upgradeButtons.get(selected).toggleSelected();
@@ -287,6 +319,9 @@ class UpgradesState extends State {
 		}
 	}
 	
+	/**
+	 * Select an upgrade
+	 */
 	private void selectUpgrade() {
 		if (!upgradeButtons.get(selected).isUnlocked() && CharacterProgress.getUpgradePoints() > 0) {
 			CharacterProgress.setUpgrade(upgradeButtons.get(selected).getUpgrade(), true);
@@ -349,42 +384,81 @@ class UpgradesState extends State {
 			available = true;
 		}
 		
+		/**
+		 * Toggle this button
+		 */
 		public void toggleSelected() {
 			selected = !selected;
 		}
 		
+		/**
+		 * Unlock this button
+		 * @param unlocked true if it should be unlocked, otherwise false
+		 */
 		public void setUnlocked(boolean unlocked) {
 			this.unlocked = unlocked;
 		}
 		
+		/**
+		 * Set if this button are to be available
+		 * @param available If available or not
+		 */
 		public void setAvailable(boolean available) {
 			this.available = available;
 		}
 		
+		/**
+		 * Tells if the button is selected or not
+		 * @return true if selected, otherwise false
+		 */
 		public boolean isSelected() {
 			return selected;
 		}
 		
+		/**
+		 * Tells if the button is unlocked
+		 * @return true if unlocked, otherwise false
+		 */
 		public boolean isUnlocked() {
 			return unlocked;
 		}
 		
+		/**
+		 * Tells if the button is available
+		 * @return true if available, otherwise false 
+		 */
 		public boolean isAvailable() {
 			return available;
 		}
 		
+		/**
+		 * Get the upgrade
+		 * @return upgrade as String
+		 */
 		public String getUpgrade() {
 			return upgrade;
 		}
 		
+		/**
+		 * Retrieve the x position for this button
+		 * @return X position as float
+		 */
 		public float getX() {
 			return x;
 		}
 		
+		/**
+		 * Retrieve the Y position for this button
+		 * @return Y position as float
+		 */
 		public float getY() {
 			return y;
 		}
 		
+		/**
+		 * Get the text for this button
+		 * @return Button text
+		 */
 		public String getText() {
 			return buttonText;
 		}

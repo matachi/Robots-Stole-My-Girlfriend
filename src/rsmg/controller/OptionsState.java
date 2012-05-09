@@ -22,7 +22,7 @@ import rsmg.io.Config;
 class OptionsState extends State {
 
 	/**
-	 * 
+	 * Set the default option settings
 	 */
 	private static final int FULLSCREEN_SETTING = 0;
 	private static final int MUSIC_SETTING = 1;
@@ -281,33 +281,58 @@ class OptionsState extends State {
 			this.selected = false;
 		}
 		
+		/**
+		 * Get this button
+		 * @return this button
+		 */
 		public Image getImage() {
 			return entry;
 		}
 		
+		/**
+		 * Retrieve the x position for this button
+		 * @return X position as float
+		 */
 		public float getX() {
 			return x;
 		}
 		
+		/**
+		 * Retrieve the y position for this button
+		 * @return Y position as float
+		 */
 		public float getY() {
 			return y;
 		}
 		
+		/**
+		 * Toggle this button
+		 */
 		public void toggleOn() {
 			on = !on;
 		}
 		
+		/**
+		 * Tells if the button is selected or not
+		 * @return If button is selected
+		 */
 		public boolean getOn() {
 			return on;
 		}
 		
+		/**
+		 * Toggle this button
+		 */
 		public void toggleSelected() {
 			selected = !selected;
 		}
 		
+		/**
+		 * Tells if the button is selected or not
+		 * @return If button is selected
+		 */
 		public boolean getSelected() {
 			return selected;
 		}
 	}
-
 }

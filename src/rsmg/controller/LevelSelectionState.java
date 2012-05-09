@@ -75,8 +75,14 @@ class LevelSelectionState extends State {
 	 */
 	private int selectedButton;
 	
+	/**
+	 * Maximum number of Tiles on a each row
+	 */
 	private static final int maxTilesOnRow = 6;
 	
+	/**
+	 * Number of level rows. Depending on number of levels
+	 */
 	private int numberOfRows;
 	
 	/**
@@ -92,6 +98,9 @@ class LevelSelectionState extends State {
 		super(stateID);
 	}
 
+	/**
+	 * Initialise the level selection menu(LevelSelectionState)
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
@@ -143,6 +152,10 @@ class LevelSelectionState extends State {
 		selectedButton = 0;
 	}
 	
+	/**
+	 * Fills the buttons to enter a level on the menu. Called at initialisation
+	 * @throws SlickException
+	 */
 	private void fillLevelButtonsList() throws SlickException {
 		// Get all available level numbers and sort them.
 		List<Integer> levelNumbers = (ArrayList<Integer>)Levels.getLevelNumbers();
@@ -186,6 +199,10 @@ class LevelSelectionState extends State {
 			levelButtons.get(i).setUnlocked(i < unlockedLevels);
 	}
 
+	/**
+	 * This method is called multiply times every second to draw the graphics on
+	 * the screen. Here is all images being drawn.
+	 */
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
@@ -220,6 +237,9 @@ class LevelSelectionState extends State {
 		selectionGlow.draw(sButton.getX()-(47*scale), sButton.getY()-(46*scale));
 	}
 
+	/**
+	 * Update the level selection screen
+	 */
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
@@ -237,6 +257,13 @@ class LevelSelectionState extends State {
 			backgroundScrollingRight = !backgroundScrollingRight;
 	}
 	
+	/**
+	 * Handle input from the user to navigate in the level selection menu
+	 * @param input key pressed
+	 * @param gc
+	 * @param sbg
+	 * @throws SlickException
+	 */
 	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if (input.isKeyPressed(Input.KEY_LEFT))
 			navigateLeftInMenu();
@@ -266,21 +293,33 @@ class LevelSelectionState extends State {
 		}
 	}
 	
+	/**
+	 * Navigating left in the level selection menu
+	 */
 	private void navigateLeftInMenu() {
 		if (selectedButton % maxTilesOnRow > 0)
 			selectedButton--;
 	}
 	
+	/**
+	 * Navigate right in the level selection menu
+	 */
 	private void navigateRightInMenu() {
 		if (selectedButton % maxTilesOnRow < maxTilesOnRow-1 && selectedButton < levelButtons.size()-1 && levelButtons.get(selectedButton+1).isUnlocked())
 			selectedButton++;
 	}
 	
+	/**
+	 * Navigate up in the level selection menu
+	 */
 	private void navigateUpInMenu() {
 		if (selectedButton / maxTilesOnRow > 0)
 			selectedButton -= maxTilesOnRow;
 	}
 	
+	/**
+	 * Navigate down in the level selection menu
+	 */
 	private void navigateDownInMenu() {
 		if (selectedButton + maxTilesOnRow < levelButtons.size() && levelButtons.get(selectedButton + maxTilesOnRow).isUnlocked())
 			selectedButton += maxTilesOnRow;
@@ -321,22 +360,40 @@ class LevelSelectionState extends State {
 			this.unlocked = unlocked;
 		}
 		
+		/**
+		 * @return The level number for this button
+		 */
 		private int getLevelNumber() {
 			return levelNumber;
 		}
 		
+		/**
+		 * @return If this button is locked or not
+		 */
 		private boolean isUnlocked() {
 			return unlocked;
 		}
 		
+		/**
+		 * Change the lock/unlock state of a button
+		 * @param unlocked if it should be unlocked or not
+		 */
 		private void setUnlocked(boolean unlocked) {
 			this.unlocked = unlocked;
 		}
 		
+		/**
+		 * Retrieve the x position for this button
+		 * @return x position as float
+		 */
 		public float getX() {
 			return x;
 		}
 		
+		/**
+		 * Retrieve the y position for this button
+		 * @return y position as float
+		 */
 		public float getY() {
 			return y;
 		}

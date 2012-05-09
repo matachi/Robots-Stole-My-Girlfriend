@@ -42,7 +42,6 @@ import rsmg.model.variables.Variables;
  */
 class LevelState extends State {
 
-	
 	/**
 	 * The background image behind the tile grid.
 	 */
@@ -134,9 +133,6 @@ class LevelState extends State {
 	private Rectangle hitboxRect;
 	private Graphics hitboxGrap;
 
-
-	
-	
 	/**
 	 * Construct the level.
 	 * @param stateID The ID to the state.

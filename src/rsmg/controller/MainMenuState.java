@@ -129,6 +129,12 @@ class MainMenuState extends State {
 		menuButtons.get(selectedButton).toggleSelected();
 	}
 
+	/**
+	 * Handle input from the user to navigate in the main menu
+	 * @param input key pressed
+	 * @param gc
+	 * @param sbg
+	 */
 	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) {
 		if (input.isKeyPressed(Input.KEY_UP)) {
 			navigateUpInMenu();
@@ -139,6 +145,9 @@ class MainMenuState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate up in the main menu
+	 */
 	private void navigateUpInMenu() {
 		if (selectedButton > 0) {
 			menuButtons.get(selectedButton).toggleSelected();
@@ -147,6 +156,9 @@ class MainMenuState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate down in the main menu
+	 */
 	private void navigateDownInMenu() {
 		if (selectedButton < menuButtons.size()-1) {
 			menuButtons.get(selectedButton).toggleSelected();
@@ -155,6 +167,11 @@ class MainMenuState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate to another state/menu screen
+	 * @param gc
+	 * @param sbg
+	 */
 	private void changeState(GameContainer gc, StateBasedGame sbg) {
 		switch (selectedButton) {
 		case 0:
@@ -172,19 +189,35 @@ class MainMenuState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate to the level selection menu with saved data
+	 * @param sbg
+	 */
 	private void continuePreviousGame(StateBasedGame sbg) {
 		sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
 	}
 	
+	/**
+	 * Navigate to level selection menu without any saved data
+	 * @param sbg
+	 */
 	private void createNewGame(StateBasedGame sbg) {
 		CharacterProgress.resetProgress();
 		sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
 	}
 	
+	/**
+	 * Navigate to the options menu
+	 * @param sbg
+	 */
 	private void openOptionsView(StateBasedGame sbg) {
 		sbg.enterState(Controller.OPTIONS_STATE, null, new FadeInTransition());
 	}
 	
+	/**
+	 * Quit the game
+	 * @param gc
+	 */
 	private void closeGame(GameContainer gc) {
 		gc.exit();
 	}
@@ -227,6 +260,10 @@ class MainMenuState extends State {
 			selected = false;
 		}
 		
+		/**
+		 * Get this button
+		 * @return this button
+		 */
 		public Image getImage() {
 			if (selected)
 				return selectedButton;
@@ -234,14 +271,25 @@ class MainMenuState extends State {
 				return button;
 		}
 		
+		/**
+		 * Toggle this button
+		 */
 		public void toggleSelected() {
 			selected = !selected;
 		}
 		
+		/**
+		 * Retrieve the x position for this button
+		 * @return x position as float
+		 */
 		public float getX() {
 			return x;
 		}
 		
+		/**
+		 * Retrieve the y position for this button
+		 * @return y position as float
+		 */
 		public float getY() {
 			return y;
 		}

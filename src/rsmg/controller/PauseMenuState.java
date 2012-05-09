@@ -117,6 +117,13 @@ class PauseMenuState extends State {
 		menuButtons.get(selectedButton).toggleSelected();
 	}
 
+	/**
+	 * Handle inputs from the user to navigate in the pause menu
+	 * @param input
+	 * @param gc
+	 * @param sbg
+	 * @throws SlickException
+	 */
 	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if (input.isKeyPressed(Input.KEY_UP)) {
 			navigateUpInMenu();
@@ -140,6 +147,9 @@ class PauseMenuState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate up in the menu.
+	 */
 	private void navigateUpInMenu() {
 		if (selectedButton > 0) {
 			menuButtons.get(selectedButton).toggleSelected();
@@ -148,6 +158,9 @@ class PauseMenuState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate down in the menu.
+	 */
 	private void navigateDownInMenu() {
 		if (selectedButton < menuButtons.size()-1) {
 			menuButtons.get(selectedButton).toggleSelected();
@@ -194,6 +207,10 @@ class PauseMenuState extends State {
 			selected = false;
 		}
 		
+		/**
+		 * Get this button
+		 * @return this button
+		 */
 		public Image getImage() {
 			if (selected)
 				return selectedButton;
@@ -201,14 +218,25 @@ class PauseMenuState extends State {
 				return button;
 		}
 		
+		/**
+		 * Toggle this button
+		 */
 		public void toggleSelected() {
 			selected = !selected;
 		}
 		
+		/**
+		 * Retrieve the x position for this button
+		 * @return X position as float
+		 */
 		public float getX() {
 			return x;
 		}
 		
+		/**
+		 * Retrieve the y position for this button
+		 * @return Y position as float
+		 */
 		public float getY() {
 			return y;
 		}
