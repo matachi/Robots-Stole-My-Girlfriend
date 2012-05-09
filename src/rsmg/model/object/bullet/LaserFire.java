@@ -2,7 +2,6 @@ package rsmg.model.object.bullet;
 
 import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
-import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
 
 public class LaserFire extends Bullet implements Explosion{
@@ -24,7 +23,10 @@ public class LaserFire extends Bullet implements Explosion{
 	public LaserFire(InteractiveObject detonator){
 		super(detonator.getX()-10, detonator.getY()-14, 20, 28, ObjectName.LASERFIRE, 70, new Vector2d(0,0));
 	}
-
+	
+	/**
+	 * Ages 6 times faster than explosions so that it will disappear faster
+	 */
 	@Override
 	public void update(double delta) {
 		age += delta*6;

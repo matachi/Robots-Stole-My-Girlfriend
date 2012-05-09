@@ -57,7 +57,7 @@ public abstract class Enemy extends LivingObject{
 		}
 	}
 	/**
-	 * returns true if this Enemy can take damage from explosions
+	 * returns true if this Enemy can take damage from explosions or laserBullets
 	 * @return true if this Enemy can take damage from explosions
 	 */
 	public boolean isVulnerabletoExplosions(){

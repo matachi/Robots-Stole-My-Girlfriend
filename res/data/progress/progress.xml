@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <progress>
-  <unlockedLevels>6</unlockedLevels>
+  <unlockedLevels>7</unlockedLevels>
   <unlockedWeapons>
     <pistol>true</pistol>
     <rpg>true</rpg>
     <shotgun>true</shotgun>
   </unlockedWeapons>
-  <upgradePoints>-6</upgradePoints>
+  <upgradePoints>7</upgradePoints>
   <unlockedUpgrades>
     <dash>true</dash>
     <doubleJump>true</doubleJump>
