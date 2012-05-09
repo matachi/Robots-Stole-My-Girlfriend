@@ -52,11 +52,11 @@ class CreditsState extends State {
 		// Credits text
 		credits = "Robots Stole My Girlfriend";
 		
-		credits += "\n\n\nStory writer: Johan Grönvall";
-		credits += "\n\nProgramming: Daniel Jonsson\n             Johan Grönvall\n             Johan Rignäs";
-		credits += "\n\nArt design: Daniel Jonsson\n            Johan Grönvall\n            Johan Rignäs";
+		credits += "\n\n\nStory writer: Johan Grï¿½nvall";
+		credits += "\n\nProgramming: Daniel Jonsson\n             Johan Grï¿½nvall\n             Johan Rignï¿½s";
+		credits += "\n\nArt design: Daniel Jonsson\n            Johan Grï¿½nvall\n            Johan Rignï¿½s";
 
-		credits += "\n\n\n\nIn memory to Johannes UlÃ©n and Victor Rådmark.";
+		credits += "\n\n\n\nIn memory to Johannes UlÃ©n and Victor Rï¿½dmark.";
 		
 		// Position for the text
 		xPosition = gc.getWidth() / 10;
@@ -69,8 +69,10 @@ class CreditsState extends State {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		font.drawString(xPosition, yPosition, credits);
-		if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE))
+		if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+			MusicHandler.startTrack(MusicHandler.Track.MENU_MUSIC);
 			sbg.enterState(Controller.LEVEL_SELECTION_STATE);
+		}
 	}
 
 	/**

@@ -8,7 +8,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
@@ -17,7 +16,6 @@ import org.newdawn.slick.state.transition.BlobbyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.CharacterProgress;
-import rsmg.io.Config;
 import rsmg.io.Levels;
 
 /**
@@ -284,12 +282,17 @@ class LevelSelectionState extends State {
 			sbg.enterState(Controller.UPGRADES_STATE, null, new FadeInTransition());
 		
 		else if (input.isKeyDown(Input.KEY_ENTER)) {
-			Controller.initLevel(levelButtons.get(selectedButton).getLevelNumber());
-			sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());
-			if (Config.musicOn()) {
-				Music backgroundMusic = new Music("res/music/WolfRock-NightOfTheMutants.ogg", true);
-				backgroundMusic.loop(1, 0.2f);
+			
+			int selectedLevel = levelButtons.get(selectedButton).getLevelNumber();
+			Controller.initLevel(selectedLevel);
+			
+			if (Levels.isBossLevel(selectedLevel)) { // Is a boss level.
+				MusicHandler.startTrack(MusicHandler.Track.BOSS_MUSIC);
+			} else { // Is a regular level.
+				MusicHandler.startTrack(MusicHandler.Track.LEVEL_MUSIC);
 			}
+			
+			sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());
 		}
 	}
 	

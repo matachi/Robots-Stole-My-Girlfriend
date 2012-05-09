@@ -37,7 +37,7 @@ import rsmg.model.variables.Variables;
 
 /**
  * The state where the levels are played out.
- * @author Daniel Jonsson, Johan Grönvall, Johan Rignäs
+ * @author Daniel Jonsson, Johan Grï¿½nvall, Johan Rignï¿½s
  *
  */
 class LevelState extends State {
@@ -525,8 +525,10 @@ class LevelState extends State {
 			if (levelNumbers.indexOf(levelNumber) + 1 == levelNumbers.size()) {
 				sbg.enterState(Controller.CREDITS_STATE, new FadeOutTransition(), new FadeInTransition());
 			} else if (level.getCharacter().getUpgradePoints() > 0) { // If the player has collected upgrade points
+				MusicHandler.startTrack(MusicHandler.Track.MENU_MUSIC);
 				sbg.enterState(Controller.UPGRADES_STATE, new FadeOutTransition(), new FadeInTransition());
 			} else { // If the player hasn't collected any upgrade points
+				MusicHandler.startTrack(MusicHandler.Track.MENU_MUSIC);
 				sbg.enterState(Controller.LEVEL_SELECTION_STATE, new FadeOutTransition(), new FadeInTransition());
 			}
 			
