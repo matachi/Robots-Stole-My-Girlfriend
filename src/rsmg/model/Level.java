@@ -228,8 +228,8 @@ public class Level {
 					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL)
 						newBullets.add(ExplosionFactory.getExplosion(bullet));
 					
-					
-					if(!(bullet instanceof Explosion)){
+					//remove the colliding bullets if they arent laserBullets or explosions
+					if(!((bullet instanceof Explosion)  || bullet.getName().equals(ObjectName.LASER_BULLET))){
 						expiredBullets.add(bullet);
 					}
 				}
@@ -250,10 +250,12 @@ public class Level {
 			bullet.update(delta);
 			bullet.move(delta);
 			
+			//if a bullet hits a solid tile
 			if (tileGrid.intersectsWith(bullet)) {
 				
 				if (bullet.getName() == ObjectName.ROCKETR  || bullet.getName() == ObjectName.ROCKETL)
 					bulletList.add(ExplosionFactory.getExplosion(bullet));
+				
 				
 				if (bullet.getName().equals(ObjectName.LASERBOLT)) {
 					alliedBulletsList.add(new LaserFire(bullet));
@@ -265,6 +267,7 @@ public class Level {
 					bulletList.remove(i);
 				}
 			}
+			
 			if (bullet instanceof Explosion){
 				if(((Explosion)bullet).getAge() > Variables.EXPLOSIONDURATION){
 					bulletList.remove(i);

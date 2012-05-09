@@ -10,10 +10,10 @@ import rsmg.util.Vector2d;
 public class LaserPistol implements Weapon { 
 	
 	private boolean shot;
-	private static int bulletWidth = 5;
+	private static int bulletWidth = 9;
 	private static int bulletHeight = 3;
-	private static int bulletDamage = 3;
-	private static int bulletSpeed = 500;
+	private static int bulletDamage = 2;
+	private static int bulletSpeed = 600;
 	private int offsetX;
 	private int offsetY;
 	private Collection<Bullet> bulletList;
@@ -46,6 +46,9 @@ public class LaserPistol implements Weapon {
 		shot = true;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public long getCooldown() {
 		if(CharacterProgress.isRapidFireUnlocked()) {
@@ -54,6 +57,9 @@ public class LaserPistol implements Weapon {
 		return 500;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean shot() {
 		if (shot) {
@@ -63,11 +69,17 @@ public class LaserPistol implements Weapon {
 		return false;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Vector2d getKnockback(boolean isFacingRight) {
 		return new Vector2d(0,0);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getName() {
 		return ObjectName.LASER_PISTOL;

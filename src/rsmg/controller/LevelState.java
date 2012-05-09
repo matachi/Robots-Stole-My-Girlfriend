@@ -578,7 +578,7 @@ class LevelState extends State {
 		}
 		
 		// right arrow key
-		if (input.isKeyDown(Input.KEY_RIGHT)) {
+		if (input.isKeyDown(Input.KEY_RIGHT) && !leftKeyIsDown) {
 			modelCharacter.moveRight();
 			rightKeyIsDown = true;
 			
@@ -620,6 +620,10 @@ class LevelState extends State {
 		// digit key 3
 		if (input.isKeyPressed(Input.KEY_3))
 			modelCharacter.changeWeapon(ObjectName.ROCKET_LAUNCHER);
+		
+		// digit key 4
+		if (input.isKeyPressed(Input.KEY_4))
+			modelCharacter.changeWeapon(ObjectName.LASER_PISTOL);
 		
 		// digit key 0. Cheat to instantaneously complete the level.
 		if (input.isKeyPressed(Input.KEY_0))
@@ -738,6 +742,7 @@ class LevelState extends State {
 		private Map<String, Renderable> pistolMap;
 		private Map<String, Renderable> rpgMap;
 		private Map<String, Renderable> shotgunMap;
+		private Map<String, Renderable> laserPistolMap;
 		private Map<String, Integer> charXOffsets;
 		private String key;
 		
@@ -762,6 +767,7 @@ class LevelState extends State {
 			Image dead = new Image(folderPath+"charDead.png", false, filter).getScaledCopy(scale);
 			
 			// Make all sprite maps.
+			laserPistolMap = makeCharSpriteMap(folderPath+"charLaserPistolStanding.png", folderPath+"charLaserPistolJumping.png", folderPath+"charLaserPistolRunningSheet.png", dashingR, dashingL, dead, scale, filter);
 			pistolMap = makeCharSpriteMap(folderPath+"charPistolStanding.png", folderPath+"charPistolJumping.png", folderPath+"charPistolRunningSheet.png", dashingR, dashingL, dead, scale, filter);
 			rpgMap = makeCharSpriteMap(folderPath+"charRPGStanding.png", folderPath+"charRPGJumping.png", folderPath+"charRPGRunningSheet.png", dashingR, dashingL, dead, scale, filter);
 			shotgunMap = makeCharSpriteMap(folderPath+"charShotgunStanding.png", folderPath+"charShotgunJumping.png", folderPath+"charShotgunRunningSheet.png", dashingR, dashingL, dead, scale, filter);
@@ -879,6 +885,9 @@ class LevelState extends State {
 					break;
 				case ObjectName.SHOTGUN :
 					charMap = shotgunMap;
+					break;
+				case ObjectName.LASER_PISTOL :
+					charMap = laserPistolMap;
 					break;
 			}
 			

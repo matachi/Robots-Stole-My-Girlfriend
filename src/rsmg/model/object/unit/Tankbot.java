@@ -35,7 +35,7 @@ public class Tankbot extends Enemy implements AttackingEnemy{
 			bulletSpeed = -XBULLETSPEED;
 		}
 		
-		bulletList.add(new Bullet(getX(), getY(), 8, 2, ObjectName.LASER_BULLET, 25, new Vector2d(bulletSpeed, 0)));
+		bulletList.add(new Bullet(getX(), getY(), 8, 2, ObjectName.PISTOL_BULLET, 25, new Vector2d(bulletSpeed, 0)));
 
 	}
 }

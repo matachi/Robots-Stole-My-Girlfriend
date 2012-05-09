@@ -9,6 +9,7 @@ import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
+import rsmg.model.object.unit.weapon.LaserPistol;
 import rsmg.model.object.unit.weapon.Pistol;
 import rsmg.model.object.unit.weapon.RocketLauncher;
 import rsmg.model.object.unit.weapon.Shotgun;
@@ -113,6 +114,7 @@ public class PCharacter extends LivingObject {
 		weapons.put(ObjectName.PISTOL, new Pistol(bulletList));
 		weapons.put(ObjectName.SHOTGUN, new Shotgun(bulletList));
 		weapons.put(ObjectName.ROCKET_LAUNCHER, new RocketLauncher(bulletList));
+		weapons.put(ObjectName.LASER_PISTOL, new LaserPistol(bulletList));
 		currentWeapon = weapons.get(ObjectName.PISTOL);
 		
 		if (CharacterProgress.isIncRunningSpeedUnlocked())
@@ -239,12 +241,15 @@ public class PCharacter extends LivingObject {
 				CharacterProgress.isRPGUnlocked()) {
 			currentWeapon = weapons.get(weaponName);
 			
-		} else if (ObjectName.PISTOL.equals(weaponName) &&
-				CharacterProgress.isPistolUnlocked()) {
+		} else if (ObjectName.PISTOL.equals(weaponName)) {
 			currentWeapon = weapons.get(weaponName);
 			
-		} else if (ObjectName.SHOTGUN.equals(weaponName) &&
+		} else if (ObjectName.SHOTGUN.equals(weaponName) && 
 				CharacterProgress.isShotgunUnlocked()) {
+			currentWeapon = weapons.get(weaponName);
+				
+		} else if (ObjectName.LASER_PISTOL.equals(weaponName)) {
+				CharacterProgress.isPistolUnlocked();
 			currentWeapon = weapons.get(weaponName);
 		}
 	}
