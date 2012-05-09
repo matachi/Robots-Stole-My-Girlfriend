@@ -10,7 +10,7 @@ public class MiniBallBot extends Enemy{
 
 	@Override
 	public int getTouchDamage() {
-		return 20;
+		return 10;
 	}
 
 	@Override

@@ -6,7 +6,7 @@
     <rpg>true</rpg>
     <shotgun>true</shotgun>
   </unlockedWeapons>
-  <upgradePoints>7</upgradePoints>
+  <upgradePoints>8</upgradePoints>
   <unlockedUpgrades>
     <dash>true</dash>
     <doubleJump>true</doubleJump>

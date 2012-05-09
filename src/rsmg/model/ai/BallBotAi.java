@@ -43,7 +43,7 @@ public class BallBotAi implements Ai {
 	private boolean shouldShoot(double delta) {
 		cooldown += delta;
 		// Every 0.8 second it gets the chance to shoot.
-		if (cooldown > 0.8) {
+		if (cooldown > 2) {
 			cooldown = 0;
 			return true;
 		}
