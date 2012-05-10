@@ -8,11 +8,18 @@ import rsmg.model.object.unit.Enemy;
  */
 public class AggroRange {
 	
+	/**
+	 * Calculate if the PCharacter are in aggro range to an Enemy
+	 * @param playerX x coordinate of the PCharacter
+	 * @param playerY y coordinate of the PCharacter
+	 * @param enemy The enemy to check aggro for 
+	 * @param aggroRange The range before the enemy should get aggro to player
+	 * @return true if in aggro range, otherwise false
+	 */
 	public static boolean charInAggroRange(double playerX, double playerY, Enemy enemy, double aggroRange) {
 		double xDifference = playerX - enemy.getX();
 		double yDifference = playerY - enemy.getY();
 		
-		return (((xDifference > 0 && xDifference < aggroRange) || (xDifference < 0 && xDifference*(-1) < aggroRange)) &&
-				((yDifference > 0 && yDifference < aggroRange) || (yDifference < 0 && yDifference*(-1) < aggroRange)));
+		return (Math.abs(xDifference) < aggroRange) && (Math.abs(yDifference) < aggroRange);
 	}
 }
