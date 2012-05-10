@@ -567,7 +567,7 @@ class LevelState extends State {
 	 * Handle keyboard events.
 	 * @param input
 	 */
-	public void handleKeyboardEvents(Input input, StateBasedGame sbg) {
+	private void handleKeyboardEvents(Input input, StateBasedGame sbg) {
 		
 		PCharacter modelCharacter = level.getCharacter();
 		
