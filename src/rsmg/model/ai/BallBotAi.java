@@ -28,6 +28,9 @@ public class BallBotAi implements Ai {
 		angle = (Math.PI/4);
 	}
 	
+	/**
+	 * Update the state and actions for the BallBot
+	 */
 	@Override
 	public void update(double delta, double playerX, double playerY) {
 		angle += ANGLES_PER_SECOND*delta;
@@ -40,6 +43,11 @@ public class BallBotAi implements Ai {
 		}
 	}
 
+	/**
+	 * Tell when the BallBot should shoot
+	 * @param delta
+	 * @return true if it should shoot, otherwise false
+	 */
 	private boolean shouldShoot(double delta) {
 		cooldown += delta;
 		// Every 0.8 second it gets the chance to shoot.
@@ -50,13 +58,18 @@ public class BallBotAi implements Ai {
 		return false;
 	}
 	
+	/**
+	 * Spawns a MiniBallBot
+	 */
 	private void spawnEnemy() {
 		enemyAiList.add(new RocketBotAi(new MiniBallBot(enemy.getX(), enemy.getY())));
 	}
 
+	/**
+	 * Returns the BallBot using this AI
+	 */
 	@Override
 	public Enemy getEnemy() {
 		return enemy;
 	}
-	
 }

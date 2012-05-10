@@ -18,13 +18,16 @@ public class TankBotAi implements Ai {
 	private boolean aggresive = false;
 	
 	/**
-	 * creates a TankBotAi with default values
-	 * @param enemy
+	 * Creates a TankBotAi with default values
+	 * @param enemy Reference to the enemy it should control.
 	 */
 	public TankBotAi(Tankbot enemy) {
 		this.enemy = enemy;
 	}
 
+	/**
+	 * Update the state and actions for the TankBot
+	 */
 	@Override
 	public void update(double delta, double playerX, double playerY) {
 		
@@ -47,10 +50,17 @@ public class TankBotAi implements Ai {
 		}
 	}
 	
+	/**
+	 * Telling the TankBot to be still
+	 */
 	private void idle() {
 		enemy.setVelocityX(0);
 	}
 	
+	/**
+	 * Tell when the TankBot should attack
+	 * @return true if it should attack, otherwise false
+	 */
 	private boolean shouldAttack(double delta) {
 		cooldown += delta;
 		// Every 0.8 second it gets the chance to shoot.
@@ -61,7 +71,9 @@ public class TankBotAi implements Ai {
 		return false;
 	}
 	
-
+	/**
+	 * Returns the TankBot using this AI
+	 */
 	@Override
 	public Enemy getEnemy() {
 		return enemy;

@@ -7,17 +7,17 @@ import rsmg.util.Vector2d;
 public class BossBotAi implements Ai{
 	private BossBotHead enemy;
 	/**
-	 * the cooldown variable used for the bosses primary attack
+	 * The cooldown variable used for the bosses primary attack
 	 */
 	double cooldown;
 	
 	/**
-	 * the cooldown variable used to make the lasers sway every now and then.
+	 * The cooldown variable used to make the lasers sway every now and then.
 	 */
 	double SwayCooldown;
 	
 	/**
-	 * the cooldown variable used for the bosses secondary attack
+	 * The cooldown variable used for the bosses secondary attack
 	 */
 	double cooldown2;
 	
@@ -28,10 +28,17 @@ public class BossBotAi implements Ai{
 	private Vector2d bulletVector = new Vector2d();
 	private double offset = 0.05;
 	
+	/**
+	 * Create a BossBot AI.
+	 * @param enemy Reference to the enemy it should control.
+	 */
 	public BossBotAi(BossBotHead enemy) {
 		this.enemy = enemy;
 	}
 
+	/**
+	 * Update the state and actions for the BossBot
+	 */
 	@Override
 	public void update(double delta, double playerX, double playerY) {
 		
@@ -69,10 +76,11 @@ public class BossBotAi implements Ai{
 		cooldown += delta;
 		cooldown2 += delta;
 	}
+	
 	/**
-	 * describing if the boss should use his other attack
+	 * Describing if the boss should use his other attack
 	 * @param delta
-	 * @return
+	 * @return true if he should use his other attack, otherwise false
 	 */
 	private boolean shouldAttack2() {
 		if (cooldown2 > 0.2) {
@@ -82,10 +90,19 @@ public class BossBotAi implements Ai{
 			return false;
 	}
 
+	/**
+	 * Returns if the player is behind the boss
+	 * @param playerX The x coordinate of the player
+	 * @return true if the player is behind the boss, otherwise false
+	 */
 	private boolean characterIsBehindBoss(double playerX) {
 		return playerX > enemy.getX();
 	}
 	
+	/**
+	 * Tell when the BossBot should attack
+	 * @return true if it should attack, otherwise false
+	 */
 	private boolean shouldAttack() {
 		// Every 0.19 second it gets the chance to shoot.
 		if (cooldown > 0.12) {
@@ -95,9 +112,11 @@ public class BossBotAi implements Ai{
 		return false;
 	}
 
+	/**
+	 * Returns the BossBot using this AI
+	 */
 	@Override
 	public Enemy getEnemy() {
 		return this.enemy;
 	}
-
 }

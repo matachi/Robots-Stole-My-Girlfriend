@@ -14,5 +14,10 @@ public interface Ai {
 	 * @param PlayerY the PCharacters y position
 	 */
 	public void update(double delta, double playerX, double playerY);
+	
+	/**
+	 * Return the Enemy that implements this interface
+	 * @return This Enemy
+	 */
 	public Enemy getEnemy();
 }

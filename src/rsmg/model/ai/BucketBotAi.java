@@ -8,10 +8,17 @@ public class BucketBotAi implements Ai{
 	private BucketBot enemy;
 	private double cooldown;
 	
+	/**
+	 * Create a BucketBot AI.
+	 * @param enemy Reference to the enemy it should control.
+	 */
 	public BucketBotAi(BucketBot enemy) {
 		this.enemy = enemy;
 	}
 
+	/**
+	 * Update the state and actions for the BucketBot
+	 */
 	@Override
 	public void update(double delta, double playerX, double pLayerY) {
 		if (playerX < enemy.getX()){
@@ -31,6 +38,9 @@ public class BucketBotAi implements Ai{
 		}
 	}
 
+	/**
+	 * Returns the BucketBot using this AI
+	 */
 	@Override
 	public Enemy getEnemy() {
 		return enemy;

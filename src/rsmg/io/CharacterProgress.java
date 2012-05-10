@@ -247,18 +247,26 @@ public class CharacterProgress {
 		return variableNumber(UPGRADE_POINTS);
 	}
 
-	// weapons
+	/**
+	 * Returns if the pistol is unlocked
+	 * @return Since you start out with the pistol, this should always return true
+	 */
 	public static boolean isPistolUnlocked() {
-		//return variableIsTrue(PISTOL);
 		return true;
-		//(since you start out with the pistol, this should always return true)
-		
 	}
 	
+	/**
+	 * Returns if the rocketLauncher is unlocked
+	 * @return true if the rocketLauncher is unlocked, otherwise false
+	 */
 	public static boolean isRPGUnlocked() {
 		return variableIsTrue(RPG);
 	}
 
+	/**
+	 * Returns if the shotgun is unlocked
+	 * @return true if the shotgun is unlocked, otherwise false
+	 */
 	public static boolean isShotgunUnlocked() {
 		return variableIsTrue(SHOTGUN);
 	}
@@ -291,26 +299,50 @@ public class CharacterProgress {
 		}
 	}
 	
+	/**
+	 * Returns if dashing is unlocked
+	 * @return true if dashing unlocked, otherwise false
+	 */
 	public static boolean isDashUnlocked() {
 		return variableIsTrue(DASH);
 	}
 	
+	/**
+	 * Returns if double-jump is unlocked
+	 * @return true if double-jump unlocked, otherwise false
+	 */
 	public static boolean isDoubleJumpUnlocked() {
 		return variableIsTrue(DOUBLE_JUMP);
 	}
 	
+	/**
+	 * Returns if rapid-fire is unlocked
+	 * @return true if rapid-fire unlocked, otherwise false
+	 */
 	public static boolean isRapidFireUnlocked() {
 		return variableIsTrue(RAPID_FIRE);
 	}
 	
+	/**
+	 * Returns if increased running speed is unlocked
+	 * @return true if increased running speed is unlocked, otherwise false
+	 */
 	public static boolean isIncRunningSpeedUnlocked() {
 		return variableIsTrue(INC_RUNNING_SPEED);
 	}
 	
+	/**
+	 * Returns if increased shotgun spread is unlocked
+	 * @return true if increased shotgun spread is unlocked, otherwise false
+	 */
 	public static boolean isIncShotgunSpreadUnlocked() {
 		return variableIsTrue(INC_SHOTGUN_SPREAD);
 	}
 	
+	/**
+	 * Returns if dashing is unlocked
+	 * @return true if dashing unlocked, otherwise false
+	 */
 	public static boolean isIncRPGAoEUnlocked() {
 		return variableIsTrue(INC_RPG_AOE);
 	}
@@ -334,15 +366,26 @@ public class CharacterProgress {
 		setVariable(UPGRADE_POINTS, i);
 	}
 	
-	// weapons
+	/**
+	 * Set if pistol is unlocked
+	 * @param unlocked If pistol is unlocked or not 
+	 */
 	public static void setPistolUnlocked(boolean unlocked) {
 		setVariable(PISTOL, unlocked);
 	}
 	
+	/**
+	 * Set if rocket launcher is unlocked
+	 * @param unlocked If rocket launcher is unlocked or not 
+	 */
 	public static void setRpgUnlocked(boolean unlocked) {
 		setVariable(RPG, unlocked);
 	}
 	
+	/**
+	 * Set if shotgun is unlocked
+	 * @param unlocked If shotgun is unlocked or not 
+	 */
 	public static void setShotgunUnlocked(boolean unlocked) {
 		setVariable(SHOTGUN, unlocked);
 	}
@@ -382,26 +425,50 @@ public class CharacterProgress {
 		}
 	}
 	
+	/**
+	 * Set if dash is unlocked
+	 * @param unlocked If dash is unlocked or not 
+	 */
 	public static void setDashUnlocked(boolean unlocked) {
 		setVariable(DASH, unlocked);
 	}
 	
+	/**
+	 * Set if double jump is unlocked
+	 * @param unlocked If double jump is unlocked or not 
+	 */
 	public static void setDoubleJumpUnlocked(boolean unlocked) {
 		setVariable(DOUBLE_JUMP, unlocked);
 	}
 	
+	/**
+	 * Set if rapid fire is unlocked
+	 * @param unlocked If rapid fire is unlocked or not 
+	 */
 	public static void setRapidFireUnlocked(boolean unlocked) {
 		setVariable(RAPID_FIRE, unlocked);
 	}
 	
+	/**
+	 * Set if increased running speed is unlocked
+	 * @param unlocked If increased running speed is unlocked or not 
+	 */
 	public static void setIncRunningSpeedUnlocked(boolean unlocked) {
 		setVariable(INC_RUNNING_SPEED, unlocked);
 	}
 	
+	/**
+	 * Set if increased shotgun spread is unlocked
+	 * @param unlocked If increased shotgun spread is unlocked or not 
+	 */
 	public static void setIncShotgunSpreadUnlocked(boolean unlocked) {
 		setVariable(INC_SHOTGUN_SPREAD, unlocked);
 	}
 	
+	/**
+	 * Set if increased area of effect  is unlocked for rocket launcher
+	 * @param unlocked If AoE is unlocked or not 
+	 */
 	public static void setIncRPGAoEUnlocked(boolean unlocked) {
 		setVariable(INC_RPG_AOE, unlocked);
 	}
