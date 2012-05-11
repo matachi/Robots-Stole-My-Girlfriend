@@ -146,7 +146,7 @@ public class TestTileGrid {
 		assertTrue(grid.intersectsWithEndTile(c));
 	}
 	
-	// REMOVE METHOD?
+	// TODO remove this one
 	@Test
 	public void testShowGrid(){	}
 }

@@ -5,24 +5,22 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import rsmg.model.object.unit.BallBot;
-
-public class TestBallBot {
+public class TestMiniBallBot {
 	
-	private BallBot ballBot;
+	private MiniBallBot miniball;
 	
 	@Before
 	public void before() {
-		ballBot = new BallBot(0,0);
+		miniball = new MiniBallBot(0, 0);
 	}
 
 	@Test
 	public void testGetTouchDamage() {
-		assertTrue(ballBot.getTouchDamage() == 30);
+		assertTrue(miniball.getTouchDamage() == 10);
 	}
 
 	@Test
 	public void testIsFlyingUnit() {
-		assertTrue(ballBot.isFlyingUnit());
+		assertTrue(miniball.isFlyingUnit());
 	}
 }

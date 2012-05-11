@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import rsmg.model.ai.TankBotAi;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.HealthPack;
 import rsmg.model.object.item.Item;
-import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
 import rsmg.model.object.unit.Tankbot;
 import rsmg.model.tile.AirTile;
@@ -64,12 +62,6 @@ public class TestLevel {
 	@After
 	public void after() {}
 	
-	
-	
-	// SKIP? (private + hard to test)
-	@Test
-	public void testLoadUpgrades(){	}
-	
 	@Test
 	public void testSpawnChar(){
 		Point spawnPoint;
@@ -83,56 +75,9 @@ public class TestLevel {
 		}
 	}
 	
-	// SKIP? (hard to test)
+	// TODO if possible
 	@Test
 	public void testUpdate(){}
-	
-	// PRIVATE...
-	@Test
-	public void testOutsideLevelCheck(){
-		Collection<Enemy> enemies = level.getEnemies();
-		
-		assertTrue(enemies.size() == 1);
-		Enemy e = (Enemy)enemies.toArray()[0];
-		enemies.clear();
-		e.setX(-1);
-		enemies.add(e);
-		
-		//level.outsideLevelCheck(); // private...
-		//assertTrue(level.getEnemies().size() == 0);
-	}
-	
-	// PRIVATE
-	@Test
-	public void testUpdateCharacter(){}
-	
-	// PRIVATE
-	@Test
-	public void testEnemyBulletCollision(){	}
-	
-	//PRIVATE
-	@Test
-	public void testUpdateEnemies(){}
-	
-	//PRIVATE
-	@Test
-	public void testupdateBullets(){}
-	
-	// Should be private...
-	@Test
-	public void testUpdateItem(){}
-	
-	// Private
-	@Test
-	public void testIsAirbourne(){}
-	
-	// Private
-	@Test
-	public void testCheckVictory(){}
-	
-	// Private
-	@Test
-	public void testCheckDeath(){}
 	
 	@Test
 	public void testHasWon() {
@@ -143,42 +88,6 @@ public class TestLevel {
 	public void testHasLost() {
 		assertFalse(level.hasLost());
 	}
-	
-	// Private
-	@Test
-	public void testApplyNormalForce(){	}
-	
-	// Private
-	@Test
-	public void testCameFromAbove(){}
-		
-	// Private
-	@Test
-	public void testCameFromBelow(){}
-		
-	// Private
-	@Test
-	public void testCameFromLeft(){}
-		
-	// Private
-	@Test
-	public void testCameFromRight(){}
-	
-	// Private
-	@Test
-	public void testMoveUp(){}
-
-	// Private
-	@Test
-	public void testMoveDown(){}
-	
-	// Private
-	@Test
-	public void testMoveLeft(){}
-	
-	// Private
-	@Test
-	public void testMoveRight(){}
 	
 	@Test
 	public void testGetTileGrid(){
