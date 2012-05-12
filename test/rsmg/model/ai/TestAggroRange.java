@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
-import rsmg.model.object.unit.Tankbot;
+import rsmg.model.object.unit.TankBot;
 
 /**
  * 
@@ -19,7 +19,7 @@ public class TestAggroRange {
 	public void testCharInAggroRange(){
 		PCharacter character = new PCharacter(null);
 		character.setPosition(4, 4);
-		Enemy enemy = new Tankbot(5,5, null);
+		Enemy enemy = new TankBot(5,5, null);
 		
 		assertTrue(AggroRange.charInAggroRange(character.getX(), character.getY(), enemy, 2));
 	}

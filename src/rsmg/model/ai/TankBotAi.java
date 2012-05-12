@@ -2,7 +2,7 @@ package rsmg.model.ai;
 
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
-import rsmg.model.object.unit.Tankbot;
+import rsmg.model.object.unit.TankBot;
 
 /**
  * An Ai used for TankBots. The Ai will make the tankbot shoot at regular
@@ -13,7 +13,7 @@ import rsmg.model.object.unit.Tankbot;
  */
 public class TankBotAi implements Ai {
 	
-	private Tankbot enemy;
+	private TankBot enemy;
 	private PCharacter character;
 	private static int AGGRORANGE = 200;
 	private double cooldown;
@@ -29,7 +29,7 @@ public class TankBotAi implements Ai {
 	 * @param enemy Reference to the enemy it should control.
 	 * @param character Reference to the player character.
 	 */
-	public TankBotAi(Tankbot enemy, PCharacter character) {
+	public TankBotAi(TankBot enemy, PCharacter character) {
 		this.enemy = enemy;
 		this.character = character;
 	}

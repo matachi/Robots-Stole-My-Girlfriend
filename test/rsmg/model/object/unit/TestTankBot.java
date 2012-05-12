@@ -8,17 +8,18 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import rsmg.model.object.bullet.Bullet;
 
-public class TestTankbot {
+public class TestTankBot {
 	
-	private Tankbot tank;
+	private TankBot tank;
 	private List<Bullet> bulletList;
 	
 	@Before
 	public void before() {
 		bulletList = new LinkedList<Bullet>();
-		tank = new Tankbot(0, 0, bulletList);
+		tank = new TankBot(0, 0, bulletList);
 	}
 
 	@Test

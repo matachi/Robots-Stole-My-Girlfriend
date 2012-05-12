@@ -19,7 +19,7 @@ import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.HealthPack;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.PCharacter;
-import rsmg.model.object.unit.Tankbot;
+import rsmg.model.object.unit.TankBot;
 import rsmg.model.tile.AirTile;
 import rsmg.model.tile.EndTile;
 import rsmg.model.tile.GroundTile;
@@ -56,7 +56,7 @@ public class TestLevel {
 		items.add(new HealthPack(10,10));
 		
 		List<Ai> enemies = new LinkedList<Ai>();
-		enemies.add(new TankBotAi(new Tankbot(10,10, new LinkedList<Bullet>()), character));
+		enemies.add(new TankBotAi(new TankBot(10,10, new LinkedList<Bullet>()), character));
 		
 		
 		level = new Level(tileGrid, character, items, enemies, new LinkedList<Bullet>(), new LinkedList<Bullet>());

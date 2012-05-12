@@ -11,19 +11,19 @@ import rsmg.util.Vector2d;
  * Class representing a stationary non-flying enemy
  * @author Johan Gronvall
  */
-public class Tankbot extends Enemy implements AttackingEnemy{
+public class TankBot extends Enemy implements AttackingEnemy{
 	
 	private static int HEALTH = 20;
 	private static int XBULLETSPEED = 200;
 	private List<Bullet> bulletList;
 	
 	/**
-	 * Creates a 'Tankbot' type enemy
+	 * Creates a 'TankBot' type enemy
 	 * @param x the horiztonal coordinate for the position of this TankBot
 	 * @param y the vertical coordinate for the position of this Tankbot
 	 * @param bulletList the list where this Tankbot will place his bullets
 	 */
-	public Tankbot(double x, double y, List<Bullet> bulletList) {
+	public TankBot(double x, double y, List<Bullet> bulletList) {
 		super(x, y, 26, 13, HEALTH, ObjectName.TANKBOT);
 		this.bulletList = bulletList;
 	}

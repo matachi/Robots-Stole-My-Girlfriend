@@ -30,7 +30,7 @@ import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.PCharacter;
 import rsmg.model.object.unit.RocketBot;
 import rsmg.model.object.unit.Spikes;
-import rsmg.model.object.unit.Tankbot;
+import rsmg.model.object.unit.TankBot;
 import rsmg.model.tile.AirTile;
 import rsmg.model.tile.EndTile;
 import rsmg.model.tile.GroundTile;
@@ -152,7 +152,7 @@ public final class LevelFactory {
 					Ai ai;
 					switch (enemyValue) {
 						case ObjectName.TANKBOT :
-							ai = new TankBotAi(new Tankbot(x*scale, y*scale, enemyBulletList), character);
+							ai = new TankBotAi(new TankBot(x*scale, y*scale, enemyBulletList), character);
 							break;
 						case ObjectName.ROCKETBOT :
 							ai = new RocketBotAi(new RocketBot(x*scale, y*scale), character);
