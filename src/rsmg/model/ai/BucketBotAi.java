@@ -2,7 +2,13 @@ package rsmg.model.ai;
 
 import rsmg.model.object.unit.BucketBot;
 import rsmg.model.object.unit.Enemy;
-
+/**
+ * An Ai used for controlling a 'BucketBot' type enemy
+ * The Ai will make the bucketBot face towards the PCharacter
+ * and fire at regular intervals
+ * @author Johan Gronvall
+ *
+ */
 public class BucketBotAi implements Ai{
 	
 	private BucketBot enemy;
@@ -17,7 +23,7 @@ public class BucketBotAi implements Ai{
 	}
 
 	/**
-	 * Update the state and actions for the BucketBot
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void update(double delta, double playerX, double pLayerY) {
@@ -26,8 +32,6 @@ public class BucketBotAi implements Ai{
 		} else { // if playerX >= enemy.getX()
 			enemy.setFacing(true);
 		}
-		
-		
 		cooldown += delta;
 		
 		// Every 0.8 second it gets the chance to shoot.
@@ -39,7 +43,7 @@ public class BucketBotAi implements Ai{
 	}
 
 	/**
-	 * Returns the BucketBot using this AI
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Enemy getEnemy() {

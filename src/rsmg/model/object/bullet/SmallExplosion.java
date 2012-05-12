@@ -4,7 +4,12 @@ import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
-
+/**
+ * Class representing an explosion
+ * @author Johan Gronvall
+ * @author Daniel Jonsson
+ *
+ */
 class SmallExplosion extends Bullet implements Explosion, Projectile {
 	private double age;
 	
@@ -12,6 +17,7 @@ class SmallExplosion extends Bullet implements Explosion, Projectile {
 		super(x, y, Variables.EXPLOSION_AOE, Variables.EXPLOSION_AOE, ObjectName.EXPLOSION, Variables.EXPLOSIONDMG, new Vector2d(0,0));
 		age = 0;
 	}
+	
 	/**
 	 * Create an explosion at the appropriate location.
 	 * @param detonator object which creates the explosion
@@ -20,16 +26,26 @@ class SmallExplosion extends Bullet implements Explosion, Projectile {
 		super(detonator.getX()-Variables.EXPLOSION_AOE/2+detonator.getWidth()/2, detonator.getY()-Variables.EXPLOSION_AOE/2+detonator.getHeight()/2,
 				Variables.EXPLOSION_AOE, Variables.EXPLOSION_AOE, ObjectName.EXPLOSION, Variables.EXPLOSIONDMG, new Vector2d(0,0));
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public double getAge() {
 		return age;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void update(double delta) {
 		age += delta;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isExplosion() {
 		return true;

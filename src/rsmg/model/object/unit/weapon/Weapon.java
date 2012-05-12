@@ -1,7 +1,13 @@
 package rsmg.model.object.unit.weapon;
 
 import rsmg.util.Vector2d;
-
+/**
+ * Interface for classes representing Weapons
+ * weapons are wielded by LivingObjects and
+ * creates bullets
+ * @author Johan Gronvall
+ *
+ */
 public interface Weapon {
 	/**
 	 * Method in which this weapon creates a bullet
@@ -22,6 +28,11 @@ public interface Weapon {
 	 */
 	public boolean shot();
 
+	/**
+	 * returns the vector of how much the wield should be pushed back when firing the weapon
+	 * @param isFacingRight
+	 * @return
+	 */
 	public Vector2d getKnockback(boolean isFacingRight);
 	
 	/**

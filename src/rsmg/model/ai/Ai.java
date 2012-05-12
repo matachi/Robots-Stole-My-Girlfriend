@@ -2,13 +2,14 @@ package rsmg.model.ai;
 
 import rsmg.model.object.unit.Enemy;
 /**
- * The interface for the Ai
- * @author zapray
+ * The interface for the artificial Intelligence classes
+ * @author Johan Gronvall
  *
  */
 public interface Ai {
 	/**
-	 * update method for the ai which is called every loop
+	 * update method for the Ai which is called every loop
+	 * updating this Ai's state and performing its actions
 	 * @param delta
 	 * @param PlayerX the PCharacters x position
 	 * @param PlayerY the PCharacters y position

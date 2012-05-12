@@ -1,7 +1,12 @@
 package rsmg.model.object.unit;
 
 import rsmg.model.object.InteractiveObject;
-
+/**
+ * Class representing InteractiveObjects that are "alive"
+ * A livingObject can take damage, die and can face left and right
+ * @author zapray
+ *
+ */
 public abstract class LivingObject extends InteractiveObject{
 	
 	private boolean facingRight;

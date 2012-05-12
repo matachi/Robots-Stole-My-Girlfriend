@@ -3,8 +3,23 @@ package rsmg.model.ai;
 import rsmg.model.object.unit.BossBotHead;
 import rsmg.model.object.unit.Enemy;
 import rsmg.util.Vector2d;
-
+/**
+ * An Ai used for controlling the 'bossBot' type enemy
+ * The bossBot will not move or face any other way.
+ * He will however use 2 different attacks
+ * 
+ * His primary attack fires a rapid volley of bullets
+ * in a line which will chase the PCharacter
+ * 
+ * His secondary attack will fire bullets in random directions
+ * 
+ * @author Johan Gronvall
+ *
+ */
 public class BossBotAi implements Ai{
+	/**
+	 * The enemy representing the boss
+	 */
 	private BossBotHead enemy;
 	/**
 	 * The cooldown variable used for the bosses primary attack
@@ -37,7 +52,7 @@ public class BossBotAi implements Ai{
 	}
 
 	/**
-	 * Update the state and actions for the BossBot
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void update(double delta, double playerX, double playerY) {
@@ -113,7 +128,7 @@ public class BossBotAi implements Ai{
 	}
 
 	/**
-	 * Returns the BossBot using this AI
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Enemy getEnemy() {

@@ -3,7 +3,9 @@ package rsmg.model.ai;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.Tankbot;
 /**
- * Class in charge of control an idling Enemy
+ * An Ai used for TankBots.
+ * The Ai will make the tankbot shoot at regular intervals and always face
+ * towards the PCharacter if he is in 'aggrorange' 
  * @author Johan Grönvall
  * 
  */

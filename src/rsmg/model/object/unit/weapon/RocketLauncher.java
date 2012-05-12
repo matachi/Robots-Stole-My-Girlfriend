@@ -8,8 +8,9 @@ import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
 /**
- * Class used to create the "rocket" type bullet
- * @author zapray
+ * Class representing a 'RocketLauncher'
+ * the rocketLauncher creates bullets of the type "rocket"
+ * @author Johan Gronvall
  *
  */
 public class RocketLauncher implements Weapon {
@@ -26,6 +27,9 @@ public class RocketLauncher implements Weapon {
 		shot = false;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void shoot(double x, double y, boolean isFacingRight) {
 
@@ -51,7 +55,10 @@ public class RocketLauncher implements Weapon {
 		
 		shot = true;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public long getCooldown() {
 		if(CharacterProgress.isRapidFireUnlocked()) {
@@ -60,6 +67,9 @@ public class RocketLauncher implements Weapon {
 		return 2000;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean shot() {
 		if (shot) {
@@ -68,6 +78,10 @@ public class RocketLauncher implements Weapon {
 		}
 		return false;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Vector2d getKnockback(boolean isFacingRight) {
 		int knockback = rpgKnockback;
@@ -77,6 +91,9 @@ public class RocketLauncher implements Weapon {
 		return new Vector2d(knockback, 0);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getName() {
 		return ObjectName.ROCKET_LAUNCHER;

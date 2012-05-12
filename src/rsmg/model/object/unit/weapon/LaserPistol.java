@@ -7,7 +7,12 @@ import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
-
+/**
+ * Class representing a weapon with bullets that
+ * do not disappear when they touch and enemy
+ * @author Johan Gronvall
+ *
+ */
 public class LaserPistol implements Weapon { 
 	
 	private boolean shot;

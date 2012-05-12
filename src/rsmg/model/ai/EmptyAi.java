@@ -3,7 +3,7 @@ package rsmg.model.ai;
 import rsmg.model.object.unit.Enemy;
 /**
  * An Ai that doesn't do anything
- * @author Johan Grönvall
+ * @author Johan Gronvall
  *
  */
 public class EmptyAi implements Ai{
@@ -18,7 +18,7 @@ public class EmptyAi implements Ai{
 	}
 	
 	/**
-	 * Update the state and actions for the EmptyAi Enemies
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void update(double delta, double playerX, double playerY) {
@@ -26,7 +26,7 @@ public class EmptyAi implements Ai{
 	}
 
 	/**
-	 * Returns the Enemy using this AI
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Enemy getEnemy() {

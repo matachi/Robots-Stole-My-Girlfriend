@@ -1,9 +1,7 @@
 package rsmg.model.object.unit;
 
-import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
-import rsmg.model.object.bullet.Explosion;
 import rsmg.model.variables.Variables;
 /**
  * Class representing hostile LivingObjects
@@ -30,6 +28,9 @@ public abstract class Enemy extends LivingObject{
 		setFacing(false);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void collide(InteractiveObject obj) {
 		//the enemy should take damage from bullets as long as the bullet isn't an explosion and
@@ -54,8 +55,9 @@ public abstract class Enemy extends LivingObject{
 	}
 	
 	private boolean dealsExplosionDmg(Bullet bullet) {
-		return (bullet instanceof Explosion || bullet.getName().equals(ObjectName.LASER_BULLET));
+		return (bullet.isExplosion());
 	}
+	
 	/**
 	 * returns the damage inflicted to the character when this enemy comes in contact with him
 	 * @return the damage inflicted to the character when this enemy comes in contact with him

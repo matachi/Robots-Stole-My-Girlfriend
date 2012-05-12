@@ -1,7 +1,12 @@
 package rsmg.model.ai;
 
 import rsmg.model.object.unit.Enemy;
-
+/**
+ * An Ai used for controlling certain flying enemies
+ * The Ai will make the enemy try to walk towards the PCharacter
+ * @author Johan Gronvall
+ *
+ */
 public class RocketBotAi implements Ai{
 	private Enemy enemy;
 	private static int TRAVELSPEED = 50;
@@ -16,7 +21,7 @@ public class RocketBotAi implements Ai{
 	}
 	
 	/**
-	 * Update the state and actions for the RocketBot
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void update(double delta, double playerX, double playerY) {
@@ -38,7 +43,7 @@ public class RocketBotAi implements Ai{
 	}
 
 	/**
-	 * Returns the BucketBot using this AI
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Enemy getEnemy() {

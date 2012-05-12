@@ -7,7 +7,11 @@ import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
-
+/**
+ * A class representing a 'Pistol' type weapon
+ * @author Johan Gronvall
+ *
+ */
 public class Pistol implements Weapon {
 	private Collection<Bullet> bulletList;
 	private boolean shot;
@@ -24,6 +28,9 @@ public class Pistol implements Weapon {
 		this.shot = false;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void shoot(double x, double y, boolean isFacingRight) {
 
@@ -43,7 +50,10 @@ public class Pistol implements Weapon {
 		
 		shot = true;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public long getCooldown() {
 		if(CharacterProgress.isRapidFireUnlocked()) {
@@ -52,6 +62,9 @@ public class Pistol implements Weapon {
 		return 300;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean shot() {
 		if (shot) {
@@ -61,11 +74,17 @@ public class Pistol implements Weapon {
 		return false;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Vector2d getKnockback(boolean isFacingRight) {
 		return new Vector2d(0,0);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getName() {
 		return ObjectName.PISTOL;

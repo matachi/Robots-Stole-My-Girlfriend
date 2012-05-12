@@ -6,7 +6,13 @@ import rsmg.model.object.unit.BallBot;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.MiniBallBot;
 import rsmg.util.Vector2d;
-
+/**
+ * creates an Ai used for BallBots.
+ * this Ai will make the BallBot circle around in the air.
+ * It will also occasionally spawn miniBallBots
+ * @author Johan Gronvall
+ *
+ */
 public class BallBotAi implements Ai {
 	private BallBot enemy;
 	private List<Ai> enemyAiList;
@@ -19,7 +25,7 @@ public class BallBotAi implements Ai {
 	/**
 	 * Create a BallBot AI.
 	 * @param enemy Reference to the enemy it should control.
-	 * @param enemyAiList The list of enemies that are harmful to the character.
+	 * @param enemyAiList The list of Ai for the enemies that are harmful to the character.
 	 */
 	public BallBotAi(BallBot enemy, List<Ai> enemyAiList) {
 		this.enemy = enemy;
@@ -29,7 +35,7 @@ public class BallBotAi implements Ai {
 	}
 	
 	/**
-	 * Update the state and actions for the BallBot
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void update(double delta, double playerX, double playerY) {
@@ -66,7 +72,7 @@ public class BallBotAi implements Ai {
 	}
 
 	/**
-	 * Returns the BallBot using this AI
+	 * @inheritDoc
 	 */
 	@Override
 	public Enemy getEnemy() {

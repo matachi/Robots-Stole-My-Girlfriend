@@ -32,22 +32,34 @@ public abstract class Bullet extends InteractiveObject implements Projectile {
 		this.dmg = dmg;
 		this.setVelocity(velocity);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public int getDamage() {
 		return dmg;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void collide(InteractiveObject obj) {
 		
 	}
+	
 	/**
-	 * method consistently making it possible for bullets to accelerate / update
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void update(double delta) {
 		//nothing at this point
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public abstract boolean isExplosion();
 

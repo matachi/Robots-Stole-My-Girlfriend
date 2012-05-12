@@ -8,7 +8,7 @@ import rsmg.model.object.bullet.RotatableBullet;
 import rsmg.util.Vector2d;
 
 /**
- * class representing the head of the bossbot
+ * class representing the head of the 'bossbot' type Enemy
  * @author zapray
  *
  */
@@ -36,9 +36,8 @@ public class BossBotHead extends Enemy {
 		super(x, y, 48, 42, 400, ObjectName.BOSSBOT);
 		this.bulletList = bulletList;
 	}
-
 	/**
-	 * Return the damage taken when touching the boss
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int getTouchDamage() {
@@ -46,7 +45,7 @@ public class BossBotHead extends Enemy {
 	}
 
 	/**
-	 * Return if the boss is a flying unit or not
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isFlyingUnit() {
@@ -60,6 +59,7 @@ public class BossBotHead extends Enemy {
 		bulletList.add(new RotatableBullet(this.getX()+OFFSETX1, this.getY()+OFFSETY1, 10, 8, ObjectName.LASERBOLT, DMG, bulletVelocity, (float)angle));
 		bulletList.add(new RotatableBullet(this.getX()+OFFSETX2, this.getY()+OFFSETY1, 10, 8, ObjectName.LASERBOLT, DMG, bulletVelocity, (float)angle));
 	}
+	
 	/**
 	 * Fires the bosses secondary attack
 	 */

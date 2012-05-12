@@ -9,8 +9,13 @@ import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
-
+/**
+ * Class representing a 'shotgun' type weapon
+ * @author Johan Gronvall
+ *
+ */
 public class Shotgun implements Weapon {
+	
 	private Collection<Bullet> bulletList;
 	private boolean shot;
 	private int bulletWidth = 2;
@@ -32,6 +37,9 @@ public class Shotgun implements Weapon {
 			spread = Variables.SHOTGUN_SPREAD;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void shoot(double x, double y, boolean isFacingRight) {
 
@@ -56,6 +64,9 @@ public class Shotgun implements Weapon {
 		shot = true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public long getCooldown() {
 		if(CharacterProgress.isRapidFireUnlocked()) {
@@ -64,6 +75,9 @@ public class Shotgun implements Weapon {
 		return 600;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean shot() {
 		if (shot) {
@@ -72,6 +86,10 @@ public class Shotgun implements Weapon {
 		}
 		return false;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Vector2d getKnockback(boolean isFacingRight) {
 		int knockback = shotgunKnockback;
@@ -81,6 +99,9 @@ public class Shotgun implements Weapon {
 		return new Vector2d(knockback, 0);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getName() {
 		return ObjectName.SHOTGUN;
