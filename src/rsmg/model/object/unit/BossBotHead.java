@@ -14,17 +14,16 @@ import rsmg.util.Vector2d;
  */
 public class BossBotHead extends Enemy {
 	private List<Bullet> bulletList;
-//	private static final int OFFSETX1 = 41;
-//	private static final int OFFSETY1 = 11;
 	private static final int OFFSETX1 = 3;
 	private static final int OFFSETY1 = 13;
 	
+	//offset for where the second attack is fired
 	private static final int CRYSTAL_OFFSETY = 130;
 	private static final int CRYSTAL_OFFSETX = -16;
+	
 	//for the other eye
 	private static int OFFSETX2 = -18;
 
-	
 	private static int DMG = 60;
 	
 	/**

@@ -21,4 +21,9 @@ public class RotatableBullet extends Bullet {
 		return angle;
 	}
 
+	@Override
+	public boolean isExplosion() {
+		return false;
+	}
+
 }

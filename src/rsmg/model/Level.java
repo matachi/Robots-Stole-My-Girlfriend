@@ -229,7 +229,7 @@ public class Level {
 						newBullets.add(ExplosionFactory.getExplosion(bullet));
 					
 					//remove the colliding bullets if they arent laserBullets or explosions
-					if(!((bullet instanceof Explosion)  || bullet.getName().equals(ObjectName.LASER_BULLET))){
+					if(!bullet.isExplosion()){
 						expiredBullets.add(bullet);
 					}
 				}
@@ -263,12 +263,12 @@ public class Level {
 				
 				//if the bullet is an explosion, do not remove it unless its past its duration
 				//otherwise, remove the bullet
-				if (!(bullet instanceof Explosion)){
+				if (!bullet.isExplosion()){
 					bulletList.remove(i);
 				}
 			}
 			
-			if (bullet instanceof Explosion){
+			if (bullet.isExplosion()){
 				if(((Explosion)bullet).getAge() > Variables.EXPLOSIONDURATION){
 					bulletList.remove(i);
 				}

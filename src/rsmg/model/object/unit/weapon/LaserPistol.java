@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import rsmg.io.CharacterProgress;
 import rsmg.model.ObjectName;
+import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
 
@@ -41,7 +42,7 @@ public class LaserPistol implements Weapon {
 			offsetY = 5;
 		}
 		
-		bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.LASER_BULLET, bulletDamage, bulletVelocity));
+		bulletList.add(new BasicBullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.LASER_BULLET, bulletDamage, bulletVelocity));
 		
 		shot = true;
 	}

@@ -10,7 +10,7 @@ import rsmg.util.Vector2d;
  * @author Daniel Jonsson
  *
  */
-public class Bullet extends InteractiveObject {
+public abstract class Bullet extends InteractiveObject implements Projectile {
 	
 	private int dmg;
 	
@@ -47,4 +47,8 @@ public class Bullet extends InteractiveObject {
 	public void update(double delta) {
 		//nothing at this point
 	}
+
+	@Override
+	public abstract boolean isExplosion();
+
 }

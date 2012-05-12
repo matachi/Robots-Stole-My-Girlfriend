@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import rsmg.io.CharacterProgress;
 import rsmg.model.ObjectName;
+import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.util.Vector2d;
 /**
@@ -37,13 +38,13 @@ public class RocketLauncher implements Weapon {
 			bulletVelocity.setX(bulletSpeed);
 			offsetX = 25;
 			offsetY = 0;
-			bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKETR, bulletDamage, bulletVelocity));
+			bulletList.add(new BasicBullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKETR, bulletDamage, bulletVelocity));
 
 		}else{
 			bulletVelocity.setX(-bulletSpeed);
 			offsetX = -5;
 			offsetY = 0;
-			bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKETL, bulletDamage, bulletVelocity));
+			bulletList.add(new BasicBullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.ROCKETL, bulletDamage, bulletVelocity));
 
 		}
 		

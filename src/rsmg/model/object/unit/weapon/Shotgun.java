@@ -5,6 +5,7 @@ import java.util.Random;
 
 import rsmg.io.CharacterProgress;
 import rsmg.model.ObjectName;
+import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
@@ -49,7 +50,7 @@ public class Shotgun implements Weapon {
 			Vector2d bulletVelocity = new Vector2d();
 			bulletVelocity.setX(xBulletSpeed);
 			bulletVelocity.setY((randomGen.nextDouble()*2-1)*spread);
-			bulletList.add(new Bullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.SHOTGUN_BULLET, bulletDamage, bulletVelocity));
+			bulletList.add(new BasicBullet(x+offsetX, y+offsetY, bulletWidth, bulletHeight, ObjectName.SHOTGUN_BULLET, bulletDamage, bulletVelocity));
 		}
 		
 		shot = true;

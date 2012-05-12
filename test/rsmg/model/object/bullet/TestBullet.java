@@ -28,7 +28,7 @@ public class TestBullet {
 
 	@Before
 	public void before() {
-		bullet = new Bullet(10, 10, 10, 10, "tstBullet", 99, null);
+		bullet = new BasicBullet(10, 10, 10, 10, "tstBullet", 99, null);
 	}
 
 	@After

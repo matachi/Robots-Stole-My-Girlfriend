@@ -32,4 +32,9 @@ public class LaserFire extends Bullet implements Explosion{
 		age += delta*6;
 	}
 
+	@Override
+	public boolean isExplosion() {
+		return true;
+	}
+
 }

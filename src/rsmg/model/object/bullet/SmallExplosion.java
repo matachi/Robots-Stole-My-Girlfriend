@@ -5,7 +5,7 @@ import rsmg.model.object.InteractiveObject;
 import rsmg.model.variables.Variables;
 import rsmg.util.Vector2d;
 
-class SmallExplosion extends Bullet implements Explosion {
+class SmallExplosion extends Bullet implements Explosion, Projectile {
 	private double age;
 	
 	public SmallExplosion(double x, double y) {
@@ -28,5 +28,10 @@ class SmallExplosion extends Bullet implements Explosion {
 	@Override
 	public void update(double delta) {
 		age += delta;
+	}
+	
+	@Override
+	public boolean isExplosion() {
+		return true;
 	}
 }

@@ -353,13 +353,11 @@ class LevelState extends State {
 				((Image)bullets.get(bullet.getName())).setRotation(-((float) (((RotatableBullet)bullet).getRotation()*180/Math.PI)));
 			}
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
-
 		}
 		
 		for (Bullet bullet : level.getAlliedBulletList()) {
 			bullets.get(bullet.getName()).draw((float)bullet.getX()*scale+cameraX, (float)bullet.getY()*scale+cameraY);
 		}
-
 	}
 	
 	/**

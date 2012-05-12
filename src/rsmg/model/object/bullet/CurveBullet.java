@@ -7,7 +7,7 @@ import rsmg.util.Vector2d;
  * @author zapray
  *
  */
-public class CurveBullet extends Bullet {
+public class CurveBullet extends Bullet implements Projectile{
 
 	public CurveBullet(double x, double y, double width, double height,
 			String name, int dmg, Vector2d velocity) {
@@ -19,6 +19,11 @@ public class CurveBullet extends Bullet {
 	@Override
 	public void update(double delta) {
 		this.applyGravity(delta);
+	}
+
+	@Override
+	public boolean isExplosion() {
+		return false;
 	}
 	
 }
