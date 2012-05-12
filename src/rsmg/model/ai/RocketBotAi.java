@@ -14,8 +14,8 @@ public class RocketBotAi implements Ai {
 	
 	private Enemy enemy;
 	private PCharacter character;
-	private static int TRAVELSPEED = 50;
-	private static int AGGRORANGE = 200;
+	private static final int TRAVEL_SPEED = 50;
+	private static final int AGGRO_RANGE = 200;
 	
 	/**
 	 * Create a RocketBot AI.
@@ -40,14 +40,14 @@ public class RocketBotAi implements Ai {
 		/**
 		 * Makes the enemy chase the character.
 		 */
-		if (AggroRange.charInAggroRange(playerX, playerY, enemy, AGGRORANGE)) {
+		if (AggroRange.charInAggroRange(playerX, playerY, enemy, AGGRO_RANGE)) {
 			double angle = Math.atan((enemy.getY()-playerY)/(enemy.getX()-playerX));
 			int modifier = 1;
 			if (enemy.getX() > playerX) {
 				modifier = -1;
 			}
-			enemy.setVelocityX((Math.cos(angle) * TRAVELSPEED) * modifier);
-			enemy.setVelocityY((Math.sin(angle) * TRAVELSPEED) * modifier);
+			enemy.setVelocityX((Math.cos(angle) * TRAVEL_SPEED) * modifier);
+			enemy.setVelocityY((Math.sin(angle) * TRAVEL_SPEED) * modifier);
 		} else {
 			enemy.setVelocityX(0);
 			enemy.setVelocityY(0);

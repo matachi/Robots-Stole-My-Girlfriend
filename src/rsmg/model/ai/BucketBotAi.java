@@ -33,14 +33,10 @@ public class BucketBotAi implements Ai{
 	 */
 	@Override
 	public void update(double delta) {
-
-		double playerX = character.getX();
 		
-		if (playerX < enemy.getX()) {
-			enemy.setFacing(false);
-		} else { // if playerX >= enemy.getX()
-			enemy.setFacing(true);
-		}
+		// Set facing to the right if player's X pos. is larger than the enemy's.
+		enemy.setFacing(character.getX() > enemy.getX());
+		
 		cooldown += delta;
 		
 		// Make it shoot every 0.8 seconds
