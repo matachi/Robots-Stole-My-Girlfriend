@@ -1,12 +1,10 @@
-package rsmg.model.object.unit.weapon;
+package rsmg.model.object.unit;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import rsmg.model.object.unit.Spikes;
 
 public class TestSpikes {
 	
