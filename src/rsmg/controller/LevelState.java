@@ -33,7 +33,7 @@ import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
 import rsmg.model.object.unit.weapon.Weapon;
-import rsmg.model.variables.Variables;
+import rsmg.model.variables.Constants;
 
 /**
  * The state where the levels are played out.
@@ -155,8 +155,8 @@ class LevelState extends State {
 		// Store the maximum number of tiles that can possibly fit on the width
 		// and height of the screen. This is used to reduce the number of tiles
 		// that are drawn to only the visible ones.
-		numberOfTilesVisibleX = gc.getWidth() / Variables.TILESIZE / scale + 2;
-		numberOfTilesVisibleY = gc.getHeight() / Variables.TILESIZE / scale + 2;
+		numberOfTilesVisibleX = gc.getWidth() / Constants.TILESIZE / scale + 2;
+		numberOfTilesVisibleY = gc.getHeight() / Constants.TILESIZE / scale + 2;
 		
 		/**
 		 * The background image in the level.
@@ -291,7 +291,7 @@ class LevelState extends State {
 		/**
 		 * Init hitbox graphics.
 		 */
-		hitboxRect = new Rectangle(0, 0, Variables.CHARACTERWIDTH*scale, Variables.CHARACTERHEIGHT*scale);
+		hitboxRect = new Rectangle(0, 0, Constants.CHARACTERWIDTH*scale, Constants.CHARACTERHEIGHT*scale);
 		hitboxGrap = new Graphics();
 		hitboxGrap.setColor(new Color(0.0f, 1.0f, 0.0f, 0.5f));
 	}
@@ -429,7 +429,7 @@ class LevelState extends State {
 		// tile grid.
 		for (int y = tileVisibleTop; y < tileVisibleBottom; y++)
 			for (int x = tileVisibleLeft; x < tileVisibleRight; x++)
-				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*Variables.TILESIZE*scale+cameraX, y*Variables.TILESIZE*scale+cameraY);
+				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*Constants.TILESIZE*scale+cameraX, y*Constants.TILESIZE*scale+cameraY);
 	}
 
 	/**
@@ -676,7 +676,7 @@ class LevelState extends State {
 		// Camera in Y-axis
 		int centerY = screenHeight/2 - (int)level.getCharacter().getHeight()*scale/2;
 		float posY = (float)level.getCharacter().getY()*scale;
-		int levelHeight = level.getTileGrid().getHeight()*Variables.TILESIZE*scale;
+		int levelHeight = level.getTileGrid().getHeight()*Constants.TILESIZE*scale;
 		
 		// If the Character is in the upper part of the screen
 		if (posY < centerY) {
@@ -697,7 +697,7 @@ class LevelState extends State {
 		// Camera in X-axis
 		int centerX = screenWidth/2 - (int)level.getCharacter().getWidth()*scale/2;
 		float posX = (float)level.getCharacter().getX()*scale;
-		int levelWidth = level.getTileGrid().getWidth()*Variables.TILESIZE*scale;
+		int levelWidth = level.getTileGrid().getWidth()*Constants.TILESIZE*scale;
 		
 		// If the Character is in the left part of the screen
 		if (posX < centerX) {

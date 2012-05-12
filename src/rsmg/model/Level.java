@@ -16,7 +16,7 @@ import rsmg.model.object.bullet.LaserFire;
 import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
-import rsmg.model.variables.Variables;
+import rsmg.model.variables.Constants;
 
 /**
  * Class representing a level. This Class is in charge of storing and updating
@@ -269,7 +269,7 @@ public class Level {
 			}
 			
 			if (bullet.isExplosion()){
-				if(((Explosion)bullet).getAge() > Variables.EXPLOSIONDURATION){
+				if(((Explosion)bullet).getAge() > Constants.EXPLOSIONDURATION){
 					bulletList.remove(i);
 				}
 			}
@@ -317,7 +317,7 @@ public class Level {
 	private void checkDeath(double delta) {
 		if (character.isDead()) {
 			deathCounter += delta;
-			if (deathCounter > Variables.DEATH_TIME)
+			if (deathCounter > Constants.DEATH_TIME)
 				hasLost = true;
 		}
 	}
@@ -389,23 +389,23 @@ public class Level {
 	private boolean cameFromAbove(InteractiveObject obj) {
 		return obj.getPY() + obj.getHeight() - 0.00001 <= tileGrid
 				.getTilePosFromRealPos(obj.getY() + obj.getHeight())
-				* Variables.TILESIZE;
+				* Constants.TILESIZE;
 	}
 
 	private boolean cameFromBelow(InteractiveObject obj) {
 		return obj.getPY() >= (tileGrid.getTilePosFromRealPos(obj.getY()) + 1)
-				* Variables.TILESIZE;
+				* Constants.TILESIZE;
 	}
 
 	private boolean cameFromLeft(InteractiveObject obj) {
 		return obj.getPX() + obj.getWidth() - 0.00001 <= tileGrid
 				.getTilePosFromRealPos(obj.getX() + obj.getWidth())
-				* Variables.TILESIZE;
+				* Constants.TILESIZE;
 	}
 
 	private boolean cameFromRight(InteractiveObject obj) {
 		return obj.getPX() >= (tileGrid.getTilePosFromRealPos(obj.getX()) + 1)
-				* Variables.TILESIZE;
+				* Constants.TILESIZE;
 	}
 
 	private void moveUp(InteractiveObject obj) {

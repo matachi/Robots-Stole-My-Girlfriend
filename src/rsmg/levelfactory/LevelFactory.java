@@ -35,7 +35,7 @@ import rsmg.model.tile.EndTile;
 import rsmg.model.tile.GroundTile;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
-import rsmg.model.variables.Variables;
+import rsmg.model.variables.Constants;
 
 /**
  * This class is responsible for creating the levels. It asks the class Levels i
@@ -118,7 +118,7 @@ public final class LevelFactory {
 				}
 				grid[y][x] = tile;
 				
-				int scale = Variables.TILESIZE; // Used to place items and enemies on appropriate positions.
+				int scale = Constants.TILESIZE; // Used to place items and enemies on appropriate positions.
 				// Retrieve eventual item
 				String itemValue = cell.getAttributeValue("item");
 				if (itemValue != null) {

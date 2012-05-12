@@ -2,7 +2,7 @@ package rsmg.model.object.bullet;
 
 import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
-import rsmg.model.variables.Variables;
+import rsmg.model.variables.Constants;
 import rsmg.util.Vector2d;
 /**
  * Class representing an explosion
@@ -18,7 +18,7 @@ class BigExplosion extends Bullet implements Explosion, Projectile{
 	 * @param y Vertical coordinate for where the explosion spawns.
 	 */
 	public BigExplosion(double x, double y) {
-		super(x, y, Variables.EXPLOSION_AOE_UPG, Variables.EXPLOSION_AOE_UPG, ObjectName.BIG_EXPLOSION, Variables.EXPLOSIONDMG, new Vector2d(0,0));
+		super(x, y, Constants.EXPLOSION_AOE_UPG, Constants.EXPLOSION_AOE_UPG, ObjectName.BIG_EXPLOSION, Constants.EXPLOSIONDMG, new Vector2d(0,0));
 		age = 0;
 	}
 	
@@ -27,8 +27,8 @@ class BigExplosion extends Bullet implements Explosion, Projectile{
 	 * @param detonator object which creates the explosion
 	 */
 	public BigExplosion(InteractiveObject detonator){
-		super(detonator.getX()-Variables.EXPLOSION_AOE_UPG/2+detonator.getWidth()/2, detonator.getY()-Variables.EXPLOSION_AOE_UPG/2+detonator.getHeight()/2,
-				Variables.EXPLOSION_AOE_UPG, Variables.EXPLOSION_AOE_UPG, ObjectName.EXPLOSION, Variables.EXPLOSIONDMG, new Vector2d(0,0));
+		super(detonator.getX()-Constants.EXPLOSION_AOE_UPG/2+detonator.getWidth()/2, detonator.getY()-Constants.EXPLOSION_AOE_UPG/2+detonator.getHeight()/2,
+				Constants.EXPLOSION_AOE_UPG, Constants.EXPLOSION_AOE_UPG, ObjectName.EXPLOSION, Constants.EXPLOSIONDMG, new Vector2d(0,0));
 	}
 	
 	/**

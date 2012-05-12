@@ -14,7 +14,7 @@ import rsmg.model.tile.EndTile;
 import rsmg.model.tile.GroundTile;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
-import rsmg.model.variables.Variables;
+import rsmg.model.variables.Constants;
 
 public class TestTileGrid {
 
@@ -39,11 +39,11 @@ public class TestTileGrid {
 	@Test
 	public void testGetTile() {
 		assertTrue(!grid.getTile(0, 0).isSolid());
-		assertTrue(!grid.getTile(1*Variables.TILESIZE, 0).isSolid());
-		assertTrue(!grid.getTile(0, 1*Variables.TILESIZE).isSolid());
-		assertTrue(!grid.getTile(1*Variables.TILESIZE, 1*Variables.TILESIZE).isSolid());
-		assertTrue(grid.getTile(0, 2*Variables.TILESIZE).isSolid());
-		assertTrue(grid.getTile(1*Variables.TILESIZE, 2*Variables.TILESIZE).isSolid());
+		assertTrue(!grid.getTile(1*Constants.TILESIZE, 0).isSolid());
+		assertTrue(!grid.getTile(0, 1*Constants.TILESIZE).isSolid());
+		assertTrue(!grid.getTile(1*Constants.TILESIZE, 1*Constants.TILESIZE).isSolid());
+		assertTrue(grid.getTile(0, 2*Constants.TILESIZE).isSolid());
+		assertTrue(grid.getTile(1*Constants.TILESIZE, 2*Constants.TILESIZE).isSolid());
 	}
 	
 	@Test
@@ -69,8 +69,8 @@ public class TestTileGrid {
 	@Test
 	public void testGetSpawnPoint() throws Exception {
 		Point p = grid.getSpawnPoint();
-		Point point = new Point((int)p.getX()/Variables.TILESIZE,
-								(int)p.getY()/Variables.TILESIZE);
+		Point point = new Point((int)p.getX()/Constants.TILESIZE,
+								(int)p.getY()/Constants.TILESIZE);
 		assertTrue(point.getX() == 0);
 		assertTrue(point.getY() == 1);
 	}
@@ -89,33 +89,33 @@ public class TestTileGrid {
 	@Test
 	public void testLeftSideIntersection() {
 		int charX = 50;
-		int notYIntersect = Variables.TILESIZE*2-Variables.CHARACTERHEIGHT-1;
+		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT-1;
 		PCharacter character = new PCharacter(charX, notYIntersect, null);
         assertTrue(grid.leftSideIntersection(character) == 0);
         
         int yIntersect = notYIntersect+1;
         character.setY(yIntersect);
-        int leftIntersect = Variables.TILESIZE*2-charX;
+        int leftIntersect = Constants.TILESIZE*2-charX;
         assertTrue(grid.leftSideIntersection(character) == leftIntersect);
 	}
 	
 	@Test
 	public void testRightSideIntersection() {
 		int charX = 35;
-		int notYIntersect = Variables.TILESIZE*2-Variables.CHARACTERHEIGHT-1;
+		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT-1;
 		PCharacter character = new PCharacter(charX, notYIntersect, null);
 		assertTrue(grid.rightSideIntersection(character) == 0);
         
         int yIntersect = notYIntersect+1;
         character.setY(yIntersect);
-        double rightIntersect = charX + Variables.CHARACTERWIDTH - Variables.TILESIZE - 0.00001;
+        double rightIntersect = charX + Constants.CHARACTERWIDTH - Constants.TILESIZE - 0.00001;
         assertTrue((int)grid.rightSideIntersection(character) == (int)rightIntersect);
 	}
 	
 	@Test
 	public void testBottomSideIntersection() {
 		int charX = 35;
-		int notYIntersect = Variables.TILESIZE*2-Variables.CHARACTERHEIGHT-1;
+		int notYIntersect = Constants.TILESIZE*2-Constants.CHARACTERHEIGHT-1;
 		PCharacter character = new PCharacter(charX, notYIntersect, null);
 		assertTrue(grid.bottomSideIntersection(character) == 0);
         
@@ -132,8 +132,8 @@ public class TestTileGrid {
 	@Test
 	public void testTileIntersect(){
 		assertTrue(!grid.tileIntersect(0,0));
-		assertTrue(grid.tileIntersect(0,2*Variables.TILESIZE+10));
-		assertTrue(grid.tileIntersect(Variables.TILESIZE+10,2*Variables.TILESIZE+10));
+		assertTrue(grid.tileIntersect(0,2*Constants.TILESIZE+10));
+		assertTrue(grid.tileIntersect(Constants.TILESIZE+10,2*Constants.TILESIZE+10));
 	}
 	
 	@Test
@@ -141,8 +141,8 @@ public class TestTileGrid {
 		PCharacter c = new PCharacter(0, 0, null);
 		assertFalse(grid.intersectsWithEndTile(c));
 		
-		c.setX(Variables.TILESIZE+15);
-		c.setY(Variables.TILESIZE+15);
+		c.setX(Constants.TILESIZE+15);
+		c.setY(Constants.TILESIZE+15);
 		assertTrue(grid.intersectsWithEndTile(c));
 	}
 	

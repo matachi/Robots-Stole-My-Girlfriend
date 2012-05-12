@@ -7,7 +7,7 @@ import rsmg.io.CharacterProgress;
 import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
-import rsmg.model.variables.Variables;
+import rsmg.model.variables.Constants;
 import rsmg.util.Vector2d;
 /**
  * Class representing a 'shotgun' type weapon
@@ -32,9 +32,9 @@ public class Shotgun implements Weapon {
 		this.bulletList = bulletList;
 		shot = false;
 		if(CharacterProgress.isIncShotgunSpreadUnlocked())
-			spread = Variables.SHOTGUN_SPREAD_UPG;
+			spread = Constants.SHOTGUN_SPREAD_UPG;
 		else
-			spread = Variables.SHOTGUN_SPREAD;
+			spread = Constants.SHOTGUN_SPREAD;
 	}
 	
 	/**

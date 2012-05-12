@@ -4,7 +4,7 @@ package rsmg.model.variables;
  * @author Johan Grönvall
  *
  */
-public enum Variables{	
+public enum Constants{	
 	;
 	
 	public static final int CHARACTERWIDTH = 20;

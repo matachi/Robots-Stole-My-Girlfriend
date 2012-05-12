@@ -2,7 +2,7 @@ package rsmg.model.object.unit;
 
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
-import rsmg.model.variables.Variables;
+import rsmg.model.variables.Constants;
 /**
  * Class representing hostile LivingObjects
  * @author zapray
@@ -47,7 +47,7 @@ public abstract class Enemy extends LivingObject{
 		}
 		if (obj instanceof PCharacter) {
 			if(((PCharacter) obj).isDashing() && vulnerableToExplosions){
-				this.damage(Variables.DASHDAMAGE);
+				this.damage(Constants.DASHDAMAGE);
 				lastAttackedTime = System.currentTimeMillis();
 				vulnerableToExplosions = false;
 			}
@@ -68,7 +68,7 @@ public abstract class Enemy extends LivingObject{
 	 * updates whether the enemy can take damage from explosionDamage or not
 	 */
 	public void updateVulnerability() {
-		if(lastAttackedTime + Variables.EXPLOSION_TICK < System.currentTimeMillis()){
+		if(lastAttackedTime + Constants.EXPLOSION_TICK < System.currentTimeMillis()){
 			vulnerableToExplosions = true;
 		}
 	}
@@ -86,7 +86,7 @@ public abstract class Enemy extends LivingObject{
 	 * @return
 	 */
 	public boolean recentlytookDamage() {
-		return (lastAttackedTime + Variables.ENEMY_FLASHDURATION > System.currentTimeMillis());
+		return (lastAttackedTime + Constants.ENEMY_FLASHDURATION > System.currentTimeMillis());
 	}
 	
 	/**

@@ -14,7 +14,7 @@ import rsmg.model.object.unit.weapon.Pistol;
 import rsmg.model.object.unit.weapon.RocketLauncher;
 import rsmg.model.object.unit.weapon.Shotgun;
 import rsmg.model.object.unit.weapon.Weapon;
-import rsmg.model.variables.Variables;
+import rsmg.model.variables.Constants;
 
 /**
  * Class for representing the playable Character
@@ -108,7 +108,7 @@ public class PCharacter extends LivingObject {
 	 * @param bulletList Reference to the level's bullet list where the character's bullets should be stored.
 	 */
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
-		super(x, y, Variables.CHARACTERWIDTH, Variables.CHARACTERHEIGHT, Variables.CHARACTERHEALTH, ObjectName.CHARACTER);
+		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 		canDash = CharacterProgress.isDashUnlocked();
 		weapons = new HashMap<String, Weapon>();
 		weapons.put(ObjectName.PISTOL, new Pistol(bulletList));
@@ -118,9 +118,9 @@ public class PCharacter extends LivingObject {
 		currentWeapon = weapons.get(ObjectName.PISTOL);
 		
 		if (CharacterProgress.isIncRunningSpeedUnlocked())
-			maxRunningSpeed = Variables.CHAR_SPEED_UPG;
+			maxRunningSpeed = Constants.CHAR_SPEED_UPG;
 		else
-			maxRunningSpeed = Variables.CHAR_SPEED;
+			maxRunningSpeed = Constants.CHAR_SPEED;
 	}
 	
 	/**
@@ -182,7 +182,7 @@ public class PCharacter extends LivingObject {
 	
 	public void updateImmortality() {
 		
-		if(lastAttackedTime + Variables.CHARACTER_IMMORTALITY_TIME < System.currentTimeMillis()){
+		if(lastAttackedTime + Constants.CHARACTER_IMMORTALITY_TIME < System.currentTimeMillis()){
 			immortal = false;
 			lastAttackedTime = 0;
 		}
@@ -206,9 +206,9 @@ public class PCharacter extends LivingObject {
 	 */
 	public void accelerate(double delta) {
 		if (directionEast) {
-			this.addVelocity(Variables.CHARACTER_ACCELERATION*delta, 0);
+			this.addVelocity(Constants.CHARACTER_ACCELERATION*delta, 0);
 		}else if(directionWest) {
-			this.addVelocity(-Variables.CHARACTER_ACCELERATION*delta, 0);
+			this.addVelocity(-Constants.CHARACTER_ACCELERATION*delta, 0);
 		}
 	}
 	
@@ -280,10 +280,10 @@ public class PCharacter extends LivingObject {
 		if (!isDead()) {
 			// Only jump if the character is standing on the ground.
 			if (!airborne){
-				this.addVelocity(0, -Variables.JUMPSTRENGTH);
+				this.addVelocity(0, -Constants.JUMPSTRENGTH);
 				
 			} else if (doubleJumpAvailable()){
-				this.setVelocityY(-Variables.DOUBLEJUMPSTRENGTH);
+				this.setVelocityY(-Constants.DOUBLEJUMPSTRENGTH);
 				doubleJumps -= 1;
 			}
 		}
@@ -337,8 +337,8 @@ public class PCharacter extends LivingObject {
 	 * Called when the character no longer tries to go higher when he is jumping.
 	 */
 	public void jumpReleased() {
-		if (getVelocityY() < Variables.RELEASED_JUMP_VELOCITY)
-			setVelocityY(Variables.RELEASED_JUMP_VELOCITY);
+		if (getVelocityY() < Constants.RELEASED_JUMP_VELOCITY)
+			setVelocityY(Constants.RELEASED_JUMP_VELOCITY);
 	}
 
 	/**
@@ -364,13 +364,13 @@ public class PCharacter extends LivingObject {
 	 * Make the character perform the "dash" move.
 	 */
 	private void performDash(double delta) {
-		distanceDashed += Variables.DASHSPEED * delta;
+		distanceDashed += Constants.DASHSPEED * delta;
 		if (this.isFacingRight())
-			this.setVelocityX(Variables.DASHSPEED);
+			this.setVelocityX(Constants.DASHSPEED);
 		else
-			this.setVelocityX(-Variables.DASHSPEED);
+			this.setVelocityX(-Constants.DASHSPEED);
 	
-		if (distanceDashed > Variables.DASHLENGTH) {
+		if (distanceDashed > Constants.DASHLENGTH) {
 			isDashing = false;
 			distanceDashed = 0;
 		}
@@ -378,7 +378,7 @@ public class PCharacter extends LivingObject {
 	}
 	
 	private boolean recentlyDashed() {
-		return lastDashed + Variables.DASHCOOLDOWN > System.currentTimeMillis();
+		return lastDashed + Constants.DASHCOOLDOWN > System.currentTimeMillis();
 	}
 
 	/**
@@ -424,9 +424,9 @@ public class PCharacter extends LivingObject {
 	public void applyFriction(double delta) {
 		double friction;
 		if(airborne){
-			friction = Variables.AIR_FRICTION;
+			friction = Constants.AIR_FRICTION;
 		} else {
-			friction = Variables.GROUND_FRICTION;
+			friction = Constants.GROUND_FRICTION;
 		}
 		
 		if (isMovingRight()) {
