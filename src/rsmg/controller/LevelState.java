@@ -37,7 +37,10 @@ import rsmg.model.variables.Constants;
 
 /**
  * The state where the levels are played out.
- * @author Daniel Jonsson, Johan Gronvall, Johan Rignas
+ * 
+ * @author Daniel Jonsson
+ * @author Johan Grönvall
+ * @author Johan Rignäs
  *
  */
 class LevelState extends State {
@@ -126,12 +129,6 @@ class LevelState extends State {
 	 * Number of tiles that are visible on the screen's height.
 	 */
 	private int numberOfTilesVisibleY;
-
-	/**
-	 * Character hitbox.
-	 */
-	private Rectangle hitboxRect;
-	private Graphics hitboxGrap;
 
 	/**
 	 * Construct the level.
@@ -287,13 +284,6 @@ class LevelState extends State {
 		tiles.put(ObjectName.BOX_TILE4, boxTile4);
 		tiles.put(ObjectName.AIR_TILE, airTile);
 		tiles.put(ObjectName.END_TILE, endTile);
-		
-		/**
-		 * Init hitbox graphics.
-		 */
-		hitboxRect = new Rectangle(0, 0, Constants.CHARACTERWIDTH*scale, Constants.CHARACTERHEIGHT*scale);
-		hitboxGrap = new Graphics();
-		hitboxGrap.setColor(new Color(0.0f, 1.0f, 0.0f, 0.5f));
 	}
 	
 	/**
@@ -383,14 +373,14 @@ class LevelState extends State {
 			
 			//make the enemy flash if he recently took damage
 
-			if(enemy.recentlytookDamage()) {
-				if(enemyRenderable instanceof Animation) {
+			if (enemy.recentlytookDamage()) {
+				if (enemyRenderable instanceof Animation) {
 					((Animation)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX+offsetX, (float)enemy.getY()*scale+cameraY+offsetY, (float)enemy.getWidth()*scale, (float)enemy.getHeight()*scale);
-				}else if(enemyRenderable instanceof Image) {
+				} else if(enemyRenderable instanceof Image) {
 					((Image)enemyRenderable).drawFlash((float)enemy.getX()*scale+cameraX+offsetX, (float)enemy.getY()*scale+cameraY+offsetY);
 				}
 				
-			}else{
+			} else {
 					enemyRenderable.draw((float)enemy.getX()*scale+cameraX+offsetX, (float)enemy.getY()*scale+cameraY+offsetY);	
 			}
 		}
@@ -437,10 +427,6 @@ class LevelState extends State {
 	 */
 	private void drawCharacter() {
 		character.draw();
-		
-		// Draw character hitbox
-//		hitboxRect.setLocation(characterX, characterY);
-//		hitboxGrap.draw(hitboxRect);
 	}
 
 	/**
