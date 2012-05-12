@@ -37,7 +37,7 @@ import rsmg.model.variables.Constants;
 
 /**
  * The state where the levels are played out.
- * @author Daniel Jonsson, Johan Gr�nvall, Johan Rign�s
+ * @author Daniel Jonsson, Johan Gronvall, Johan Rignas
  *
  */
 class LevelState extends State {

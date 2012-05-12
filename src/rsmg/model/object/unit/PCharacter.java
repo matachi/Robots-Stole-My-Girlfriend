@@ -145,6 +145,9 @@ public class PCharacter extends LivingObject {
 		updateImmortality();
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void collide(InteractiveObject obj) {
 		if (obj instanceof Enemy) {
@@ -180,7 +183,10 @@ public class PCharacter extends LivingObject {
 		}
 	}
 	
-	public void updateImmortality() {
+	/**
+	 * updates whether the character can take damage
+	 */
+	private void updateImmortality() {
 		
 		if(lastAttackedTime + Constants.CHARACTER_IMMORTALITY_TIME < System.currentTimeMillis()){
 			immortal = false;
@@ -195,7 +201,10 @@ public class PCharacter extends LivingObject {
 	public boolean isImmortal() {
 		return immortal;
 	}
-	
+	/**
+	 * sets whether the character can currently take damage 
+	 * @param isImmortal
+	 */
 	public void setMortality(boolean isImmortal){
 		this.immortal = isImmortal;
 	}
@@ -212,6 +221,9 @@ public class PCharacter extends LivingObject {
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */	
 	@Override
 	public void applyGravity(double delta) {
 		// Apply gravity to the character if he is in the air, in other words,
@@ -219,7 +231,10 @@ public class PCharacter extends LivingObject {
 		if (airborne)
 			super.applyGravity(delta);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void move(double delta) {
 		if (isDashing)
@@ -325,10 +340,16 @@ public class PCharacter extends LivingObject {
 		
 	}
 	
+	/**
+	 * called whe nthe character no longer tries to move right
+	 */
 	public void moveRightReleased() {
 		runningRight = false;
 	}
 	
+	/**
+	 * called when the character no longer tries to move left
+	 */
 	public void moveLeftReleased() {
 		runningLeft = false;
 	}
@@ -400,9 +421,17 @@ public class PCharacter extends LivingObject {
 		return isDashing;
 	}
 
+	/**
+	 * returns how many upgrade points this character has in store
+	 * @return
+	 */
 	public int getUpgradePoints() {
 		return upgradePoints;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void updateFacing(){
 		if (directionWest){
@@ -411,12 +440,17 @@ public class PCharacter extends LivingObject {
 			setFacing(true);
 		}
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setFacing(boolean isFacingRight){
 		if(!isDashing) {
 			super.setFacing(isFacingRight);
 		}
 	}
+	
 	/**
 	 * applies friction to the character, consistently retarding his  
 	 * @param delta
@@ -442,15 +476,27 @@ public class PCharacter extends LivingObject {
 		}
 	}
 
-	public void setDirections(boolean newDirection) {
+	private void setDirections(boolean newDirection) {
 		directionEast = newDirection;
 		directionWest = newDirection;
 	}
 	
+	/**
+	 * returns true of the character is running
+	 * (running doesn't nessescarily mean moving
+	 * but rather if the character is trying to move
+	 * anywhere) 
+	 * @return true if the character is running
+	 */
 	public boolean isRunning() {
 		return runningRight || runningLeft;
 	}
 	
+	/**
+	 * returns how far the character has dashed since the last time
+	 * the dash move was initiated
+	 * @return
+	 */
 	public double getDistanceDashed(){
 		return distanceDashed;
 	}
