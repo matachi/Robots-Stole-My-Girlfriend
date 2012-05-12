@@ -8,6 +8,11 @@ import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
 import rsmg.model.object.unit.Tankbot;
 
+/**
+ * 
+ * @author Johan Rignäs
+ *
+ */
 public class TestAggroRange {
 	
 	@Test

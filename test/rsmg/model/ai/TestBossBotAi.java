@@ -12,6 +12,11 @@ import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.unit.BossBotHead;
 import rsmg.model.object.unit.PCharacter;
 
+/**
+ * 
+ * @author Johan Rignäs
+ *
+ */
 public class TestBossBotAi {
 	
 	private BossBotAi bossBotAi;

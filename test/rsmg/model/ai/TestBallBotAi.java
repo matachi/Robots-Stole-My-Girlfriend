@@ -11,6 +11,11 @@ import org.junit.Test;
 import rsmg.model.object.unit.BallBot;
 import rsmg.model.object.unit.PCharacter;
 
+/**
+ * 
+ * @author Johan Rignäs
+ *
+ */
 public class TestBallBotAi {
 
 	private BallBotAi ballBotAi;
