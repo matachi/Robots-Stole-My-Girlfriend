@@ -5,7 +5,7 @@ import rsmg.model.object.InteractiveObject;
 import rsmg.util.Vector2d;
 
 /**
- * A class representing an explosion created when a Laserbolt collides with anything 
+ * A class representing an explosion created when a LaserBolt collides with anything 
  * @author Johan Gronvall
  *
  */

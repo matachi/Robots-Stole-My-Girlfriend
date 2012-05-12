@@ -8,15 +8,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import rsmg.model.object.bullet.Bullet;
+import rsmg.util.Vector2d;
+import rsmg.model.variables.Constants;
 
-/**
- * Tests the bullet class
- *
- */
-public class TestBullet {
-	
-	private Bullet bullet;
+public class TestCurveBullet {
+	private CurveBullet bullet;
 	
 	@BeforeClass
 	public static void beforeClass() {
@@ -28,7 +24,7 @@ public class TestBullet {
 
 	@Before
 	public void before() {
-		bullet = new BasicBullet(10, 10, 10, 10, "tstBullet", 99, null);
+		bullet = new CurveBullet(10, 10, 10, 10, "tstBullet", 99, new Vector2d(0,0));
 	}
 
 	@After
@@ -36,12 +32,13 @@ public class TestBullet {
 	}
 
 	@Test
-	public void testGetDamage() {
-		assertTrue(bullet.getDamage() == 99);
+	public void testUpdate() {
+		bullet.update(20);
+		assertTrue(bullet.getVelocityY() == Constants.GRAVITYSTRENGTH*20);
 	}
 	
+	@Test
 	public void testIsExplosion() {
 		assertTrue(!bullet.isExplosion());
 	}
-	
 }

@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Tests the bullet class
+ * Tests the Explosion class
  *
  */
 public class TestExplosion {

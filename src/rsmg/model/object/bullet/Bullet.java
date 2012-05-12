@@ -53,9 +53,8 @@ public abstract class Bullet extends InteractiveObject implements Projectile {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(double delta) {
-		//nothing at this point
-	}
+	public abstract void update(double delta);
+	
 
 	/**
 	 * {@inheritDoc}

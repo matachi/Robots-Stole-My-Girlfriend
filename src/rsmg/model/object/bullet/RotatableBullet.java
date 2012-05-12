@@ -42,5 +42,10 @@ public class RotatableBullet extends Bullet {
 	public boolean isExplosion() {
 		return false;
 	}
+	
+	@Override
+	public void update(double delta) {
+		//nothing as of now
+	}
 
 }
