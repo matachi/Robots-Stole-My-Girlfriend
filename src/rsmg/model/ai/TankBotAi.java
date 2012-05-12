@@ -15,7 +15,7 @@ public class TankBotAi implements Ai {
 	
 	private TankBot enemy;
 	private PCharacter character;
-	private static int AGGRORANGE = 200;
+	private final static int AGGRO_RANGE = 200;
 	private double cooldown;
 	
 	/**
@@ -44,14 +44,10 @@ public class TankBotAi implements Ai {
 		
 		double xDiff = playerX - enemy.getX();
 		
-		if(xDiff > 0 && xDiff < AGGRORANGE) {
+		if (Math.abs(xDiff) < AGGRO_RANGE) {
+			enemy.setFacing(xDiff > 0);
 			aggresive = true;
-			enemy.setFacing(true);
-			
-		} else if(xDiff < 0 && xDiff*(-1) < AGGRORANGE) {
-			enemy.setFacing(false);
-			aggresive = true;
-		}else {
+		} else {
 			idle();
 			aggresive = false;
 		}
