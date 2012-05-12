@@ -25,7 +25,7 @@ public class TestBallBotAi {
 	public void before() {
 		BallBot ballbot = new BallBot(10,10);
 		enemyAiList = new LinkedList<Ai>();
-		ballBotAi = new BallBotAi(ballbot, enemyAiList);
+		ballBotAi = new BallBotAi(ballbot, enemyAiList, new PCharacter(null));
 	}
 		
 	// TODO
@@ -33,14 +33,13 @@ public class TestBallBotAi {
 	@Test
 	public void testUpdate() {
 		double delta = 2;
-		PCharacter character = new PCharacter(300,0, null);
 		
-		ballBotAi.update(delta, character.getX(), character.getY());
-		ballBotAi.update(delta, character.getX(), character.getY());
-		ballBotAi.update(delta, character.getX(), character.getY());
-		ballBotAi.update(delta, character.getX(), character.getY());
-		ballBotAi.update(delta, character.getX(), character.getY());
-		ballBotAi.update(delta, character.getX(), character.getY());
+		ballBotAi.update(delta);
+		ballBotAi.update(delta);
+		ballBotAi.update(delta);
+		ballBotAi.update(delta);
+		ballBotAi.update(delta);
+		ballBotAi.update(delta);
 		assertTrue(enemyAiList.size() == 3);
 	}
 		

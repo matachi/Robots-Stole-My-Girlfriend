@@ -49,14 +49,17 @@ public class TestLevel {
 				 {new SpawnTile(), new  EndTile()},
 				 {new GroundTile("boxTile1"), new GroundTile("boxTile1")}};
 		tileGrid = new TileGrid(tiles);
+
+		PCharacter character = new PCharacter(new LinkedList<Bullet>());
 		
 		List<Item> items = new LinkedList<Item>();
 		items.add(new HealthPack(10,10));
 		
 		List<Ai> enemies = new LinkedList<Ai>();
-		enemies.add(new TankBotAi(new Tankbot(10,10, new LinkedList<Bullet>())));
+		enemies.add(new TankBotAi(new Tankbot(10,10, new LinkedList<Bullet>()), character));
 		
-		level = new Level(tileGrid, items, enemies, new LinkedList<Bullet>());
+		
+		level = new Level(tileGrid, character, items, enemies, new LinkedList<Bullet>(), new LinkedList<Bullet>());
 	}
 
 	@After
@@ -67,7 +70,7 @@ public class TestLevel {
 		Point spawnPoint;
 		try {
 			spawnPoint = tileGrid.getSpawnPoint();
-			PCharacter character = new PCharacter(spawnPoint.getX(), spawnPoint.getY(), new LinkedList<Bullet>());
+			PCharacter character = level.getCharacter();
 			assertTrue(character.getX() == spawnPoint.getX());
 			assertTrue(character.getY() == spawnPoint.getY());
 		} catch (Exception e) {

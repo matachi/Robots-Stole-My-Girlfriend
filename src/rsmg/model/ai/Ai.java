@@ -14,11 +14,9 @@ public interface Ai {
 	 * Update method for the Ai which is called every loop updating this Ai's
 	 * state and performing its actions
 	 * 
-	 * @param delta
-	 * @param PlayerX The PCharacter's X position.
-	 * @param PlayerY The PCharacter's Y position.
+	 * @param delta Seconds since last update.
 	 */
-	public void update(double delta, double playerX, double playerY);
+	public void update(double delta);
 	
 	/**
 	 * Return the Enemy that implements this interface

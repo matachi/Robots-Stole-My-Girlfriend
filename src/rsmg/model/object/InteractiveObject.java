@@ -98,6 +98,12 @@ public abstract class InteractiveObject {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+	public void setPosition(double x, double y) {
+		setX(x);
+		setY(y);
+	}
+	
 	public double getPX(){
 		return previousX;
 	}

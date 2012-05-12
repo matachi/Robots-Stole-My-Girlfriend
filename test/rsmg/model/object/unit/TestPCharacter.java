@@ -35,7 +35,7 @@ public class TestPCharacter {
 
 	@Before
 	public void before() {
-		character = new PCharacter(0, 0, new LinkedList<Bullet>());
+		character = new PCharacter(new LinkedList<Bullet>());
 	}
 
 	@After

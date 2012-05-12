@@ -2,6 +2,7 @@ package rsmg.model.ai;
 
 import rsmg.model.object.unit.BossBotHead;
 import rsmg.model.object.unit.Enemy;
+import rsmg.model.object.unit.PCharacter;
 import rsmg.util.Vector2d;
 
 
@@ -23,6 +24,11 @@ public class BossBotAi implements Ai {
 	 * The enemy representing the boss
 	 */
 	private BossBotHead enemy;
+	
+	/**
+	 * Reference to the player character.
+	 */
+	private PCharacter character;
 	
 	/**
 	 * The cooldown variable used for the bosses primary attack
@@ -50,16 +56,21 @@ public class BossBotAi implements Ai {
 	 * Create a BossBot AI.
 	 * 
 	 * @param enemy Reference to the enemy it should control.
+	 * @param character Reference to the player character.
 	 */
-	public BossBotAi(BossBotHead enemy) {
+	public BossBotAi(BossBotHead enemy, PCharacter character) {
 		this.enemy = enemy;
+		this.character = character;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(double delta, double playerX, double playerY) {
+	public void update(double delta) {
+
+		double playerX = character.getX();
+		double playerY = character.getY();
 		
 		double tempAngle = Math.atan((playerY - enemy.getY())/(enemy.getX() - playerX));
 		if (tempAngle > angle + offset) {

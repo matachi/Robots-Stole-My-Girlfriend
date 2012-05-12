@@ -17,7 +17,8 @@ public class TestAggroRange {
 	
 	@Test
 	public void testCharInAggroRange(){
-		PCharacter character = new PCharacter(4, 4, null);
+		PCharacter character = new PCharacter(null);
+		character.setPosition(4, 4);
 		Enemy enemy = new Tankbot(5,5, null);
 		
 		assertTrue(AggroRange.charInAggroRange(character.getX(), character.getY(), enemy, 2));

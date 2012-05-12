@@ -103,8 +103,18 @@ public class PCharacter extends LivingObject {
 	
 	/**
 	 * Create a character that the player controls.
-	 * @param x The X coordinate.
-	 * @param y The Y coordinate.
+	 * 
+	 * @param bulletList Reference to the level's bullet list where the character's bullets should be stored.
+	 */
+	public PCharacter(Collection<Bullet> bulletList) {
+		this(0, 0, bulletList);
+	}
+	
+	/**
+	 * Create a character that the player controls.
+	 * 
+	 * @param x The character's X position.
+	 * @param y The character's Y position.
 	 * @param bulletList Reference to the level's bullet list where the character's bullets should be stored.
 	 */
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {

@@ -74,17 +74,21 @@ public class Level {
 	
 	/**
 	 * Creates a level.
+	 * 
 	 * @param tileGrid The tile grid that the level shall use.
+	 * @param character Reference to the character.
 	 * @param items The items that should be in the level.
 	 * @param aiList The enemies in the level.
 	 * @param enemyBullets List containing the enemies' bullets.
+	 * @param alliedBullets List containing the allied' bullets.
 	 */
-	public Level(TileGrid tileGrid, List<Item> items, List<Ai> aiList, List<Bullet> enemyBullets) {
+	public Level(TileGrid tileGrid, PCharacter character, List<Item> items, List<Ai> aiList, List<Bullet> enemyBullets, List<Bullet> alliedBullets) {
 		this.tileGrid = tileGrid;
+		this.character = character;
 		this.items = items;
 		this.enemies = aiList;
 		enemyBulletList = enemyBullets;
-		alliedBulletsList = new ArrayList<Bullet>();
+		alliedBulletsList = alliedBullets;
 		spawnChar();
 	}
 
@@ -96,9 +100,10 @@ public class Level {
 	private void spawnChar() {
 		try {
 			Point spawnPoint = tileGrid.getSpawnPoint();
-			character = new PCharacter(spawnPoint.getX(), spawnPoint.getY(), alliedBulletsList);
+			character.setX(spawnPoint.getX());
+			character.setY(spawnPoint.getY());
 		} catch (Exception NullPointerException) {
-			character = new PCharacter(0, 0, alliedBulletsList);
+			// The character will remain on position (0, 0).
 		}
 	}
 
@@ -201,7 +206,7 @@ public class Level {
 				enemy.applyGravity(delta);
 			}
 			
-			ai.update(delta, character.getX(), character.getY());
+			ai.update(delta);
 			enemy.move(delta);
 			applyNormalForce(enemy);
 			

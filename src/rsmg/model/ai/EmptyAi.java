@@ -25,7 +25,7 @@ public class EmptyAi implements Ai {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(double delta, double playerX, double playerY) {
+	public void update(double delta) {
 		//nothing
 	}
 

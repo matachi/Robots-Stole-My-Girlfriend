@@ -21,12 +21,14 @@ public class TestBossBotAi {
 	
 	private BossBotAi bossBotAi;
 	private List<Bullet> bulletList;
+	private PCharacter character;
 	
 	@Before
 	public void before() {
 		bulletList = new LinkedList<Bullet>();
 		BossBotHead bossBot = new BossBotHead(20,20, bulletList);
-		bossBotAi = new BossBotAi(bossBot);
+		character = new PCharacter(null);
+		bossBotAi = new BossBotAi(bossBot, character);
 	}
 
 	// TODO
@@ -34,18 +36,17 @@ public class TestBossBotAi {
 	@Test
 	public void testUpdate() {
 		double delta = 2;
-		PCharacter character = new PCharacter(300,0, null);
 		
-		bossBotAi.update(delta, character.getX(), character.getY());
+		bossBotAi.update(delta);
 		assertTrue(bulletList.size() == 0);
-		
-		bossBotAi.update(delta, character.getX(), character.getY());
+
+		bossBotAi.update(delta);
 		assertTrue(bulletList.size() == 1);
-		
-		bossBotAi.update(delta, character.getX(), character.getY());
+
+		bossBotAi.update(delta);
 		assertTrue(bulletList.size() == 2);
-		
-		bossBotAi.update(delta, character.getX(), character.getY());
+
+		bossBotAi.update(delta);
 		assertTrue(bulletList.size() == 3);
 	}
 		

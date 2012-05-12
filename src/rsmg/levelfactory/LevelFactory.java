@@ -27,6 +27,7 @@ import rsmg.model.object.item.UpgradePoints;
 import rsmg.model.object.unit.BallBot;
 import rsmg.model.object.unit.BossBotHead;
 import rsmg.model.object.unit.BucketBot;
+import rsmg.model.object.unit.PCharacter;
 import rsmg.model.object.unit.RocketBot;
 import rsmg.model.object.unit.Spikes;
 import rsmg.model.object.unit.Tankbot;
@@ -61,6 +62,8 @@ public final class LevelFactory {
 		List<Item> itemList = new ArrayList<Item>();
 		List<Ai> aiList = new ArrayList<Ai>();
 		List<Bullet> enemyBulletList = new ArrayList<Bullet>();
+		List<Bullet> alliedBulletList = new ArrayList<Bullet>();
+		PCharacter character = new PCharacter(alliedBulletList);
 		
 		// Get the document from the io package.
 		Document document = Levels.getLevel(levelNumber);
@@ -149,19 +152,19 @@ public final class LevelFactory {
 					Ai ai;
 					switch (enemyValue) {
 						case ObjectName.TANKBOT :
-							ai = new TankBotAi(new Tankbot(x*scale, y*scale, enemyBulletList));
+							ai = new TankBotAi(new Tankbot(x*scale, y*scale, enemyBulletList), character);
 							break;
 						case ObjectName.ROCKETBOT :
-							ai = new RocketBotAi(new RocketBot(x*scale, y*scale));
+							ai = new RocketBotAi(new RocketBot(x*scale, y*scale), character);
 							break;
 						case ObjectName.BALLBOT :
-							ai = new BallBotAi(new BallBot(x*scale, y*scale), aiList);
+							ai = new BallBotAi(new BallBot(x*scale, y*scale), aiList, character);
 							break;
 						case ObjectName.BUCKETBOT :
-							ai = new BucketBotAi(new BucketBot(x*scale, y*scale, enemyBulletList));
+							ai = new BucketBotAi(new BucketBot(x*scale, y*scale, enemyBulletList), character);
 							break;
 						case ObjectName.BOSSBOT :
-							ai = new BossBotAi(new BossBotHead(x*scale, y*scale, enemyBulletList));
+							ai = new BossBotAi(new BossBotHead(x*scale, y*scale, enemyBulletList), character);
 							break;
 						default :
 							ai = new EmptyAi(new Spikes(x*scale, y*scale));
@@ -172,6 +175,6 @@ public final class LevelFactory {
 			}
 		}
 		
-		return new Level(new TileGrid(grid), itemList, aiList, enemyBulletList);
+		return new Level(new TileGrid(grid), character, itemList, aiList, enemyBulletList, alliedBulletList);
 	}
 }
