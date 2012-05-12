@@ -6,14 +6,17 @@ import rsmg.model.object.unit.BallBot;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.MiniBallBot;
 import rsmg.util.Vector2d;
+
+
 /**
- * creates an Ai used for BallBots.
- * this Ai will make the BallBot circle around in the air.
- * It will also occasionally spawn miniBallBots
- * @author Johan Gronvall
- *
+ * Creates an Ai used for BallBots. This Ai will make the BallBot circle around
+ * in the air. It will also occasionally spawn miniBallBots.
+ * 
+ * @author Johan Grönvall
+ * 
  */
 public class BallBotAi implements Ai {
+	
 	private BallBot enemy;
 	private List<Ai> enemyAiList;
 	private static int TRAVELSPEED = 20;
@@ -24,6 +27,7 @@ public class BallBotAi implements Ai {
 	
 	/**
 	 * Create a BallBot AI.
+	 * 
 	 * @param enemy Reference to the enemy it should control.
 	 * @param enemyAiList The list of Ai for the enemies that are harmful to the character.
 	 */
@@ -50,13 +54,14 @@ public class BallBotAi implements Ai {
 	}
 
 	/**
-	 * Tell when the BallBot should shoot
+	 * Tell when the BallBot should shoot.
+	 * 
 	 * @param delta
-	 * @return true if it should shoot, otherwise false
+	 * @return true If it should shoot, otherwise false.
 	 */
 	private boolean shouldShoot(double delta) {
 		cooldown += delta;
-		// Every 0.8 second it gets the chance to shoot.
+		// Shoot every 2 seconds.
 		if (cooldown > 2) {
 			cooldown = 0;
 			return true;
@@ -65,7 +70,7 @@ public class BallBotAi implements Ai {
 	}
 	
 	/**
-	 * Spawns a MiniBallBot
+	 * Spawns a MiniBallBot.
 	 */
 	private void spawnEnemy() {
 		enemyAiList.add(new RocketBotAi(new MiniBallBot(enemy.getX(), enemy.getY())));

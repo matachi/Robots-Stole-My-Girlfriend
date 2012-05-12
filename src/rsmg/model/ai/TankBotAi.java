@@ -2,10 +2,12 @@ package rsmg.model.ai;
 
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.Tankbot;
+
+
 /**
- * An Ai used for TankBots.
- * The Ai will make the tankbot shoot at regular intervals and always face
- * towards the PCharacter if he is in 'aggrorange' 
+ * An Ai used for TankBots. The Ai will make the tankbot shoot at regular
+ * intervals and always face towards the PCharacter if he is in 'aggrorange'.
+ * 
  * @author Johan Grönvall
  * 
  */
@@ -15,12 +17,13 @@ public class TankBotAi implements Ai {
 	private double cooldown;
 	
 	/**
-	 * boolean whether the enemy should be attacking or not
+	 * Whether the enemy should be attacking or not.
 	 */
 	private boolean aggresive = false;
 	
 	/**
-	 * Creates a TankBotAi with default values
+	 * Creates a TankBotAi with default values.
+	 * 
 	 * @param enemy Reference to the enemy it should control.
 	 */
 	public TankBotAi(Tankbot enemy) {
@@ -28,7 +31,7 @@ public class TankBotAi implements Ai {
 	}
 
 	/**
-	 * Update the state and actions for the TankBot
+	 * Update the state and actions for the TankBot.
 	 */
 	@Override
 	public void update(double delta, double playerX, double playerY) {
@@ -53,19 +56,20 @@ public class TankBotAi implements Ai {
 	}
 	
 	/**
-	 * Telling the TankBot to be still
+	 * Telling the TankBot to be still.
 	 */
 	private void idle() {
 		enemy.setVelocityX(0);
 	}
 	
 	/**
-	 * Tell when the TankBot should attack
-	 * @return true if it should attack, otherwise false
+	 * Tell when the TankBot should attack.
+	 * 
+	 * @return True if it should attack, otherwise false.
 	 */
 	private boolean shouldAttack(double delta) {
 		cooldown += delta;
-		// Every 0.8 second it gets the chance to shoot.
+		// Attack every 0.8 seconds.
 		if (cooldown > 0.8) {
 			cooldown = 0;
 			return true;
@@ -74,7 +78,7 @@ public class TankBotAi implements Ai {
 	}
 	
 	/**
-	 * Returns the TankBot using this AI
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Enemy getEnemy() {
