@@ -281,20 +281,23 @@ public class CharacterProgress {
 	 * @return If the upgrade is unlocked.
 	 */
 	public static boolean isUpgradeUnlocked(String upgrade) {
-		switch (upgrade) {
-		case DASH:
+		/*
+		 * I would have used a switch statement here if it was supported in Java
+		 * 1.7. But we wanted the project to be compatible with Java 1.6.
+		 */
+		if (upgrade.equals(DASH)) {
 			return isDashUnlocked();
-		case DOUBLE_JUMP:
+		} else if (upgrade.equals(DOUBLE_JUMP)) {
 			return isDoubleJumpUnlocked();
-		case RAPID_FIRE:
+		} else if (upgrade.equals(RAPID_FIRE)) {
 			return isRapidFireUnlocked();
-		case INC_RUNNING_SPEED:
+		} else if (upgrade.equals(INC_RUNNING_SPEED)) {
 			return isIncRunningSpeedUnlocked();
-		case INC_SHOTGUN_SPREAD:
+		} else if (upgrade.equals(INC_SHOTGUN_SPREAD)) {
 			return isIncShotgunSpreadUnlocked();
-		case INC_RPG_AOE:
+		} else if (upgrade.equals(INC_RPG_AOE)) {
 			return isIncRPGAoEUnlocked();
-		default:
+		} else {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -401,26 +404,23 @@ public class CharacterProgress {
 	 *            unlocked If the upgrade should be unlocked.
 	 */
 	public static void setUpgrade(String upgrade, boolean unlocked) {
-		switch (upgrade) {
-		case DASH:
+		/*
+		 * I would have used a switch statement here if it was supported in Java
+		 * 1.7. But we wanted the project to be compatible with Java 1.6.
+		 */
+		if (upgrade.equals(DASH)) {
 			setDashUnlocked(unlocked);
-			break;
-		case DOUBLE_JUMP:
+		} else if (upgrade.equals(DOUBLE_JUMP)) {
 			setDoubleJumpUnlocked(unlocked);
-			break;
-		case RAPID_FIRE:
+		} else if (upgrade.equals(RAPID_FIRE)) {
 			setRapidFireUnlocked(unlocked);
-			break;
-		case INC_RUNNING_SPEED:
+		} else if (upgrade.equals(INC_RUNNING_SPEED)) {
 			setIncRunningSpeedUnlocked(unlocked);
-			break;
-		case INC_SHOTGUN_SPREAD:
+		} else if (upgrade.equals(INC_SHOTGUN_SPREAD)) {
 			setIncShotgunSpreadUnlocked(unlocked);
-			break;
-		case INC_RPG_AOE:
+		} else if (upgrade.equals(INC_RPG_AOE)) {
 			setIncRPGAoEUnlocked(unlocked);
-			break;
-		default:
+		} else {
 			throw new IllegalArgumentException();
 		}
 	}

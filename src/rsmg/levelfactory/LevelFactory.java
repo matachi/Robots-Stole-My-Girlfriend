@@ -1,7 +1,9 @@
 package rsmg.levelfactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -48,6 +50,43 @@ import rsmg.model.variables.ObjectName;
  */
 public final class LevelFactory {
 
+	/*
+	 * These maps are needed to bridge a String to an Enum. The XML document
+	 * does of course contain Strings, and we want to use switch statements when
+	 * walking through those objects. However, we also want the project to be
+	 * compatible with Java 1.6, and in 1.6 is switch statements with Strings
+	 * not supported.
+	 */
+	@SuppressWarnings("serial")
+	private static Map<String, ObjectName> tiles = new HashMap<String, ObjectName>() {{
+		put("AirTile", ObjectName.AIR_TILE);
+		put("GroundTile", ObjectName.BOX_TILE1);
+		put("GroundTile2", ObjectName.BOX_TILE2);
+		put("GroundTile3", ObjectName.BOX_TILE3);
+		put("GroundTile4", ObjectName.BOX_TILE4);
+		put("SpawnTile", ObjectName.SPAWN_TILE);
+		put("EndTile", ObjectName.END_TILE);
+	}};
+	
+	@SuppressWarnings("serial")
+	private static Map<String, ObjectName> items = new HashMap<String, ObjectName>() {{
+		put("healthPack", ObjectName.HEALTH_PACK);
+		put("upgradePoint", ObjectName.UPGRADE_POINT);
+		put("laserPistol", ObjectName.LASER_BULLET);
+		put("shotgun", ObjectName.SHOTGUN);
+		put("rocketLauncher", ObjectName.ROCKET_LAUNCHER);
+	}};
+	
+	@SuppressWarnings("serial")
+	private static Map<String, ObjectName> enemies = new HashMap<String, ObjectName>() {{
+		put("tankbot", ObjectName.TANKBOT);
+		put("rocketbot", ObjectName.ROCKETBOT);
+		put("ballbot", ObjectName.BALLBOT);
+		put("bucketbot", ObjectName.BUCKETBOT);
+		put("bossbot", ObjectName.BOSSBOT);
+		put("spikes", ObjectName.SPIKES);
+	}};
+	
 	/**
 	 * Get a working, playable Level.
 	 * 
@@ -93,26 +132,26 @@ public final class LevelFactory {
 				Element cell = (Element) cells.get(x);
 				String cellValue = cell.getText();
 				Tile tile;
-				switch (cellValue) {
-					case "AirTile" :
+				switch (tiles.get(cellValue)) {
+					case AIR_TILE :
 						tile = new AirTile();
 						break;
-					case "GroundTile" :
+					case BOX_TILE1 :
 						tile = new GroundTile(ObjectName.BOX_TILE1);
 						break;
-					case "GroundTile2" :
+					case BOX_TILE2 :
 						tile = new GroundTile(ObjectName.BOX_TILE2);
 						break;
-					case "GroundTile3" :
+					case BOX_TILE3 :
 						tile = new GroundTile(ObjectName.BOX_TILE3);
 						break;
-					case "GroundTile4" :
+					case BOX_TILE4 :
 						tile = new GroundTile(ObjectName.BOX_TILE4);
 						break;
-					case "SpawnTile" :
+					case SPAWN_TILE :
 						tile = new SpawnTile();
 						break;
-					case "EndTile" :
+					case END_TILE :
 						tile = new EndTile();
 						break;
 					default :
@@ -126,17 +165,17 @@ public final class LevelFactory {
 				String itemValue = cell.getAttributeValue("item");
 				if (itemValue != null) {
 					Item item;
-					switch (itemValue) {
-						case "healthPack" :
+					switch (items.get(itemValue)) {
+						case HEALTH_PACK :
 							item = new HealthPack(x*scale,y*scale);
 							break;
-						case "upgradePoint" :
+						case UPGRADE_POINT :
 							item = new UpgradePoints(x*scale,y*scale);
 							break;
-						case "laserPistol" :
+						case LASER_PISTOL :
 							item = new Pistol(x*scale,y*scale, 15, 15);
 							break;
-						case "shotgun" :
+						case SHOTGUN :
 							item = new Shotgun(x*scale,y*scale, 15, 15);
 							break;
 						default :
@@ -150,20 +189,20 @@ public final class LevelFactory {
 				String enemyValue = cell.getAttributeValue("enemy");
 				if (enemyValue != null) {
 					Ai ai;
-					switch (enemyValue) {
-						case "tankbot" :
+					switch (enemies.get(enemyValue)) {
+						case TANKBOT :
 							ai = new TankBotAi(new TankBot(x*scale, y*scale, enemyBulletList), character);
 							break;
-						case "rocketbot" :
+						case ROCKETBOT :
 							ai = new RocketBotAi(new RocketBot(x*scale, y*scale), character);
 							break;
-						case "ballbot" :
+						case BALLBOT :
 							ai = new BallBotAi(new BallBot(x*scale, y*scale), aiList, character);
 							break;
-						case "bucketbot" :
+						case BUCKETBOT :
 							ai = new BucketBotAi(new BucketBot(x*scale, y*scale, enemyBulletList), character);
 							break;
-						case "bossbot" :
+						case BOSSBOT :
 							ai = new BossBotAi(new BossBotHead(x*scale, y*scale, enemyBulletList), character);
 							break;
 						default :

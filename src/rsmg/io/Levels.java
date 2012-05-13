@@ -60,7 +60,10 @@ public final class Levels {
 			} else {
 				return new SAXBuilder().build("res/data/level/Level" + levelNumber + ".xml");
 			}
-		} catch (JDOMException | IOException e) {
+		} catch (JDOMException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
