@@ -1,7 +1,7 @@
 package rsmg.model.object.bullet;
 
-import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 
 /**

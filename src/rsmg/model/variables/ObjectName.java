@@ -1,4 +1,4 @@
-package rsmg.model;
+package rsmg.model.variables;
 
 /**
  * Names of all object in the game.
@@ -10,7 +10,12 @@ package rsmg.model;
  * 
  */
 public enum ObjectName {
-	;
+	
+	/**
+	 * The tiles' names.
+	 */
+	BOX_TILE1, BOX_TILE2, BOX_TILE3, BOX_TILE4, AIR_TILE, SPAWN_TILE, END_TILE;
+	
 
 	/**
 	 * The character's name.
@@ -53,15 +58,4 @@ public enum ObjectName {
 	public static final String LASERBOLT = "laserbolt";
 	public static final String LASERFIRE = "laserFire";
 	public static final String LASERBLAST = "laserBlast";
-	/**
-	 * The tiles' names.
-	 */
-	public static final String BOX_TILE1 = "boxTile1";
-	public static final String BOX_TILE2 = "boxTile2";
-	public static final String BOX_TILE3 = "boxTile3";
-	public static final String BOX_TILE4 = "boxTile4";
-	public static final String AIR_TILE = "airTile";
-	public static final String HAZARDOUS_TILE = "airTile";
-	public static final String SPAWN_TILE = "airTile";
-	public static final String END_TILE = "endTile";
 }

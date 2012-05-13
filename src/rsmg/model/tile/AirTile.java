@@ -1,6 +1,6 @@
 package rsmg.model.tile;
 
-import rsmg.model.ObjectName;
+import rsmg.model.variables.ObjectName;
 
 /**
  * Class to creates a AirTile that is not solid

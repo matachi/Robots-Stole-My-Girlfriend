@@ -17,6 +17,7 @@ import rsmg.model.object.item.Item;
 import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
 
 /**
  * Class representing a level. This Class is in charge of storing and updating

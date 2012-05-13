@@ -25,6 +25,7 @@ import rsmg.model.tile.EndTile;
 import rsmg.model.tile.GroundTile;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
+import rsmg.model.variables.ObjectName;
 
 /**
  * Tests the Level class
@@ -47,7 +48,7 @@ public class TestLevel {
 	public void before() {
 		Tile[][] tiles = {{new AirTile(),new AirTile()},
 				 {new SpawnTile(), new  EndTile()},
-				 {new GroundTile("boxTile1"), new GroundTile("boxTile1")}};
+				 {new GroundTile(ObjectName.BOX_TILE1), new GroundTile(ObjectName.BOX_TILE1)}};
 		tileGrid = new TileGrid(tiles);
 
 		PCharacter character = new PCharacter(new LinkedList<Bullet>());

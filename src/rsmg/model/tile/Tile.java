@@ -1,6 +1,7 @@
 package rsmg.model.tile;
 
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
 
 /**
  * A Tile are parts of the environment in the game
@@ -16,13 +17,13 @@ public abstract class Tile {
 	/**
 	 * Name for the tile
 	 */
-	private String name;
+	private Enum<ObjectName> name;
 
 	/**
 	 * Constructor of Tile
 	 * @param name Name of the tile
 	 */
-	public Tile(String name) {
+	public Tile(Enum<ObjectName> name) {
 		this.name = name;
 	}
 
@@ -43,7 +44,7 @@ public abstract class Tile {
 	 * The name for this tile. Used for sub-Tiles
 	 * @return Tile name
 	 */
-	public String getName() {
+	public Enum<ObjectName> getName() {
 		return name;
 	}
 }

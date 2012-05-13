@@ -2,9 +2,9 @@ package rsmg.model.object.unit;
 
 import java.util.List;
 
-import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.RotatableBullet;
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 
 /**

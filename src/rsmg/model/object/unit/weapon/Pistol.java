@@ -3,9 +3,9 @@ package rsmg.model.object.unit.weapon;
 import java.util.Collection;
 
 import rsmg.io.CharacterProgress;
-import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 /**
  * A class representing a 'Pistol' type weapon

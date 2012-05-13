@@ -15,6 +15,7 @@ import rsmg.model.tile.GroundTile;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
 
 public class TestTileGrid {
 
@@ -24,14 +25,14 @@ public class TestTileGrid {
 	public void before() {
 		Tile[][] tile = {{new AirTile(),new AirTile()},
 						 {new SpawnTile(), new  EndTile()},
-						 {new GroundTile("boxtile1"), new GroundTile("boxtile1")}};
+						 {new GroundTile(ObjectName.BOX_TILE1), new GroundTile(ObjectName.BOX_TILE1)}};
 		grid = new TileGrid(tile);
 	}
 	
 	@Test
 	public void testSet() {
 		assertFalse(grid.getFromCoord(1, 0).isSolid());
-		grid.set(1, 0, new GroundTile("boxtile1"));
+		grid.set(1, 0, new GroundTile(ObjectName.BOX_TILE1));
 		assertTrue(grid.getFromCoord(1, 0).isSolid());
 	}
 	

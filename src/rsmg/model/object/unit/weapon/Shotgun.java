@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.Random;
 
 import rsmg.io.CharacterProgress;
-import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.BasicBullet;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 /**
  * Class representing a 'shotgun' type weapon

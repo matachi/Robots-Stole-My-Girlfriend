@@ -1,6 +1,6 @@
 package rsmg.model.tile;
 
-import rsmg.model.ObjectName;
+import rsmg.model.variables.ObjectName;
 
 /**
  * Class to creates a SpawnTile that is not solid

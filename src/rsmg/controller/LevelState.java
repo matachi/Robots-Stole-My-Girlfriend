@@ -2,6 +2,7 @@ package rsmg.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,6 @@ import rsmg.io.CharacterProgress;
 import rsmg.io.Levels;
 import rsmg.levelfactory.LevelFactory;
 import rsmg.model.Level;
-import rsmg.model.ObjectName;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.bullet.RotatableBullet;
 import rsmg.model.object.item.Item;
@@ -34,6 +34,7 @@ import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
 import rsmg.model.object.unit.weapon.Weapon;
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
 
 /**
  * The state where the levels are played out.
@@ -67,7 +68,7 @@ class LevelState extends State {
 	/**
 	 * Maps containing images.
 	 */
-	private Map<String, Renderable> tiles;
+	private Map<ObjectName, Renderable> tiles;
 	private Map<String, Renderable> bullets;
 	private Map<String, Renderable> items;
 	private Map<String, Renderable> enemies;
@@ -271,7 +272,7 @@ class LevelState extends State {
 		/**
 		 * Create a map with all tile images.
 		 */
-		tiles = new HashMap<String, Renderable>();
+		tiles = new EnumMap<ObjectName, Renderable>(ObjectName.class);
 		Image boxTile1 = new Image(folderPath+"tiles/boxTile1.png", false, filter).getScaledCopy(scale);
 		Image boxTile2 = new Image(folderPath+"tiles/boxTile2.png", false, filter).getScaledCopy(scale);
 		Image boxTile3 = new Image(folderPath+"tiles/boxTile3.png", false, filter).getScaledCopy(scale);
@@ -283,6 +284,7 @@ class LevelState extends State {
 		tiles.put(ObjectName.BOX_TILE3, boxTile3);
 		tiles.put(ObjectName.BOX_TILE4, boxTile4);
 		tiles.put(ObjectName.AIR_TILE, airTile);
+		tiles.put(ObjectName.SPAWN_TILE, airTile);
 		tiles.put(ObjectName.END_TILE, endTile);
 	}
 	
@@ -417,9 +419,11 @@ class LevelState extends State {
 		// Now only draw the tiles that are visible on the screen. This greatly
 		// improves the performance compared to drawing all tiles in the whole
 		// tile grid.
-		for (int y = tileVisibleTop; y < tileVisibleBottom; y++)
-			for (int x = tileVisibleLeft; x < tileVisibleRight; x++)
+		for (int y = tileVisibleTop; y < tileVisibleBottom; y++) {
+			for (int x = tileVisibleLeft; x < tileVisibleRight; x++) {
 				tiles.get(level.getTileGrid().getFromCoord(x, y).getName()).draw(x*Constants.TILESIZE*scale+cameraX, y*Constants.TILESIZE*scale+cameraY);
+			}
+		}
 	}
 
 	/**

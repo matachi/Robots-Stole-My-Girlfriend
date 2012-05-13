@@ -1,6 +1,6 @@
 package rsmg.model.object.unit;
 
-import rsmg.model.ObjectName;
+import rsmg.model.variables.ObjectName;
 /**
  * Class representing a small flying enemy
  * @author zapray

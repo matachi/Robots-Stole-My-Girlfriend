@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rsmg.io.CharacterProgress;
-import rsmg.model.ObjectName;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.object.item.Item;
@@ -15,6 +14,7 @@ import rsmg.model.object.unit.weapon.RocketLauncher;
 import rsmg.model.object.unit.weapon.Shotgun;
 import rsmg.model.object.unit.weapon.Weapon;
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
 
 /**
  * Class for representing the playable Character

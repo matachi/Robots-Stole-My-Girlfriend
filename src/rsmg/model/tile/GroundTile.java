@@ -1,5 +1,7 @@
 package rsmg.model.tile;
 
+import rsmg.model.variables.ObjectName;
+
 /**
  * Class to creates a GroundTile that is solid
  * @author Johan Rignas
@@ -11,7 +13,7 @@ public class GroundTile extends Tile {
 	/**
 	 * Constructor of GroundTile
 	 */
-	public GroundTile(String groundType) {
+	public GroundTile(Enum<ObjectName> groundType) {
 		super(groundType);
 	}
 

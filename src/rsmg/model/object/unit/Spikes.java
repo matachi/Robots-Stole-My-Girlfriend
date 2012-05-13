@@ -1,6 +1,6 @@
 package rsmg.model.object.unit;
 
-import rsmg.model.ObjectName;
+import rsmg.model.variables.ObjectName;
 /**
  * Class representing a stationary non-flying AI-less enemy
  * @author Johan Rignas

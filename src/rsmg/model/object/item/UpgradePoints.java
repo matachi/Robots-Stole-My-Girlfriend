@@ -1,6 +1,6 @@
 package rsmg.model.object.item;
 
-import rsmg.model.ObjectName;
+import rsmg.model.variables.ObjectName;
 
 public class UpgradePoints extends Item {
 	

@@ -1,6 +1,6 @@
 package rsmg.model.object.unit;
 
-import rsmg.model.ObjectName;
+import rsmg.model.variables.ObjectName;
 /**
  * An flying enemy of the type "Ballbot".
  * @author zapray

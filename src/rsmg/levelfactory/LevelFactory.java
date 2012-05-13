@@ -8,7 +8,6 @@ import org.jdom.Element;
 
 import rsmg.io.Levels;
 import rsmg.model.Level;
-import rsmg.model.ObjectName;
 import rsmg.model.TileGrid;
 import rsmg.model.ai.Ai;
 import rsmg.model.ai.BallBotAi;
@@ -37,6 +36,7 @@ import rsmg.model.tile.GroundTile;
 import rsmg.model.tile.SpawnTile;
 import rsmg.model.tile.Tile;
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
 
 /**
  * This class is responsible for creating the levels. It asks the class Levels i
