@@ -56,9 +56,9 @@ public abstract class Enemy extends LivingObject {
 			}
 		}
 	}
-	
+
 	private boolean dealsExplosionDmg(Bullet bullet) {
-		return (bullet.isExplosion());
+		return (bullet.isExplosion() || bullet.getName().equals(ObjectName.LASER_BULLET));
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public abstract class Enemy extends LivingObject {
 			vulnerableToExplosions = true;
 		}
 	}
-	
+
 	/**
 	 * returns true if this Enemy can take damage from explosions or laserBullets
 	 * @return true if this Enemy can take damage from explosions

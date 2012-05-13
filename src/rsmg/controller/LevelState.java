@@ -605,15 +605,15 @@ class LevelState extends State {
 		
 		// digit key 2
 		if (input.isKeyPressed(Input.KEY_2)) 
-			modelCharacter.changeWeapon(ObjectName.SHOTGUN);
+			modelCharacter.changeWeapon(ObjectName.LASER_PISTOL);
 		
 		// digit key 3
 		if (input.isKeyPressed(Input.KEY_3))
-			modelCharacter.changeWeapon(ObjectName.ROCKET_LAUNCHER);
+			modelCharacter.changeWeapon(ObjectName.SHOTGUN);
 		
 		// digit key 4
 		if (input.isKeyPressed(Input.KEY_4))
-			modelCharacter.changeWeapon(ObjectName.LASER_PISTOL);
+			modelCharacter.changeWeapon(ObjectName.ROCKET_LAUNCHER);
 		
 		// digit key 0. Cheat to instantaneously complete the level.
 		if (input.isKeyPressed(Input.KEY_0))

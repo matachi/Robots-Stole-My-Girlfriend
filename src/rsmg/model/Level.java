@@ -221,6 +221,7 @@ public class Level {
 			//see if enemy has collided with any bullets and act appropriately
 			List<Bullet> newBullets = new ArrayList<Bullet>();
 			List<Bullet> expiredBullets = new ArrayList<Bullet>();
+			
 			for (Iterator<Bullet> j = alliedBulletsList.iterator(); j.hasNext(); ) {
 				Bullet bullet = j.next();
 
@@ -234,8 +235,8 @@ public class Level {
 					if (bullet.getName() == ObjectName.ROCKETR || bullet.getName() == ObjectName.ROCKETL)
 						newBullets.add(ExplosionFactory.getExplosion(bullet));
 					
-					//remove the colliding bullets if they arent laserBullets or explosions
-					if(!bullet.isExplosion()){
+					//remove the colliding bullets if they aren't laserBullets or explosions
+					if(!(bullet.isExplosion() || bullet.getName().equals(ObjectName.LASER_BULLET))) {
 						expiredBullets.add(bullet);
 					}
 				}
