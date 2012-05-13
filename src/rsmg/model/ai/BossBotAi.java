@@ -5,7 +5,6 @@ import rsmg.model.object.unit.Enemy;
 import rsmg.model.object.unit.PCharacter;
 import rsmg.util.Vector2d;
 
-
 /**
  * An Ai used for controlling the 'bossBot' type enemy. The bossBot will not
  * move or face any other way. He will however use 2 different attacks.
@@ -38,10 +37,10 @@ public class BossBotAi implements Ai {
 	/**
 	 * The cooldown variable used to make the lasers sway every now and then.
 	 */
-	double SwayCooldown;
+	double swayCooldown;
 	
 	/**
-	 * The cooldown variable used for the bosses secondary attack
+	 * The cooldown variable used for the bosses secondary attack.
 	 */
 	double cooldown2;
 	
@@ -68,6 +67,10 @@ public class BossBotAi implements Ai {
 	 */
 	@Override
 	public void update(double delta) {
+		
+		swayCooldown += delta;
+		cooldown += delta;
+		cooldown2 += delta;
 
 		double playerX = character.getX();
 		double playerY = character.getY();
@@ -79,11 +82,11 @@ public class BossBotAi implements Ai {
 			angle -= angleIncr * delta;
 		}
 		
-		if (SwayCooldown > 1.5) {
+		if (swayCooldown > 1.5) {
 			offset *= -1;
-			SwayCooldown = 0;
+			swayCooldown = 0;
 		}
-
+		
 		if (characterIsBehindBoss(playerX)) {
 			angle = Math.PI / 2.7;
 			bulletVector = new Vector2d();
@@ -102,9 +105,6 @@ public class BossBotAi implements Ai {
 			bulletVector2.setY(bulletSpeed2 * Math.sin(angle2));
 			enemy.shoot2(bulletVector2, angle2);
 		}
-		SwayCooldown += delta;
-		cooldown += delta;
-		cooldown2 += delta;
 	}
 	
 	/**
@@ -117,8 +117,8 @@ public class BossBotAi implements Ai {
 		if (cooldown2 > 0.2) {
 			cooldown2 = 0;
 			return true;
-		}else
-			return false;
+		}
+		return false;
 	}
 
 	/**

@@ -15,6 +15,7 @@ import rsmg.model.object.unit.PCharacter;
 /**
  * 
  * @author Johan Rignas
+ * @author Daniel Jonsson
  *
  */
 public class TestBossBotAi {
@@ -33,25 +34,25 @@ public class TestBossBotAi {
 
 	@Test
 	public void testUpdate() {
-		double delta = 2;
-		character.setX(50);
+		double delta = 0.3;
 		
-		// TODO: Why zero first time? If it´s as it should, remove this line!!
+		// Check if it shoots correctly
 		bossBotAi.update(delta);
-		assertTrue(bulletList.size() == 0);
+		assertTrue(bulletList.size() == 3);
 
 		bossBotAi.update(delta);
-		assertTrue(bulletList.size() == 1);
+		assertTrue(bulletList.size() == 6);
 
 		bossBotAi.update(delta);
-		assertTrue(bulletList.size() == 2);
+		assertTrue(bulletList.size() == 9);
 		
-		character.setX(0);
+		// Behind the boss should only the secondary attack work
+		character.setX(150);
 		bossBotAi.update(delta);
-		assertTrue(bulletList.size() == 5);
+		assertTrue(bulletList.size() == 10);
 		
 		bossBotAi.update(delta);
-		assertTrue(bulletList.size() == 8);
+		assertTrue(bulletList.size() == 11);
 	}
 		
 	@Test
