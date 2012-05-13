@@ -2,20 +2,23 @@ package rsmg.model.tile;
 
 import rsmg.model.ObjectName;
 
+/**
+ * Class to creates a AirTile that is not solid
+ * @author Johan Rignas
+ */
 public class AirTile extends Tile {
 
-	private boolean solid;
+	private static boolean solid = false;
 
 	/**
-	 * Constructor of AirTile. Sets the solid value
+	 * Constructor of AirTile
 	 */
 	public AirTile() {
 		super(ObjectName.AIR_TILE);
-		solid = false;
 	}
 
 	/**
-	 * @return if an AirTile is solid or not
+	 * {@inheritDoc}
 	 */
 	public boolean isSolid() {
 		return solid;

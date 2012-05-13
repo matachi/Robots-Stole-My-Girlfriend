@@ -11,7 +11,6 @@ public class UpgradePoints extends Item {
 	 * @param height height of the item
 	 */
 	public UpgradePoints(double x, double y) {
-		// TODO: Set size
-		super(x+((32-15)/2), y+32-15, 10, 10, ObjectName.UPGRADE_POINT);
+		super(x+((32-15)/2), y+32-15, 15, 15, ObjectName.UPGRADE_POINT);
 	}
 }

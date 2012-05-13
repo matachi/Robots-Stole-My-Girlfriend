@@ -23,9 +23,24 @@ public abstract class InteractiveObject {
 	 */
 	private Vector2d velocity;
 	
+	/**
+	 * Constructor of InteractiveObject
+	 * @param x The x position of the InteractiveObject
+	 * @param y The y position of the InteractiveObject
+	 * @param name The name of the InteractiveObject
+	 */
 	protected InteractiveObject(double x, double y, String name) {
 		this(x, y, 0, 0, name);
 	}
+	
+	/**
+	 * Constructor of InteractiveObject
+	 * @param x The x position of the InteractiveObject
+	 * @param y The y position of the InteractiveObject
+	 * @param width The width of the InteractiveObject
+	 * @param height The height of the InteractiveObject
+	 * @param name The name of the InteractiveObject
+	 */
 	protected InteractiveObject(double x, double y, double width, double height, String name) {
 		this.x = x;
 		this.y = y;
@@ -35,6 +50,10 @@ public abstract class InteractiveObject {
 		this.name = name;
 	}
 	
+	/**
+	 * Get the name for the InteractiveObject
+	 * @return The name
+	 */
 	public String getName() {
 		return name;
 	}
@@ -47,66 +66,133 @@ public abstract class InteractiveObject {
 		return velocity.getlength();
 	}
 
+	/**
+	 * Get the objects velocity in x-axis
+	 * @return The velocity
+	 */
 	public double getVelocityX() {
 		return velocity.getX();
 	}
 
+	/**
+	 * Get the objects velocity in y-axis
+	 * @return The velocity
+	 */
 	public double getVelocityY() {
 		return velocity.getY();
 	}
 	
+	/**
+	 * Set the velocity of the object
+	 * @param velocity The velocity
+	 */
 	public void setVelocity(Vector2d velocity) {
 		this.velocity=velocity;
 	}
 	
+	/**
+	 * Set the velocity in x-axis
+	 * @param x The velocity
+	 */
 	public void setVelocityX(double x) {
 		velocity.setX(x);
 	}
 	
+	/**
+	 * Set the velocity in y-axis
+	 * @param y The velocity
+	 */
 	public void setVelocityY(double y) {
 		velocity.setY(y);
 	}
 	
+	/**
+	 * Add velocity to the object
+	 * @param vector velocity to add
+	 */
 	public void addVelocity(Vector2d vector) {
 		velocity.add(vector);
 	}
 	
+	/**
+	 * Add velocity to the object
+	 * @param x The velocity to add in x-axis
+	 * @param y The velocity to add in y-axis
+	 */
 	public void addVelocity(double x, double y) {
 		velocity.add(x, y);
 	}
 
+	/**
+	 * Gets the height of the object
+	 * @return The height
+	 */
 	public double getHeight() {
 		return height;
 	}
 
+	/**
+	 * Get the width of the object
+	 * @return The width
+	 */
 	public double getWidth() {
 		return width;
 	}
 
+	/**
+	 * Get the X position of the object
+	 * @return The x position
+	 */
 	public double getX() {
 		return x;
 	}
 
+	/**
+	 * Get the y position of the object
+	 * @return The y position
+	 */
 	public double getY() {
 		return y;
 	}
 
+	/**
+	 * Set the x position of the object
+	 * @param x The x position to be set
+	 */
 	public void setX(double x) {
 		this.x = x;
 	}
 
+	/**
+	 * Set the y position of the object
+	 * @param y The y position to be set
+	 */
 	public void setY(double y) {
 		this.y = y;
 	}
 	
+	/**
+	 * Set the postion of the object
+	 * @param x The x postion to be set
+	 * @param y The y postion to be set
+	 */
 	public void setPosition(double x, double y) {
 		setX(x);
 		setY(y);
 	}
 	
+	/**
+	 * Get the previous x position of the object
+	 * @return The previous x position
+	 */
 	public double getPX(){
 		return previousX;
 	}
+	
+	/**
+	 * Get the previous y position of the object
+	 * @return The previous y position
+	 */
 	public double getPY(){
 		return previousY;
 	}
@@ -124,7 +210,7 @@ public abstract class InteractiveObject {
 	}
 
 	/**
-	 * applies a gravity vector to this InteractiveObject 
+	 * Applies a gravity vector to this InteractiveObject 
 	 * @param delta
 	 */
 	public void applyGravity(double delta) {
@@ -211,6 +297,7 @@ public abstract class InteractiveObject {
 	public boolean isStandingStill() {
 		return getX() == getPX();
 	}
+	
 	/**
 	 * 
 	 * @return true if the objects X coordinate is lower now than
@@ -219,6 +306,7 @@ public abstract class InteractiveObject {
 	public boolean isMovingLeft() {
 		return getX() < getPX();
 	}
+	
 	/**
 	 * 
 	 * @return true if the objects X coordinate is higher now than
@@ -228,9 +316,8 @@ public abstract class InteractiveObject {
 		return getX() > getPX();
 	}
 	
-	
 	/**
-	 * method for specifying what happens to this object when it collides with another InteractiveObject
+	 * Method for specifying what happens to this object when it collides with another InteractiveObject
 	 */
 	public abstract void collide(InteractiveObject obj);
 }

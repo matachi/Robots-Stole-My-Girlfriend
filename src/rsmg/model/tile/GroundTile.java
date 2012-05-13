@@ -1,20 +1,22 @@
 package rsmg.model.tile;
 
-
+/**
+ * Class to creates a GroundTile that is solid
+ * @author Johan Rignas
+ */
 public class GroundTile extends Tile {
 
-	private boolean solid;
+	private static boolean solid = true;
 
 	/**
-	 * Constructor of GroundTile. Sets the solid value
+	 * Constructor of GroundTile
 	 */
 	public GroundTile(String groundType) {
 		super(groundType);
-		solid = true;
 	}
 
 	/**
-	 * @return if an GroundTile is solid or not
+	 * {@inheritDoc}
 	 */
 	public boolean isSolid() {
 		return solid;

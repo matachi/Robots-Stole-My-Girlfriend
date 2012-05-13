@@ -2,19 +2,24 @@ package rsmg.model.tile;
 
 import rsmg.model.ObjectName;
 
+/**
+ * Class to creates a SpawnTile that is not solid
+ * @author Johan Rignas
+ *
+ */
 public class SpawnTile extends Tile {
 
-	private boolean solid;
+	private static boolean solid = false;
+	
 	/**
-	 * Constructor of SpawnTile. Sets solid value
+	 * Constructor of SpawnTile
 	 */
 	public SpawnTile() {
 		super(ObjectName.SPAWN_TILE);
-		solid = false;
 	}
 
 	/**
-	 * @return if an SpawnTile is solid or not
+	 * {@inheritDoc}
 	 */
 	public boolean isSolid() {
 		return solid;
