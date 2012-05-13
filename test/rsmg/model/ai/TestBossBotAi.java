@@ -14,7 +14,7 @@ import rsmg.model.object.unit.PCharacter;
 
 /**
  * 
- * @author Johan Rignäs
+ * @author Johan Rignas
  *
  */
 public class TestBossBotAi {
@@ -31,12 +31,12 @@ public class TestBossBotAi {
 		bossBotAi = new BossBotAi(bossBot, character);
 	}
 
-	// TODO
-	// Having problems with this update to
 	@Test
 	public void testUpdate() {
 		double delta = 2;
+		character.setX(50);
 		
+		// TODO: Why zero first time? If it´s as it should, remove this line!!
 		bossBotAi.update(delta);
 		assertTrue(bulletList.size() == 0);
 
@@ -45,9 +45,13 @@ public class TestBossBotAi {
 
 		bossBotAi.update(delta);
 		assertTrue(bulletList.size() == 2);
-
+		
+		character.setX(0);
 		bossBotAi.update(delta);
-		assertTrue(bulletList.size() == 3);
+		assertTrue(bulletList.size() == 5);
+		
+		bossBotAi.update(delta);
+		assertTrue(bulletList.size() == 8);
 	}
 		
 	@Test
