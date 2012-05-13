@@ -363,7 +363,7 @@ class LevelState extends State {
 			int offsetX = 0;
 			int offsetY = 0;
 			if (enemy.getName().equals(ObjectName.BOSSBOT)) {
-				offsetX = -194;
+				offsetX = -97*scale;
 			}
 			//different facing Animations are not yet supported. 
 			Renderable enemyRenderable;
