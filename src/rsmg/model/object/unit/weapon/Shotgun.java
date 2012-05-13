@@ -103,7 +103,7 @@ public class Shotgun implements Weapon {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getName() {
+	public ObjectName getName() {
 		return ObjectName.SHOTGUN;
 	}
 }

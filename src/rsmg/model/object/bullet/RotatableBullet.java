@@ -1,5 +1,6 @@
 package rsmg.model.object.bullet;
 
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 /**
  * bullet class which stores an angle
@@ -21,7 +22,7 @@ public class RotatableBullet extends Bullet {
 	 * @param angle the angle this bullet is rotated to
 	 */
 	public RotatableBullet(double x, double y, double width, double height,
-			String name, int dmg, Vector2d velocity, float angle) {
+			ObjectName name, int dmg, Vector2d velocity, float angle) {
 		super(x, y, width, height, name, dmg, velocity);
 		this.angle = angle;
 		// TODO Auto-generated constructor stub

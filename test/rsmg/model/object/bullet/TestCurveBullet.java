@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import rsmg.util.Vector2d;
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
 
 public class TestCurveBullet {
 	private CurveBullet bullet;
@@ -24,7 +25,7 @@ public class TestCurveBullet {
 
 	@Before
 	public void before() {
-		bullet = new CurveBullet(10, 10, 10, 10, "tstBullet", 99, new Vector2d(0,0));
+		bullet = new CurveBullet(10, 10, 10, 10, ObjectName.LASER_BULLET, 99, new Vector2d(0,0));
 	}
 
 	@After

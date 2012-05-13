@@ -17,13 +17,13 @@ public abstract class Tile {
 	/**
 	 * Name for the tile
 	 */
-	private Enum<ObjectName> name;
+	private ObjectName name;
 
 	/**
 	 * Constructor of Tile
 	 * @param name Name of the tile
 	 */
-	public Tile(Enum<ObjectName> name) {
+	public Tile(ObjectName name) {
 		this.name = name;
 	}
 
@@ -44,7 +44,7 @@ public abstract class Tile {
 	 * The name for this tile. Used for sub-Tiles
 	 * @return Tile name
 	 */
-	public Enum<ObjectName> getName() {
+	public ObjectName getName() {
 		return name;
 	}
 }

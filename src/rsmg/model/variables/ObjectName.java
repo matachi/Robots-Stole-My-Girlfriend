@@ -14,48 +14,27 @@ public enum ObjectName {
 	/**
 	 * The tiles' names.
 	 */
-	BOX_TILE1, BOX_TILE2, BOX_TILE3, BOX_TILE4, AIR_TILE, SPAWN_TILE, END_TILE;
-	
+	BOX_TILE1, BOX_TILE2, BOX_TILE3, BOX_TILE4, AIR_TILE, SPAWN_TILE, END_TILE,
 
 	/**
 	 * The character's name.
 	 */
-	public static final String CHARACTER = "character";
+	CHARACTER,
 
 	/**
 	 * The enemies' names.
 	 */
-	public static final String TANKBOT = "tankbot";
-	public static final String ROCKETBOT = "rocketbot";
-	public static final String BALLBOT = "ballbot";
-	public static final String BUCKETBOT = "bucketbot";
-	public static final String SPIKES = "spikes";
-	public static final String MINIBALLBOT = "miniBallBot";
-	public static final String BOSSBOT = "bossBot";
+	TANKBOT, ROCKETBOT, BALLBOT, BUCKETBOT, SPIKES, MINIBALLBOT, BOSSBOT,
 	
 	/**
 	 * The items' names.
 	 */
-	public static final String HEALTH_PACK = "healthPack";
-	public static final String UPGRADE_POINT = "upgradePoint";
-	public static final String LASER_PISTOL = "laserPistol";
-	public static final String ROCKET_LAUNCHER = "rpg";
-	public static final String SHOTGUN = "shotgun";
-	public static final String PISTOL = "pistol";
+	HEALTH_PACK, UPGRADE_POINT, LASER_PISTOL, ROCKET_LAUNCHER, SHOTGUN, PISTOL,
 	
 	
 	/**
 	 * The bullets' names.
 	 */
-	public static final String EXPLOSION = "explosion";
-	public static final String BIG_EXPLOSION = "bigExplosion";
-	public static final String PISTOL_BULLET = "bullet";
-	public static final String LASER_BULLET = "laserBullet";
-	public static final String ROCKETR = "rocketR";
-	public static final String ROCKETL = "rocketL";
-	public static final String SHOTGUN_BULLET = "shotgunBullet";
-	public static final String STONE = "stone";
-	public static final String LASERBOLT = "laserbolt";
-	public static final String LASERFIRE = "laserFire";
-	public static final String LASERBLAST = "laserBlast";
+	EXPLOSION, BIG_EXPLOSION, PISTOL_BULLET, LASER_BULLET, ROCKETR, ROCKETL,
+	SHOTGUN_BULLET, STONE, LASERBOLT, LASERFIRE, LASERBLAST;
 }

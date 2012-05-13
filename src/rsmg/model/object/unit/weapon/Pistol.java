@@ -86,7 +86,7 @@ public class Pistol implements Weapon {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getName() {
+	public ObjectName getName() {
 		return ObjectName.PISTOL;
 	}
 }

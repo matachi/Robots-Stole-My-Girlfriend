@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import rsmg.model.object.bullet.Bullet;
+import rsmg.model.variables.ObjectName;
 
 /**
  * Tests the bullet class
@@ -28,7 +29,7 @@ public class TestBullet {
 
 	@Before
 	public void before() {
-		bullet = new BasicBullet(10, 10, 10, 10, "tstBullet", 99, null);
+		bullet = new BasicBullet(10, 10, 10, 10, ObjectName.LASER_BULLET, 99, null);
 	}
 
 	@After

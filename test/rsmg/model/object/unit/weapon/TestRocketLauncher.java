@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import rsmg.model.object.bullet.Bullet;
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 
 public class TestRocketLauncher {
@@ -55,6 +56,6 @@ public class TestRocketLauncher {
 	
 	@Test
 	public void testGetName() {
-		assertTrue(launcher.getName() == "rpg");
+		assertTrue(launcher.getName() == ObjectName.ROCKET_LAUNCHER);
 	}
 }

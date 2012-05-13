@@ -69,9 +69,9 @@ class LevelState extends State {
 	 * Maps containing images.
 	 */
 	private Map<ObjectName, Renderable> tiles;
-	private Map<String, Renderable> bullets;
-	private Map<String, Renderable> items;
-	private Map<String, Renderable> enemies;
+	private Map<ObjectName, Renderable> bullets;
+	private Map<ObjectName, Renderable> items;
+	private Map<ObjectName, Renderable> enemies;
 	
 	/**
 	 * A class representing the character on the screen.
@@ -179,7 +179,7 @@ class LevelState extends State {
 		/**
 		 * Create a map with all enemy images / Animations.
 		 */
-		enemies = new HashMap<String, Renderable>();
+		enemies = new EnumMap<ObjectName, Renderable>(ObjectName.class);
 		Image tankbot = new Image(folderPath+"tankBot.png", false, filter).getScaledCopy(scale);
 		Image bucketBot = new Image(folderPath+"bucketBot.png", false, filter).getScaledCopy(scale);
 		Image ballBot = new Image(folderPath+"ballBot.png", false, filter).getScaledCopy(scale);
@@ -201,7 +201,7 @@ class LevelState extends State {
 		/**
 		 * Create a map with all item images.
 		 */
-		items = new HashMap<String, Renderable>();
+		items = new EnumMap<ObjectName, Renderable>(ObjectName.class);
 		Image healthPack = new Image(folderPath+"healthPack.png", false, filter).getScaledCopy(scale);	
 		Image laserPistol = new Image(folderPath+"laserPistol.png", false, filter).getScaledCopy(scale);
 		Image rocketLauncher = new Image(folderPath+"rocketLauncher.png", false, filter).getScaledCopy(scale);
@@ -216,7 +216,7 @@ class LevelState extends State {
 		/**
 		 * Create a map with all bullet images.
 		 */
-		bullets = new HashMap<String, Renderable>();
+		bullets = new EnumMap<ObjectName, Renderable>(ObjectName.class);
 		Image laserBullet = new Image(folderPath+"laserBullet.png", false, filter).getScaledCopy(scale);
 		bullets.put(ObjectName.LASER_BULLET, laserBullet);
 		
@@ -865,18 +865,18 @@ class LevelState extends State {
 		public void update() {
 
 			// Update which map should be used.
-			String weaponName = level.getCharacter().getWeapon().getName();
+			ObjectName weaponName = level.getCharacter().getWeapon().getName();
 			switch (weaponName) {
-				case ObjectName.PISTOL : 
+				case PISTOL : 
 					charMap = pistolMap;
 					break;
-				case ObjectName.ROCKET_LAUNCHER :
+				case ROCKET_LAUNCHER :
 					charMap = rpgMap;
 					break;
-				case ObjectName.SHOTGUN :
+				case SHOTGUN :
 					charMap = shotgunMap;
 					break;
-				case ObjectName.LASER_PISTOL :
+				case LASER_PISTOL :
 					charMap = laserPistolMap;
 					break;
 			}

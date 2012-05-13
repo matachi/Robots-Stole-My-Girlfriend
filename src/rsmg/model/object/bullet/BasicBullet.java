@@ -1,5 +1,6 @@
 package rsmg.model.object.bullet;
 
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 
 /**
@@ -23,7 +24,7 @@ public class BasicBullet extends Bullet implements Projectile {
 	 * @param velocity The bullet's velocity.
 	 */
 	public BasicBullet(double x, double y, double width, double height,
-			String name, int dmg, Vector2d velocity) {
+			ObjectName name, int dmg, Vector2d velocity) {
 		super(x, y, width, height, name, dmg, velocity);
 		// TODO Auto-generated constructor stub
 	}

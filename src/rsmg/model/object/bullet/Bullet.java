@@ -1,6 +1,7 @@
 package rsmg.model.object.bullet;
 
 import rsmg.model.object.InteractiveObject;
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 
 /**
@@ -26,7 +27,7 @@ public abstract class Bullet extends InteractiveObject implements Projectile {
 	 * @param velocity The bullet's velocity.
 	 */
 	public Bullet(double x, double y, double width, double height,
-			String name, int dmg, Vector2d velocity) {
+			ObjectName name, int dmg, Vector2d velocity) {
 		
 		super(x, y, width, height, name);
 		this.dmg = dmg;

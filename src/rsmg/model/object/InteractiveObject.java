@@ -1,6 +1,7 @@
 package rsmg.model.object;
 
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 
 /**
@@ -16,7 +17,7 @@ public abstract class InteractiveObject {
 	private double y;
 	private double height;
 	private double width;
-	private String name;
+	private ObjectName name;
 	
 	/**
 	 * Store the velocity as a 2d vector.
@@ -29,7 +30,7 @@ public abstract class InteractiveObject {
 	 * @param y The y position of the InteractiveObject
 	 * @param name The name of the InteractiveObject
 	 */
-	protected InteractiveObject(double x, double y, String name) {
+	protected InteractiveObject(double x, double y, ObjectName name) {
 		this(x, y, 0, 0, name);
 	}
 	
@@ -41,7 +42,7 @@ public abstract class InteractiveObject {
 	 * @param height The height of the InteractiveObject
 	 * @param name The name of the InteractiveObject
 	 */
-	protected InteractiveObject(double x, double y, double width, double height, String name) {
+	protected InteractiveObject(double x, double y, double width, double height, ObjectName name) {
 		this.x = x;
 		this.y = y;
 		this.height = height;
@@ -54,7 +55,7 @@ public abstract class InteractiveObject {
 	 * Get the name for the InteractiveObject
 	 * @return The name
 	 */
-	public String getName() {
+	public ObjectName getName() {
 		return name;
 	}
 	

@@ -127,16 +127,16 @@ public final class LevelFactory {
 				if (itemValue != null) {
 					Item item;
 					switch (itemValue) {
-						case ObjectName.HEALTH_PACK :
+						case "healthPack" :
 							item = new HealthPack(x*scale,y*scale);
 							break;
-						case ObjectName.UPGRADE_POINT :
+						case "upgradePoint" :
 							item = new UpgradePoints(x*scale,y*scale);
 							break;
-						case ObjectName.LASER_PISTOL :
+						case "laserPistol" :
 							item = new Pistol(x*scale,y*scale, 15, 15);
 							break;
-						case ObjectName.SHOTGUN :
+						case "shotgun" :
 							item = new Shotgun(x*scale,y*scale, 15, 15);
 							break;
 						default :
@@ -151,19 +151,19 @@ public final class LevelFactory {
 				if (enemyValue != null) {
 					Ai ai;
 					switch (enemyValue) {
-						case ObjectName.TANKBOT :
+						case "tankbot" :
 							ai = new TankBotAi(new TankBot(x*scale, y*scale, enemyBulletList), character);
 							break;
-						case ObjectName.ROCKETBOT :
+						case "rocketbot" :
 							ai = new RocketBotAi(new RocketBot(x*scale, y*scale), character);
 							break;
-						case ObjectName.BALLBOT :
+						case "ballbot" :
 							ai = new BallBotAi(new BallBot(x*scale, y*scale), aiList, character);
 							break;
-						case ObjectName.BUCKETBOT :
+						case "bucketbot" :
 							ai = new BucketBotAi(new BucketBot(x*scale, y*scale, enemyBulletList), character);
 							break;
-						case ObjectName.BOSSBOT :
+						case "bossbot" :
 							ai = new BossBotAi(new BossBotHead(x*scale, y*scale, enemyBulletList), character);
 							break;
 						default :

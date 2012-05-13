@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 
 public class TestRotatableBullet {
@@ -23,7 +24,7 @@ public class TestRotatableBullet {
 
 	@Before
 	public void before() {
-		bullet = new RotatableBullet(10, 10, 10, 10, "tstBullet", 99, new Vector2d(0,0), 10);
+		bullet = new RotatableBullet(10, 10, 10, 10, ObjectName.LASER_BULLET, 99, new Vector2d(0,0), 10);
 	}
 
 	@After

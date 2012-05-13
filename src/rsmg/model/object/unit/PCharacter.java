@@ -1,8 +1,7 @@
 package rsmg.model.object.unit;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
 import rsmg.io.CharacterProgress;
 import rsmg.model.object.InteractiveObject;
@@ -39,7 +38,7 @@ public class PCharacter extends LivingObject {
 	/**
 	 * List of references to the character's weapons.
 	 */
-	private Map<String, Weapon> weapons;
+	private EnumMap<ObjectName, Weapon> weapons;
 	
 	/**
 	 * Keeps track of when the character last attacked. Used to have a cooldown
@@ -120,7 +119,7 @@ public class PCharacter extends LivingObject {
 	public PCharacter(double x, double y, Collection<Bullet> bulletList) {
 		super(x, y, Constants.CHARACTERWIDTH, Constants.CHARACTERHEIGHT, Constants.CHARACTERHEALTH, ObjectName.CHARACTER);
 		canDash = CharacterProgress.isDashUnlocked();
-		weapons = new HashMap<String, Weapon>();
+		weapons = new EnumMap<ObjectName, Weapon>(ObjectName.class);
 		weapons.put(ObjectName.PISTOL, new Pistol(bulletList));
 		weapons.put(ObjectName.SHOTGUN, new Shotgun(bulletList));
 		weapons.put(ObjectName.ROCKET_LAUNCHER, new RocketLauncher(bulletList));
@@ -261,21 +260,21 @@ public class PCharacter extends LivingObject {
 		return currentWeapon;
 	}
 	
-	public void changeWeapon(String weaponName) {
-		if (ObjectName.ROCKET_LAUNCHER.equals(weaponName) &&
+	public void changeWeapon(ObjectName enum1) {
+		if (ObjectName.ROCKET_LAUNCHER.equals(enum1) &&
 				CharacterProgress.isRPGUnlocked()) {
-			currentWeapon = weapons.get(weaponName);
+			currentWeapon = weapons.get(enum1);
 			
-		} else if (ObjectName.PISTOL.equals(weaponName)) {
-			currentWeapon = weapons.get(weaponName);
+		} else if (ObjectName.PISTOL.equals(enum1)) {
+			currentWeapon = weapons.get(enum1);
 			
-		} else if (ObjectName.SHOTGUN.equals(weaponName) && 
+		} else if (ObjectName.SHOTGUN.equals(enum1) && 
 				CharacterProgress.isShotgunUnlocked()) {
-			currentWeapon = weapons.get(weaponName);
+			currentWeapon = weapons.get(enum1);
 				
-		} else if (ObjectName.LASER_PISTOL.equals(weaponName)) {
+		} else if (ObjectName.LASER_PISTOL.equals(enum1)) {
 				CharacterProgress.isPistolUnlocked();
-			currentWeapon = weapons.get(weaponName);
+			currentWeapon = weapons.get(enum1);
 		}
 	}
 

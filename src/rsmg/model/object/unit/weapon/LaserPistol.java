@@ -87,7 +87,7 @@ public class LaserPistol implements Weapon {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getName() {
+	public ObjectName getName() {
 		return ObjectName.LASER_PISTOL;
 	}
 }

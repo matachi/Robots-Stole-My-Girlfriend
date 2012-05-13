@@ -95,7 +95,7 @@ public class RocketLauncher implements Weapon {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getName() {
+	public ObjectName getName() {
 		return ObjectName.ROCKET_LAUNCHER;
 	}
 }

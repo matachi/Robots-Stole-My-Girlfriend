@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import rsmg.model.object.bullet.Bullet;
+import rsmg.model.variables.ObjectName;
 import rsmg.util.Vector2d;
 
 public class TestPistol {
@@ -53,6 +54,6 @@ public class TestPistol {
 	
 	@Test
 	public void testGetName() {
-		assertTrue(pistol.getName() == "pistol");
+		assertTrue(pistol.getName() == ObjectName.PISTOL);
 	}
 }

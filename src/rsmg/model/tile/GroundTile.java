@@ -13,7 +13,7 @@ public class GroundTile extends Tile {
 	/**
 	 * Constructor of GroundTile
 	 */
-	public GroundTile(Enum<ObjectName> groundType) {
+	public GroundTile(ObjectName groundType) {
 		super(groundType);
 	}
 

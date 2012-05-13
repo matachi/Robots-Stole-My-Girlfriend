@@ -1,6 +1,7 @@
 package rsmg.model.object.item;
 
 import rsmg.model.object.InteractiveObject;
+import rsmg.model.variables.ObjectName;
 
 public abstract class Item extends InteractiveObject {
 	/**
@@ -11,7 +12,7 @@ public abstract class Item extends InteractiveObject {
 	 * @param height height of the item
 	 * @param name name of the item
 	 */
-	public Item(double x, double y, double width, double height, String name) {
+	public Item(double x, double y, double width, double height, ObjectName name) {
 		super(x, y, width, height, name);
 	}
 	

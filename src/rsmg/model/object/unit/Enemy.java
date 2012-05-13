@@ -3,12 +3,15 @@ package rsmg.model.object.unit;
 import rsmg.model.object.InteractiveObject;
 import rsmg.model.object.bullet.Bullet;
 import rsmg.model.variables.Constants;
+import rsmg.model.variables.ObjectName;
+
 /**
- * Class representing hostile LivingObjects
- * @author zapray
+ * Class representing hostile LivingObjects.
+ * 
+ * @author Johan Grönvall
  *
  */
-public abstract class Enemy extends LivingObject{
+public abstract class Enemy extends LivingObject {
 	
 	private long lastAttackedTime;
 	private boolean vulnerableToExplosions = true;
@@ -22,7 +25,7 @@ public abstract class Enemy extends LivingObject{
 	 * @param name the enemy name
 	 */
 	
-	public Enemy(double x, double y, double width, double height, int health, String name) {
+	public Enemy(double x, double y, double width, double height, int health, ObjectName name) {
 		super(x, y, width, height, health, name);
 		//make the enemy face left to fit the images
 		setFacing(false);
