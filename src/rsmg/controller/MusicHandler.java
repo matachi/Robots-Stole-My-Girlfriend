@@ -30,9 +30,6 @@ public final class MusicHandler {
 	 * @throws SlickException
 	 */
 	public static void startTrack(Track track) throws SlickException {
-		System.out.println(track);
-		System.out.println(currentTrack);
-		System.out.println("");
 		if (Config.musicOn() && track != currentTrack) {
 			switch (track) {
 			case MENU_MUSIC :
