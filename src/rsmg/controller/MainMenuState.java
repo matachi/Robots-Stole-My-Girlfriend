@@ -84,6 +84,12 @@ class MainMenuState extends State {
 		// Set which button is initially selected
 		selectedButton = 0;
 		menuButtons.get(selectedButton).toggleSelected();
+	}
+
+	@Override
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		super.enter(container, game);
 		
 		// Start some background music.
 		MusicHandler.startTrack(MusicHandler.Track.MENU_MUSIC);

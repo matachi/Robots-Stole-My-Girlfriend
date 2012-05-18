@@ -6,13 +6,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.BlobbyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
-
-import rsmg.io.Config;
 
 /**
  * The pause menu state.
@@ -135,10 +132,7 @@ class PauseMenuState extends State {
 				sbg.enterState(Controller.LEVEL_STATE, null, new FadeInTransition());
 				break;
 			case 1:
-				if (Config.musicOn()) {
-					Music backgroundMusic = new Music("res/music/WolfRock-WelcomeToTheTemple.ogg", true);
-					backgroundMusic.loop(1, 0.1f);
-				}
+				MusicHandler.startTrack(MusicHandler.Track.MENU_MUSIC);
 				sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new BlobbyTransition());
 				break;
 			}

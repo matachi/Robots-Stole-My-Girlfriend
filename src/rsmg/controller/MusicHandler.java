@@ -19,13 +19,21 @@ public final class MusicHandler {
 	public enum Track { MENU_MUSIC, LEVEL_MUSIC, BOSS_MUSIC };
 	
 	/**
+	 * Keeps track of which track is currently being played.
+	 */
+	private static Track currentTrack;
+	
+	/**
 	 * Start a music track.
 	 * 
 	 * @param track Which track you want to play.
 	 * @throws SlickException
 	 */
 	public static void startTrack(Track track) throws SlickException {
-		if (Config.musicOn()) {
+		System.out.println(track);
+		System.out.println(currentTrack);
+		System.out.println("");
+		if (Config.musicOn() && track != currentTrack) {
 			switch (track) {
 			case MENU_MUSIC :
 				new Music("res/music/WolfRock-WelcomeToTheTemple.ogg", true).loop(1, 0.1f);
@@ -39,6 +47,7 @@ public final class MusicHandler {
 			default :
 				throw new IllegalArgumentException();
 			}
+			currentTrack = track;
 		}
 	}
 }

@@ -177,8 +177,9 @@ class OptionsState extends State {
 	 * @param input
 	 * @param gc
 	 * @param sbg
+	 * @throws SlickException 
 	 */
-	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) {
+	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if (input.isKeyPressed(Input.KEY_UP)) {
 			navigateUpInMenu();
 		} else if (input.isKeyPressed(Input.KEY_DOWN)) {
@@ -198,6 +199,7 @@ class OptionsState extends State {
 				break;
 			}
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+			MusicHandler.startTrack(MusicHandler.Track.MENU_MUSIC);
 			sbg.enterState(Controller.MAINMENU_STATE, null, new BlobbyTransition());
 		}
 	}
