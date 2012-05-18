@@ -37,7 +37,7 @@ class CreditsState extends State {
 	}
 
 	/**
-	 * Initialise the credit text
+	 * Initialize the credit text.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -51,15 +51,26 @@ class CreditsState extends State {
 		
 		// Credits text
 		credits = "Robots Stole My Girlfriend";
-		
-		credits += "\n\n\nStory writer: Johan Grï¿½nvall";
-		credits += "\n\nProgramming: Daniel Jonsson\n             Johan Grï¿½nvall\n             Johan Rignï¿½s";
-		credits += "\n\nArt design: Daniel Jonsson\n            Johan Grï¿½nvall\n            Johan Rignï¿½s";
 
-		credits += "\n\n\n\nIn memory to Johannes UlÃ©n and Victor Rï¿½dmark.";
+		credits += "\n\n\nStory writer: Johan Grönvall";
+		credits += "\n\nVoice acting: Johan Grönvall";
+		credits += "\n\nProgramming: Daniel Jonsson\n             Johan Grönvall\n             Johan Rignäs";
+		credits += "\n\nArt design: Daniel Jonsson\n            Johan Grönvall\n            Johan Rignäs";
+
+		// Uncommented since nobody will get the "joke".
+		//credits += "\n\n\n\nIn memory to Johannes Ulén and Victor Rådmark.";
 		
 		// Position for the text
 		xPosition = gc.getWidth() / 10;
+		yPosition = gc.getHeight();
+	}
+
+	/**
+	 * Enters the state. Reset the credits text.
+	 */
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		super.enter(gc, sbg);
 		yPosition = gc.getHeight();
 	}
 
