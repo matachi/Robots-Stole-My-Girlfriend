@@ -146,7 +146,7 @@ class LevelState extends State {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		
-		scale = (int) ((float)gc.getWidth() / 480);
+		scale = (int) Math.ceil(((float)gc.getWidth() / 480));
 		int filter = Image.FILTER_NEAREST;
 		String folderPath = "res/sprites/level/";
 
