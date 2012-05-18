@@ -24,6 +24,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import rsmg.io.CharacterProgress;
+import rsmg.io.Config;
 import rsmg.io.Levels;
 import rsmg.levelfactory.LevelFactory;
 import rsmg.model.Level;
@@ -530,25 +531,27 @@ class LevelState extends State {
 	 * @throws SlickException
 	 */
 	private void playSounds() throws SlickException {
-		PCharacter character = level.getCharacter();
-		
-		/**
-		 * Play sound if the character is dashing
-		 */
-		if(character.isDashing() && character.getDistanceDashed() == 0)
-			new Sound("res/sounds/dash.wav").play();
-		
-		/**
-		 * Play a sound if the character has fired his weapon.
-		 */
-		Weapon weapon = character.getWeapon();
-		boolean isShooting = weapon.shot();
-		if (isShooting && weapon.getName().equals(ObjectName.PISTOL))
-			new Sound("res/sounds/pistol.wav").play();
-		else if(isShooting && weapon.getName().equals(ObjectName.SHOTGUN))
-			new Sound("res/sounds/shotgun.wav").play();
-		else if(isShooting && weapon.getName().equals(ObjectName.ROCKET_LAUNCHER))
-			new Sound("res/sounds/rocketLauncher.wav").play();
+		if (Config.soundEffectsOn()) {
+			PCharacter character = level.getCharacter();
+			
+			/**
+			 * Play sound if the character is dashing
+			 */
+			if(character.isDashing() && character.getDistanceDashed() == 0)
+				new Sound("res/sounds/dash.wav").play();
+			
+			/**
+			 * Play a sound if the character has fired his weapon.
+			 */
+			Weapon weapon = character.getWeapon();
+			boolean isShooting = weapon.shot();
+			if (isShooting && weapon.getName().equals(ObjectName.PISTOL))
+				new Sound("res/sounds/pistol.wav").play();
+			else if(isShooting && weapon.getName().equals(ObjectName.SHOTGUN))
+				new Sound("res/sounds/shotgun.wav").play();
+			else if(isShooting && weapon.getName().equals(ObjectName.ROCKET_LAUNCHER))
+				new Sound("res/sounds/rocketLauncher.wav").play();
+		}
 	}
 	
 	/**

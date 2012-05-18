@@ -7,10 +7,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
 import rsmg.io.CharacterProgress;
+import rsmg.io.Config;
 
 /**
  * The main menu state.
@@ -90,6 +92,10 @@ class MainMenuState extends State {
 	public void enter(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		super.enter(container, game);
+		
+		// Play the Robot Stole My Girlfriend jingle
+		if (Config.soundEffectsOn())
+			new Sound("res/sounds/rsmg.wav").play();
 		
 		// Start some background music.
 		MusicHandler.startTrack(MusicHandler.Track.MENU_MUSIC);

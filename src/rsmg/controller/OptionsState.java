@@ -26,7 +26,7 @@ class OptionsState extends State {
 	 */
 	private static final int FULLSCREEN_SETTING = 0;
 	private static final int MUSIC_SETTING = 1;
-	private static final int SOUNDEFFECTS_SETTING = 3;
+	private static final int SOUNDEFFECTS_SETTING = 2;
 	
 	/**
 	 * The options view's various images.
