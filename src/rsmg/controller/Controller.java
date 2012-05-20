@@ -54,7 +54,7 @@ class Controller extends StateBasedGame {
 	 * Initialize level data in LevelState.
 	 * @param levelNumber The level number.
 	 */
-	public static void initLevel(int levelNumber) {
+	static void initLevel(int levelNumber) {
 		levelState.initLevel(levelNumber);
 	}
 }

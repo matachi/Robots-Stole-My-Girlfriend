@@ -238,9 +238,9 @@ class UpgradesState extends State {
 	@Override
 	public void leave(GameContainer gc, StateBasedGame game)
 			throws SlickException {
-//		menuButtons.get(selectedButton).toggleSelected();
-//		selectedButton = 0;
-//		menuButtons.get(selectedButton).toggleSelected();
+		upgradeButtons.get(selected).toggleSelected();
+		selected = 0;
+		upgradeButtons.get(selected).toggleSelected();
 	}
 
 	/**
@@ -320,7 +320,7 @@ class UpgradesState extends State {
 	}
 	
 	/**
-	 * Select an upgrade
+	 * Select an upgrade.
 	 */
 	private void selectUpgrade() {
 		if (!upgradeButtons.get(selected).isUnlocked() && CharacterProgress.getUpgradePoints() > 0) {
@@ -385,79 +385,79 @@ class UpgradesState extends State {
 		}
 		
 		/**
-		 * Toggle this button
+		 * Toggle if this button should be marked as selected.
 		 */
 		public void toggleSelected() {
 			selected = !selected;
 		}
 		
 		/**
-		 * Unlock this button
-		 * @param unlocked true if it should be unlocked, otherwise false
+		 * If this upgrade should be marked as unlocked.
+		 * @param unlocked True if it should be unlocked, otherwise false.
 		 */
 		public void setUnlocked(boolean unlocked) {
 			this.unlocked = unlocked;
 		}
 		
 		/**
-		 * Set if this button are to be available
-		 * @param available If available or not
+		 * Set if this button is to be available.
+		 * @param available If available.
 		 */
 		public void setAvailable(boolean available) {
 			this.available = available;
 		}
 		
 		/**
-		 * Tells if the button is selected or not
-		 * @return true if selected, otherwise false
+		 * Tells if the button is selected or not.
+		 * @return true If selected, otherwise false.
 		 */
 		public boolean isSelected() {
 			return selected;
 		}
 		
 		/**
-		 * Tells if the button is unlocked
-		 * @return true if unlocked, otherwise false
+		 * Tells if the button is unlocked.
+		 * @return true If unlocked, otherwise false.
 		 */
 		public boolean isUnlocked() {
 			return unlocked;
 		}
 		
 		/**
-		 * Tells if the button is available
-		 * @return true if available, otherwise false 
+		 * Tells if the button is available.
+		 * @return true If available, otherwise false.
 		 */
 		public boolean isAvailable() {
 			return available;
 		}
 		
 		/**
-		 * Get the upgrade
-		 * @return upgrade as String
+		 * Get the upgrade.
+		 * @return Upgrade as String.
 		 */
 		public String getUpgrade() {
 			return upgrade;
 		}
 		
 		/**
-		 * Retrieve the x position for this button
-		 * @return X position as float
+		 * Retrieve the x position for this button.
+		 * @return X position as float.
 		 */
 		public float getX() {
 			return x;
 		}
 		
 		/**
-		 * Retrieve the Y position for this button
-		 * @return Y position as float
+		 * Retrieve the Y position for this button.
+		 * @return Y position as float.
 		 */
 		public float getY() {
 			return y;
 		}
 		
 		/**
-		 * Get the text for this button
-		 * @return Button text
+		 * Get the text for this button.
+		 * @return Button text.
 		 */
 		public String getText() {
 			return buttonText;

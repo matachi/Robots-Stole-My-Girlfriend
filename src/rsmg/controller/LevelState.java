@@ -76,7 +76,8 @@ class LevelState extends State {
 	
 	/**
 	 * A class representing the character on the screen.
-	 * This inner class handles which character image that should be drawn on a given time.
+	 * This inner class handles which character image that should be drawn on a 
+	 * given time.
 	 */
 	private CharacterImage character;
 	

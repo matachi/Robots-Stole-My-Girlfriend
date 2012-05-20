@@ -22,7 +22,8 @@ import rsmg.io.Config;
 class OptionsState extends State {
 
 	/**
-	 * Set the default option settings
+	 * The different available options in this state, assigned with their
+	 * positions in the menu.
 	 */
 	private static final int FULLSCREEN_SETTING = 0;
 	private static final int MUSIC_SETTING = 1;
@@ -45,12 +46,14 @@ class OptionsState extends State {
 	private float titleYPos;
 	
 	/**
-	 * How far the on/off controller will be placed from the option entry on the x-axis.
+	 * How far the on/off controller will be placed from the option entry on the
+	 * x-axis.
 	 */
 	private float onOffOffset;
-	
+
 	/**
-	 * How far the selected marker will be placed from the selected option entry on the x-axis.
+	 * How far the selected marker will be placed from the selected option entry
+	 * on the x-axis.
 	 */
 	private float selectedOffset;
 	
@@ -65,8 +68,9 @@ class OptionsState extends State {
 	private float scale;
 	
 	/**
-	 * How far the view should be drawn from the top of the screen. If the screen hasn't
-	 * the aspect radio 16:9, there will be black borders over and under the view.
+	 * How far the view should be drawn from the top of the screen. If the
+	 * screen hasn't the aspect radio 16:9, there will be black borders over and
+	 * under the view.
 	 */
 	private float topOffset;
 	

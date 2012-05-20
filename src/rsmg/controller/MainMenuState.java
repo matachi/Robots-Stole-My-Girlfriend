@@ -39,8 +39,9 @@ class MainMenuState extends State {
 	private float scale;
 	
 	/**
-	 * How far the view should be drawn from the top of the screen. If the screen hasn't
-	 * the aspect radio 16:9, there will be black borders over and under the view.
+	 * How far the view should be drawn from the top of the screen. If the
+	 * screen hasn't the aspect radio 16:9, there will be black borders over and
+	 * under the view.
 	 */
 	private float topOffset;
 	
