@@ -121,10 +121,12 @@ class UpgradesState extends State {
 	}
 	
 	@Override
-	public void enter(GameContainer container, StateBasedGame game)
+	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		super.enter(container, game);
+		super.enter(gc, sbg);
+		gc.getInput().clearKeyPressedRecord();
 		checkUpgradeButtons();
+		
 	}
 	
 	/**
