@@ -23,7 +23,7 @@ public class Window {
 				app.setDisplayMode(960, 540, false);
 			
 			app.setShowFPS(false);
-			app.setTargetFrameRate(60);
+			app.setTargetFrameRate(120);
 			
 			app.start();
 		} catch (SlickException e) {
