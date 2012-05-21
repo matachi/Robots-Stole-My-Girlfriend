@@ -72,7 +72,7 @@ public final class LevelFactory {
 	private static Map<String, ObjectName> items = new HashMap<String, ObjectName>() {{
 		put("healthPack", ObjectName.HEALTH_PACK);
 		put("upgradePoint", ObjectName.UPGRADE_POINT);
-		put("laserPistol", ObjectName.LASER_BULLET);
+		put("laserPistol", ObjectName.LASER_PISTOL);
 		put("shotgun", ObjectName.SHOTGUN);
 		put("rocketLauncher", ObjectName.ROCKET_LAUNCHER);
 	}};
