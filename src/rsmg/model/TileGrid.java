@@ -2,6 +2,12 @@ package rsmg.model;
 
 import java.awt.Point;
 
+import rsmg.model.object.InteractiveObject;
+import rsmg.model.tile.EndTile;
+import rsmg.model.tile.SpawnTile;
+import rsmg.model.tile.Tile;
+import rsmg.model.variables.Constants;
+
 /**
  * Contains information about the Tile[][]
  */
@@ -17,7 +23,6 @@ public class TileGrid {
 	 */
 	public TileGrid(Tile[][] grid) {
 		this.grid = grid;
-		showGrid();
 	}
 
 	/**
@@ -116,7 +121,7 @@ public class TileGrid {
 		// of those are solid.
 		for (int x = leftX; x <= rightX; x++) {
 			for (int y = topY; y <= bottomY; y++) {
-				if (grid[y][x].isSolid() == true)
+				if (grid[y][x].isSolid())
 					return true;
 			}
 		}
@@ -135,7 +140,7 @@ public class TileGrid {
 		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int y = topY; y <= bottomY; y++) {
-			if (grid[y][leftX].isSolid() == true)
+			if (grid[y][leftX].isSolid())
 				return (leftX + 1) * Constants.TILESIZE - object.getX();
 		}
 		return 0;
@@ -153,8 +158,8 @@ public class TileGrid {
 		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int y = topY; y <= bottomY; y++) {
-			if (grid[y][rightX].isSolid() == true)
-				return object.getX() + object.getWidth() - rightX * Constants.TILESIZE;
+			if (grid[y][rightX].isSolid())
+				return object.getX() + object.getWidth() - rightX * Constants.TILESIZE - 0.00001;
 		}
 		return 0;
 	}
@@ -171,8 +176,8 @@ public class TileGrid {
 		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int x = leftX; x <= rightX; x++) {
-			if (grid[bottomY][x].isSolid() == true)
-				return object.getY() + object.getHeight() - bottomY * Constants.TILESIZE;
+			if (grid[bottomY][x].isSolid())
+				return object.getY() + object.getHeight() - bottomY * Constants.TILESIZE - 0.00001;
 		}
 		return 0;
 	}
@@ -189,10 +194,44 @@ public class TileGrid {
 		int topY = getTilePosFromRealPos(object.getY()+object.getHeight());
 		
 		for (int x = leftX; x <= rightX; x++) {
-			if (grid[topY][x].isSolid() == true)
+			if (grid[topY][x].isSolid())
 				return topY * Constants.TILESIZE - object.getY();
 		}
 		return 0;
+	}
+
+	/**
+	 * Checks if the tile at a given coordinate is solid.
+	 * @param x X coordinate.
+	 * @param y Y coordinate.
+	 * @return If the tile is solid.
+	 */
+	public boolean tileIntersect(double x, double y) {
+		return getTile(x, y).isSolid();
+	}
+	
+	/**
+	 * Check if an interactive object intersects with the end tile.
+	 * @param object The interactive object.
+	 * @return If the object intersects with the end tile.
+	 */
+	public boolean intersectsWithEndTile(InteractiveObject object) {
+		
+		// Get the object's boundaries in the tile grid.
+		int leftX = getTilePosFromRealPos(object.getX());
+		int rightX = getTilePosFromRealPos(object.getX()+object.getWidth());
+		int topY = getTilePosFromRealPos(object.getY());
+		int bottomY = getTilePosFromRealPos(object.getY()+object.getHeight());
+		
+		// Walk through all tiles that the object is lying over and check if any
+		// of them is the end tile.
+		for (int x = leftX; x <= rightX; x++) {
+			for (int y = topY; y <= bottomY; y++) {
+				if (grid[y][x] instanceof EndTile)
+					return true;
+			}
+		}
+		return false;
 	}
 
 	/**

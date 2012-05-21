@@ -7,15 +7,19 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
+
+import rsmg.io.CharacterProgress;
+import rsmg.io.Config;
 
 /**
  * The main menu state.
  * @author Daniel Jonsson
  *
  */
-public class MainMenuState extends State {
+class MainMenuState extends State {
 
 	/**
 	 * The main menu's images.
@@ -29,7 +33,19 @@ public class MainMenuState extends State {
 	 */
 	private int selectedButton;
 	
-	public MainMenuState(int stateID) {
+	/**
+	 * How much everything should be multiplied with.
+	 */
+	private float scale;
+	
+	/**
+	 * How far the view should be drawn from the top of the screen. If the
+	 * screen hasn't the aspect radio 16:9, there will be black borders over and
+	 * under the view.
+	 */
+	private float topOffset;
+	
+	MainMenuState(int stateID) {
 		super(stateID);
 	}
 
@@ -40,16 +56,19 @@ public class MainMenuState extends State {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 
+		scale = (float)gc.getWidth() / 1920;
+		
+		topOffset = (gc.getHeight() - 1080 * scale) / 2;
+		
 		// Folder path to the sprites.
 		String folderPath = "res/sprites/mainMenu/";
 		
 		// Create the bg image and scale it to fit the window's width
-		background = new Image("res/sprites/mainMenu/bg.jpg");
-		float scale = (float)gc.getWidth() / (float)background.getWidth();
+		background = new Image(folderPath+"bg.jpg");
 		background = background.getScaledCopy(scale);
 		
 		// Create the title image with the same scale as the background image
-		title = new Image("res/sprites/mainMenu/title.png");
+		title = new Image(folderPath+"title.png");
 		title = title.getScaledCopy(scale);
 
 		// Create the menu buttons
@@ -70,6 +89,19 @@ public class MainMenuState extends State {
 		menuButtons.get(selectedButton).toggleSelected();
 	}
 
+	@Override
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		super.enter(container, game);
+		
+		// Play the Robot Stole My Girlfriend jingle
+		if (Config.soundEffectsOn())
+			new Sound("res/sounds/rsmg.wav").play();
+		
+		// Start some background music.
+		MusicHandler.startTrack(MusicHandler.Track.MENU_MUSIC);
+	}
+
 	/**
 	 * Handle inputs from the keyboard.
 	 */
@@ -86,11 +118,11 @@ public class MainMenuState extends State {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		
-		background.draw(0, 0);
-		title.draw((gc.getWidth() - title.getWidth()) / 2, 40);
+		background.draw(0, topOffset);
+		title.draw((gc.getWidth() - title.getWidth()) / 2, 40+topOffset);
 		
 		for (MenuButton m : menuButtons) {
-			m.getImage().draw(m.getX(), m.getY());
+			m.getImage().draw(m.getX(), m.getY()+topOffset);
 		}
 	}
 	
@@ -105,6 +137,12 @@ public class MainMenuState extends State {
 		menuButtons.get(selectedButton).toggleSelected();
 	}
 
+	/**
+	 * Handle input from the user to navigate in the main menu
+	 * @param input key pressed
+	 * @param gc
+	 * @param sbg
+	 */
 	private void handleInputs(Input input, GameContainer gc, StateBasedGame sbg) {
 		if (input.isKeyPressed(Input.KEY_UP)) {
 			navigateUpInMenu();
@@ -115,6 +153,9 @@ public class MainMenuState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate up in the main menu
+	 */
 	private void navigateUpInMenu() {
 		if (selectedButton > 0) {
 			menuButtons.get(selectedButton).toggleSelected();
@@ -123,6 +164,9 @@ public class MainMenuState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate down in the main menu
+	 */
 	private void navigateDownInMenu() {
 		if (selectedButton < menuButtons.size()-1) {
 			menuButtons.get(selectedButton).toggleSelected();
@@ -131,11 +175,59 @@ public class MainMenuState extends State {
 		}
 	}
 	
+	/**
+	 * Navigate to another state/menu screen
+	 * @param gc
+	 * @param sbg
+	 */
 	private void changeState(GameContainer gc, StateBasedGame sbg) {
-		if (selectedButton == 3)
-			gc.exit();
-		else
-			sbg.enterState(Controller.LEVEL1_STATE, null, new FadeInTransition());
+		switch (selectedButton) {
+		case 0:
+			continuePreviousGame(sbg);
+			break;
+		case 1:
+			createNewGame(sbg);
+			break;
+		case 2:
+			openOptionsView(sbg);
+			break;
+		case 3:
+			closeGame(gc);
+			break;
+		}
+	}
+	
+	/**
+	 * Navigate to the level selection menu with saved data
+	 * @param sbg
+	 */
+	private void continuePreviousGame(StateBasedGame sbg) {
+		sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
+	}
+	
+	/**
+	 * Navigate to level selection menu without any saved data
+	 * @param sbg
+	 */
+	private void createNewGame(StateBasedGame sbg) {
+		CharacterProgress.resetProgress();
+		sbg.enterState(Controller.LEVEL_SELECTION_STATE, null, new FadeInTransition());
+	}
+	
+	/**
+	 * Navigate to the options menu
+	 * @param sbg
+	 */
+	private void openOptionsView(StateBasedGame sbg) {
+		sbg.enterState(Controller.OPTIONS_STATE, null, new FadeInTransition());
+	}
+	
+	/**
+	 * Quit the game
+	 * @param gc
+	 */
+	private void closeGame(GameContainer gc) {
+		gc.exit();
 	}
 	
 	/**
@@ -176,6 +268,10 @@ public class MainMenuState extends State {
 			selected = false;
 		}
 		
+		/**
+		 * Get this button
+		 * @return this button
+		 */
 		public Image getImage() {
 			if (selected)
 				return selectedButton;
@@ -183,14 +279,25 @@ public class MainMenuState extends State {
 				return button;
 		}
 		
+		/**
+		 * Toggle this button
+		 */
 		public void toggleSelected() {
 			selected = !selected;
 		}
 		
+		/**
+		 * Retrieve the x position for this button
+		 * @return x position as float
+		 */
 		public float getX() {
 			return x;
 		}
 		
+		/**
+		 * Retrieve the y position for this button
+		 * @return y position as float
+		 */
 		public float getY() {
 			return y;
 		}

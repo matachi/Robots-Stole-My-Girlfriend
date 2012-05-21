@@ -95,6 +95,30 @@ public class Vector2d {
 	}
 	
 	/**
+	 * multiplies this vector with -1;
+	 */
+	public void negate(){
+		x*=-1;
+		y*=-1;
+	}
+	/**
+	 * returns a deep cope of this vector
+	 * @return a deep copy of this vector
+	 */
+	public Vector2d copy(){
+		return new Vector2d(x,y);
+	}
+	/**
+	 * returns a negated deep copy of this vector
+	 * @return a negated deep copy of this vector
+	 */
+	public Vector2d getNegatedCopy(){
+		Vector2d vector = this.copy();
+		vector.negate();
+		return vector;
+	}
+	
+	/**
 	 * This method returns the resulting vectors length using Pythagoras theorem.
 	 * @return The length of the resulting vector.
 	 */
